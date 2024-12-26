@@ -1,6 +1,4 @@
-import {
-  combineReducers
-} from '@reduxjs/toolkit';
+import { combineReducers } from "@reduxjs/toolkit";
 
 // Front
 import ThemeReducer from "./themeLayouts/reducer";
@@ -17,15 +15,17 @@ import ChatReducer from "./Chat/reducer";
 // email
 import EmailReducer from "./Email/reducer";
 
+// Auth
+import AuthReducer from "./Auth/reducer";
+
 // Combine your reducers into a root reducer
 const rootReducer = combineReducers({
   Calender: calenderReducer,
   Ecom: EcomReducer,
   chat: ChatReducer,
   Email: EmailReducer,
-  Theme: ThemeReducer
+  Theme: ThemeReducer,
+  Auth: AuthReducer,
 });
 
-export {
-  rootReducer
-}
+export { rootReducer };

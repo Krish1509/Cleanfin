@@ -8,17 +8,17 @@ File: style.css
 =================================================================================== */
 
 // main framework
-@import 'node_modules/bootstrap/scss/functions';
-@import 'node_modules/bootstrap/scss/variables';
-@import 'settings/color-variables';
-@import 'settings/bootstrap-variables';
-@import 'settings/theme-variables';
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "settings/color-variables";
+@import "settings/bootstrap-variables";
+@import "settings/theme-variables";
 
-@import 'node_modules/bootstrap/scss/mixins';
+@import "node_modules/bootstrap/scss/mixins";
 
-section {
-  padding: 100px 0;
-}
+// section {
+//   padding: 100px 0;
+// }
 
 .section-title {
   margin-top: -6px;
@@ -108,11 +108,11 @@ header {
     position: relative;
 
     p {
-      color: rgba(255, 255, 255, .8);
+      color: rgba(255, 255, 255, 0.8);
     }
   }
 
-  &>* {
+  & > * {
     position: relative;
     z-index: 5;
   }
@@ -149,7 +149,7 @@ header {
       width: 100%;
       gap: 40px;
 
-      >.row {
+      > .row {
         flex: 1;
         width: 100%;
       }
@@ -193,7 +193,11 @@ header {
         left: 0;
         right: 0;
         top: 0;
-        background: linear-gradient(180deg, transparent 60%, rgba(23, 31, 39, 0.6));
+        background: linear-gradient(
+          180deg,
+          transparent 60%,
+          rgba(23, 31, 39, 0.6)
+        );
       }
     }
 
@@ -220,7 +224,13 @@ header {
 }
 
 .bg-dark {
-  background: linear-gradient(198deg, #131920 21.56%, #1d2630 48.55%, #131920 91.02%), #f7f9fc;
+  background: linear-gradient(
+      198deg,
+      #131920 21.56%,
+      #1d2630 48.55%,
+      #131920 91.02%
+    ),
+    #f7f9fc;
 }
 
 .language-slides {
@@ -294,7 +304,7 @@ header {
     display: flex;
     align-items: center;
 
-    >div {
+    > div {
       flex: 1;
     }
   }
@@ -356,7 +366,7 @@ header {
 .board-section {
   position: relative;
 
-  &>* {
+  & > * {
     position: relative;
     z-index: 5;
   }
@@ -424,20 +434,20 @@ header {
         border-radius: 50%;
         box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.5);
 
-        &~i {
+        & ~ i {
           display: none;
         }
 
         &:checked {
           opacity: 0;
 
-          ~i {
+          ~ i {
             display: inline-block;
           }
         }
       }
 
-      +.board-color-checkbox {
+      + .board-color-checkbox {
         margin-top: 15px;
       }
     }
@@ -450,16 +460,16 @@ header {
   background-size: cover;
   -webkit-animation: mobebg 110s linear infinite reverse;
   animation: mobebg 110s linear infinite reverse;
-  background-repeat: repeat-x
+  background-repeat: repeat-x;
 }
 
 @keyframes mobebg {
   0% {
-    background-position-x: 0
+    background-position-x: 0;
   }
 
   100% {
-    background-position-x: 1920px
+    background-position-x: 1920px;
   }
 }
 
@@ -469,11 +479,19 @@ header {
   overflow: hidden;
   border-radius: 6px;
   padding: 25px;
-  background: linear-gradient(145deg, rgba(255, 255, 255, .05) 0%, transparent 50%);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    transparent 50%
+  );
 
   &:hover {
-    box-shadow: 0 0 12px rgba(0, 0, 0, .2);
-    background: linear-gradient(320deg, rgba(255, 255, 255, .05) 0%, transparent 50%);
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(
+      320deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      transparent 50%
+    );
   }
 
   .price {
@@ -493,7 +511,8 @@ header {
     top: 18px;
     right: -40px;
     font-weight: 600;
-    box-shadow: 0 10px 16px 0px rgba(0, 0, 0, .2), 0 10px 16px 0px rgba(var(--bs-primary-rgb) .15);
+    box-shadow: 0 10px 16px 0px rgba(0, 0, 0, 0.2),
+      0 10px 16px 0px rgba(var(--bs-primary-rgb) 0.15);
   }
 
   ul {
@@ -513,7 +532,7 @@ header {
 .product-section {
   position: relative;
 
-  &>* {
+  & > * {
     position: relative;
     z-index: 5;
   }
@@ -565,7 +584,7 @@ header {
   }
 
   .nav-link.active,
-  .show>.nav-link {
+  .show > .nav-link {
     background: var(--bs-gray-900);
     color: var(--bs-gray-300);
   }
@@ -583,7 +602,7 @@ header {
   }
 
   .nav-link.active,
-  .show>.nav-link {
+  .show > .nav-link {
     background: #fff;
   }
 }
@@ -620,7 +639,7 @@ header {
     @media (max-width: 575.98px) {
       font-size: 30px;
 
-      &+h4 {
+      & + h4 {
         font-size: 14px;
       }
     }
@@ -696,12 +715,12 @@ header {
 }
 
 @media (max-width: 991.98px) {
-  section {
-    padding: 40px 0;
-  }
+  // section {
+  // padding: 40px 0;
+  // }
 }
 
-[data-pc-direction='rtl'] {
+[data-pc-direction="rtl"] {
   .owl-carousel {
     direction: ltr;
   }
@@ -713,10 +732,10 @@ header {
   }
 }
 
-[data-pc-theme='dark'] {
+[data-pc-theme="dark"] {
   &.landing-page {
     .bg-white {
-      background: lighten($dark-layout-color, 4%) ;
+      background: lighten($dark-layout-color, 4%);
       --bs-white: lighten($dark-layout-color, 4%);
     }
 
@@ -740,7 +759,7 @@ header {
       background: var(--bs-gray-800);
 
       .nav-link.active,
-      .show>.nav-link {
+      .show > .nav-link {
         background: $dark-layout-color;
       }
     }

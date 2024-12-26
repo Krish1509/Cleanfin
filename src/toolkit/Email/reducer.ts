@@ -1,18 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    userEmail: [],
-    error: {},
+  userEmail: [],
+  error: {},
 };
 
 const EmailSlice = createSlice({
-    name: 'email',
-    initialState,
-    reducers: {
-        getUserEmail: (state: any, action: any) => {
-            state.userEmail = action.payload;
-        },
+  name: "email",
+  initialState,
+  reducers: {
+    getUserEmail: (state: any, action: any) => {
+      state.userEmail = action.payload;
     },
+  },
 });
 
 export const { getUserEmail } = EmailSlice.actions;
