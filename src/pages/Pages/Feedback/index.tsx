@@ -19,7 +19,7 @@ const Feedback = () => {
     const [feedbackListData, setFeedbackListData] = useState<FeedbackListData[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [searchQuery, setSearchQuery] = useState<string>("");
-    const [entriesPerPage, setEntriesPerPage] = useState<number>(5);
+    const [entriesPerPage, setEntriesPerPage] = useState<number>(10);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(0);
 
@@ -97,7 +97,6 @@ const Feedback = () => {
                                             <tr>
                                                 <th>User Name</th>
                                                 <th>Description</th>
-                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -105,26 +104,6 @@ const Feedback = () => {
                                                 <tr key={key}>
                                                     <td>{item?.firstName} {item?.lastName}</td>
                                                     <td>{item?.description}</td>
-                                                    <td>
-                                                        <a
-                                                            href="#"
-                                                            className="avtar avtar-xs btn-link-secondary"
-                                                        >
-                                                            <i className="ti ti-eye f-20"></i>
-                                                        </a>
-                                                        <a
-                                                            href="#"
-                                                            className="avtar avtar-xs btn-link-secondary"
-                                                        >
-                                                            <i className="ti ti-edit f-20"></i>
-                                                        </a>
-                                                        <a
-                                                            href="#"
-                                                            className="avtar avtar-xs btn-link-secondary"
-                                                        >
-                                                            <i className="ti ti-trash f-20"></i>
-                                                        </a>
-                                                    </td>
                                                 </tr>
                                             ))}
                                         </tbody>

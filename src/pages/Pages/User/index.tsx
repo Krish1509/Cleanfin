@@ -6,6 +6,8 @@ import { Card, CardBody, CardHeader, Form } from "react-bootstrap";
 import { postRequest } from "../../../service/fetch-services";
 import Pagination from "../../../Common/Pagination"; // Import Pagination component
 import EntriesPerPageSelector from "../../../Common/EntriesPerPageSelector";
+import DatePicker from "../../../Common/DatePicker";
+import ToastAlert from "../../../helper/toast-alert";
 
 type UserListData = {
     _id: string;
@@ -17,13 +19,14 @@ type UserListData = {
     role: string;
     subscription_end: string;
     subscription_start: string;
+    isActive: boolean;
 };
 
 const User = () => {
     const [userListData, setUserListData] = useState<UserListData[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [searchQuery, setSearchQuery] = useState<string>("");
-    const [entriesPerPage, setEntriesPerPage] = useState<number>(5);
+    const [entriesPerPage, setEntriesPerPage] = useState<number>(10);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(0);
 
@@ -66,6 +69,21 @@ const User = () => {
         fetchUserListData();
     }, [entriesPerPage, currentPage, searchQuery, fetchUserListData]);
 
+    const updateUserDetails = React.useCallback(async (id: string, key: string, value: any) => {
+        try {
+            const body = {
+                userId: id,
+                [key]: value
+            };
+            const result = await postRequest("user/edit", body, true);
+            ToastAlert.success(result.message);
+            fetchUserListData();
+        } catch (err) {
+            console.log(err);
+            setLoading(false);
+        }
+    }, [fetchUserListData]);
+
     return (
         <React.Fragment>
             <BreadcrumbItem mainTitle="User" subTitle="User List" />
@@ -102,6 +120,9 @@ const User = () => {
                                                 <th>Name</th>
                                                 <th>Mobile</th>
                                                 <th>Role</th>
+                                                <th>Start</th>
+                                                <th>End</th>
+                                                <th>isActive</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -117,6 +138,30 @@ const User = () => {
                                                     </td>
                                                     <td>{item?.mobileNumber}</td>
                                                     <td>{item?.role}</td>
+                                                    <td>
+                                                        <DatePicker
+                                                            value={item?.subscription_start}
+                                                            onChange={() => 0}
+                                                            disabled
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <DatePicker
+                                                            value={item?.subscription_end}
+                                                            onChange={(date) => updateUserDetails(item._id, "subscription_end", date)}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <div className="form-check form-switch mb-2 d-flex justify-content-center">
+                                                            <input
+                                                                className="form-check-input"
+                                                                type="checkbox"
+                                                                id="notify1"
+                                                                checked={item?.isActive}
+                                                                onChange={() => updateUserDetails(item._id, 'isActive', !item?.isActive)}
+                                                            />
+                                                        </div>
+                                                    </td>
                                                     <td>
                                                         <a
                                                             href="#"
