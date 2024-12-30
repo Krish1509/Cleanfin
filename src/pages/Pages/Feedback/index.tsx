@@ -5,6 +5,7 @@ import BreadcrumbItem from "../../../Common/BreadcrumbItem";
 import { Card, CardBody, CardHeader, Form } from "react-bootstrap";
 import { postRequest } from "../../../service/fetch-services";
 import Pagination from "../../../Common/Pagination"; // Import Pagination component
+import EntriesPerPageSelector from "../../../Common/EntriesPerPageSelector";
 
 type FeedbackListData = {
     _id: string;
@@ -143,22 +144,10 @@ const Feedback = () => {
                                 onPageChange={handlePageChange}
                             />
                         </div>
-                        <ul className="list-inline m-0" style={{ float: 'right' }}>
-                            <span className="me-2"> entries per page</span>
-                            <li className="list-inline-item">
-                                <select
-                                    className="form-select"
-                                    onChange={handleEntriesPerPageChange}
-                                    value={entriesPerPage}
-                                >
-                                    <option value="5">5</option>
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                    <option value="30">30</option>
-                                    <option value="40">40</option>
-                                </select>
-                            </li>
-                        </ul>
+                        <EntriesPerPageSelector
+                            entriesPerPage={entriesPerPage}
+                            onEntriesPerPageChange={handleEntriesPerPageChange}
+                        />
                     </div>
                 </Card>
             </div>
