@@ -7,6 +7,20 @@ const horizontalData = [
     icon: "",
   },
   {
+    id: "user",
+    label: "User",
+    dataPage: null,
+    link: "/user",
+    icon: "",
+  },
+  {
+    id: "feedback",
+    label: "Feedback",
+    dataPage: null,
+    link: "/feedback",
+    icon: "",
+  },
+  {
     id: "navigation",
     label: "Navigation",
     dataPage: null,
