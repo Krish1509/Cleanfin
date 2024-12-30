@@ -3,7 +3,21 @@ const horizontalData = [
     id: "dashboard",
     label: "Dashboard",
     dataPage: null,
-    link: "/",
+    link: "/dashboard",
+    icon: "",
+  },
+  {
+    id: "user",
+    label: "User",
+    dataPage: null,
+    link: "/user",
+    icon: "",
+  },
+  {
+    id: "feedback",
+    label: "Feedback",
+    dataPage: null,
+    link: "/feedback",
     icon: "",
   },
   {
