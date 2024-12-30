@@ -9,6 +9,8 @@ import Pagination from "../../../Common/Pagination"; // Import Pagination compon
 type FeedbackListData = {
     _id: string;
     userId: string;
+    firstName: string;
+    lastName: string;
     description: string;
 };
 
@@ -18,6 +20,7 @@ const Feedback = () => {
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [entriesPerPage, setEntriesPerPage] = useState<number>(5);
     const [currentPage, setCurrentPage] = useState<number>(1);
+    const [totalPages, setTotalPages] = useState<number>(0);
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchQuery(e.target.value);
@@ -35,34 +38,28 @@ const Feedback = () => {
         setCurrentPage(pageNumber);
     };
 
-    const fetchFeedbackListData = async () => {
+    const fetchFeedbackListData = React.useCallback(async () => {
         try {
             setLoading(true);
-            const body = {}; // Add your API request body if needed
+            const body = {
+                limit: entriesPerPage,
+                page: currentPage,
+                search: searchQuery
+            };
             const result = await postRequest("feedback/list", body, true);
-            setFeedbackListData(result.data); // Assuming the data has a 'users' property
+            const { feedbacks, totalPages } = result.data;
+            setFeedbackListData(feedbacks);
+            setTotalPages(totalPages);
             setLoading(false);
         } catch (err) {
             console.log(err);
             setLoading(false);
         }
-    };
+    }, [entriesPerPage, currentPage, searchQuery]);
 
     useEffect(() => {
         fetchFeedbackListData();
-    }, []);
-
-    const filteredData = feedbackListData?.filter((item) =>
-        item?.description?.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
-    const totalPages = Math.ceil(filteredData.length / entriesPerPage);
-    const indexOfLastEntry = currentPage * entriesPerPage;
-    const indexOfFirstEntry = indexOfLastEntry - entriesPerPage;
-    const currentEntries = filteredData.slice(
-        indexOfFirstEntry,
-        indexOfLastEntry
-    );
+    }, [entriesPerPage, currentPage, searchQuery, fetchFeedbackListData]);
 
     return (
         <React.Fragment>
@@ -74,52 +71,38 @@ const Feedback = () => {
                             <h5 className="mb-3 mb-sm-0">Feedback List</h5>
                         </div>
                     </CardHeader>
+                    <div className="d-sm-flex align-items-center mt-4">
+                        <ul className="list-inline ms-auto my-1 me-4">
+                            <li className="list-inline-item">
+                                <form className="form-search">
+                                    <Form.Control
+                                        type="search"
+                                        placeholder="Search...."
+                                        className="ps-2 pe-3 pt-2 pb-3"
+                                        onChange={handleSearchChange}
+                                    />
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
                     {loading ? (
                         <center className="m-4">Loading...</center>
                     ) : (
                         <React.Fragment>
-                            <div className="d-sm-flex align-items-center mt-4">
-                                <ul className="list-inline me-auto my-1 ms-4">
-                                    <li className="list-inline-item">
-                                        <select
-                                            className="form-select"
-                                            onChange={handleEntriesPerPageChange}
-                                        >
-                                            <option value="5">5</option>
-                                            <option value="10">10</option>
-                                            <option value="20">20</option>
-                                            <option value="30">30</option>
-                                            <option value="40">40</option>
-                                        </select>
-                                    </li>
-                                    <span> entries per page</span>
-                                </ul>
-                                <ul className="list-inline ms-auto my-1 me-4">
-                                    <li className="list-inline-item">
-                                        <form className="form-search">
-                                            <Form.Control
-                                                type="search"
-                                                placeholder="Search...."
-                                                className="ps-2 pe-3 pt-2 pb-3"
-                                                onChange={handleSearchChange}
-                                            />
-                                        </form>
-                                    </li>
-                                </ul>
-                            </div>
                             <CardBody className="pt-3">
                                 <div className="table-responsive">
                                     <table className="table table-hover" id="pc-dt-simple">
                                         <thead>
                                             <tr>
-                                                <th>User ID</th>
+                                                <th>User Name</th>
                                                 <th>Description</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {currentEntries.map((item, key) => (
+                                            {feedbackListData.map((item, key) => (
                                                 <tr key={key}>
-                                                    <td>{item?.userId}</td>
+                                                    <td>{item?.firstName} {item?.lastName}</td>
                                                     <td>{item?.description}</td>
                                                     <td>
                                                         <a
@@ -146,14 +129,37 @@ const Feedback = () => {
                                         </tbody>
                                     </table>
                                 </div>
-                                <Pagination
-                                    totalPages={totalPages}
-                                    currentPage={currentPage}
-                                    onPageChange={handlePageChange}
-                                />
                             </CardBody>
                         </React.Fragment>
                     )}
+                    <div className="px-4 py-2" style={{
+                        width: "100%",
+                        textAlign: 'center'
+                    }}>
+                        <div style={{ display: 'inline-block' }}>
+                            <Pagination
+                                totalPages={totalPages}
+                                currentPage={currentPage}
+                                onPageChange={handlePageChange}
+                            />
+                        </div>
+                        <ul className="list-inline m-0" style={{ float: 'right' }}>
+                            <span className="me-2"> entries per page</span>
+                            <li className="list-inline-item">
+                                <select
+                                    className="form-select"
+                                    onChange={handleEntriesPerPageChange}
+                                    value={entriesPerPage}
+                                >
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="40">40</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </div>
                 </Card>
             </div>
         </React.Fragment>

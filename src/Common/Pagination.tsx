@@ -15,7 +15,7 @@ const Pagination: React.FC<PaginationProps> = ({ totalPages, currentPage, onPage
 
     return (
         <nav>
-            <ul className="pagination justify-content-end me-3">
+            <ul className="pagination justify-content-end m-0">
                 {/* Previous Button */}
                 <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
                     <button className="page-link" onClick={() => handlePageChange(currentPage - 1)}>
