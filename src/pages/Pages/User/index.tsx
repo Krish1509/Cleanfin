@@ -120,8 +120,8 @@ const User = () => {
                                                 <th>Name</th>
                                                 <th>Mobile</th>
                                                 <th>Role</th>
-                                                <th>Start</th>
-                                                <th>End</th>
+                                                <th>Subscription Start</th>
+                                                <th>Subscription End</th>
                                                 <th>isActive</th>
                                                 <th>Action</th>
                                             </tr>
@@ -147,6 +147,7 @@ const User = () => {
                                                     </td>
                                                     <td>
                                                         <DatePicker
+                                                            minDate={new Date(item?.subscription_start)}
                                                             value={item?.subscription_end}
                                                             onChange={(date) => updateUserDetails(item._id, "subscription_end", date)}
                                                         />

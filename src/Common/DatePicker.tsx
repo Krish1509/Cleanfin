@@ -8,6 +8,8 @@ type DatePickerProps = {
   disabled?: boolean;            // Optional prop to disable the picker
   dateFormat?: string;           // Optional format for date display (default: "yyyy-MM-dd")
   className?: string;            // Optional additional CSS classes
+  minDate?: Date;                // Optional minimum date
+  maxDate?: Date;                // Optional miximum date
 };
 
 const DatePicker: React.FC<DatePickerProps> = ({
@@ -15,7 +17,8 @@ const DatePicker: React.FC<DatePickerProps> = ({
   onChange,
   disabled = false,
   dateFormat = "yyyy-MM-dd",
-  className = ""
+  className = "",
+  ...props
 }) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
@@ -41,6 +44,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
       onChange={handleDateChange}
       disabled={disabled}
       dateFormat={dateFormat}
+      {...props}
     />
   );
 };
