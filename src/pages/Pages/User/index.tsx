@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 
@@ -6,7 +7,6 @@ import BreadcrumbItem from "../../../Common/BreadcrumbItem";
 import { Card, CardBody, CardHeader, Form } from "react-bootstrap";
 import { postRequest } from "../../../service/fetch-services";
 import Pagination from "../../../Common/Pagination"; // Import Pagination component
-import EntriesPerPageSelector from "../../../Common/EntriesPerPageSelector";
 import DatePicker from "../../../Common/DatePicker";
 import ToastAlert from "../../../helper/toast-alert";
 
@@ -205,25 +205,13 @@ const User = () => {
               </CardBody>
             </React.Fragment>
           )}
-          <div
-            className="px-4 py-2"
-            style={{
-              width: "100%",
-              textAlign: "center",
-            }}
-          >
-            <div style={{ display: "inline-block" }}>
-              <Pagination
-                totalPages={totalPages}
-                currentPage={currentPage}
-                onPageChange={handlePageChange}
-              />
-            </div>
-            <EntriesPerPageSelector
-              entriesPerPage={entriesPerPage}
-              onEntriesPerPageChange={handleEntriesPerPageChange}
-            />
-          </div>
+          <Pagination
+            totalPages={totalPages}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+            entriesPerPage={entriesPerPage}
+            onEntriesPerPageChange={handleEntriesPerPageChange}
+          />
         </Card>
       </div>
     </React.Fragment>

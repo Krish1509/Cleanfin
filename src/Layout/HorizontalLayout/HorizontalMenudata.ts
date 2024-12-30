@@ -3,7 +3,7 @@ const horizontalData = [
     id: "dashboard",
     label: "Dashboard",
     dataPage: null,
-    link: "/",
+    link: "/dashboard",
     icon: "",
   },
   {
