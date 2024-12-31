@@ -4,10 +4,12 @@ import Feedback from "../pages/Pages/Feedback";
 import Error404 from "../pages/Pages/Error404";
 import SamplePage from "../pages/Other/SamplePage";
 import Login from "../pages/Pages/Auth/Login";
+import Recommendation from "../pages/Pages/Recommendation";
 
 const routes = [
   { path: "/dashboard", component: <Dashboard /> },
   { path: "/user", component: <User /> },
+  { path: "/recommendation", component: <Recommendation /> },
   { path: "/feedback", component: <Feedback /> },
   { path: "/other/sample-page", component: <SamplePage /> },
 ];
