@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useState, useEffect } from "react";
 //import Components
 import BreadcrumbItem from "../../../Common/BreadcrumbItem";
 import { Card, CardBody, CardHeader, Form } from "react-bootstrap";
+import moment from "moment";
+import ToggleSwitch from "../../../Common/ToggleSwitch";
 import { postRequest } from "../../../service/fetch-services";
-import Pagination from "../../../Common/Pagination"; // Import Pagination component
+import ToastAlert from "../../../helper/toast-alert";
+import Pagination from "../../../Common/Pagination";
+import EditableNumberInput from "../../../Common/EditableNumberInput";
 
 type RecommendationListData = {
   _id: string;
+  scriptId: string;
   date: string;
   time: string;
   action: string;
@@ -25,9 +29,7 @@ type RecommendationListData = {
 };
 
 const Recommendation = () => {
-  const [recommendationListData, setRecommendationListData] = useState<RecommendationListData[]>(
-    []
-  );
+  const [recommendationListData, setRecommendationListData] = useState<RecommendationListData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [entriesPerPage, setEntriesPerPage] = useState<number>(10);
@@ -39,9 +41,7 @@ const Recommendation = () => {
     setCurrentPage(1); // Reset page to 1 when search query changes
   };
 
-  const handleEntriesPerPageChange = (
-    e: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleEntriesPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setEntriesPerPage(parseInt(e.target.value));
     setCurrentPage(1); // Reset page to 1 when entries per page changes
   };
@@ -59,9 +59,8 @@ const Recommendation = () => {
         search: searchQuery,
       };
       const result = await postRequest("recommendation/list", body, true);
-      console.log(result.data, result.totalPages);
-      const { totalPages } = result.data;
-      setRecommendationListData(result.data);
+      const { recommendations, totalPages } = result.data;
+      setRecommendationListData(recommendations);
       setTotalPages(totalPages);
       setLoading(false);
     } catch (err) {
@@ -73,6 +72,23 @@ const Recommendation = () => {
   useEffect(() => {
     fetchRecommendationListData();
   }, [entriesPerPage, currentPage, searchQuery, fetchRecommendationListData]);
+
+  const updateRecommendationDetails = React.useCallback(async (id: string, key: string, value: unknown) => {
+    try {
+      const body = { id, [key]: value };
+      const result = await postRequest("recommendation/edit", body, true);
+      ToastAlert.success(result.message);
+      fetchRecommendationListData();
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
+    }
+  }, [fetchRecommendationListData]);
+
+  // Update recommendation details when a value is changed
+  const handleValueUpdate = (id: string, key: string, value: unknown) => {
+    updateRecommendationDetails(id, key, value);
+  };
 
   return (
     <React.Fragment>
@@ -107,33 +123,95 @@ const Recommendation = () => {
                   <table className="table table-hover" id="pc-dt-simple">
                     <thead>
                       <tr>
+                        <th>ScriptId</th>
+                        <th>Date</th>
                         <th>Target 1</th>
                         <th>Target 2</th>
-                        <th>Recommendation</th>
-                        <th>isActive</th>
+                        <th>Target 3</th>
+                        <th>Stop Loss</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       {recommendationListData.map((item, key) => (
                         <tr key={key}>
+                          <td>{item?.scriptId}</td>
+                          <td>{moment(item?.date).format("YYYY-MM-DD")} {item?.time}</td>
                           <td>
-                            {item?.priceCondition}
+                            <div className="d-flex align-items-center justify-content-between">
+                              <EditableNumberInput
+                                id={item._id}
+                                value={item.target1}
+                                placeholder="target1"
+                                keyName="target1"
+                                onUpdate={handleValueUpdate}
+                              />
+                              <ToggleSwitch
+                                checked={item?.target1Achieved}
+                                onChange={() =>
+                                  updateRecommendationDetails(item?._id, "target1Achieved", !item?.target1Achieved)
+                                }
+                              />
+                            </div>
                           </td>
-                          <td>{item?.recommendation}</td>
                           <td>
-                            <div className="form-check form-switch mb-2 d-flex justify-content-center">
-                              <input
-                                className="form-check-input"
-                                type="checkbox"
-                                id="notify1"
+                            <div className="d-flex align-items-center justify-content-between">
+                              <EditableNumberInput
+                                id={item._id}
+                                value={item.target2}
+                                placeholder="target2"
+                                keyName="target2"
+                                onUpdate={handleValueUpdate}
+                              />
+                              <ToggleSwitch
+                                checked={item?.target2Achieved}
+                                onChange={() =>
+                                  updateRecommendationDetails(item?._id, "target2Achieved", !item?.target2Achieved)
+                                }
+                              />
+                            </div>
+                          </td>
+                          <td>
+                            <div className="d-flex align-items-center justify-content-between">
+                              <EditableNumberInput
+                                id={item._id}
+                                value={item.target3}
+                                placeholder="target3"
+                                keyName="target3"
+                                onUpdate={handleValueUpdate}
+                              />
+                              <ToggleSwitch
+                                checked={item?.target3Achieved}
+                                onChange={() =>
+                                  updateRecommendationDetails(item?._id, "target3Achieved", !item?.target3Achieved)
+                                }
+                              />
+                            </div>
+                          </td>
+                          <td>
+                            <div className="d-flex align-items-center justify-content-between">
+                              <EditableNumberInput
+                                id={item._id}
+                                value={item.stopLoss}
+                                placeholder="stopLoss"
+                                keyName="stopLoss"
+                                onUpdate={handleValueUpdate}
+                              />
+                              <ToggleSwitch
+                                checked={item?.stopLossAchieved}
+                                onChange={() =>
+                                  updateRecommendationDetails(item?._id, "stopLossAchieved", !item?.stopLossAchieved)
+                                }
+                              />
+                            </div>
+                          </td>
+                          <td>
+                            <div className="d-flex">
+                              <ToggleSwitch
                                 checked={item?.isActive}
-                                // onChange={() =>
-                                //   updateUserDetails(
-                                //     item._id,
-                                //     "isActive",
-                                //     !item?.isActive
-                                //   )
-                                // }
+                                onChange={() =>
+                                  updateRecommendationDetails(item?._id, "isActive", !item?.isActive)
+                                }
                               />
                             </div>
                           </td>
