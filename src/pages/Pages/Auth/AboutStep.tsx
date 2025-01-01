@@ -39,7 +39,11 @@ const AboutStep: React.FC = () => {
           dispatch(setUserDetails(result?.data?.user));
           localStorage.setItem("user", JSON.stringify(result?.data?.user));
           ToastAlert.success("User registered successfully");
-          navigate("/dashboard");
+          if (result?.data?.user?.role === "admin") {
+            navigate("/dashboard");
+          } else {
+            navigate("/dashboard/user");
+          }
         } else {
           setLoading(false);
         }

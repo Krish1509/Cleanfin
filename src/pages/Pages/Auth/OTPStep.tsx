@@ -76,7 +76,11 @@ const OTPStep: React.FC<Props> = ({ setActiveTab }) => {
         localStorage.setItem("userToken", result?.data?.token);
         localStorage.setItem("user", JSON.stringify(result?.data?.user));
         if (userDetails?.firstName && userDetails?.lastName) {
-          navigate("/dashboard");
+          if (result?.data?.user?.role === "admin") {
+            navigate("/dashboard");
+          } else {
+            navigate("/dashboard/user");
+          }
         } else {
           setActiveTab("about-tab");
         }

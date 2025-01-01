@@ -5,7 +5,6 @@ import Layout from "../Layout";
 import NonLayout from "../Layout/NonLayout";
 import LandingPage from "../pages/Pages/LandingPage";
 import PrivateRoute from "./PrivateRoute";
-import PublicRoutes from "./PublicRoutes";
 
 const Routing = () => {
   return (
@@ -28,11 +27,7 @@ const Routing = () => {
           <Route
             key={key}
             path={item.path}
-            element={
-              <PublicRoutes>
-                <NonLayout>{item.component}</NonLayout>
-              </PublicRoutes>
-            }
+            element={<NonLayout>{item.component}</NonLayout>}
           />
         ))}
       </Routes>
