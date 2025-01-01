@@ -21,6 +21,13 @@ const horizontalData = [
     icon: "",
   },
   {
+    id: "event",
+    label: "Event",
+    dataPage: null,
+    link: "/event",
+    icon: "",
+  },
+  {
     id: "feedback",
     label: "Feedback",
     dataPage: null,
