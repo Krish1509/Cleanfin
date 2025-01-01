@@ -6,11 +6,13 @@ import SamplePage from "../pages/Other/SamplePage";
 import Login from "../pages/Pages/Auth/Login";
 import Recommendation from "../pages/Pages/Recommendation";
 import PublicRoutes from "./PublicRoutes";
+import Event from "../pages/Pages/Event";
 
 const routes = [
   { path: "/dashboard", component: <Dashboard /> },
   { path: "/user", component: <User /> },
   { path: "/recommendation", component: <Recommendation /> },
+  { path: "/event", component: <Event /> },
   { path: "/feedback", component: <Feedback /> },
   { path: "/other/sample-page", component: <SamplePage /> },
 ];
