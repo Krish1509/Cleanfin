@@ -2,7 +2,7 @@
 import React, { useRef, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Spinner } from "react-bootstrap";
 import codeVerify from "../../../assets/images/authentication/img-auth-code-varify.png";
 import { postRequest } from "../../../service/fetch-services";
 import { useDispatch, useSelector } from "react-redux";
@@ -61,6 +61,7 @@ const OTPStep: React.FC<Props> = ({ setActiveTab }) => {
       inputRefs.current[index - 1]?.focus();
     }
   };
+  console.log(userDetails);
 
   const handleSubmit = async (values: { otp: string }) => {
     try {
@@ -138,7 +139,8 @@ const OTPStep: React.FC<Props> = ({ setActiveTab }) => {
                   className="btn btn-primary"
                   disabled={values.otp.length < 4 || loading}
                 >
-                  Verify OTP
+                  Verify OTP{" "}
+                  {loading ? <Spinner className="ml-2" size="sm" /> : ""}
                 </button>
               </div>
             </Form>

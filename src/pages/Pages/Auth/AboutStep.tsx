@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { InputGroup } from "react-bootstrap";
+import { InputGroup, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { handleFormData } from "../../../service/fetch-services";
@@ -110,7 +110,7 @@ const AboutStep: React.FC = () => {
                   className="btn btn-primary"
                   disabled={loading}
                 >
-                  Submit
+                  Submit {loading ? <Spinner className="ml-2" size="sm" /> : ""}
                 </button>
               </div>
             </Form>

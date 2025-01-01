@@ -2,10 +2,6 @@
 import React, { useState } from "react";
 import BcakImg from "../../../assets/images/authentication/img-auth-bg.jpg";
 
-// img
-import logolight from "../../../assets/images/logo-white.svg";
-
-import { Link } from "react-router-dom";
 import { Card, CardBody, Col, Row } from "react-bootstrap";
 import PhoneStep from "./PhoneStep";
 import OTPStep from "./OTPStep";
@@ -13,9 +9,35 @@ import AboutStep from "./AboutStep";
 
 const Login = () => {
   const [activeTab, setActiveTab] = useState("phone-tab");
+  const [isOtpTabEnabled, setIsOtpTabEnabled] = useState(false);
+  const [isAboutTabEnabled, setIsAboutTabEnabled] = useState(false);
 
   const handleTabSelect = (tab: string) => {
+    if (
+      (tab === "otp-tab" && !isOtpTabEnabled) ||
+      (tab === "about-tab" && !isAboutTabEnabled)
+    ) {
+      return; // Prevent switching to disabled tabs
+    }
+    if (tab === "phone-tab") {
+      setIsOtpTabEnabled(false);
+      setIsAboutTabEnabled(false);
+    }
+    if (tab === "about-tab") {
+      setIsOtpTabEnabled(false);
+    }
     setActiveTab(tab);
+  };
+
+  const enableOtpTab = () => {
+    setIsOtpTabEnabled(true);
+    setActiveTab("otp-tab");
+  };
+
+  const enableAboutTab = () => {
+    setIsAboutTabEnabled(true);
+    setIsOtpTabEnabled(false);
+    setActiveTab("about-tab");
   };
 
   return (
@@ -27,55 +49,9 @@ const Login = () => {
         <div className="bg-overlay bg-dark-custom"></div>
 
         <div className="auth-wrapper">
-          <div className="auth-sidecontent">
-            <div className="auth-sidefooter">
-              <img
-                src={logolight}
-                className="img-brand img-fluid"
-                alt="images"
-              />
-              <hr className="mb-3 mt-4" />
-              <Row>
-                <Col className="my-1">
-                  <p className="m-0">
-                    Light Able ♥ crafted by Team{" "}
-                    <a
-                      href="https://themeforest.net/user/phoenixcoded"
-                      target="_blank"
-                    >
-                      Phoenixcoded
-                    </a>
-                  </p>
-                </Col>
-                <div className="col-auto my-1">
-                  <ul className="list-inline footer-link mb-0">
-                    <li className="list-inline-item">
-                      <Link to="/">Home</Link>
-                    </li>
-                    <li className="list-inline-item">
-                      <Link
-                        to="https://pcoded.gitbook.io/light-able/"
-                        target="_blank"
-                      >
-                        Documentation
-                      </Link>
-                    </li>
-                    <li className="list-inline-item">
-                      <Link
-                        to="https://phoenixcoded.support-hub.io/"
-                        target="_blank"
-                      >
-                        Support
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              </Row>
-            </div>
-          </div>
           <div className="auth-form">
             <Card className="my-5 mx-3">
-              <CardBody className="d-block">
+              <CardBody className="d-flex justify-content-between">
                 <div className="py-4 mb-3">
                   <Row className="nav-pills justify-content-between">
                     <Col className="nav-item auth-step">
@@ -126,9 +102,9 @@ const Login = () => {
                   </Row>
                 </div>
                 {activeTab === "phone-tab" ? (
-                  <PhoneStep setActiveTab={setActiveTab} />
+                  <PhoneStep setActiveTab={enableOtpTab} />
                 ) : activeTab === "otp-tab" ? (
-                  <OTPStep setActiveTab={setActiveTab} />
+                  <OTPStep setActiveTab={enableAboutTab} />
                 ) : activeTab === "about-tab" ? (
                   <AboutStep />
                 ) : (
