@@ -102,64 +102,6 @@ const TopBar = ({
 
           <div className="ms-auto">
             <ul className="list-unstyled">
-              <Dropdown
-                as="li"
-                className="dropdown pc-h-item d-none d-md-inline-flex"
-              >
-                <Dropdown.Toggle
-                  as="a"
-                  className="pc-head-link dropdown-toggle arrow-none me-0"
-                  data-bs-toggle="dropdown"
-                  href="#"
-                  role="button"
-                  aria-haspopup="false"
-                  aria-expanded="false"
-                >
-                  <i className="ph-duotone ph-circles-four"></i>
-                </Dropdown.Toggle>
-                <Dropdown.Menu className="dropdown-menu dropdown-qta dropdown-menu-end pc-h-dropdown">
-                  <div className="overflow-hidden">
-                    <div className="qta-links m-n1">
-                      <Dropdown.Item href="#!" className="dropdown-item">
-                        <i className="ph-duotone ph-shopping-cart"></i>
-                        <span>E-commerce</span>
-                      </Dropdown.Item>
-                      <Dropdown.Item href="#!" className="dropdown-item">
-                        <i className="ph-duotone ph-lifebuoy"></i>
-                        <span>Helpdesk</span>
-                      </Dropdown.Item>
-                      <Dropdown.Item href="#!" className="dropdown-item">
-                        <i className="ph-duotone ph-scroll"></i>
-                        <span>Invoice</span>
-                      </Dropdown.Item>
-                      <Dropdown.Item href="#!" className="dropdown-item">
-                        <i className="ph-duotone ph-books"></i>
-                        <span>Online Courses</span>
-                      </Dropdown.Item>
-                      <Dropdown.Item href="#!" className="dropdown-item">
-                        <i className="ph-duotone ph-envelope-open"></i>
-                        <span>Mail</span>
-                      </Dropdown.Item>
-                      <Dropdown.Item href="#!" className="dropdown-item">
-                        <i className="ph-duotone ph-identification-badge"></i>
-                        <span>Membership</span>
-                      </Dropdown.Item>
-                      <Dropdown.Item href="#!" className="dropdown-item">
-                        <i className="ph-duotone ph-chats-circle"></i>
-                        <span>Chat</span>
-                      </Dropdown.Item>
-                      <Dropdown.Item href="#!" className="dropdown-item">
-                        <i className="ph-duotone ph-currency-circle-dollar"></i>
-                        <span>Plans</span>
-                      </Dropdown.Item>
-                      <Dropdown.Item href="#!" className="dropdown-item">
-                        <i className="ph-duotone ph-user-circle"></i>
-                        <span>Users</span>
-                      </Dropdown.Item>
-                    </div>
-                  </div>
-                </Dropdown.Menu>
-              </Dropdown>
               <Dropdown as="li" className="pc-h-item">
                 <Dropdown.Toggle
                   as="a"
