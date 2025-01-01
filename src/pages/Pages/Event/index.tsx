@@ -62,23 +62,6 @@ const Event = () => {
     fetchEventListData();
   }, [entriesPerPage, currentPage, searchQuery, fetchEventListData]);
 
-  // const updateEventDetails = React.useCallback(async (id: string, key: string, value: unknown) => {
-  //   try {
-  //     const body = { id, [key]: value };
-  //     const result = await postRequest("event/edit", body, true);
-  //     ToastAlert.success(result.message);
-  //     fetchEventListData();
-  //   } catch (err) {
-  //     console.log(err);
-  //     setLoading(false);
-  //   }
-  // }, [fetchEventListData]);
-
-  // Update event details when a value is changed
-  // const handleValueUpdate = (id: string, key: string, value: unknown) => {
-  //   updateEventDetails(id, key, value);
-  // };
-
   return (
     <React.Fragment>
       <BreadcrumbItem mainTitle="Event" subTitle="Event List" />
