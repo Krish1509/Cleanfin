@@ -14,6 +14,13 @@ const horizontalData = [
     icon: "",
   },
   {
+    id: "recommendation",
+    label: "Recommendation",
+    dataPage: null,
+    link: "/recommendation",
+    icon: "",
+  },
+  {
     id: "feedback",
     label: "Feedback",
     dataPage: null,
