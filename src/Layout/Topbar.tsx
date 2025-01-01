@@ -32,6 +32,11 @@ const TopBar = ({
     dispatch(changeThemeMode(value));
   };
 
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
+
   return (
     <React.Fragment>
       <header className="pc-header">
@@ -147,41 +152,7 @@ const TopBar = ({
                   <i className="ph-duotone ph-gear-six"></i>
                 </a>
               </li> */}
-              {/* <Dropdown as="li" className="pc-h-item">
-                <Dropdown.Toggle
-                  as="a"
-                  className="pc-head-link arrow-none me-0"
-                  data-bs-toggle="dropdown"
-                  href="#"
-                  role="button"
-                  aria-haspopup="false"
-                  aria-expanded="false"
-                >
-                  <i className="ph-duotone ph-diamonds-four"></i>
-                </Dropdown.Toggle>
-                <Dropdown.Menu className="dropdown-menu-end pc-h-dropdown">
-                  <Dropdown.Item>
-                    <i className="ph-duotone ph-user"></i>
-                    <span>My Account</span>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <i className="ph-duotone ph-gear"></i>
-                    <span>Settings</span>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <i className="ph-duotone ph-lifebuoy"></i>
-                    <span>Support</span>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <i className="ph-duotone ph-lock-key"></i>
-                    <span>Lock Screen</span>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <i className="ph-duotone ph-power"></i>
-                    <span>Logout</span>
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown> */}
+
               <Dropdown as="li" className="pc-h-item">
                 <Dropdown.Toggle
                   as="a"
@@ -648,7 +619,7 @@ const TopBar = ({
                           </Dropdown.Item>
                         </li>
                         <li className="list-group-item">
-                          <Dropdown.Item>
+                          <Dropdown.Item onClick={handleLogout}>
                             <span className="d-flex align-items-center">
                               <i className="ph-duotone ph-power"></i>
                               <span>Logout</span>
