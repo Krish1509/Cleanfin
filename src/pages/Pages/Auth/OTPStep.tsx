@@ -61,7 +61,6 @@ const OTPStep: React.FC<Props> = ({ setActiveTab }) => {
       inputRefs.current[index - 1]?.focus();
     }
   };
-  console.log(userDetails);
 
   const handleSubmit = async (values: { otp: string }) => {
     try {

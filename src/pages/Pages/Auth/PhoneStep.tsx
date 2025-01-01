@@ -30,7 +30,6 @@ const PhoneStep: React.FC<Props> = ({ setActiveTab }) => {
         mobile: values?.phoneNumber,
       };
       const result = await postRequest("auth/login", body, false);
-      console.log(result);
       if (result) {
         dispatch(setUserDetails(result?.data));
         setActiveTab("otp-tab");

@@ -1,5 +1,5 @@
 // import React from "react";
-import { horizontalData } from "./HorizontalMenudata";
+import { getMenuByRole } from "./HorizontalMenudata";
 import FeatherIcon from "feather-icons-react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -10,15 +10,18 @@ interface SubMenuItem {
   link?: string;
   icon?: string;
   badge?: string;
-  submenu?: SubMenuItem[];
+  submenu?: SubMenuItem[] | undefined; // Explicitly optional
 }
 
 interface MenuItem extends SubMenuItem {
-  submenu?: SubMenuItem[];
+  submenu?: SubMenuItem[] | undefined;
 }
 
 const Navbar = () => {
   const router = useLocation();
+
+  const user = JSON.parse(localStorage.getItem("user") || ""); // Fetch role
+  const menuData = getMenuByRole(user?.role);
 
   const isMenuActive = (menuItem: MenuItem) => {
     if (router.pathname === menuItem.link) {
@@ -80,7 +83,7 @@ const Navbar = () => {
   return (
     <div className="navbar-content pc-trigger">
       <ul className="pc-navbar" style={{ display: "block" }}>
-        {horizontalData.map((item, key) => (
+        {menuData.map((item, key) => (
           <li
             className={`pc-item pc-hasmenu ${
               isMenuActive(item) ? "active" : ""

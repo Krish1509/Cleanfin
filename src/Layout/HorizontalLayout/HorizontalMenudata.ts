@@ -1,4 +1,4 @@
-const horizontalData = [
+const adminMenuData = [
   {
     id: "dashboard",
     label: "Dashboard",
@@ -34,55 +34,22 @@ const horizontalData = [
     link: "/feedback",
     icon: "",
   },
+];
+
+const userMenuData = [
   {
-    id: "navigation",
-    label: "Navigation",
+    id: "dashboard",
+    label: "Dashboard",
     dataPage: null,
-    link: "#",
+    link: "/dashboard/user",
     icon: "",
-    submenu: [
-      {
-        id: "dashboard",
-        label: "Dashboard",
-        icon: "ph-duotone ph-gauge",
-        link: "/dashboard",
-        dataPage: "index",
-        badge: "2",
-        submenu: [
-          {
-            id: "analytics",
-            label: "Analytics",
-            link: "/dashboard",
-            dataPage: "analytics",
-          },
-          {
-            id: "affiliate",
-            label: "Affiliate",
-            link: "/affiliate-dashboard",
-            dataPage: "affiliate",
-          },
-          {
-            id: "finance",
-            label: "Finance",
-            link: "/finance-dashboard",
-            dataPage: "finance",
-          },
-          {
-            id: "helpdesk",
-            label: "Helpdesk",
-            link: "/helpdesk-dashboard",
-            dataPage: "helpdesk",
-          },
-          {
-            id: "invoice",
-            label: "Invoice",
-            link: "/Invoice-dashboard",
-            dataPage: "invoice",
-          },
-        ],
-      },
-    ],
   },
 ];
 
-export { horizontalData };
+const getMenuByRole = (role: string) => {
+  if (role === "admin") return adminMenuData;
+  if (role === "customer") return userMenuData;
+  return [];
+};
+
+export { adminMenuData, userMenuData, getMenuByRole };
