@@ -7,9 +7,9 @@ import { useDispatch } from "react-redux";
 import SimpleBar from "simplebar-react";
 
 //import images
-import avatar1 from "../assets/images/user/avatar-1.jpg";
+// import avatar1 from "../assets/images/user/avatar-1.jpg";
 import avatar2 from "../assets/images/user/avatar-2.jpg";
-import avatar3 from "../assets/images/user/avatar-3.jpg";
+// import avatar3 from "../assets/images/user/avatar-3.jpg";
 
 interface HeaderProps {
   themeMode?: string; // Define the type for themeMode
@@ -26,6 +26,7 @@ const TopBar = ({
   toogleMobileSidebarHide,
 }: HeaderProps) => {
   const dispatch = useDispatch<any>();
+  const userDetails = JSON.parse(localStorage.getItem("user") || "");
   // Function to handle theme mode change
   const handleThemeChange = (value: any) => {
     dispatch(changeThemeMode(value));
@@ -146,7 +147,7 @@ const TopBar = ({
                   <i className="ph-duotone ph-gear-six"></i>
                 </a>
               </li> */}
-              <Dropdown as="li" className="pc-h-item">
+              {/* <Dropdown as="li" className="pc-h-item">
                 <Dropdown.Toggle
                   as="a"
                   className="pc-head-link arrow-none me-0"
@@ -180,7 +181,7 @@ const TopBar = ({
                     <span>Logout</span>
                   </Dropdown.Item>
                 </Dropdown.Menu>
-              </Dropdown>
+              </Dropdown> */}
               <Dropdown as="li" className="pc-h-item">
                 <Dropdown.Toggle
                   as="a"
@@ -609,15 +610,18 @@ const TopBar = ({
                               />
                             </div>
                             <div className="flex-grow-1 mx-3">
-                              <h5 className="mb-0">Carson Darrin</h5>
-                              <a
+                              <h5 className="mb-0">
+                                {userDetails?.firstName}&nbsp;
+                                {userDetails?.lastName}
+                              </h5>
+                              {/* <a
                                 className="link-primary"
-                                href="mailto:carson.darrin@company.io"
-                              >
-                                carson.darrin@company.io
-                              </a>
+                                href="tel:carson.darrin@company.io"
+                              > */}
+                              {userDetails?.mobileNumber}
+                              {/* </a> */}
                             </div>
-                            <span className="badge bg-primary">PRO</span>
+                            {/* <span className="badge bg-primary">PRO</span> */}
                           </div>
                         </li>
                         <li className="list-group-item">
@@ -627,87 +631,6 @@ const TopBar = ({
                               <span>Change password</span>
                             </span>
                           </Dropdown.Item>
-                          <Dropdown.Item>
-                            <span className="d-flex align-items-center">
-                              <i className="ph-duotone ph-envelope-simple"></i>
-                              <span>Recently mail</span>
-                            </span>
-                            <div className="user-group">
-                              <img
-                                src={avatar1}
-                                alt="user-image"
-                                className="avtar"
-                              />
-                              <img
-                                src={avatar2}
-                                alt="user-image"
-                                className="avtar"
-                              />
-                              <img
-                                src={avatar3}
-                                alt="user-image"
-                                className="avtar"
-                              />
-                            </div>
-                          </Dropdown.Item>
-                          <Dropdown.Item>
-                            <span className="d-flex align-items-center">
-                              <i className="ph-duotone ph-calendar-blank"></i>
-                              <span>Schedule meetings</span>
-                            </span>
-                          </Dropdown.Item>
-                        </li>
-                        <li className="list-group-item">
-                          <Dropdown.Item>
-                            <span className="d-flex align-items-center">
-                              <i className="ph-duotone ph-heart"></i>
-                              <span>Favorite</span>
-                            </span>
-                          </Dropdown.Item>
-                          <Dropdown.Item>
-                            <span className="d-flex align-items-center">
-                              <i className="ph-duotone ph-arrow-circle-down"></i>
-                              <span>Download</span>
-                            </span>
-                            <span className="avtar avtar-xs rounded-circle bg-danger text-white">
-                              10
-                            </span>
-                          </Dropdown.Item>
-                        </li>
-                        <li className="list-group-item">
-                          <div className="dropdown-item">
-                            <span className="d-flex align-items-center">
-                              <i className="ph-duotone ph-globe-hemisphere-west"></i>
-                              <span>Languages</span>
-                            </span>
-                            <span className="flex-shrink-0">
-                              <select className="form-select bg-transparent form-select-sm border-0 shadow-none">
-                                <option value="1">English</option>
-                                <option value="2">Spain</option>
-                                <option value="3">Arbic</option>
-                              </select>
-                            </span>
-                          </div>
-                          <Dropdown.Item>
-                            <span className="d-flex align-items-center">
-                              <i className="ph-duotone ph-flag"></i>
-                              <span>Country</span>
-                            </span>
-                          </Dropdown.Item>
-                          <div className="dropdown-item">
-                            <span className="d-flex align-items-center">
-                              <i className="ph-duotone ph-moon"></i>
-                              <span>Dark mode</span>
-                            </span>
-                            <div className="form-check form-switch form-check-reverse m-0">
-                              <input
-                                className="form-check-input f-18"
-                                id="dark-mode"
-                                type="checkbox"
-                                role="switch"
-                              />
-                            </div>
-                          </div>
                         </li>
                         <li className="list-group-item">
                           <Dropdown.Item>
@@ -716,35 +639,15 @@ const TopBar = ({
                               <span>Edit profile</span>
                             </span>
                           </Dropdown.Item>
-                          <Dropdown.Item>
-                            <span className="d-flex align-items-center">
-                              <i className="ph-duotone ph-star text-warning"></i>
-                              <span>Upgrade account</span>
-                              <span className="badge bg-light-success border border-success ms-2">
-                                NEW
-                              </span>
-                            </span>
-                          </Dropdown.Item>
+
                           <Dropdown.Item>
                             <span className="d-flex align-items-center">
                               <i className="ph-duotone ph-bell"></i>
                               <span>Notifications</span>
                             </span>
                           </Dropdown.Item>
-                          <Dropdown.Item>
-                            <span className="d-flex align-items-center">
-                              <i className="ph-duotone ph-gear-six"></i>
-                              <span>Settings</span>
-                            </span>
-                          </Dropdown.Item>
                         </li>
                         <li className="list-group-item">
-                          <Dropdown.Item>
-                            <span className="d-flex align-items-center">
-                              <i className="ph-duotone ph-plus-circle"></i>
-                              <span>Add account</span>
-                            </span>
-                          </Dropdown.Item>
                           <Dropdown.Item>
                             <span className="d-flex align-items-center">
                               <i className="ph-duotone ph-power"></i>
