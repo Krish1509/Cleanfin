@@ -8,6 +8,7 @@ import { Card, CardBody, CardHeader, Form } from "react-bootstrap";
 import { postRequest } from "../../../service/fetch-services";
 import Pagination from "../../../Common/Pagination"; // Import Pagination component
 import DatePicker from "../../../Common/DatePicker";
+import ToggleSwitch from "../../../Common/ToggleSwitch";  // Import the new ToggleSwitch component
 import ToastAlert from "../../../helper/toast-alert";
 
 type UserListData = {
@@ -61,7 +62,6 @@ const User = () => {
       setTotalPages(totalPages);
       setLoading(false);
     } catch (err) {
-      console.log(err);
       setLoading(false);
     }
   }, [entriesPerPage, currentPage, searchQuery]);
@@ -81,7 +81,6 @@ const User = () => {
         ToastAlert.success(result.message);
         fetchUserListData();
       } catch (err) {
-        console.log(err);
         setLoading(false);
       }
     },
@@ -161,21 +160,16 @@ const User = () => {
                             />
                           </td>
                           <td>
-                            <div className="form-check form-switch mb-2 d-flex justify-content-center">
-                              <input
-                                className="form-check-input"
-                                type="checkbox"
-                                id="notify1"
-                                checked={item?.isActive}
-                                onChange={() =>
-                                  updateUserDetails(
-                                    item._id,
-                                    "isActive",
-                                    !item?.isActive
-                                  )
-                                }
-                              />
-                            </div>
+                            <ToggleSwitch
+                              checked={item?.isActive}
+                              onChange={() =>
+                                updateUserDetails(
+                                  item._id,
+                                  "isActive",
+                                  !item?.isActive
+                                )
+                              }
+                            />
                           </td>
                           <td>
                             <a
