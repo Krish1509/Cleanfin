@@ -20,7 +20,7 @@ interface HeaderProps {
 }
 
 const TopBar = ({
-  handleOffcanvasToggle,
+  // handleOffcanvasToggle,
   changeThemeMode,
   toogleSidebarHide,
   toogleMobileSidebarHide,
@@ -135,7 +135,7 @@ const TopBar = ({
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-              <li className="pc-h-item">
+              {/* <li className="pc-h-item">
                 <a
                   className="pc-head-link pct-c-btn"
                   onClick={handleOffcanvasToggle}
@@ -145,7 +145,7 @@ const TopBar = ({
                 >
                   <i className="ph-duotone ph-gear-six"></i>
                 </a>
-              </li>
+              </li> */}
               <Dropdown as="li" className="pc-h-item">
                 <Dropdown.Toggle
                   as="a"
