@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { InputGroup } from "react-bootstrap";
+import { InputGroup, Spinner } from "react-bootstrap";
 import authlogin from "../../../assets/images/authentication/img-auth-login.png";
 import { postRequest } from "../../../service/fetch-services";
 import { setUserDetails } from "../../../toolkit/Auth/reducer";
@@ -30,7 +30,6 @@ const PhoneStep: React.FC<Props> = ({ setActiveTab }) => {
         mobile: values?.phoneNumber,
       };
       const result = await postRequest("auth/login", body, false);
-      console.log(result);
       if (result) {
         dispatch(setUserDetails(result?.data));
         setActiveTab("otp-tab");
@@ -79,7 +78,8 @@ const PhoneStep: React.FC<Props> = ({ setActiveTab }) => {
                   className="btn btn-primary"
                   disabled={loading}
                 >
-                  Login/Sign Up
+                  Login/Sign Up{" "}
+                  {loading ? <Spinner className="ml-2" size="sm" /> : ""}
                 </button>
               </div>
             </Form>

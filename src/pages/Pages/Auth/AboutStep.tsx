@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { InputGroup } from "react-bootstrap";
+import { InputGroup, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { handleFormData } from "../../../service/fetch-services";
@@ -37,8 +37,13 @@ const AboutStep: React.FC = () => {
 
         if (result) {
           dispatch(setUserDetails(result?.data?.user));
+          localStorage.setItem("user", JSON.stringify(result?.data?.user));
           ToastAlert.success("User registered successfully");
-          navigate("/dashboard");
+          if (result?.data?.user?.role === "admin") {
+            navigate("/dashboard");
+          } else {
+            navigate("/dashboard/user");
+          }
         } else {
           setLoading(false);
         }
@@ -110,7 +115,7 @@ const AboutStep: React.FC = () => {
                   className="btn btn-primary"
                   disabled={loading}
                 >
-                  Submit
+                  Submit {loading ? <Spinner className="ml-2" size="sm" /> : ""}
                 </button>
               </div>
             </Form>

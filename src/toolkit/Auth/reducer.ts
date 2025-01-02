@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 // Define the initial state for the auth slice
 const initialState = {
@@ -14,8 +14,7 @@ const authSlice = createSlice({
   reducers: {
     setUserDetails: (state: any, action: any) => {
       // Handle login, store user
-      const { user } = current(state);
-      state.user = { ...user, ...action.payload };
+      state.user = action.payload;
     },
     logout: (state: any) => {
       // Handle logout, clear user and token

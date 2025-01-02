@@ -7,9 +7,9 @@ import { useDispatch } from "react-redux";
 import SimpleBar from "simplebar-react";
 
 //import images
-import avatar1 from "../assets/images/user/avatar-1.jpg";
+// import avatar1 from "../assets/images/user/avatar-1.jpg";
 import avatar2 from "../assets/images/user/avatar-2.jpg";
-import avatar3 from "../assets/images/user/avatar-3.jpg";
+// import avatar3 from "../assets/images/user/avatar-3.jpg";
 
 interface HeaderProps {
   themeMode?: string; // Define the type for themeMode
@@ -20,15 +20,21 @@ interface HeaderProps {
 }
 
 const TopBar = ({
-  handleOffcanvasToggle,
+  // handleOffcanvasToggle,
   changeThemeMode,
   toogleSidebarHide,
   toogleMobileSidebarHide,
 }: HeaderProps) => {
   const dispatch = useDispatch<any>();
+  const userDetails = JSON.parse(localStorage.getItem("user") || "");
   // Function to handle theme mode change
   const handleThemeChange = (value: any) => {
     dispatch(changeThemeMode(value));
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.reload();
   };
 
   return (
@@ -102,64 +108,6 @@ const TopBar = ({
 
           <div className="ms-auto">
             <ul className="list-unstyled">
-              <Dropdown
-                as="li"
-                className="dropdown pc-h-item d-none d-md-inline-flex"
-              >
-                <Dropdown.Toggle
-                  as="a"
-                  className="pc-head-link dropdown-toggle arrow-none me-0"
-                  data-bs-toggle="dropdown"
-                  href="#"
-                  role="button"
-                  aria-haspopup="false"
-                  aria-expanded="false"
-                >
-                  <i className="ph-duotone ph-circles-four"></i>
-                </Dropdown.Toggle>
-                <Dropdown.Menu className="dropdown-menu dropdown-qta dropdown-menu-end pc-h-dropdown">
-                  <div className="overflow-hidden">
-                    <div className="qta-links m-n1">
-                      <Dropdown.Item href="#!" className="dropdown-item">
-                        <i className="ph-duotone ph-shopping-cart"></i>
-                        <span>E-commerce</span>
-                      </Dropdown.Item>
-                      <Dropdown.Item href="#!" className="dropdown-item">
-                        <i className="ph-duotone ph-lifebuoy"></i>
-                        <span>Helpdesk</span>
-                      </Dropdown.Item>
-                      <Dropdown.Item href="#!" className="dropdown-item">
-                        <i className="ph-duotone ph-scroll"></i>
-                        <span>Invoice</span>
-                      </Dropdown.Item>
-                      <Dropdown.Item href="#!" className="dropdown-item">
-                        <i className="ph-duotone ph-books"></i>
-                        <span>Online Courses</span>
-                      </Dropdown.Item>
-                      <Dropdown.Item href="#!" className="dropdown-item">
-                        <i className="ph-duotone ph-envelope-open"></i>
-                        <span>Mail</span>
-                      </Dropdown.Item>
-                      <Dropdown.Item href="#!" className="dropdown-item">
-                        <i className="ph-duotone ph-identification-badge"></i>
-                        <span>Membership</span>
-                      </Dropdown.Item>
-                      <Dropdown.Item href="#!" className="dropdown-item">
-                        <i className="ph-duotone ph-chats-circle"></i>
-                        <span>Chat</span>
-                      </Dropdown.Item>
-                      <Dropdown.Item href="#!" className="dropdown-item">
-                        <i className="ph-duotone ph-currency-circle-dollar"></i>
-                        <span>Plans</span>
-                      </Dropdown.Item>
-                      <Dropdown.Item href="#!" className="dropdown-item">
-                        <i className="ph-duotone ph-user-circle"></i>
-                        <span>Users</span>
-                      </Dropdown.Item>
-                    </div>
-                  </div>
-                </Dropdown.Menu>
-              </Dropdown>
               <Dropdown as="li" className="pc-h-item">
                 <Dropdown.Toggle
                   as="a"
@@ -193,7 +141,7 @@ const TopBar = ({
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-              <li className="pc-h-item">
+              {/* <li className="pc-h-item">
                 <a
                   className="pc-head-link pct-c-btn"
                   onClick={handleOffcanvasToggle}
@@ -203,42 +151,8 @@ const TopBar = ({
                 >
                   <i className="ph-duotone ph-gear-six"></i>
                 </a>
-              </li>
-              <Dropdown as="li" className="pc-h-item">
-                <Dropdown.Toggle
-                  as="a"
-                  className="pc-head-link arrow-none me-0"
-                  data-bs-toggle="dropdown"
-                  href="#"
-                  role="button"
-                  aria-haspopup="false"
-                  aria-expanded="false"
-                >
-                  <i className="ph-duotone ph-diamonds-four"></i>
-                </Dropdown.Toggle>
-                <Dropdown.Menu className="dropdown-menu-end pc-h-dropdown">
-                  <Dropdown.Item>
-                    <i className="ph-duotone ph-user"></i>
-                    <span>My Account</span>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <i className="ph-duotone ph-gear"></i>
-                    <span>Settings</span>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <i className="ph-duotone ph-lifebuoy"></i>
-                    <span>Support</span>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <i className="ph-duotone ph-lock-key"></i>
-                    <span>Lock Screen</span>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <i className="ph-duotone ph-power"></i>
-                    <span>Logout</span>
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+              </li> */}
+
               <Dropdown as="li" className="pc-h-item">
                 <Dropdown.Toggle
                   as="a"
@@ -667,15 +581,18 @@ const TopBar = ({
                               />
                             </div>
                             <div className="flex-grow-1 mx-3">
-                              <h5 className="mb-0">Carson Darrin</h5>
-                              <a
+                              <h5 className="mb-0">
+                                {userDetails?.firstName}&nbsp;
+                                {userDetails?.lastName}
+                              </h5>
+                              {/* <a
                                 className="link-primary"
-                                href="mailto:carson.darrin@company.io"
-                              >
-                                carson.darrin@company.io
-                              </a>
+                                href="tel:carson.darrin@company.io"
+                              > */}
+                              {userDetails?.mobileNumber}
+                              {/* </a> */}
                             </div>
-                            <span className="badge bg-primary">PRO</span>
+                            {/* <span className="badge bg-primary">PRO</span> */}
                           </div>
                         </li>
                         <li className="list-group-item">
@@ -685,87 +602,6 @@ const TopBar = ({
                               <span>Change password</span>
                             </span>
                           </Dropdown.Item>
-                          <Dropdown.Item>
-                            <span className="d-flex align-items-center">
-                              <i className="ph-duotone ph-envelope-simple"></i>
-                              <span>Recently mail</span>
-                            </span>
-                            <div className="user-group">
-                              <img
-                                src={avatar1}
-                                alt="user-image"
-                                className="avtar"
-                              />
-                              <img
-                                src={avatar2}
-                                alt="user-image"
-                                className="avtar"
-                              />
-                              <img
-                                src={avatar3}
-                                alt="user-image"
-                                className="avtar"
-                              />
-                            </div>
-                          </Dropdown.Item>
-                          <Dropdown.Item>
-                            <span className="d-flex align-items-center">
-                              <i className="ph-duotone ph-calendar-blank"></i>
-                              <span>Schedule meetings</span>
-                            </span>
-                          </Dropdown.Item>
-                        </li>
-                        <li className="list-group-item">
-                          <Dropdown.Item>
-                            <span className="d-flex align-items-center">
-                              <i className="ph-duotone ph-heart"></i>
-                              <span>Favorite</span>
-                            </span>
-                          </Dropdown.Item>
-                          <Dropdown.Item>
-                            <span className="d-flex align-items-center">
-                              <i className="ph-duotone ph-arrow-circle-down"></i>
-                              <span>Download</span>
-                            </span>
-                            <span className="avtar avtar-xs rounded-circle bg-danger text-white">
-                              10
-                            </span>
-                          </Dropdown.Item>
-                        </li>
-                        <li className="list-group-item">
-                          <div className="dropdown-item">
-                            <span className="d-flex align-items-center">
-                              <i className="ph-duotone ph-globe-hemisphere-west"></i>
-                              <span>Languages</span>
-                            </span>
-                            <span className="flex-shrink-0">
-                              <select className="form-select bg-transparent form-select-sm border-0 shadow-none">
-                                <option value="1">English</option>
-                                <option value="2">Spain</option>
-                                <option value="3">Arbic</option>
-                              </select>
-                            </span>
-                          </div>
-                          <Dropdown.Item>
-                            <span className="d-flex align-items-center">
-                              <i className="ph-duotone ph-flag"></i>
-                              <span>Country</span>
-                            </span>
-                          </Dropdown.Item>
-                          <div className="dropdown-item">
-                            <span className="d-flex align-items-center">
-                              <i className="ph-duotone ph-moon"></i>
-                              <span>Dark mode</span>
-                            </span>
-                            <div className="form-check form-switch form-check-reverse m-0">
-                              <input
-                                className="form-check-input f-18"
-                                id="dark-mode"
-                                type="checkbox"
-                                role="switch"
-                              />
-                            </div>
-                          </div>
                         </li>
                         <li className="list-group-item">
                           <Dropdown.Item>
@@ -774,36 +610,16 @@ const TopBar = ({
                               <span>Edit profile</span>
                             </span>
                           </Dropdown.Item>
-                          <Dropdown.Item>
-                            <span className="d-flex align-items-center">
-                              <i className="ph-duotone ph-star text-warning"></i>
-                              <span>Upgrade account</span>
-                              <span className="badge bg-light-success border border-success ms-2">
-                                NEW
-                              </span>
-                            </span>
-                          </Dropdown.Item>
+
                           <Dropdown.Item>
                             <span className="d-flex align-items-center">
                               <i className="ph-duotone ph-bell"></i>
                               <span>Notifications</span>
                             </span>
                           </Dropdown.Item>
-                          <Dropdown.Item>
-                            <span className="d-flex align-items-center">
-                              <i className="ph-duotone ph-gear-six"></i>
-                              <span>Settings</span>
-                            </span>
-                          </Dropdown.Item>
                         </li>
                         <li className="list-group-item">
-                          <Dropdown.Item>
-                            <span className="d-flex align-items-center">
-                              <i className="ph-duotone ph-plus-circle"></i>
-                              <span>Add account</span>
-                            </span>
-                          </Dropdown.Item>
-                          <Dropdown.Item>
+                          <Dropdown.Item onClick={handleLogout}>
                             <span className="d-flex align-items-center">
                               <i className="ph-duotone ph-power"></i>
                               <span>Logout</span>
