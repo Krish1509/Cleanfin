@@ -8,6 +8,7 @@ import PublicRoutes from "./PublicRoutes";
 import Event from "../pages/Pages/Event";
 import Unauthorized from "../pages/Pages/Unauthorized";
 import UserDashboard from "../pages/Pages/UserDashboard/Dashboard";
+import AddRecommendation from "../pages/Pages/Recommendation/add-edit/add";
 
 const routes = [
   { path: "/dashboard", component: <Dashboard />, allowedRoles: ["admin"] },
@@ -20,6 +21,11 @@ const routes = [
   {
     path: "/recommendation",
     component: <Recommendation />,
+    allowedRoles: ["admin"],
+  },
+  {
+    path: "/recommendation/add",
+    component: <AddRecommendation />,
     allowedRoles: ["admin"],
   },
   { path: "/event", component: <Event />, allowedRoles: ["admin"] },

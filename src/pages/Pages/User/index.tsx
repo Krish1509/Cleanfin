@@ -8,7 +8,7 @@ import { Card, CardBody, CardHeader, Form } from "react-bootstrap";
 import { postRequest } from "../../../service/fetch-services";
 import Pagination from "../../../Common/Pagination"; // Import Pagination component
 import DatePicker from "../../../Common/DatePicker";
-import ToggleSwitch from "../../../Common/ToggleSwitch";  // Import the new ToggleSwitch component
+import ToggleSwitch from "../../../Common/ToggleSwitch"; // Import the new ToggleSwitch component
 import ToastAlert from "../../../helper/toast-alert";
 
 type UserListData = {
@@ -150,7 +150,7 @@ const User = () => {
                             <DatePicker
                               minDate={new Date(item?.subscription_start)}
                               value={item?.subscription_end}
-                              onChange={(date) =>
+                              onChange={(date: any) =>
                                 updateUserDetails(
                                   item._id,
                                   "subscription_end",
