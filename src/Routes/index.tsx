@@ -16,7 +16,7 @@ const Routing = () => {
             key={key}
             path={item.path}
             element={
-              <PrivateRoute>
+              <PrivateRoute allowedRoles={item.allowedRoles}>
                 <Layout>{item.component}</Layout>
               </PrivateRoute>
             }

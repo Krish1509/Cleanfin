@@ -2,19 +2,28 @@ import Dashboard from "../pages/Dashboard";
 import User from "../pages/Pages/User";
 import Feedback from "../pages/Pages/Feedback";
 import Error404 from "../pages/Pages/Error404";
-import SamplePage from "../pages/Other/SamplePage";
 import Login from "../pages/Pages/Auth/Login";
 import Recommendation from "../pages/Pages/Recommendation";
 import PublicRoutes from "./PublicRoutes";
 import Event from "../pages/Pages/Event";
+import Unauthorized from "../pages/Pages/Unauthorized";
+import UserDashboard from "../pages/Pages/UserDashboard/Dashboard";
 
 const routes = [
-  { path: "/dashboard", component: <Dashboard /> },
-  { path: "/user", component: <User /> },
-  { path: "/recommendation", component: <Recommendation /> },
-  { path: "/event", component: <Event /> },
-  { path: "/feedback", component: <Feedback /> },
-  { path: "/other/sample-page", component: <SamplePage /> },
+  { path: "/dashboard", component: <Dashboard />, allowedRoles: ["admin"] },
+  {
+    path: "/dashboard/user",
+    component: <UserDashboard />,
+    allowedRoles: ["customer"],
+  },
+  { path: "/user", component: <User />, allowedRoles: ["admin"] },
+  {
+    path: "/recommendation",
+    component: <Recommendation />,
+    allowedRoles: ["admin"],
+  },
+  { path: "/event", component: <Event />, allowedRoles: ["admin"] },
+  { path: "/feedback", component: <Feedback />, allowedRoles: ["admin"] },
 ];
 
 const nonAuthRoutes = [
@@ -28,6 +37,7 @@ const nonAuthRoutes = [
     ),
   },
   { path: "/pages/error-404", component: <Error404 /> },
+  { path: "/unauthorized", component: <Unauthorized /> },
   // Add a catch-all route for 404 errors
   { path: "*", component: <Error404 /> },
 ];

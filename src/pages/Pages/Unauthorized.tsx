@@ -1,12 +1,12 @@
 import React from "react";
+
 import { Card } from "react-bootstrap";
 
-//import images
-import ImgError404 from "../../assets/images/pages/img-error-404.png";
+import ImgConnectionLost from "../../assets/images/pages/img-connection-lost.png";
 import { Link } from "react-router-dom";
 import FooterBlock from "../../Layout/FooterBlock";
 
-const Error404 = () => {
+const Unauthorized = () => {
   const user = JSON.parse(localStorage.getItem("user") || "{}");
   const allowedDashboard =
     user?.role === "admin" ? "dashboard" : "dashboard/user";
@@ -18,13 +18,17 @@ const Error404 = () => {
             <div className="error-card">
               <Card.Body>
                 <div className="error-image-block">
-                  <img className="img-fluid" src={ImgError404} alt="img" />
+                  <img
+                    className="img-fluid"
+                    src={ImgConnectionLost}
+                    alt="img"
+                  />
                 </div>
                 <div className="text-center">
-                  <h1 className="mt-2">Oops! Something Went wrong</h1>
+                  <h1 className="mt-2">Unauthorized Access Attempt</h1>
                   <p className="mt-2 mb-4 text-muted f-20">
-                    We couldn’t find the page you were looking for. Why not try
-                    back to the Homepage.
+                    You are not authorized to view the page you are trying to
+                    access.
                   </p>
                   <Link
                     className="btn btn-primary d-inline-flex align-items-center mb-3"
@@ -36,8 +40,6 @@ const Error404 = () => {
               </Card.Body>
             </div>
           </div>
-
-          {/* FooterBlock */}
           <FooterBlock />
         </div>
       </div>
@@ -45,4 +47,4 @@ const Error404 = () => {
   );
 };
 
-export default Error404;
+export default Unauthorized;
