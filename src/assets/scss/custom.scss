@@ -18,42 +18,57 @@ $googleFontsUrl: "https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;
 // }
 
 .paymenttab {
-    display: none !important;
+  display: none !important;
 
-    // background-color: transparent !important;
-    // border: 0 !important;
+  // background-color: transparent !important;
+  // border: 0 !important;
 }
 
 .dropdown-menu .dropdown-item svg.svg-dropdown-icon {
-    fill: var(--bs-dropdown-link-color);
-    font-size: 5px;
+  fill: var(--bs-dropdown-link-color);
+  font-size: 5px;
 }
 
 #left-right-fix {
-    overflow-x: scroll !important;
-    overflow-y: scroll !important;
-    height: 500px;
+  overflow-x: scroll !important;
+  overflow-y: scroll !important;
+  height: 500px;
 }
 
 #right-fix {
-    overflow-x: scroll !important;
-    overflow-y: scroll !important;
-    height: 500px;
+  overflow-x: scroll !important;
+  overflow-y: scroll !important;
+  height: 500px;
 }
 
 .tableScroller {
-    max-height: 250px;
-    overflow-y: auto !important;
+  max-height: 250px;
+  overflow-y: auto !important;
 }
 
 .modal-body {
-    background-color: white !important;
+  background-color: white !important;
 }
 
 #world-map-markers::-webkit-scrollbar {
-	display: none;
+  display: none;
 }
 
 .datatable-container-scroll {
-    overflow-x: auto;
+  overflow-x: auto;
+}
+.ql-editor {
+  height: 200px !important;
+}
+.custom-date {
+  .react-datepicker-wrapper {
+    display: inline;
+  }
+}
+.react-select__control {
+  padding: 0.3rem 0.7rem;
+  border-radius: 8px !important;
+}
+.invalid-feedback {
+  font-size: 0.8rem;
 }
