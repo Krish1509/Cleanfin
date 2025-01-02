@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 //import Components
 import BreadcrumbItem from "../../../Common/BreadcrumbItem";
-import { Card, CardBody, CardHeader, Form } from "react-bootstrap";
+import { Button, Card, CardBody, CardHeader, Form } from "react-bootstrap";
 import moment from "moment";
 import ToggleSwitch from "../../../Common/ToggleSwitch";
 import { postRequest } from "../../../service/fetch-services";
 import ToastAlert from "../../../helper/toast-alert";
 import Pagination from "../../../Common/Pagination";
 import EditableNumberInput from "../../../Common/EditableNumberInput";
+import { useNavigate } from "react-router-dom";
 
 type RecommendationListData = {
   _id: string;
@@ -29,7 +30,11 @@ type RecommendationListData = {
 };
 
 const Recommendation = () => {
-  const [recommendationListData, setRecommendationListData] = useState<RecommendationListData[]>([]);
+  const navigate = useNavigate();
+
+  const [recommendationListData, setRecommendationListData] = useState<
+    RecommendationListData[]
+  >([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [entriesPerPage, setEntriesPerPage] = useState<number>(10);
@@ -41,7 +46,9 @@ const Recommendation = () => {
     setCurrentPage(1); // Reset page to 1 when search query changes
   };
 
-  const handleEntriesPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleEntriesPerPageChange = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     setEntriesPerPage(parseInt(e.target.value));
     setCurrentPage(1); // Reset page to 1 when entries per page changes
   };
@@ -73,31 +80,48 @@ const Recommendation = () => {
     fetchRecommendationListData();
   }, [entriesPerPage, currentPage, searchQuery, fetchRecommendationListData]);
 
-  const updateRecommendationDetails = React.useCallback(async (id: string, key: string, value: unknown) => {
-    try {
-      const body = { id, [key]: value };
-      const result = await postRequest("recommendation/edit", body, true);
-      ToastAlert.success(result.message);
-      fetchRecommendationListData();
-    } catch (err) {
-      console.log(err);
-      setLoading(false);
-    }
-  }, [fetchRecommendationListData]);
+  const updateRecommendationDetails = React.useCallback(
+    async (id: string, key: string, value: unknown) => {
+      try {
+        const body = { id, [key]: value };
+        const result = await postRequest("recommendation/edit", body, true);
+        ToastAlert.success(result.message);
+        fetchRecommendationListData();
+      } catch (err) {
+        console.log(err);
+        setLoading(false);
+      }
+    },
+    [fetchRecommendationListData]
+  );
 
   // Update recommendation details when a value is changed
   const handleValueUpdate = (id: string, key: string, value: unknown) => {
     updateRecommendationDetails(id, key, value);
   };
 
+  const handleEditDate = (id: string) => {
+    console.log(id);
+    navigate("/recommendation/edit", { state: { id: id } });
+  };
+
   return (
     <React.Fragment>
-      <BreadcrumbItem mainTitle="Recommendation" subTitle="Recommendation List" />
+      <BreadcrumbItem
+        mainTitle="Recommendation"
+        subTitle="Recommendation List"
+      />
       <div className="col-12 mt-4 pb-4">
         <Card className="table-card">
           <CardHeader>
             <div className="d-sm-flex align-items-center justify-content-between">
               <h5 className="mb-3 mb-sm-0">Recommendation List</h5>
+              <Button
+                onClick={() => navigate("/recommendation/add")}
+                className="btn btn-primary"
+              >
+                Add
+              </Button>
             </div>
           </CardHeader>
           <div className="d-sm-flex align-items-center mt-4">
@@ -136,7 +160,10 @@ const Recommendation = () => {
                       {recommendationListData.map((item, key) => (
                         <tr key={key}>
                           <td>{item?.scriptId}</td>
-                          <td>{moment(item?.date).format("YYYY-MM-DD")} {item?.time}</td>
+                          <td>
+                            {moment(item?.date).format("YYYY-MM-DD")}{" "}
+                            {item?.time}
+                          </td>
                           <td>
                             <div className="d-flex align-items-center justify-content-between">
                               <EditableNumberInput
@@ -149,7 +176,11 @@ const Recommendation = () => {
                               <ToggleSwitch
                                 checked={item?.target1Achieved}
                                 onChange={() =>
-                                  updateRecommendationDetails(item?._id, "target1Achieved", !item?.target1Achieved)
+                                  updateRecommendationDetails(
+                                    item?._id,
+                                    "target1Achieved",
+                                    !item?.target1Achieved
+                                  )
                                 }
                               />
                             </div>
@@ -166,7 +197,11 @@ const Recommendation = () => {
                               <ToggleSwitch
                                 checked={item?.target2Achieved}
                                 onChange={() =>
-                                  updateRecommendationDetails(item?._id, "target2Achieved", !item?.target2Achieved)
+                                  updateRecommendationDetails(
+                                    item?._id,
+                                    "target2Achieved",
+                                    !item?.target2Achieved
+                                  )
                                 }
                               />
                             </div>
@@ -183,7 +218,11 @@ const Recommendation = () => {
                               <ToggleSwitch
                                 checked={item?.target3Achieved}
                                 onChange={() =>
-                                  updateRecommendationDetails(item?._id, "target3Achieved", !item?.target3Achieved)
+                                  updateRecommendationDetails(
+                                    item?._id,
+                                    "target3Achieved",
+                                    !item?.target3Achieved
+                                  )
                                 }
                               />
                             </div>
@@ -200,19 +239,34 @@ const Recommendation = () => {
                               <ToggleSwitch
                                 checked={item?.stopLossAchieved}
                                 onChange={() =>
-                                  updateRecommendationDetails(item?._id, "stopLossAchieved", !item?.stopLossAchieved)
+                                  updateRecommendationDetails(
+                                    item?._id,
+                                    "stopLossAchieved",
+                                    !item?.stopLossAchieved
+                                  )
                                 }
                               />
                             </div>
                           </td>
                           <td>
-                            <div className="d-flex">
+                            <div className="d-flex align-items-center">
                               <ToggleSwitch
                                 checked={item?.isActive}
                                 onChange={() =>
-                                  updateRecommendationDetails(item?._id, "isActive", !item?.isActive)
+                                  updateRecommendationDetails(
+                                    item?._id,
+                                    "isActive",
+                                    !item?.isActive
+                                  )
                                 }
                               />
+                              <Button
+                                type="button"
+                                className="avtar avtar-xs btn-link-secondary"
+                                onClick={() => handleEditDate(item?._id)}
+                              >
+                                <i className="ti ti-edit f-20"></i>
+                              </Button>
                             </div>
                           </td>
                         </tr>

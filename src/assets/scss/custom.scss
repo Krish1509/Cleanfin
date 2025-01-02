@@ -65,3 +65,10 @@ $googleFontsUrl: "https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;
     display: inline;
   }
 }
+.react-select__control {
+  padding: 0.3rem 0.7rem;
+  border-radius: 8px !important;
+}
+.invalid-feedback {
+  font-size: 0.8rem;
+}

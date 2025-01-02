@@ -28,6 +28,11 @@ const routes = [
     component: <AddRecommendation />,
     allowedRoles: ["admin"],
   },
+  {
+    path: "/recommendation/edit",
+    component: <AddRecommendation />,
+    allowedRoles: ["admin"],
+  },
   { path: "/event", component: <Event />, allowedRoles: ["admin"] },
   { path: "/feedback", component: <Feedback />, allowedRoles: ["admin"] },
 ];
