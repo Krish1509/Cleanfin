@@ -41,6 +41,13 @@ const adminMenuData = [
     link: "/staticPages",
     icon: "",
   },
+  {
+    id: "contentBytes",
+    label: "Content Bytes",
+    dataPage: null,
+    link: "/contentBytes",
+    icon: "",
+  },
 ];
 
 const userMenuData = [

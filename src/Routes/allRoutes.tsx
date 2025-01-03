@@ -11,6 +11,8 @@ import UserDashboard from "../pages/Pages/UserDashboard/Dashboard";
 import AddRecommendation from "../pages/Pages/Recommendation/add-edit/add";
 import StaticPages from "../pages/Pages/StaticPages";
 import UpdateStaticPages from "../pages/Pages/StaticPages/add-edit/add";
+import ContentBytes from "../pages/Pages/ContentBytes";
+import AddContentBytes from "../pages/Pages/ContentBytes/add-edit/add";
 
 const routes = [
   // Dashboard Routes
@@ -58,6 +60,22 @@ const routes = [
 
   // Feedback Routes
   { path: "/feedback", component: <Feedback />, allowedRoles: ["admin"] },
+
+  {
+    path: "/contentBytes",
+    component: <ContentBytes />,
+    allowedRoles: ["admin"],
+  },
+  {
+    path: "/contentBytes/add",
+    component: <AddContentBytes />,
+    allowedRoles: ["admin"],
+  },
+  {
+    path: "/contentBytes/edit",
+    component: <AddContentBytes />,
+    allowedRoles: ["admin"],
+  },
 ];
 
 const nonAuthRoutes = [

@@ -67,8 +67,11 @@ const StaticPages = () => {
                       {data?.map((item, key) => (
                         <tr key={key}>
                           <td>{item?.pageName}</td>
-                          <td style={{ whiteSpace: "normal" }}>
-                            <div
+                          <td
+                            style={{ whiteSpace: "normal" }}
+                            className="html-content"
+                          >
+                            <span
                               dangerouslySetInnerHTML={{
                                 __html: item?.content,
                               }}
