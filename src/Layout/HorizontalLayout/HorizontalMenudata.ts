@@ -34,6 +34,13 @@ const adminMenuData = [
     link: "/feedback",
     icon: "",
   },
+  {
+    id: "staticPages",
+    label: "Static Pages",
+    dataPage: null,
+    link: "/staticPages",
+    icon: "",
+  },
 ];
 
 const userMenuData = [
