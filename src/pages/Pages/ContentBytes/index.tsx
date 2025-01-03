@@ -6,6 +6,7 @@ import { Button, Card, CardBody, CardHeader, Form } from "react-bootstrap";
 import { postRequest } from "../../../service/fetch-services";
 import Pagination from "../../../Common/Pagination";
 import { useNavigate } from "react-router-dom";
+import { TypeOptions } from "./type";
 
 type ContentBytesData = {
   _id: string;
@@ -69,7 +70,6 @@ const ContentBytes = () => {
   }, [entriesPerPage, currentPage, searchQuery]);
 
   const handleEditDate = (id: string) => {
-    console.log(id);
     navigate("/contentBytes/edit", { state: { id: id } });
   };
 
@@ -124,7 +124,13 @@ const ContentBytes = () => {
                         <tr key={key}>
                           <td>{key + 1}</td>
                           <td>{item?.title}</td>
-                          <td>{item?.type}</td>
+                          <td>
+                            {item?.type
+                              ? TypeOptions?.find(
+                                  (type) => type?.value === item?.type
+                                )?.label
+                              : ""}
+                          </td>
                           <td className="html-content">
                             <span
                               dangerouslySetInnerHTML={{

@@ -14,7 +14,8 @@ import {
   postRequest,
 } from "../../../../service/fetch-services";
 import ToastAlert from "../../../../helper/toast-alert";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { TypeOptions } from "../type";
 
 const validationSchema = Yup.object().shape({
   type: Yup.string().required("Type is required!"),
@@ -42,13 +43,6 @@ const AddContentBytes = () => {
   const editId = location?.state !== undefined ? location?.state?.id : "";
   const user = JSON.parse(localStorage.getItem("user") || "");
 
-  const TypeOptions = [
-    { value: "url", label: "URL" },
-    { value: "video", label: "Video" },
-    { value: "audio", label: "Audio" },
-    { value: "file", label: "File" },
-  ];
-
   const [loading, setLoading] = useState(false);
   const [editData, setEditData] = useState<any>({});
   const [getLoading, setGetLoading] = useState(false);
@@ -64,7 +58,7 @@ const AddContentBytes = () => {
       formData.append("title", values?.title);
       formData.append("description", values?.description);
       formData.append("url", values?.url);
-      if (selectedFile && Object.keys(selectedFile)?.length) {
+      if (selectedFile) {
         formData.append("filePath", selectedFile);
       }
 
@@ -127,6 +121,12 @@ const AddContentBytes = () => {
         "application/vnd.ms-excel",
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "image/jpeg",
+        "image/png",
+        "image/gif",
+        "image/bmp",
       ],
       audio: ["audio/mpeg", "audio/wav", "audio/ogg"],
       video: ["video/mp4", "video/ogg", "video/webm"],
@@ -172,7 +172,7 @@ const AddContentBytes = () => {
                         <Row>
                           <Col sm={6}>
                             <div className="mb-3">
-                              <label className="form-label">Action</label>
+                              <label className="form-label">Type</label>
                               <Select
                                 isSearchable={true}
                                 options={TypeOptions}
@@ -217,7 +217,7 @@ const AddContentBytes = () => {
                                   }
                                   accept={
                                     values?.type === "file"
-                                      ? ".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv"
+                                      ? ".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.csv,.jpg,.jpeg,.png,.gif,.bmp"
                                       : values?.type === "audio"
                                       ? "audio/*"
                                       : values?.type === "video"
@@ -233,7 +233,8 @@ const AddContentBytes = () => {
                               ) : null}
                               {!error &&
                               values?.type !== "url" &&
-                              !selectedFile ? (
+                              !selectedFile &&
+                              (editData?._id ? !editData?.filePath : true) ? (
                                 <div className="invalid-feedback d-flex align-items-start">
                                   File is required
                                 </div>
@@ -246,6 +247,115 @@ const AddContentBytes = () => {
                             </div>
                           </Col>
                         </Row>
+                        {selectedFile || editData?.filePath ? (
+                          <div
+                            className="list-unstyled mb-3"
+                            id="file-previews"
+                          >
+                            <Card className="mt-1 mb-0 shadow-none border dz-processing dz-image-preview dz-success dz-complete">
+                              <div className="py-3 px-2">
+                                <Row className="align-items-center">
+                                  <Col className="col-auto">
+                                    {selectedFile ? (
+                                      // Display newly selected file
+                                      selectedFile.type.startsWith("image/") ? (
+                                        <img
+                                          height="80"
+                                          width="100"
+                                          className="avatar-sm rounded bg-light"
+                                          alt="preview"
+                                          src={URL.createObjectURL(
+                                            selectedFile
+                                          )}
+                                        />
+                                      ) : selectedFile.type.startsWith(
+                                          "audio/"
+                                        ) ? (
+                                        <audio controls>
+                                          <source
+                                            src={URL.createObjectURL(
+                                              selectedFile
+                                            )}
+                                            type={selectedFile.type}
+                                          />
+                                          Your browser does not support the
+                                          audio element.
+                                        </audio>
+                                      ) : selectedFile.type.startsWith(
+                                          "video/"
+                                        ) ? (
+                                        <video controls width="100">
+                                          <source
+                                            src={URL.createObjectURL(
+                                              selectedFile
+                                            )}
+                                            type={selectedFile.type}
+                                          />
+                                          Your browser does not support the
+                                          video element.
+                                        </video>
+                                      ) : (
+                                        <Link
+                                          to={URL.createObjectURL(selectedFile)}
+                                          target="_blank"
+                                          className="text-muted font-weight-bold"
+                                        >
+                                          {selectedFile.name}
+                                        </Link>
+                                      )
+                                    ) : (
+                                      // Display existing file from editData
+                                      editData?.filePath &&
+                                      (editData.fileExtension?.match(
+                                        /jpg|jpeg|png|gif|bmp/
+                                      ) ? (
+                                        <img
+                                          height="50"
+                                          width="50"
+                                          className="avatar-sm rounded bg-light"
+                                          alt="preview"
+                                          src={editData.filePath}
+                                        />
+                                      ) : editData.fileExtension?.match(
+                                          /mp3|wav|ogg/
+                                        ) ? (
+                                        <audio controls>
+                                          <source
+                                            src={editData.filePath}
+                                            type={`audio/${editData.fileExtension}`}
+                                          />
+                                          Your browser does not support the
+                                          audio element.
+                                        </audio>
+                                      ) : editData.fileExtension?.match(
+                                          /mp4|avi|mkv/
+                                        ) ? (
+                                        <video controls width="100">
+                                          <source
+                                            src={editData.filePath}
+                                            type={`video/${editData.fileExtension}`}
+                                          />
+                                          Your browser does not support the
+                                          video element.
+                                        </video>
+                                      ) : (
+                                        <Link
+                                          to={editData.filePath}
+                                          target="_blank"
+                                          className="text-muted font-weight-bold"
+                                        >
+                                          {editData?.filePath}
+                                        </Link>
+                                      ))
+                                    )}
+                                  </Col>
+                                </Row>
+                              </div>
+                            </Card>
+                          </div>
+                        ) : (
+                          ""
+                        )}
                         <Row>
                           <Col sm={12}>
                             <div className="mb-3">
@@ -284,6 +394,7 @@ const AddContentBytes = () => {
                             </div>
                           </Col>
                         </Row>
+
                         <Row>
                           <div className="text-end">
                             <button
