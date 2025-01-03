@@ -9,15 +9,22 @@ import Event from "../pages/Pages/Event";
 import Unauthorized from "../pages/Pages/Unauthorized";
 import UserDashboard from "../pages/Pages/UserDashboard/Dashboard";
 import AddRecommendation from "../pages/Pages/Recommendation/add-edit/add";
+import StaticPages from "../pages/Pages/StaticPages";
+import UpdateStaticPages from "../pages/Pages/StaticPages/add-edit/add";
 
 const routes = [
+  // Dashboard Routes
   { path: "/dashboard", component: <Dashboard />, allowedRoles: ["admin"] },
   {
     path: "/dashboard/user",
     component: <UserDashboard />,
     allowedRoles: ["customer"],
   },
+
+  // User Routes
   { path: "/user", component: <User />, allowedRoles: ["admin"] },
+
+  // Recommendation Routes
   {
     path: "/recommendation",
     component: <Recommendation />,
@@ -33,7 +40,23 @@ const routes = [
     component: <AddRecommendation />,
     allowedRoles: ["admin"],
   },
+
+  // Static Pages Routes
+  {
+    path: "/staticPages",
+    component: <StaticPages />,
+    allowedRoles: ["admin"],
+  },
+  {
+    path: "/staticPages/edit",
+    component: <UpdateStaticPages />,
+    allowedRoles: ["admin"],
+  },
+
+  // Event Routes
   { path: "/event", component: <Event />, allowedRoles: ["admin"] },
+
+  // Feedback Routes
   { path: "/feedback", component: <Feedback />, allowedRoles: ["admin"] },
 ];
 
