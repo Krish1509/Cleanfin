@@ -9,6 +9,8 @@ import ToastAlert from "../../../helper/toast-alert";
 import Pagination from "../../../Common/Pagination";
 import EditableNumberInput from "../../../Common/EditableNumberInput";
 import { useNavigate } from "react-router-dom";
+import ConfirmationModal from "../../../Common/ConfirmationModal";
+import fireStoreLogo from "../../../assets/images/firestore.png";
 
 type RecommendationListData = {
   _id: string;
@@ -27,6 +29,7 @@ type RecommendationListData = {
   stopLossAchieved: boolean;
   recommendation: string;
   isActive: boolean;
+  firestore?: boolean;
 };
 
 const Recommendation = () => {
@@ -40,6 +43,10 @@ const Recommendation = () => {
   const [entriesPerPage, setEntriesPerPage] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
+  const [showConfirm, setShowConfirm] = useState<boolean>(false);
+  const [selectedId, setSelectedId] = useState<string>("");
+  const [selectedStatus, setSelectedStatus] = useState<boolean>();
+  const [updateLoading, setUpdateLoading] = useState<boolean>(false);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -83,16 +90,25 @@ const Recommendation = () => {
   const updateRecommendationDetails = React.useCallback(
     async (id: string, key: string, value: unknown) => {
       try {
+        setUpdateLoading(true);
         const body = { id, [key]: value };
         const result = await postRequest("recommendation/edit", body, true);
         ToastAlert.success(result.message);
-        fetchRecommendationListData();
+        // Update user in the local state
+        setRecommendationListData((prevList) =>
+          prevList.map((data) =>
+            data._id === id ? { ...data, [key]: value } : data
+          )
+        );
+        setShowConfirm(false);
+        setSelectedId("");
+        setUpdateLoading(false);
       } catch (err) {
         console.log(err);
         setLoading(false);
       }
     },
-    [fetchRecommendationListData]
+    []
   );
 
   // Update recommendation details when a value is changed
@@ -159,7 +175,21 @@ const Recommendation = () => {
                     <tbody>
                       {recommendationListData.map((item, key) => (
                         <tr key={key}>
-                          <td>{item?.scriptId}</td>
+                          <td>
+                            {item?.firestore ? (
+                              <img
+                                src={fireStoreLogo}
+                                style={{
+                                  marginRight: "5px",
+                                  height: "20px",
+                                  width: "20px",
+                                }}
+                              />
+                            ) : (
+                              ""
+                            )}
+                            {item?.scriptId}
+                          </td>
                           <td>
                             {moment(item?.date).format("YYYY-MM-DD")}{" "}
                             {item?.time}
@@ -252,13 +282,11 @@ const Recommendation = () => {
                             <div className="d-flex align-items-center">
                               <ToggleSwitch
                                 checked={item?.isActive}
-                                onChange={() =>
-                                  updateRecommendationDetails(
-                                    item?._id,
-                                    "isActive",
-                                    !item?.isActive
-                                  )
-                                }
+                                onChange={() => {
+                                  setShowConfirm(!showConfirm);
+                                  setSelectedStatus(!item?.isActive);
+                                  setSelectedId(item?._id);
+                                }}
                               />
                               <Button
                                 type="button"
@@ -284,6 +312,25 @@ const Recommendation = () => {
             entriesPerPage={entriesPerPage}
             onEntriesPerPageChange={handleEntriesPerPageChange}
           />
+          {showConfirm ? (
+            <ConfirmationModal
+              show={showConfirm}
+              handleConfirm={() =>
+                updateRecommendationDetails(
+                  selectedId,
+                  "isActive",
+                  selectedStatus
+                )
+              }
+              handleClose={() => setShowConfirm(false)}
+              message={`Are you sure you want to ${
+                selectedStatus ? "activate" : "deactivate"
+              } this record?`}
+              loading={updateLoading}
+            />
+          ) : (
+            ""
+          )}
         </Card>
       </div>
     </React.Fragment>
