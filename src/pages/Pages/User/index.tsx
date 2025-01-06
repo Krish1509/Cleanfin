@@ -79,12 +79,17 @@ const User = () => {
         };
         const result = await postRequest("user/edit", body, true);
         ToastAlert.success(result.message);
-        fetchUserListData();
+        // Update user in the local state
+        setUserListData((prevList) =>
+          prevList.map((user) =>
+            user._id === id ? { ...user, [key]: value } : user
+          )
+        );
       } catch (err) {
         setLoading(false);
       }
     },
-    [fetchUserListData]
+    []
   );
 
   return (
