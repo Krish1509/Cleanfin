@@ -10,6 +10,7 @@ import Pagination from "../../../Common/Pagination"; // Import Pagination compon
 import DatePicker from "../../../Common/DatePicker";
 import ToggleSwitch from "../../../Common/ToggleSwitch"; // Import the new ToggleSwitch component
 import ToastAlert from "../../../helper/toast-alert";
+import ConfirmationModal from "../../../Common/ConfirmationModal";
 
 type UserListData = {
   _id: string;
@@ -31,6 +32,10 @@ const User = () => {
   const [entriesPerPage, setEntriesPerPage] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
+  const [showConfirm, setShowConfirm] = useState<boolean>(false);
+  const [selectedId, setSelectedId] = useState<string>("");
+  const [selectedStatus, setSelectedStatus] = useState<boolean>();
+  const [updateLoading, setUpdateLoading] = useState<boolean>(false);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -72,6 +77,7 @@ const User = () => {
 
   const updateUserDetails = React.useCallback(
     async (id: string, key: string, value: any) => {
+      setUpdateLoading(true);
       try {
         const body = {
           userId: id,
@@ -79,12 +85,20 @@ const User = () => {
         };
         const result = await postRequest("user/edit", body, true);
         ToastAlert.success(result.message);
-        fetchUserListData();
+        // Update user in the local state
+        setUserListData((prevList) =>
+          prevList.map((user) =>
+            user._id === id ? { ...user, [key]: value } : user
+          )
+        );
+        setUpdateLoading(false);
+        setShowConfirm(false);
+        setSelectedId("");
       } catch (err) {
         setLoading(false);
       }
     },
-    [fetchUserListData]
+    []
   );
 
   return (
@@ -163,11 +177,16 @@ const User = () => {
                             <ToggleSwitch
                               checked={item?.isActive}
                               onChange={() =>
-                                updateUserDetails(
-                                  item._id,
-                                  "isActive",
-                                  !item?.isActive
-                                )
+                                // updateUserDetails(
+                                //   item._id,
+                                //   "isActive",
+                                //   !item?.isActive
+                                // )
+                                {
+                                  setShowConfirm(!showConfirm);
+                                  setSelectedStatus(!item?.isActive);
+                                  setSelectedId(item?._id);
+                                }
                               }
                             />
                           </td>
@@ -206,6 +225,21 @@ const User = () => {
             entriesPerPage={entriesPerPage}
             onEntriesPerPageChange={handleEntriesPerPageChange}
           />
+          {showConfirm ? (
+            <ConfirmationModal
+              show={showConfirm}
+              handleConfirm={() =>
+                updateUserDetails(selectedId, "isActive", selectedStatus)
+              }
+              handleClose={() => setShowConfirm(false)}
+              message={`Are you sure you want to ${
+                selectedStatus ? "activate" : "deactivate"
+              } this record?`}
+              loading={updateLoading}
+            />
+          ) : (
+            ""
+          )}
         </Card>
       </div>
     </React.Fragment>
