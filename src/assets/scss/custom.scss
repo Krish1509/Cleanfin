@@ -77,3 +77,60 @@ $googleFontsUrl: "https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;
     margin-bottom: 0;
   }
 }
+
+.active-scroll-spy {
+  background-color: yellowgreen;
+  border-radius: 15px;
+  transition: all 0.5s;
+}
+.ss-item {
+  color: black;
+  padding: 30px;
+  margin: 10px;
+}
+
+/* media query for screens less than 500px */
+@media screen and (max-width: 500px) {
+  .ss-item {
+    padding: 17px;
+  }
+  .button-size {
+    margin: 20px;
+    font-size: 17px;
+    padding: 15px 25px;
+  }
+}
+
+.user-dashboard-tab {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--bs-gray-400);
+
+  .nav-item {
+    .nav-link {
+      border-radius: 0;
+      color: var(--bs-gray-700);
+    }
+    .active {
+      border-radius: 0;
+      border-bottom: 2px solid #000;
+      background-color: #fff;
+      color: var(--bs-primary);
+      border-bottom-color: var(--bs-primary);
+    }
+  }
+}
+.user-dashboard-sticky-action {
+  top: 210px;
+  position: sticky;
+  z-index: 1020;
+  background: var(--bs-card-bg);
+  border-radius: 0;
+}
+.dashboard-recommendation {
+  margin-top: 60px;
+}
+.user-dashboard-container {
+  height: 100vh;
+}
