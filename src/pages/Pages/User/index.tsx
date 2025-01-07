@@ -193,19 +193,19 @@ const User = () => {
                           <td>
                             <a
                               href="#"
-                              className="avtar avtar-xs btn-link-secondary"
+                              className="avtar avtar-xs btn-link-warning btn-pc-default"
                             >
                               <i className="ti ti-eye f-20"></i>
                             </a>
                             <a
                               href="#"
-                              className="avtar avtar-xs btn-link-secondary"
+                              className="avtar avtar-xs btn-link-success btn-pc-default"
                             >
-                              <i className="ti ti-edit f-20"></i>
+                              <i className="ti ti-edit-circle f-20"></i>
                             </a>
                             <a
                               href="#"
-                              className="avtar avtar-xs btn-link-secondary"
+                              className="avtar avtar-xs btn-link-danger btn-pc-default"
                             >
                               <i className="ti ti-trash f-20"></i>
                             </a>
