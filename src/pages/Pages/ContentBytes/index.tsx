@@ -142,10 +142,10 @@ const ContentBytes = () => {
                             <div className="d-flex align-items-center">
                               <Button
                                 type="button"
-                                className="avtar avtar-xs btn-link-success btn-pc-default"
+                                className="avtar avtar-xs btn btn-primary"
                                 onClick={() => handleEditDate(item?._id)}
                               >
-                                <i className="ti ti-edit-circle f-20"></i>
+                                <i className="ti ti-pencil f-20"></i>
                               </Button>
                             </div>
                           </td>
