@@ -25,7 +25,8 @@ select.form-control,
 
 select.form-control {
   appearance: none;
-  background: #{$input-bg} url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='currentColor' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' class='css-i6dzq1'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 0.75rem center/18px 25px;
+  background: #{$input-bg} url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='currentColor' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' class='css-i6dzq1'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")
+    no-repeat right 0.75rem center/18px 25px;
 
   &[data-multiselectsplitter-firstselect-selector],
   &[data-multiselectsplitter-secondselect-selector] {
@@ -34,34 +35,33 @@ select.form-control {
 }
 
 .form-floating {
-  >label {
+  > label {
     top: 1px;
   }
 
-  >.form-control:focus,
-  >.form-control:not(:placeholder-shown),
-  >.form-select {
-    ~label {
+  > .form-control:focus,
+  > .form-control:not(:placeholder-shown),
+  > .form-select {
+    ~ label {
       color: $gray-600;
     }
   }
 
-  >.form-control:focus {
-    ~label {
+  > .form-control:focus {
+    ~ label {
       color: $component-active-bg;
     }
   }
 
-  >input {
+  > input {
     color: $body-color;
   }
 }
 
 .bootstrap-select -select {
-
-  >.dropdown-toggle.btn-light,
-  >.dropdown-toggle.btn-secondary,
-  >.dropdown-toggle.btn-default {
+  > .dropdown-toggle.btn-light,
+  > .dropdown-toggle.btn-secondary,
+  > .dropdown-toggle.btn-default {
     border-color: $input-border-color !important;
     box-shadow: none;
     background: $input-bg !important;
@@ -122,8 +122,7 @@ select.form-control {
   }
 }
 
-@each $color,
-$value in $theme-colors {
+@each $color, $value in $theme-colors {
   .form-check {
     .form-check-input {
       &.input-#{$color} {
@@ -138,12 +137,16 @@ $value in $theme-colors {
           border-color: shift-color($value, $soft-bg-level);
           background-color: shift-color($value, $soft-bg-level);
 
-          &[type='checkbox'] {
-            background-image: escape-svg(url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='#{$value}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/></svg>"));
+          &[type="checkbox"] {
+            background-image: escape-svg(
+              url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='#{$value}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/></svg>")
+            );
           }
 
-          &[type='radio'] {
-            background-image: escape-svg(url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='2' fill='#{$value}'/></svg>"));
+          &[type="radio"] {
+            background-image: escape-svg(
+              url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='2' fill='#{$value}'/></svg>")
+            );
           }
         }
       }
@@ -151,9 +154,8 @@ $value in $theme-colors {
       &.input-#{$color},
       &.input-light-#{$color} {
         &:focus {
-
-          &[type='checkbox'],
-          &[type='radio'] {
+          &[type="checkbox"],
+          &[type="radio"] {
             box-shadow: 0 0 0 0.2rem rgba($value, 0.25);
             border-color: $value;
           }
@@ -164,19 +166,25 @@ $value in $theme-colors {
     &.form-switch {
       .form-check-input.input-light-#{$color} {
         &:checked {
-          background-image: escape-svg(url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='#{$value}'/></svg>"));
+          background-image: escape-svg(
+            url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='#{$value}'/></svg>")
+          );
         }
       }
     }
   }
 }
 
-.input-group>.input-group-append:last-child>.btn:not(:last-child):not(.dropdown-toggle),
-.input-group>.input-group-append:last-child>.input-group-text:not(:last-child),
-.input-group>.input-group-append:not(:last-child)>.btn,
-.input-group>.input-group-append:not(:last-child)>.input-group-text,
-.input-group>.input-group-prepend>.btn,
-.input-group>.input-group-prepend>.input-group-text {
+.input-group
+  > .input-group-append:last-child
+  > .btn:not(:last-child):not(.dropdown-toggle),
+.input-group
+  > .input-group-append:last-child
+  > .input-group-text:not(:last-child),
+.input-group > .input-group-append:not(:last-child) > .btn,
+.input-group > .input-group-append:not(:last-child) > .input-group-text,
+.input-group > .input-group-prepend > .btn,
+.input-group > .input-group-prepend > .input-group-text {
   border-right: none;
 }
 
@@ -188,13 +196,13 @@ $value in $theme-colors {
     margin-bottom: 1rem;
   }
 
-  .form-label-group>input,
-  .form-label-group>label {
+  .form-label-group > input,
+  .form-label-group > label {
     height: 3.125rem;
     padding: 0.75rem;
   }
 
-  .form-label-group>label {
+  .form-label-group > label {
     position: absolute;
     top: 0;
     left: 0;
@@ -234,14 +242,14 @@ $value in $theme-colors {
     padding-bottom: 0.25rem;
   }
 
-  .form-label-group input:not(:-moz-placeholder-shown)~label {
+  .form-label-group input:not(:-moz-placeholder-shown) ~ label {
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
     font-size: 12px;
     color: #777;
   }
 
-  .form-label-group input:not(:placeholder-shown)~label {
+  .form-label-group input:not(:placeholder-shown) ~ label {
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
     font-size: 12px;
@@ -308,7 +316,7 @@ $value in $theme-colors {
   }
 
   tbody {
-    tr>td {
+    tr > td {
       &.day {
         color: $body-color;
 
@@ -339,7 +347,7 @@ $value in $theme-colors {
           color: #fff !important;
 
           &:before {
-            content: '';
+            content: "";
             display: inline-block;
             border: solid transparent;
             border-width: 0 0 7px 7px;
@@ -379,8 +387,7 @@ $value in $theme-colors {
   }
 
   tfoot {
-    tr>th {
-
+    tr > th {
       &.clear,
       &.today {
         font-weight: 500;
@@ -409,7 +416,7 @@ $value in $theme-colors {
   }
 
   table td {
-    >a {
+    > a {
       border: 0;
 
       i {
@@ -420,7 +427,6 @@ $value in $theme-colors {
 }
 
 .bootstrap-timepicker-widget {
-
   .bootstrap-timepicker-hour,
   .bootstrap-timepicker-meridian,
   .bootstrap-timepicker-minute,
@@ -428,7 +434,7 @@ $value in $theme-colors {
     color: $headings-color;
   }
 
-  table td>a {
+  table td > a {
     &:hover {
       background: $body-bg;
     }
@@ -444,8 +450,7 @@ $value in $theme-colors {
   --tag-remove-bg: #{transparentize($danger, 0.7)};
   --tag-remove-btn-bg--hover: #{$danger};
 
-  @each $color,
-  $value in $theme-colors {
+  @each $color, $value in $theme-colors {
     &.tagify__tag--#{$color} {
       --tag-bg: #{transparentize($value, 0.8)};
 
@@ -470,8 +475,7 @@ $value in $theme-colors {
       background: $body-bg;
     }
 
-    @each $color,
-    $value in $theme-colors {
+    @each $color, $value in $theme-colors {
       &.bootstrap-switch-#{$color} {
         color: #fff;
         background: $value;
@@ -484,7 +488,7 @@ $value in $theme-colors {
 // bootstrap-select start
 
 .bootstrap-select {
-  >.dropdown-toggle.bs-placeholder.btn[class*='btn-']:not(.btn-light) {
+  > .dropdown-toggle.bs-placeholder.btn[class*="btn-"]:not(.btn-light) {
     color: #fff;
   }
 }
@@ -572,8 +576,7 @@ $value in $theme-colors {
   }
 
   // State colors
-  @each $color,
-  $value in $theme-colors {
+  @each $color, $value in $theme-colors {
     &.dropzone-#{$color} {
       border-color: $value;
     }
@@ -597,7 +600,6 @@ $value in $theme-colors {
   }
 
   .dropzone-panel {
-
     .dropzone-remove-all,
     .dropzone-upload {
       display: none;
@@ -742,7 +744,6 @@ $value in $theme-colors {
     h3 {
       margin-top: 0;
     }
-
   }
 
   header.ck-content {
@@ -753,7 +754,7 @@ $value in $theme-colors {
         margin-top: 0;
       }
 
-      &+h3 {
+      & + h3 {
         margin-top: 0;
 
         font: {
@@ -801,7 +802,7 @@ $value in $theme-colors {
 
     .demo-row {
       flex-direction: column;
-      .demo-row__half{
+      .demo-row__half {
         width: 100%;
         padding-left: 0 !important;
         padding-right: 0 !important;
@@ -823,14 +824,16 @@ $value in $theme-colors {
     padding-left: 2.9em;
 
     .form-check-input {
-      height: 20px;
-      width: 35px;
+      height: 22px;
+      width: 42px;
       margin-left: -2.9em;
-      background-image: escape-svg(url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='4.1' fill='#{$form-switch-color}'/%3e%3c/svg%3e"));
+      background-image: escape-svg(
+        url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='4.1' fill='#{$form-switch-color}'/%3e%3c/svg%3e")
+      );
       transition: 0.35s cubic-bezier(0.54, 1.6, 0.5, 1);
       //box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
 
-      &[class*='input-light-'] {
+      &[class*="input-light-"] {
         border: none;
       }
 
@@ -840,15 +843,19 @@ $value in $theme-colors {
       }
 
       &:checked {
-        background-image: escape-svg(url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='4.1' fill='%23ffffff'/%3e%3c/svg%3e"));
+        background-image: escape-svg(
+          url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='4.1' fill='%23ffffff'/%3e%3c/svg%3e")
+        );
       }
+      cursor: pointer;
     }
 
-    @each $color,
-    $value in $theme-colors {
+    @each $color, $value in $theme-colors {
       .form-check-input.input-light-#{$color} {
         &:checked {
-          background-image: escape-svg(url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='4.1' fill='#{$value}'/%3e%3c/svg%3e"));
+          background-image: escape-svg(
+            url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='4.1' fill='#{$value}'/%3e%3c/svg%3e")
+          );
         }
       }
     }
@@ -871,13 +878,14 @@ $value in $theme-colors {
       height: 19px;
       width: 19px;
       border-radius: 0.7rem;
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 4px 0 0 rgba(0, 0, 0, 0.04), 0 4px 9px rgba(0, 0, 0, 0.13), 0 3px 3px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 4px 0 0 rgba(0, 0, 0, 0.04),
+        0 4px 9px rgba(0, 0, 0, 0.13), 0 3px 3px rgba(0, 0, 0, 0.05);
       transition: 0.35s cubic-bezier(0.54, 1.6, 0.5, 1);
     }
   }
 
   .custom-control-input {
-    &:checked~.custom-control-label::after {
+    &:checked ~ .custom-control-label::after {
       transform: translateX(0.95rem);
     }
   }
@@ -895,7 +903,7 @@ $value in $theme-colors {
 
 // ============================
 // chioice selector start
-$choices-selector: 'choices' !default;
+$choices-selector: "choices" !default;
 $choices-font-size-lg: 16px !default;
 $choices-font-size-md: 14px !default;
 $choices-font-size-sm: 12px !default;
@@ -912,8 +920,8 @@ $choices-disabled-color: $input-disabled-bg !default;
 $choices-highlight-color: $choices-primary-color !default;
 $choices-button-dimension: 8px !default;
 $choices-button-offset: 8px !default;
-$choices-icon-cross: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEiIGhlaWdodD0iMjEiIHZpZXdCb3g9IjAgMCAyMSAyMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjRkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0yLjU5Mi4wNDRsMTguMzY0IDE4LjM2NC0yLjU0OCAyLjU0OEwuMDQ0IDIuNTkyeiIvPjxwYXRoIGQ9Ik0wIDE4LjM2NEwxOC4zNjQgMGwyLjU0OCAyLjU0OEwyLjU0OCAyMC45MTJ6Ii8+PC9nPjwvc3ZnPg==') !default;
-$choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEiIGhlaWdodD0iMjEiIHZpZXdCb3g9IjAgMCAyMSAyMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0yLjU5Mi4wNDRsMTguMzY0IDE4LjM2NC0yLjU0OCAyLjU0OEwuMDQ0IDIuNTkyeiIvPjxwYXRoIGQ9Ik0wIDE4LjM2NEwxOC4zNjQgMGwyLjU0OCAyLjU0OEwyLjU0OCAyMC45MTJ6Ii8+PC9nPjwvc3ZnPg==') !default;
+$choices-icon-cross: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEiIGhlaWdodD0iMjEiIHZpZXdCb3g9IjAgMCAyMSAyMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjRkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0yLjU5Mi4wNDRsMTguMzY0IDE4LjM2NC0yLjU0OCAyLjU0OEwuMDQ0IDIuNTkyeiIvPjxwYXRoIGQ9Ik0wIDE4LjM2NEwxOC4zNjQgMGwyLjU0OCAyLjU0OEwyLjU0OCAyMC45MTJ6Ii8+PC9nPjwvc3ZnPg==") !default;
+$choices-icon-cross-inverse: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEiIGhlaWdodD0iMjEiIHZpZXdCb3g9IjAgMCAyMSAyMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0yLjU5Mi4wNDRsMTguMzY0IDE4LjM2NC0yLjU0OCAyLjU0OEwuMDQ0IDIuNTkyeiIvPjxwYXRoIGQ9Ik0wIDE4LjM2NEwxOC4zNjQgMGwyLjU0OCAyLjU0OEwyLjU0OCAyMC45MTJ6Ii8+PC9nPjwvc3ZnPg==") !default;
 
 .#{$choices-selector} {
   position: relative;
@@ -929,7 +937,6 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   }
 
   &.is-disabled {
-
     .#{$choices-selector}__inner,
     .#{$choices-selector}__input {
       background-color: $choices-bg-color-disabled;
@@ -947,7 +954,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   }
 }
 
-.#{$choices-selector}[data-type*='select-one'] {
+.#{$choices-selector}[data-type*="select-one"] {
   cursor: pointer;
 
   .#{$choices-selector}__inner {
@@ -987,12 +994,12 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     }
   }
 
-  .#{$choices-selector}__item[data-value=''] .#{$choices-selector}__button {
+  .#{$choices-selector}__item[data-value=""] .#{$choices-selector}__button {
     display: none;
   }
 
   &:after {
-    content: '';
+    content: "";
     height: 0;
     width: 0;
     border-style: solid;
@@ -1010,7 +1017,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     margin-top: -7.5px;
   }
 
-  &[dir='rtl'] {
+  &[dir="rtl"] {
     &:after {
       left: 11.5px;
       right: auto;
@@ -1025,8 +1032,8 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   }
 }
 
-.#{$choices-selector}[data-type*='select-multiple'],
-.#{$choices-selector}[data-type*='text'] {
+.#{$choices-selector}[data-type*="select-multiple"],
+.#{$choices-selector}[data-type*="text"] {
   .#{$choices-selector}__inner {
     cursor: text;
   }
@@ -1090,7 +1097,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   padding: 4px 16px 4px 4px;
   width: 100%;
 
-  [dir='rtl'] & {
+  [dir="rtl"] & {
     padding-right: 4px;
     padding-left: 16px;
   }
@@ -1122,7 +1129,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
       padding-right: 5px;
     }
 
-    [dir='rtl'] & {
+    [dir="rtl"] & {
       margin-right: 0;
       margin-left: 3.75px;
     }
@@ -1184,7 +1191,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     padding: 10px;
     font-size: $choices-font-size-md;
 
-    [dir='rtl'] & {
+    [dir="rtl"] & {
       text-align: right;
     }
   }
@@ -1203,7 +1210,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
         transform: translateY(-50%);
       }
 
-      [dir='rtl'] & {
+      [dir="rtl"] & {
         text-align: right;
         padding-left: 100px;
         padding-right: 10px;
@@ -1278,7 +1285,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     outline: 0;
   }
 
-  [dir='rtl'] & {
+  [dir="rtl"] & {
     padding-right: 2px;
     padding-left: 0;
   }
@@ -1294,7 +1301,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
 .typeahead {
   position: relative;
 
-  &>ul {
+  & > ul {
     background-color: #ffffff;
     border-radius: 4px;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -1312,8 +1319,8 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     top: 100%;
     z-index: 1000;
 
-    >li {
-      >a {
+    > li {
+      > a {
         clear: both;
         color: #333;
         cursor: default;
@@ -1324,9 +1331,9 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
         white-space: nowrap;
       }
 
-      &.active>a:hover,
-      &.active>a,
-      >a:hover {
+      &.active > a:hover,
+      &.active > a,
+      > a:hover {
         background-color: var(--bs-primary);
         color: #fff !important;
         text-decoration: none;
@@ -1348,7 +1355,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
 .flatpickr-input[readonly] {
   background: $input-bg;
 }
-.noUi-target{
+.noUi-target {
   @include media-breakpoint-down(sm) {
     margin: 0 15px;
   }
@@ -1365,7 +1372,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
 .CodeMirror-fullscreen {
   z-index: 1099;
 }
-.flatpickr-calendar{
+.flatpickr-calendar {
   @include media-breakpoint-down(sm) {
     width: 270px;
   }
@@ -1385,7 +1392,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     }
 
     .nav-link.active,
-    .show>.nav-link {
+    .show > .nav-link {
       color: $white;
     }
   }
