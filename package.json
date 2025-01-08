@@ -78,6 +78,7 @@
     "react-syntax-highlighter": "^15.5.0",
     "react-table": "^7.8.0",
     "react-toastify": "^11.0.2",
+    "react-ui-scrollspy": "^2.3.0",
     "redux": "^5.0.1",
     "sass": "^1.83.0",
     "simplebar-react": "^3.2.4",

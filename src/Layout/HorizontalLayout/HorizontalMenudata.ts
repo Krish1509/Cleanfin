@@ -58,6 +58,20 @@ const userMenuData = [
     link: "/dashboard/user",
     icon: "",
   },
+  {
+    id: "pastPerformance",
+    label: "Past Performance",
+    dataPage: null,
+    link: "/pastPerformance",
+    icon: "",
+  },
+  {
+    id: "content",
+    label: "Content",
+    dataPage: null,
+    link: "/content",
+    icon: "",
+  },
 ];
 
 const getMenuByRole = (role: string) => {
