@@ -134,3 +134,13 @@ $googleFontsUrl: "https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;
 .user-dashboard-container {
   height: 100vh;
 }
+
+.rounded-img{
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+}
+
+.performancecard{
+  background-color: var(--bs-primary-light);
+}

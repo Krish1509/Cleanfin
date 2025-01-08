@@ -14,7 +14,38 @@
     padding-right: 300px;
     padding-top: 20px;
 
-    @include media-breakpoint-down(xl) {
+    // Extra Large (xl) and smaller screens
+    @include media-breakpoint-up(xl) {
+      padding-left: 250px;
+      padding-right: 250px;
+    }
+
+    // Large (lg) screens and smaller
+    @include media-breakpoint-up(lg) {
+      padding-left: 200px;
+      padding-right: 200px;
+    }
+
+    // Medium (md) screens and smaller
+    @include media-breakpoint-up(md) {
+      padding-left: 150px;
+      padding-right: 150px;
+    }
+
+    // Small (sm) screens and smaller
+    @include media-breakpoint-up(sm) {
+      padding-left: 300px;
+      padding-right: 300px;
+    }
+
+    // Extra Small (xs) screens and smaller
+    @include media-breakpoint-up(xs) {
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+
+    // For screens larger than xl and smaller than container max-width
+    @include media-breakpoint-up(xl) {
       &.container {
         max-width: 100%;
       }
