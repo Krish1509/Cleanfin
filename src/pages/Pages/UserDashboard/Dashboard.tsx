@@ -4,7 +4,7 @@ import { Card, CardBody, Col, Row } from "react-bootstrap";
 import ContentBytes from "../../../Common/ContentBytes/ContentBytes";
 import Recommendation from "../../../Common/Recommendation/Recommendation";
 import PerformanceCard from "../../../Common/PerformanceCard/PerformanceCard";
-import { IRecommendation ,IContentbytes} from "./Helper/interfaces";
+import { IRecommendation, IContentbytes } from "./Helper/interfaces";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../../../helper/firebase-config";
 import { postRequest } from "../../../service/fetch-services";
@@ -15,8 +15,9 @@ const UserDashboard = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setdata] = useState<IRecommendation[]>([]);
   const [activeSection, setActiveSection] = useState("recommendation");
-  const [contentBytes,SetcontentBytes] = useState<IContentbytes[]>([])
-  const [contentBytesLoading,SetcontentBytesLoading] =  useState<boolean>(false)
+  const [contentBytes, SetcontentBytes] = useState<IContentbytes[]>([]);
+  const [contentBytesLoading, SetcontentBytesLoading] =
+    useState<boolean>(false);
 
   const fetchData = () => {
     try {
@@ -42,25 +43,20 @@ const UserDashboard = () => {
     }
   };
 
-
-
   const fetchContentBytes = async () => {
     try {
       SetcontentBytesLoading(true);
-      const result = await postRequest("contentBites/list",{
-        "limit": 5,
-        "page" : 1
+      const result = await postRequest("contentBites/list", {
+        limit: 5,
+        page: 1,
       });
-      SetcontentBytes(result?.data?.contentBites
-      );
+      SetcontentBytes(result?.data?.contentBites);
       SetcontentBytesLoading(false);
     } catch (err) {
       console.log(err);
       SetcontentBytesLoading(false);
     }
   };
-
-
 
   useEffect(() => {
     fetchData(); // Call the function to start listening for real-time updates
@@ -71,7 +67,6 @@ const UserDashboard = () => {
       // Cleanup if needed, but onSnapshot automatically handles cleanup as well
     };
   }, []);
-
 
   const handleScroll = () => {
     const sections = ["recommendation", "content-bytes", "past-performance"];
@@ -103,7 +98,6 @@ const UserDashboard = () => {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
-  
 
   return (
     <React.Fragment>
@@ -189,13 +183,14 @@ const UserDashboard = () => {
                     </button>
                   </div>
                 </Col>
-                { !contentBytesLoading && contentBytes?.map((item, i) => {
-                  return (
-                    <Col xs={6} key={i}>
-                      <ContentBytes data = {item}/>
-                    </Col>
-                  );
-                })}
+                {!contentBytesLoading &&
+                  contentBytes?.map((item, i) => {
+                    return (
+                      <Col xs={6} key={i}>
+                        <ContentBytes data={item} />
+                      </Col>
+                    );
+                  })}
               </Row>
             </div>
             <div
