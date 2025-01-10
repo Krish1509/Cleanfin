@@ -14,7 +14,7 @@ import ConfirmationModal from "../../../Common/ConfirmationModal";
 import Loader from "../../../Common/Loader/Loader";
 
 type UserListData = {
-  _id: string;
+  id: string;
   age: number;
   firstName: string;
   lastName: string;
@@ -89,7 +89,7 @@ const User = () => {
         // Update user in the local state
         setUserListData((prevList) =>
           prevList.map((user) =>
-            user._id === id ? { ...user, [key]: value } : user
+            user.id === id ? { ...user, [key]: value } : user
           )
         );
         setUpdateLoading(false);
@@ -167,7 +167,7 @@ const User = () => {
                               value={item?.subscription_end}
                               onChange={(date: any) =>
                                 updateUserDetails(
-                                  item._id,
+                                  item.id,
                                   "subscription_end",
                                   date
                                 )
@@ -186,7 +186,7 @@ const User = () => {
                                 {
                                   setShowConfirm(!showConfirm);
                                   setSelectedStatus(!item?.isActive);
-                                  setSelectedId(item?._id);
+                                  setSelectedId(item?.id);
                                 }
                               }
                             />
@@ -239,7 +239,6 @@ const User = () => {
       </div>
 
       <Loader updateLoading={showConfirm}></Loader>
-      
     </React.Fragment>
   );
 };
