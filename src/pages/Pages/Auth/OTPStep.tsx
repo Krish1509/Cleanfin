@@ -8,6 +8,7 @@ import { postRequest } from "../../../service/fetch-services";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserDetails } from "../../../toolkit/Auth/reducer";
 import { useNavigate } from "react-router-dom";
+import { requestFCMToken } from "../../../helper/firebase-config";
 
 const OTPSchema = Yup.object().shape({
   otp: Yup.string()
@@ -62,12 +63,19 @@ const OTPStep: React.FC<Props> = ({ setActiveTab }) => {
     }
   };
 
+  const generateToken = async () => {
+    const token = await requestFCMToken();
+    return token || "";
+  };
+
   const handleSubmit = async (values: { otp: string }) => {
     try {
       setLoading(true);
+      const token = await generateToken();
       const body = {
         otp: values?.otp,
         userId: userDetails?._id,
+        fcmToken: token || "",
       };
       const result = await postRequest("auth/verifyOtp", body, false);
       if (result) {

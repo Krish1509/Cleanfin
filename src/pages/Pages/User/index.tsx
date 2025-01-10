@@ -11,6 +11,7 @@ import DatePicker from "../../../Common/DatePicker";
 import ToggleSwitch from "../../../Common/ToggleSwitch"; // Import the new ToggleSwitch component
 import ToastAlert from "../../../helper/toast-alert";
 import ConfirmationModal from "../../../Common/ConfirmationModal";
+import Loader from "../../../Common/Loader/Loader";
 
 type UserListData = {
   _id: string;
@@ -236,6 +237,9 @@ const User = () => {
           )}
         </Card>
       </div>
+
+      <Loader updateLoading={showConfirm}></Loader>
+      
     </React.Fragment>
   );
 };

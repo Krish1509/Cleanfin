@@ -41,6 +41,7 @@
     "datepicker.js": "^0.0.1-beta1",
     "feather-icons": "^4.29.1",
     "feather-icons-react": "^0.7.0",
+    "firebase": "^11.1.0",
     "formik": "^2.4.5",
     "html2canvas": "^1.4.1",
     "i": "^0.3.7",

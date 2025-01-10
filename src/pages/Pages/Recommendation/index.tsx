@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 //import Components
 import BreadcrumbItem from "../../../Common/BreadcrumbItem";
@@ -11,6 +12,7 @@ import EditableNumberInput from "../../../Common/EditableNumberInput";
 import { useNavigate } from "react-router-dom";
 import ConfirmationModal from "../../../Common/ConfirmationModal";
 import fireStoreLogo from "../../../assets/images/firestore.png";
+import Loader from "../../../Common/Loader/Loader";
 
 type RecommendationListData = {
   _id: string;
@@ -116,10 +118,10 @@ const Recommendation = () => {
     updateRecommendationDetails(id, key, value);
   };
 
-  const handleEditDate = (id: string) => {
-    console.log(id);
+  const handleEditDate = (id: string) => {    
     navigate("/recommendation/edit", { state: { id: id } });
   };
+
 
   return (
     <React.Fragment>
@@ -246,6 +248,7 @@ const Recommendation = () => {
                                 onUpdate={handleValueUpdate}
                               />
                               <ToggleSwitch
+                                disabled={updateLoading}
                                 checked={item?.target3Achieved}
                                 onChange={() =>
                                   updateRecommendationDetails(
@@ -333,6 +336,9 @@ const Recommendation = () => {
           )}
         </Card>
       </div>
+
+    
+      <Loader updateLoading={updateLoading}></Loader>
     </React.Fragment>
   );
 };

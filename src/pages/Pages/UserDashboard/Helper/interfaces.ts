@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+
 export   interface IRecommendation {
     firestore: boolean;
     _id: string;
-    date: string;        // Use `Date` if you prefer working with date objects
+    date: any;        // Use `Date` if you prefer working with date objects
     time: string;
     action: "buy" | "sell";  // Use a union type to restrict possible values
     priceCondition: "above" | "below";  // Based on common conditions
@@ -18,6 +21,20 @@ export   interface IRecommendation {
     updatedAt: string;    // Use `Date` if you prefer working with date objects
     createdAt: string;    // Use `Date` if you prefer working with date objects
     scriptId: string;
+    __v: number;
+  }
+  
+
+  export interface IContentbytes {
+    _id: string;
+    userId: string;
+    title: string;
+    description: string;
+    type: "file" | string;  // If you expect other types, you can add them here
+    url: string | null;
+    fileExtension: string;
+    updatedAt: string;
+    createdAt: string;
     __v: number;
   }
   

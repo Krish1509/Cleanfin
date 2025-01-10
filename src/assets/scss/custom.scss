@@ -132,15 +132,92 @@ $googleFontsUrl: "https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;
   margin-top: 60px;
 }
 .user-dashboard-container {
-  height: 100vh;
+  // height: 100vh;
 }
 
-.rounded-img{
+.rounded-img {
   height: 35px;
   width: 35px;
   border-radius: 50%;
 }
 
-.performancecard{
+.performancecard {
   background-color: var(--bs-primary-light);
+}
+
+.menu {
+  margin-bottom: 20px;
+  // position: fixed;
+  // background-color: gainsboro;
+  // z-index: 9999999;
+  // top: 159px;
+}
+
+.menu-item {
+  cursor: pointer;
+  padding: 10px;
+  font-size: 18px;
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.menu-item.active {
+  border-bottom: 2px solid var(--pc-sidebar-active-color);
+  color: var(--pc-sidebar-active-color);
+}
+
+.menucontainer {
+  position: sticky;
+  background-color: rgb(255, 255, 255);
+  z-index: 9999999;
+  top: 159px;
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .menucontainer {
+    top: 95px;
+  }
+}
+
+/* For mobile devices (small devices) */
+@media (max-width: 480px) {
+  .menucontainer {
+    top: 100px;
+  }
+}
+
+/* For very small screens */
+@media (max-width: 320px) {
+  .menucontainer {
+    top: 80px;
+  }
+}
+
+.container-min {
+  min-height: 550px;
+}
+
+.check-icon {
+  font-size: 20px;
+  color: #28a745;
+}
+
+.beat-animation {
+  animation: beat 0.5s infinite alternate;
+}
+
+@keyframes beat {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.07);
+  }
+}
+
+.fixed-image-size {
+  width: 100%;
+  height: 200px; /* Adjust height as needed */
+  object-fit: cover;
 }
