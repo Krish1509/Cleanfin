@@ -10,7 +10,7 @@ import "../assets/scss/landing.scss";
 const Footerpage = () => {
   return (
     <React.Fragment>
-      <footer className="pc-footer footer border-top">
+      <footer className="pc-footer footer border-top ">
         <div className="footer-top">
           <Container>
             <Row className="gy-4">

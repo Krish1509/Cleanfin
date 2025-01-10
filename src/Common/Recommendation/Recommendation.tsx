@@ -2,6 +2,7 @@ import React from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import P1 from "../../assets/images/application/img-brand-6.png";
 import { IRecommendation } from "../../pages/Pages/UserDashboard/Helper/interfaces";
+import moment from "moment";
 
 interface RecommendationProps {
   data: IRecommendation;
@@ -35,15 +36,37 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
             <div className="d-flex align-items-center justify-content-around mt-4">
               <div className="d-flex align-items-center justify-content-between flex-column">
                 <div>Target 1</div>
-                <div>{data?.target1}</div>
+                <div className="d-flex align-items-center justify-content-around gap-1">
+                  <div>{data?.target1}</div>
+                  {data?.target1Achieved && (
+                    <div className="check-icon beat-animation">
+                      <i className="ph-duotone ph-seal-check "></i>
+                    </div>
+                  )}
+                </div>
               </div>
+
               <div className="d-flex align-items-center justify-content-between flex-column">
                 <div>Target 2</div>
-                <div>{data?.target2}</div>
+                <div className="d-flex align-items-center justify-content-around gap-1">
+                  <div>{data?.target2}</div>
+                  {data?.target2Achieved && (
+                    <div className="check-icon beat-animation">
+                      <i className="ph-duotone ph-seal-check "></i>
+                    </div>
+                  )}
+                </div>
               </div>
               <div className="d-flex align-items-center justify-content-between flex-column">
                 <div>Target 3</div>
-                <div>{data?.target2}</div>
+                <div className="d-flex align-items-center justify-content-around gap-1">
+                  <div>{data?.target3}</div>
+                  {data?.target3Achieved && (
+                    <div className="check-icon beat-animation">
+                      <i className="ph-duotone ph-seal-check "></i>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -55,7 +78,7 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
                 <h5 className="mb-0">
                   {" "}
                   {data?.date
-                    ? new Date(data.date).toLocaleDateString("en-US")
+                    ? moment.utc(data?.date?.timestamp).format("DD-MM-YYYY")
                     : "No date available"}
                 </h5>
               </div>
