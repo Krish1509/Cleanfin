@@ -118,12 +118,6 @@ const AddContentBytes = () => {
     const allowedTypes: Record<string, string[]> = {
       file: [
         "application/pdf",
-        "application/msword",
-        "application/vnd.ms-excel",
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        "application/vnd.ms-powerpoint",
-        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
         "image/jpeg",
         "image/png",
         "image/gif",
@@ -349,7 +343,7 @@ const AddContentBytes = () => {
                             <button
                               type="button"
                               className="btn btn-outline-secondary me-1"
-                              onClick={() => navigate("/recommendation")}
+                              onClick={() => navigate("/contentBytes")}
                             >
                               Cancel
                             </button>
