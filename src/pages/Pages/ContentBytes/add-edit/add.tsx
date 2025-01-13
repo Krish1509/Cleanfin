@@ -218,7 +218,7 @@ const AddContentBytes = () => {
                                   }
                                   accept={
                                     values?.type === "file"
-                                      ? ".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.csv,.jpg,.jpeg,.png,.gif,.bmp"
+                                      ? ".pdf,.jpg,.jpeg,.png,.gif,.bmp"
                                       : values?.type === "audio"
                                         ? "audio/*"
                                         : values?.type === "video"
@@ -280,10 +280,7 @@ const AddContentBytes = () => {
                                       )
                                     ) : (
                                       // Display existing file from editData
-                                      editData?.filePath && (
-                                        editData.fileExtension?.match(
-                                          /jpg|jpeg|png|gif|bmp|mp3|wav|ogg|mp4|avi|mkv|pdf|msword/
-                                        ) ? (
+                                      editData?.filePath ? (
                                           <FilePreview
                                             type={"url"}
                                             // file={editData?.filePath}
@@ -299,7 +296,7 @@ const AddContentBytes = () => {
                                           </Link>
                                         )
                                       )
-                                    )}
+                                    }
                                   </Col>
                                 </Row>
                               </div>

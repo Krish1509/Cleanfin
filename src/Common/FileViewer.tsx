@@ -1,22 +1,24 @@
 import React, { useState, useEffect, CSSProperties } from "react";
 
-const invalidFileExtensions = [
-  "exe",
-  "scr",
-  "msi",
-  "bat",
-  "sh",
-  "cmd",
-  "com",
-  "dll",
-  "pif",
-  "vb",
-  "vbe",
-  "vbs",
-  "ws",
-  "wsc",
-  "wsf",
-  "wsh",
+const validFileExtensions = [
+  "pdf",
+  "jpg",
+  "jpeg",
+  "png",
+  "gif",
+  "bmp",
+  "webp",
+  "mp4",
+  "avi",
+  "mkv",
+  "mov",
+  "mp3",
+  "wav",
+  "ogg",
+  "flac",
+  "webm",
+  "mpg",
+  "mpeg",
 ];
 
 const defaultStyles = {
@@ -69,11 +71,8 @@ function getFileUrl({
   if (type === "file" && file) {
     try {
       const fileExtension = file.name.split(".").pop()?.toLowerCase();
-      if (
-        file.type === "" ||
-        invalidFileExtensions.includes(fileExtension || "") ||
-        (file.type.includes("application") && file.type !== "application/pdf")
-      ) {
+
+      if (!fileExtension || !validFileExtensions.includes(fileExtension)) {
         const msg = `${file.name} is not a valid file.`;
         if (onError) {
           onError(msg);
