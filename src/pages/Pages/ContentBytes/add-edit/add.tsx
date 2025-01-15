@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 //import Components
 import { Card, CardBody, Col, Row, Spinner } from "react-bootstrap";
 import BreadcrumbItem from "../../../../Common/BreadcrumbItem";
+import FilePreview from "../../../../Common/FileViewer";
 import { Field, Form, Formik } from "formik";
 import RichTextEditor from "../../../../Common/Editor/RichTextEditor";
 import Select from "react-select";
@@ -117,12 +118,6 @@ const AddContentBytes = () => {
     const allowedTypes: Record<string, string[]> = {
       file: [
         "application/pdf",
-        "application/msword",
-        "application/vnd.ms-excel",
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        "application/vnd.ms-powerpoint",
-        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
         "image/jpeg",
         "image/png",
         "image/gif",
@@ -217,12 +212,12 @@ const AddContentBytes = () => {
                                   }
                                   accept={
                                     values?.type === "file"
-                                      ? ".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.csv,.jpg,.jpeg,.png,.gif,.bmp"
+                                      ? ".pdf,.jpg,.jpeg,.png,.gif,.bmp"
                                       : values?.type === "audio"
-                                      ? "audio/*"
-                                      : values?.type === "video"
-                                      ? "video/*"
-                                      : ""
+                                        ? "audio/*"
+                                        : values?.type === "video"
+                                          ? "video/*"
+                                          : ""
                                   }
                                 />
                               )}
@@ -232,9 +227,9 @@ const AddContentBytes = () => {
                                 </div>
                               ) : null}
                               {!error &&
-                              values?.type !== "url" &&
-                              !selectedFile &&
-                              (editData?._id ? !editData?.filePath : true) ? (
+                                values?.type !== "url" &&
+                                !selectedFile &&
+                                (editData?._id ? !editData?.filePath : true) ? (
                                 <div className="invalid-feedback d-flex align-items-start">
                                   File is required
                                 </div>
@@ -255,45 +250,19 @@ const AddContentBytes = () => {
                             <Card className="mt-1 mb-0 shadow-none border dz-processing dz-image-preview dz-success dz-complete">
                               <div className="py-3 px-2">
                                 <Row className="align-items-center">
-                                  <Col className="col-auto">
+                                  <Col className="col-auto" style={{ width: "100%", maxWidth: "500px", margin: "auto" }}>
                                     {selectedFile ? (
                                       // Display newly selected file
-                                      selectedFile.type.startsWith("image/") ? (
-                                        <img
-                                          height="80"
-                                          width="100"
-                                          className="avatar-sm rounded bg-light"
-                                          alt="preview"
-                                          src={URL.createObjectURL(
-                                            selectedFile
-                                          )}
+                                      selectedFile.type.startsWith("image/") ||
+                                        selectedFile.type.startsWith("video/") ||
+                                        selectedFile.type.startsWith("audio/") ||
+                                        selectedFile.type.startsWith("file/") ||
+                                        selectedFile.type.startsWith("application/") ||
+                                        selectedFile.type.startsWith("text/") ? (
+                                        <FilePreview
+                                          type={"file"}
+                                          file={selectedFile}
                                         />
-                                      ) : selectedFile.type.startsWith(
-                                          "audio/"
-                                        ) ? (
-                                        <audio controls>
-                                          <source
-                                            src={URL.createObjectURL(
-                                              selectedFile
-                                            )}
-                                            type={selectedFile.type}
-                                          />
-                                          Your browser does not support the
-                                          audio element.
-                                        </audio>
-                                      ) : selectedFile.type.startsWith(
-                                          "video/"
-                                        ) ? (
-                                        <video controls width="100">
-                                          <source
-                                            src={URL.createObjectURL(
-                                              selectedFile
-                                            )}
-                                            type={selectedFile.type}
-                                          />
-                                          Your browser does not support the
-                                          video element.
-                                        </video>
                                       ) : (
                                         <Link
                                           to={URL.createObjectURL(selectedFile)}
@@ -305,49 +274,23 @@ const AddContentBytes = () => {
                                       )
                                     ) : (
                                       // Display existing file from editData
-                                      editData?.filePath &&
-                                      (editData.fileExtension?.match(
-                                        /jpg|jpeg|png|gif|bmp/
-                                      ) ? (
-                                        <img
-                                          height="50"
-                                          width="50"
-                                          className="avatar-sm rounded bg-light"
-                                          alt="preview"
-                                          src={editData.filePath}
-                                        />
-                                      ) : editData.fileExtension?.match(
-                                          /mp3|wav|ogg/
-                                        ) ? (
-                                        <audio controls>
-                                          <source
-                                            src={editData.filePath}
-                                            type={`audio/${editData.fileExtension}`}
+                                      editData?.filePath ? (
+                                          <FilePreview
+                                            type={"url"}
+                                            // file={editData?.filePath}
+                                            url={editData?.filePath}
                                           />
-                                          Your browser does not support the
-                                          audio element.
-                                        </audio>
-                                      ) : editData.fileExtension?.match(
-                                          /mp4|avi|mkv/
-                                        ) ? (
-                                        <video controls width="100">
-                                          <source
-                                            src={editData.filePath}
-                                            type={`video/${editData.fileExtension}`}
-                                          />
-                                          Your browser does not support the
-                                          video element.
-                                        </video>
-                                      ) : (
-                                        <Link
-                                          to={editData.filePath}
-                                          target="_blank"
-                                          className="text-muted font-weight-bold"
-                                        >
-                                          {editData?.filePath}
-                                        </Link>
-                                      ))
-                                    )}
+                                        ) : (
+                                          <Link
+                                            to={editData.filePath}
+                                            target="_blank"
+                                            className="text-muted font-weight-bold"
+                                          >
+                                            {editData?.filePath}
+                                          </Link>
+                                        )
+                                      )
+                                    }
                                   </Col>
                                 </Row>
                               </div>
@@ -400,7 +343,7 @@ const AddContentBytes = () => {
                             <button
                               type="button"
                               className="btn btn-outline-secondary me-1"
-                              onClick={() => navigate("/recommendation")}
+                              onClick={() => navigate("/contentBytes")}
                             >
                               Cancel
                             </button>
