@@ -36,6 +36,7 @@ const User = () => {
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<string>("");
   const [selectedStatus, setSelectedStatus] = useState<boolean>();
+  const [updateLoading, setUpdateLoading] = useState<boolean>(false);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -55,6 +56,7 @@ const User = () => {
 
   const fetchUserListData = React.useCallback(async () => {
     try {
+      setUpdateLoading(true);
       setLoading(true);
       const body = {
         limit: entriesPerPage,
@@ -66,8 +68,10 @@ const User = () => {
       setUserListData(users);
       setTotalPages(totalPages);
       setLoading(false);
+      setUpdateLoading(false);
     } catch (err) {
       setLoading(false);
+      setUpdateLoading(false);
     }
   }, [entriesPerPage, currentPage, searchQuery]);
 
@@ -77,7 +81,7 @@ const User = () => {
 
   const updateUserDetails = React.useCallback(
     async (id: string, key: string, value: any) => {
-      setLoading(true);
+      setUpdateLoading(true);
       try {
         const body = {
           userId: id,
@@ -91,11 +95,11 @@ const User = () => {
             user.id === id ? { ...user, [key]: value } : user
           )
         );
-        setLoading(false);
+        setUpdateLoading(false);
         setShowConfirm(false);
         setSelectedId("");
       } catch (err) {
-        setLoading(false);
+        setUpdateLoading(false);
       }
     },
     []
@@ -227,7 +231,7 @@ const User = () => {
               message={`Are you sure you want to ${
                 selectedStatus ? "activate" : "deactivate"
               } this record?`}
-              loading={loading}
+              loading={updateLoading}
             />
           ) : (
             ""
@@ -235,7 +239,7 @@ const User = () => {
         </Card>
       </div>
 
-      <Loader updateLoading={loading}></Loader>
+      <Loader updateLoading={updateLoading}></Loader>
     </React.Fragment>
   );
 };

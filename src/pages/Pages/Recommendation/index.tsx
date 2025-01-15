@@ -48,6 +48,7 @@ const Recommendation = () => {
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<string>("");
   const [selectedStatus, setSelectedStatus] = useState<boolean>();
+  const [updateLoading, setUpdateLoading] = useState<boolean>(false);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -67,6 +68,7 @@ const Recommendation = () => {
 
   const fetchRecommendationListData = React.useCallback(async () => {
     try {
+      setUpdateLoading(true);
       setLoading(true);
       const body = {
         limit: entriesPerPage,
@@ -78,9 +80,11 @@ const Recommendation = () => {
       setRecommendationListData(recommendations);
       setTotalPages(totalPages);
       setLoading(false);
+      setUpdateLoading(false);
     } catch (err) {
       console.log(err);
       setLoading(false);
+      setUpdateLoading(false);
     }
   }, [entriesPerPage, currentPage, searchQuery]);
 
@@ -91,7 +95,7 @@ const Recommendation = () => {
   const updateRecommendationDetails = React.useCallback(
     async (id: string, key: string, value: unknown) => {
       try {
-        setLoading(true);
+        setUpdateLoading(true);
         const body = { id, [key]: value };
         const result = await postRequest("recommendation/edit", body, true);
         ToastAlert.success(result.message);
@@ -103,10 +107,10 @@ const Recommendation = () => {
         );
         setShowConfirm(false);
         setSelectedId("");
-        setLoading(false);
+        setUpdateLoading(false);
       } catch (err) {
         console.log(err);
-        setLoading(false);
+        setUpdateLoading(false);
       }
     },
     []
@@ -245,7 +249,7 @@ const Recommendation = () => {
                                 onUpdate={handleValueUpdate}
                               />
                               <ToggleSwitch
-                                disabled={loading}
+                                disabled={updateLoading}
                                 checked={item?.target3Achieved}
                                 onChange={() =>
                                   updateRecommendationDetails(
@@ -326,7 +330,7 @@ const Recommendation = () => {
               message={`Are you sure you want to ${
                 selectedStatus ? "activate" : "deactivate"
               } this record?`}
-              loading={loading}
+              loading={updateLoading}
             />
           ) : (
             ""
@@ -335,7 +339,7 @@ const Recommendation = () => {
       </div>
 
     
-      <Loader updateLoading={loading}></Loader>
+      <Loader updateLoading={updateLoading}></Loader>
     </React.Fragment>
   );
 };
