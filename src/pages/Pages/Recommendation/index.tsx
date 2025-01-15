@@ -68,6 +68,7 @@ const Recommendation = () => {
 
   const fetchRecommendationListData = React.useCallback(async () => {
     try {
+      setUpdateLoading(true);
       setLoading(true);
       const body = {
         limit: entriesPerPage,
@@ -79,9 +80,11 @@ const Recommendation = () => {
       setRecommendationListData(recommendations);
       setTotalPages(totalPages);
       setLoading(false);
+      setUpdateLoading(false);
     } catch (err) {
       console.log(err);
       setLoading(false);
+      setUpdateLoading(false);
     }
   }, [entriesPerPage, currentPage, searchQuery]);
 
@@ -107,7 +110,7 @@ const Recommendation = () => {
         setUpdateLoading(false);
       } catch (err) {
         console.log(err);
-        setLoading(false);
+        setUpdateLoading(false);
       }
     },
     []
@@ -156,9 +159,7 @@ const Recommendation = () => {
               </li>
             </ul>
           </div>
-          {loading ? (
-            <center className="m-4">Loading...</center>
-          ) : (
+          {!loading && (
             <React.Fragment>
               <CardBody className="pt-3">
                 <div className="table-responsive">

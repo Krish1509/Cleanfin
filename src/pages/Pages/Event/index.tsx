@@ -6,6 +6,7 @@ import { postRequest } from "../../../service/fetch-services";
 // import ToastAlert from "../../../helper/toast-alert";
 import Pagination from "../../../Common/Pagination";
 import moment from "moment";
+import Loader from "../../../Common/Loader/Loader";
 
 type EventListData = {
   _id: string;
@@ -86,9 +87,7 @@ const Event = () => {
               </li>
             </ul>
           </div>
-          {loading ? (
-            <center className="m-4">Loading...</center>
-          ) : (
+          {!loading && (
             <React.Fragment>
               <CardBody className="pt-3">
                 <div className="table-responsive">
@@ -129,6 +128,8 @@ const Event = () => {
           />
         </Card>
       </div>
+
+      <Loader updateLoading={loading}></Loader>
     </React.Fragment>
   );
 };

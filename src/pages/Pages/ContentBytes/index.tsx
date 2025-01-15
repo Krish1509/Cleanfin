@@ -7,6 +7,7 @@ import { postRequest } from "../../../service/fetch-services";
 import Pagination from "../../../Common/Pagination";
 import { useNavigate } from "react-router-dom";
 import { TypeOptions } from "./type";
+import Loader from "../../../Common/Loader/Loader";
 
 type ContentBytesData = {
   _id: string;
@@ -103,9 +104,7 @@ const ContentBytes = () => {
               </li>
             </ul>
           </div>
-          {loading ? (
-            <center className="m-4">Loading...</center>
-          ) : (
+          {!loading && (
             <React.Fragment>
               <CardBody className="pt-3">
                 <div className="table-responsive">
@@ -166,6 +165,8 @@ const ContentBytes = () => {
           />
         </Card>
       </div>
+
+      <Loader updateLoading={loading}></Loader>
     </React.Fragment>
   );
 };
