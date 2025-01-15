@@ -68,6 +68,7 @@ const Recommendation = () => {
 
   const fetchRecommendationListData = React.useCallback(async () => {
     try {
+      setUpdateLoading(true);
       setLoading(true);
       const body = {
         limit: entriesPerPage,
@@ -79,9 +80,11 @@ const Recommendation = () => {
       setRecommendationListData(recommendations);
       setTotalPages(totalPages);
       setLoading(false);
+      setUpdateLoading(false);
     } catch (err) {
       console.log(err);
       setLoading(false);
+      setUpdateLoading(false);
     }
   }, [entriesPerPage, currentPage, searchQuery]);
 

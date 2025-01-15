@@ -56,6 +56,7 @@ const User = () => {
 
   const fetchUserListData = React.useCallback(async () => {
     try {
+      setUpdateLoading(true);
       setLoading(true);
       const body = {
         limit: entriesPerPage,
@@ -67,8 +68,10 @@ const User = () => {
       setUserListData(users);
       setTotalPages(totalPages);
       setLoading(false);
+      setUpdateLoading(false);
     } catch (err) {
       setLoading(false);
+      setUpdateLoading(false);
     }
   }, [entriesPerPage, currentPage, searchQuery]);
 
@@ -238,7 +241,7 @@ const User = () => {
         </Card>
       </div>
 
-      <Loader updateLoading={showConfirm}></Loader>
+      <Loader updateLoading={updateLoading}></Loader>
     </React.Fragment>
   );
 };

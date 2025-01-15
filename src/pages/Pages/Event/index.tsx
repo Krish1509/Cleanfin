@@ -6,6 +6,7 @@ import { postRequest } from "../../../service/fetch-services";
 // import ToastAlert from "../../../helper/toast-alert";
 import Pagination from "../../../Common/Pagination";
 import moment from "moment";
+import Loader from "../../../Common/Loader/Loader";
 
 type EventListData = {
   _id: string;
@@ -24,6 +25,7 @@ const Event = () => {
   const [entriesPerPage, setEntriesPerPage] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
+  const [updateLoading, setUpdateLoading] = useState<boolean>(false);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -41,6 +43,7 @@ const Event = () => {
 
   const fetchEventListData = React.useCallback(async () => {
     try {
+      setUpdateLoading(true);
       setLoading(true);
       const body = {
         limit: entriesPerPage,
@@ -52,9 +55,11 @@ const Event = () => {
       setEventListData(events);
       setTotalPages(totalPages);
       setLoading(false);
+      setUpdateLoading(false);
     } catch (err) {
       console.log(err);
       setLoading(false);
+      setUpdateLoading(false);
     }
   }, [entriesPerPage, currentPage, searchQuery]);
 
@@ -129,6 +134,8 @@ const Event = () => {
           />
         </Card>
       </div>
+
+      <Loader updateLoading={updateLoading}></Loader>
     </React.Fragment>
   );
 };

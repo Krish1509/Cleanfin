@@ -5,6 +5,7 @@ import BreadcrumbItem from "../../../Common/BreadcrumbItem";
 import { Card, CardBody, CardHeader, Form } from "react-bootstrap";
 import { postRequest } from "../../../service/fetch-services";
 import Pagination from "../../../Common/Pagination"; // Import Pagination component
+import Loader from "../../../Common/Loader/Loader";
 
 type FeedbackListData = {
   _id: string;
@@ -23,6 +24,7 @@ const Feedback = () => {
   const [entriesPerPage, setEntriesPerPage] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
+  const [updateLoading, setUpdateLoading] = useState<boolean>(false);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -42,6 +44,7 @@ const Feedback = () => {
 
   const fetchFeedbackListData = React.useCallback(async () => {
     try {
+      setUpdateLoading(true);
       setLoading(true);
       const body = {
         limit: entriesPerPage,
@@ -53,9 +56,11 @@ const Feedback = () => {
       setFeedbackListData(feedbacks);
       setTotalPages(totalPages);
       setLoading(false);
+      setUpdateLoading(false);
     } catch (err) {
       console.log(err);
       setLoading(false);
+      setUpdateLoading(false);
     }
   }, [entriesPerPage, currentPage, searchQuery]);
 
@@ -124,6 +129,8 @@ const Feedback = () => {
           />
         </Card>
       </div>
+
+      <Loader updateLoading={updateLoading}></Loader>
     </React.Fragment>
   );
 };
