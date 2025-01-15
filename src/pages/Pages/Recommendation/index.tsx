@@ -48,7 +48,6 @@ const Recommendation = () => {
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<string>("");
   const [selectedStatus, setSelectedStatus] = useState<boolean>();
-  const [updateLoading, setUpdateLoading] = useState<boolean>(false);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -68,7 +67,6 @@ const Recommendation = () => {
 
   const fetchRecommendationListData = React.useCallback(async () => {
     try {
-      setUpdateLoading(true);
       setLoading(true);
       const body = {
         limit: entriesPerPage,
@@ -80,11 +78,9 @@ const Recommendation = () => {
       setRecommendationListData(recommendations);
       setTotalPages(totalPages);
       setLoading(false);
-      setUpdateLoading(false);
     } catch (err) {
       console.log(err);
       setLoading(false);
-      setUpdateLoading(false);
     }
   }, [entriesPerPage, currentPage, searchQuery]);
 
@@ -95,7 +91,7 @@ const Recommendation = () => {
   const updateRecommendationDetails = React.useCallback(
     async (id: string, key: string, value: unknown) => {
       try {
-        setUpdateLoading(true);
+        setLoading(true);
         const body = { id, [key]: value };
         const result = await postRequest("recommendation/edit", body, true);
         ToastAlert.success(result.message);
@@ -107,7 +103,7 @@ const Recommendation = () => {
         );
         setShowConfirm(false);
         setSelectedId("");
-        setUpdateLoading(false);
+        setLoading(false);
       } catch (err) {
         console.log(err);
         setLoading(false);
@@ -159,9 +155,7 @@ const Recommendation = () => {
               </li>
             </ul>
           </div>
-          {loading ? (
-            <center className="m-4">Loading...</center>
-          ) : (
+          {!loading && (
             <React.Fragment>
               <CardBody className="pt-3">
                 <div className="table-responsive">
@@ -251,7 +245,7 @@ const Recommendation = () => {
                                 onUpdate={handleValueUpdate}
                               />
                               <ToggleSwitch
-                                disabled={updateLoading}
+                                disabled={loading}
                                 checked={item?.target3Achieved}
                                 onChange={() =>
                                   updateRecommendationDetails(
@@ -332,7 +326,7 @@ const Recommendation = () => {
               message={`Are you sure you want to ${
                 selectedStatus ? "activate" : "deactivate"
               } this record?`}
-              loading={updateLoading}
+              loading={loading}
             />
           ) : (
             ""
@@ -341,7 +335,7 @@ const Recommendation = () => {
       </div>
 
     
-      <Loader updateLoading={updateLoading}></Loader>
+      <Loader updateLoading={loading}></Loader>
     </React.Fragment>
   );
 };

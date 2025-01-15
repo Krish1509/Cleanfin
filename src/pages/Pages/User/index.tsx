@@ -36,7 +36,6 @@ const User = () => {
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<string>("");
   const [selectedStatus, setSelectedStatus] = useState<boolean>();
-  const [updateLoading, setUpdateLoading] = useState<boolean>(false);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -56,7 +55,6 @@ const User = () => {
 
   const fetchUserListData = React.useCallback(async () => {
     try {
-      setUpdateLoading(true);
       setLoading(true);
       const body = {
         limit: entriesPerPage,
@@ -68,10 +66,8 @@ const User = () => {
       setUserListData(users);
       setTotalPages(totalPages);
       setLoading(false);
-      setUpdateLoading(false);
     } catch (err) {
       setLoading(false);
-      setUpdateLoading(false);
     }
   }, [entriesPerPage, currentPage, searchQuery]);
 
@@ -81,7 +77,7 @@ const User = () => {
 
   const updateUserDetails = React.useCallback(
     async (id: string, key: string, value: any) => {
-      setUpdateLoading(true);
+      setLoading(true);
       try {
         const body = {
           userId: id,
@@ -95,7 +91,7 @@ const User = () => {
             user.id === id ? { ...user, [key]: value } : user
           )
         );
-        setUpdateLoading(false);
+        setLoading(false);
         setShowConfirm(false);
         setSelectedId("");
       } catch (err) {
@@ -129,9 +125,7 @@ const User = () => {
               </li>
             </ul>
           </div>
-          {loading ? (
-            <center className="m-4">Loading...</center>
-          ) : (
+          {!loading && (
             <React.Fragment>
               <CardBody className="pt-3">
                 <div className="table-responsive">
@@ -233,7 +227,7 @@ const User = () => {
               message={`Are you sure you want to ${
                 selectedStatus ? "activate" : "deactivate"
               } this record?`}
-              loading={updateLoading}
+              loading={loading}
             />
           ) : (
             ""
@@ -241,7 +235,7 @@ const User = () => {
         </Card>
       </div>
 
-      <Loader updateLoading={updateLoading}></Loader>
+      <Loader updateLoading={loading}></Loader>
     </React.Fragment>
   );
 };

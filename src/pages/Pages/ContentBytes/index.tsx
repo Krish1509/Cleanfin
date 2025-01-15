@@ -30,7 +30,6 @@ const ContentBytes = () => {
   const [entriesPerPage, setEntriesPerPage] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
-  const [updateLoading, setUpdateLoading] = useState<boolean>(false);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -50,7 +49,6 @@ const ContentBytes = () => {
 
   const fetchContentBytesData = React.useCallback(async () => {
     try {
-      setUpdateLoading(true);
       setLoading(true);
       const body = {
         limit: entriesPerPage,
@@ -62,11 +60,9 @@ const ContentBytes = () => {
       setContentBytesData(contentBites);
       setTotalPages(totalPages);
       setLoading(false);
-      setUpdateLoading(false);
     } catch (err) {
       console.log(err);
       setLoading(false);
-      setUpdateLoading(false);
     }
   }, [entriesPerPage, currentPage, searchQuery]);
 
@@ -108,9 +104,7 @@ const ContentBytes = () => {
               </li>
             </ul>
           </div>
-          {loading ? (
-            <center className="m-4">Loading...</center>
-          ) : (
+          {!loading && (
             <React.Fragment>
               <CardBody className="pt-3">
                 <div className="table-responsive">
@@ -172,7 +166,7 @@ const ContentBytes = () => {
         </Card>
       </div>
 
-      <Loader updateLoading={updateLoading}></Loader>
+      <Loader updateLoading={loading}></Loader>
     </React.Fragment>
   );
 };
