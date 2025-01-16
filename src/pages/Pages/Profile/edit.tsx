@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
-import { Card, Col, Row } from "react-bootstrap";
+import { Card, Col, Row, Spinner } from "react-bootstrap";
 import Dropzone from "react-dropzone";
 import { Formik, Field, Form as FormikForm, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -23,7 +23,7 @@ interface FormValues {
 }
 
 const EditProfile = () => {
-
+    const [loading, setLoading] = useState(false);
     const [userData, setUserData] = useState<FormValues | null>(null);
     const [selectedImage, setSelectedImage] = useState<File | string | null>(null);
 
@@ -77,6 +77,7 @@ const EditProfile = () => {
 
     const handleSubmit = async (values: any) => {
         try {
+            setLoading(true);
             const formData = new FormData();
             formData.append("userId", values?._id);
 
@@ -101,8 +102,10 @@ const EditProfile = () => {
                 localStorage.setItem('user', JSON.stringify(result.data));
                 setUserData(result.data);
             }
+            setLoading(false);
         } catch (error) {
             console.error("Error:", error);
+            setLoading(false);
         }
     };
 
@@ -289,9 +292,14 @@ const EditProfile = () => {
                                         <Row>
                                             <Col lg={12} className="text-end">
                                                 <button type="submit" className="btn btn-primary me-2"
-                                                    disabled={!dirty}
+                                                    disabled={!dirty || loading}
                                                 >
-                                                    Apply Change
+                                                    Apply Change{" "}
+                                                    {loading ? (
+                                                        <Spinner className="ml-2" size="sm" />
+                                                    ) : (
+                                                        ""
+                                                    )}
                                                 </button>
                                                 <button type="reset" className="btn btn-outline-secondary"
                                                     onClick={() => handleCancel(resetForm)}
