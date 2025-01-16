@@ -24,11 +24,8 @@ interface FormValues {
 
 const EditProfile = () => {
 
-    // const user = localStorage?.getItem("user");
-    // const userData: FormValues = user ? JSON.parse(user) : null;
-
     const [userData, setUserData] = useState<FormValues | null>(null);
-    const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    const [selectedImage, setSelectedImage] = useState<File | string | null>(null);
 
     // Fetch user data from localStorage when the component mounts
     useEffect(() => {
@@ -74,24 +71,25 @@ const EditProfile = () => {
     const handleImageChange = (acceptedFiles: File[]) => {
         const file = acceptedFiles[0];
         if (file) {
-            setSelectedImage(URL.createObjectURL(file));
+            setSelectedImage(file);
         }
     };
 
     const handleSubmit = async (values: any) => {
         try {
             const formData = new FormData();
-            formData.append("userId", values._id);
-            formData.append("firstName", values.firstName);
-            formData.append("lastName", values.lastName);
-            formData.append("age", values.age.toString());
-            formData.append("mobileNumber", values.mobileNumber);
-            formData.append("role", values.role);
-            formData.append("subscription_start", values.subscription_start);
-            formData.append("subscription_end", values.subscription_end);
-            formData.append("isActive", values.isActive.toString());
-            if (selectedImage) {
-                formData.append("filePath", selectedImage);
+            formData.append("userId", values?._id);
+
+            const fieldsToCheck: (keyof FormValues)[] = ['firstName', 'lastName', 'age'];
+
+            fieldsToCheck.forEach((field) => {
+                if (values[field] !== initialValues[field]) {
+                    formData.append(field, values[field]);
+                }
+            });
+
+            if (selectedImage instanceof File) {
+                formData.append("image", selectedImage);
             }
 
             const result = await handleFormData("user/edit", formData);
@@ -158,7 +156,7 @@ const EditProfile = () => {
                                                                     <>
                                                                         <div style={{ position: "relative", width: "110px", height: "110px", top: 0, left: 0 }}>
                                                                             <img
-                                                                                src={selectedImage}
+                                                                                src={selectedImage instanceof File ? URL.createObjectURL(selectedImage) : selectedImage}
                                                                                 alt="Preview"
                                                                                 className="avatar-sm rounded-circle"
                                                                                 style={{
