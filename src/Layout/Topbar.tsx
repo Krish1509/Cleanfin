@@ -604,7 +604,7 @@ const TopBar = ({
                           </Dropdown.Item>
                         </li>
                         <li className="list-group-item">
-                          <Dropdown.Item>
+                          <Dropdown.Item href="/profile/edit">
                             <span className="d-flex align-items-center">
                               <i className="ph-duotone ph-user-circle"></i>
                               <span>Edit profile</span>
