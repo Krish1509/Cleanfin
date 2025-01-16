@@ -17,7 +17,7 @@ import EditProfile from "../pages/Pages/Profile/edit";
 
 const routes = [
   // Dashboard Routes
-  { path: "/profile/edit", component: <EditProfile />, allowedRoles: ["admin"] },
+  { path: "/profile/edit", component: <EditProfile />, allowedRoles: ["admin", "customer"] },
   { path: "/dashboard", component: <Dashboard />, allowedRoles: ["admin"] },
   {
     path: "/dashboard/user",

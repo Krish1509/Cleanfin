@@ -158,7 +158,7 @@ const EditProfile = () => {
                                                                     <>
                                                                         <div style={{ position: "relative", width: "110px", height: "110px", top: 0, left: 0 }}>
                                                                             <img
-                                                                                src={userData?.image || selectedImage}
+                                                                                src={selectedImage}
                                                                                 alt="Preview"
                                                                                 className="avatar-sm rounded-circle"
                                                                                 style={{
@@ -227,7 +227,7 @@ const EditProfile = () => {
                                         </Row>
 
                                         <Row>
-                                            <Col lg={12} className="mb-3">
+                                            <Col lg={6} sm={12} className="mb-3">
                                                 <label className="col-form-label text-sm-end">Age</label>
                                                 <Field
                                                     type="number"
@@ -237,9 +237,6 @@ const EditProfile = () => {
                                                 />
                                                 <ErrorMessage name="age" component="div" className="text-danger" />
                                             </Col>
-                                        </Row>
-
-                                        <Row>
                                             <Col lg={6} sm={12} className="mb-3">
                                                 <label className="col-form-label text-sm-end">Mobile Number</label>
                                                 <Field
@@ -251,7 +248,10 @@ const EditProfile = () => {
                                                 />
                                                 <ErrorMessage name="mobileNumber" component="div" className="text-danger" />
                                             </Col>
-                                            <Col lg={6} sm={12} className="mb-3">
+                                        </Row>
+
+                                        <Row>
+                                            <Col lg={12} className="mb-3">
                                                 <label className="col-form-label text-sm-end">Role</label>
                                                 <Field
                                                     type="text"
@@ -289,20 +289,18 @@ const EditProfile = () => {
                                         </Row>
 
                                         <Row>
-                                            <div className="form-group row mb-0 text-end">
-                                                <Col lg={12}>
-                                                    <button type="submit" className="btn btn-primary me-2"
-                                                        disabled={!dirty}
-                                                    >
-                                                        Apply Change
-                                                    </button>
-                                                    <button type="reset" className="btn btn-outline-secondary"
-                                                        onClick={() => handleCancel(resetForm)}
-                                                    >
-                                                        Cancel
-                                                    </button>
-                                                </Col>
-                                            </div>
+                                            <Col lg={12} className="text-end">
+                                                <button type="submit" className="btn btn-primary me-2"
+                                                    disabled={!dirty}
+                                                >
+                                                    Apply Change
+                                                </button>
+                                                <button type="reset" className="btn btn-outline-secondary"
+                                                    onClick={() => handleCancel(resetForm)}
+                                                >
+                                                    Cancel
+                                                </button>
+                                            </Col>
                                         </Row>
                                     </FormikForm>
                                 )}
