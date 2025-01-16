@@ -80,15 +80,6 @@ const EditProfile = () => {
 
     const handleSubmit = async (values: any) => {
         try {
-            // const formData = {
-            //     ...userData,
-            //     userId: userData?._id,
-            //     firstName: values.firstName,
-            //     lastName: values.lastName,
-            //     image: values.image || "",
-            //     age: values.age.toString(),
-            // };
-
             const formData = new FormData();
             formData.append("userId", values._id);
             formData.append("firstName", values.firstName);
