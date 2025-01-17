@@ -5,6 +5,7 @@ import BreadcrumbItem from "../../../Common/BreadcrumbItem";
 import { Button, Card, CardBody, CardHeader } from "react-bootstrap";
 import { getRequest } from "../../../service/fetch-services";
 import { useNavigate } from "react-router-dom";
+import Loader from "../../../Common/Loader/Loader";
 
 type StaticPageListData = {
   _id: string;
@@ -49,9 +50,7 @@ const StaticPages = () => {
               <h5 className="mb-3 mb-sm-0">Static Pages</h5>
             </div>
           </CardHeader>
-          {loading ? (
-            <center className="m-4">Loading...</center>
-          ) : (
+          {!loading && (
             <React.Fragment>
               <CardBody className="pt-3">
                 <div className="table-responsive">
@@ -98,6 +97,8 @@ const StaticPages = () => {
           )}
         </Card>
       </div>
+
+      <Loader updateLoading={loading}></Loader>
     </React.Fragment>
   );
 };

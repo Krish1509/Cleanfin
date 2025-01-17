@@ -56,6 +56,7 @@ const User = () => {
 
   const fetchUserListData = React.useCallback(async () => {
     try {
+      setUpdateLoading(true);
       setLoading(true);
       const body = {
         limit: entriesPerPage,
@@ -67,8 +68,10 @@ const User = () => {
       setUserListData(users);
       setTotalPages(totalPages);
       setLoading(false);
+      setUpdateLoading(false);
     } catch (err) {
       setLoading(false);
+      setUpdateLoading(false);
     }
   }, [entriesPerPage, currentPage, searchQuery]);
 
@@ -96,7 +99,7 @@ const User = () => {
         setShowConfirm(false);
         setSelectedId("");
       } catch (err) {
-        setLoading(false);
+        setUpdateLoading(false);
       }
     },
     []
@@ -126,9 +129,7 @@ const User = () => {
               </li>
             </ul>
           </div>
-          {loading ? (
-            <center className="m-4">Loading...</center>
-          ) : (
+          {!loading && (
             <React.Fragment>
               <CardBody className="pt-3">
                 <div className="table-responsive">
@@ -238,7 +239,7 @@ const User = () => {
         </Card>
       </div>
 
-      <Loader updateLoading={showConfirm}></Loader>
+      <Loader updateLoading={updateLoading}></Loader>
     </React.Fragment>
   );
 };

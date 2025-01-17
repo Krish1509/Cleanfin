@@ -5,6 +5,7 @@ import BreadcrumbItem from "../../../Common/BreadcrumbItem";
 import { Card, CardBody, CardHeader, Form } from "react-bootstrap";
 import { postRequest } from "../../../service/fetch-services";
 import Pagination from "../../../Common/Pagination"; // Import Pagination component
+import Loader from "../../../Common/Loader/Loader";
 
 type FeedbackListData = {
   _id: string;
@@ -87,9 +88,7 @@ const Feedback = () => {
               </li>
             </ul>
           </div>
-          {loading ? (
-            <center className="m-4">Loading...</center>
-          ) : (
+          {!loading && (
             <React.Fragment>
               <CardBody className="pt-3">
                 <div className="table-responsive">
@@ -124,6 +123,8 @@ const Feedback = () => {
           />
         </Card>
       </div>
+
+      <Loader updateLoading={loading}></Loader>
     </React.Fragment>
   );
 };
