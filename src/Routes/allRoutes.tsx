@@ -15,9 +15,11 @@ import ContentBytes from "../pages/Pages/ContentBytes";
 import AddContentBytes from "../pages/Pages/ContentBytes/add-edit/add";
 import ViewContentBytes from "../pages/Pages/UserDashboard/Content/view";
 import Content from "../pages/Pages/UserDashboard/Content";
+import EditProfile from "../pages/Pages/Profile/edit";
 
 const routes = [
   // Dashboard Routes
+  { path: "/profile/edit", component: <EditProfile />, allowedRoles: ["admin", "customer"] },
   { path: "/dashboard", component: <Dashboard />, allowedRoles: ["admin"] },
   {
     path: "/dashboard/user",
