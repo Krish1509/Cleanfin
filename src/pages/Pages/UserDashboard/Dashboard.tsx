@@ -1,13 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Card, CardBody, Col, Row } from "react-bootstrap";
 import ContentBytes from "../../../Common/ContentBytes/ContentBytes";
 import Recommendation from "../../../Common/Recommendation/Recommendation";
 import PerformanceCard from "../../../Common/PerformanceCard/PerformanceCard";
 import { IRecommendation, IContentbytes } from "./Helper/interfaces";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../../../helper/firebase-config";
 import { postRequest } from "../../../service/fetch-services";
+import AnimationComponent from "../../../Common/AnimationComponent/AnimationComponent";
+// import Subscription from "../../../Common/Subscription/Subscription";
 import { useNavigate } from "react-router-dom";
 
 //import Components
@@ -18,6 +22,7 @@ const UserDashboard = () => {
   const [data, setdata] = useState<IRecommendation[]>([]);
   const [activeSection, setActiveSection] = useState("recommendation");
   const [contentBytes, SetcontentBytes] = useState<IContentbytes[]>([]);
+  const [ShowAnimation, setShowAnimation] = useState<boolean>(false);
   const [contentBytesLoading, SetcontentBytesLoading] =
     useState<boolean>(false);
 
@@ -25,17 +30,69 @@ const UserDashboard = () => {
     try {
       setLoading(true);
 
-      // Listening for real-time updates using onSnapshot
-      const unsubscribe = onSnapshot(
+      // Create a query to filter documents where isActive is true
+      const recommendationsQuery = query(
         collection(db, "recommendations"),
-        (querySnapshot) => {
-          const fetchedData = querySnapshot.docs.map(
-            (doc) => doc.data() as IRecommendation
-          );
-          setdata(fetchedData); // Set the fetched data to state
-          setLoading(false);
-        }
+        where("isActive", "==", true) // Filter for isActive = true
       );
+
+      // Store the previous values for target1Achieved, target2Achieved, target3Achieved, and stopLossAchieved
+      let previousData: Record<
+        string,
+        {
+          target1Achieved: boolean;
+          target2Achieved: boolean;
+          target3Achieved: boolean;
+          stopLossAchieved: boolean;
+        }
+      > = {};
+
+      // Listening for real-time updates using onSnapshot
+      const unsubscribe = onSnapshot(recommendationsQuery, (querySnapshot) => {
+        const fetchedData = querySnapshot.docs.map((doc) => {
+          const data = doc.data() as IRecommendation;
+          const id = doc.id;
+
+          // Get previous values
+          const prev = previousData[id];
+
+          // Only proceed if prev is defined
+          if (prev) {
+            // Check if any of the specified fields changed from false to true
+            const target1Changed =
+              prev.target1Achieved === false && data.target1Achieved === true;
+            const target2Changed =
+              prev.target2Achieved === false && data.target2Achieved === true;
+            const target3Changed =
+              prev.target3Achieved === false && data.target3Achieved === true;
+            const stopLossChanged =
+              prev.stopLossAchieved === false && data.stopLossAchieved === true;
+
+            // Trigger animation only if any of the fields changed from false to true
+            if (
+              target1Changed ||
+              target2Changed ||
+              target3Changed ||
+              stopLossChanged
+            ) {
+              triggerAnimation(); // Trigger animation
+            }
+          }
+
+          // Update previous data for comparison
+          previousData[id] = {
+            target1Achieved: data.target1Achieved,
+            target2Achieved: data.target2Achieved,
+            target3Achieved: data.target3Achieved,
+            stopLossAchieved: data.stopLossAchieved,
+          };
+
+          return data;
+        });
+
+        setdata(fetchedData); // Set the fetched data to state
+        setLoading(false);
+      });
 
       // Cleanup function to unsubscribe from the snapshot listener when the component is unmounted
       return () => unsubscribe();
@@ -43,6 +100,22 @@ const UserDashboard = () => {
       console.log("Error fetching data from Firestore:", err);
       setLoading(false);
     }
+  };
+
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null); // Ref to store timeout ID
+
+  const triggerAnimation = () => {
+    // If there's an existing timeout, clear it
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    setShowAnimation(true); // Show the animation
+
+    // Set a new timeout to hide the animation after 3 seconds
+    timeoutRef.current = setTimeout(() => {
+      setShowAnimation(false); // Hide the animation
+    }, 3000); // Hide animation after 3 seconds
   };
 
   const fetchContentBytes = async () => {
@@ -59,16 +132,6 @@ const UserDashboard = () => {
       SetcontentBytesLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchData(); // Call the function to start listening for real-time updates
-    // Optionally, return a cleanup function to unsubscribe when the component unmounts
-    fetchContentBytes();
-
-    return () => {
-      // Cleanup if needed, but onSnapshot automatically handles cleanup as well
-    };
-  }, []);
 
   const handleScroll = () => {
     const sections = ["recommendation", "content-bytes", "past-performance"];
@@ -88,6 +151,11 @@ const UserDashboard = () => {
   };
 
   useEffect(() => {
+    setShowAnimation(false);
+    fetchData(); // Call the function to start listening for real-time updates
+    // Optionally, return a cleanup function to unsubscribe when the component unmounts
+    fetchContentBytes();
+
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -158,14 +226,27 @@ const UserDashboard = () => {
                 </div>
               </Col>
               <Row>
-                {!loading &&
-                  data?.map((item, i) => {
-                    return (
+                {!loading ? (
+                  data?.length > 0 ? (
+                    data.map((item, i) => (
                       <Col xs={12} sm={6} xxl={4} key={i}>
                         <Recommendation data={item} />
                       </Col>
-                    );
-                  })}
+                    ))
+                  ) : (
+                    <div className="no-data-container">
+                      <div className="no-data-content">
+                        <h2>No Recommendations Available</h2>
+                        <p>
+                          It seems there are no recommendations at the moment.
+                          Please check back later!
+                        </p>
+                      </div>
+                    </div>
+                  )
+                ) : (
+                  ""
+                )}
               </Row>
             </div>
             <div
@@ -216,6 +297,9 @@ const UserDashboard = () => {
           </CardBody>
         </Card>
       </div>
+      <AnimationComponent show={ShowAnimation} />
+      {/* add bellow component in reccomendation */}
+      {/* <Subscription /> */}
     </React.Fragment>
   );
 };
