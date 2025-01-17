@@ -10,20 +10,18 @@
   min-height: calc(100vh - #{$temp});
 
   .pc-content {
-    padding-left: 300px;
-    padding-right: 300px;
     padding-top: 20px;
 
-    // Extra Large (xl) and smaller screens
-    @include media-breakpoint-up(xl) {
-      padding-left: 250px;
-      padding-right: 250px;
+    // Extra Small (xs) screens and smaller
+    @include media-breakpoint-up(xs) {
+      padding-left: 50px;
+      padding-right: 50px;
     }
 
-    // Large (lg) screens and smaller
-    @include media-breakpoint-up(lg) {
-      padding-left: 200px;
-      padding-right: 200px;
+    // Small (sm) screens and smaller
+    @include media-breakpoint-up(sm) {
+      padding-left: 100px;
+      padding-right: 100px;
     }
 
     // Medium (md) screens and smaller
@@ -32,16 +30,16 @@
       padding-right: 150px;
     }
 
-    // Small (sm) screens and smaller
-    @include media-breakpoint-up(sm) {
-      padding-left: 300px;
-      padding-right: 300px;
+    // Large (lg) screens and smaller
+    @include media-breakpoint-up(lg) {
+      padding-left: 120px;
+      padding-right: 120px;
     }
 
-    // Extra Small (xs) screens and smaller
-    @include media-breakpoint-up(xs) {
-      padding-left: 50px;
-      padding-right: 50px;
+    // Extra Large (xl) and smaller screens
+    @include media-breakpoint-up(xl) {
+      padding-left: 250px;
+      padding-right: 250px;
     }
 
     // For screens larger than xl and smaller than container max-width
@@ -60,6 +58,7 @@
     padding-top: calc(30px + 55px);
   }
 }
+
 
 .page-header {
   display: flex;

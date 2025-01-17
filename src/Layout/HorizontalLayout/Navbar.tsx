@@ -25,7 +25,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar-content pc-trigger">
+    <div className="navbar-content pc-trigger pc-container-padding">
       <ul className="pc-navbar" style={{ display: "block" }}>
         {menuData.map((item, key) => (
           <li
