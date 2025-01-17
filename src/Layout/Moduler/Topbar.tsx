@@ -15,7 +15,7 @@ interface HeaderProps {
     changeThemeMode?: any; // Define the type for changeThemeMode function
     toogleSidebarHide?: () => void;
     toogleMobileSidebarHide?: () => void;
-     handleOffcanvasToggle?: () => void;
+    handleOffcanvasToggle?: () => void;
 }
 
 const TopBar = ({ handleOffcanvasToggle, changeThemeMode, toogleSidebarHide, toogleMobileSidebarHide }: HeaderProps) => {
@@ -449,7 +449,7 @@ const TopBar = ({ handleOffcanvasToggle, changeThemeMode, toogleSidebarHide, too
                                                     </div>
                                                 </li>
                                                 <li className="list-group-item">
-                                                    <Dropdown.Item>
+                                                    <Dropdown.Item href="/profile/edit">
                                                         <span className="d-flex align-items-center">
                                                             <i className="ph-duotone ph-user-circle"></i>
                                                             <span>Edit profile</span>

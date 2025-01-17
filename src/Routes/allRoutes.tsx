@@ -13,9 +13,11 @@ import StaticPages from "../pages/Pages/StaticPages";
 import UpdateStaticPages from "../pages/Pages/StaticPages/add-edit/add";
 import ContentBytes from "../pages/Pages/ContentBytes";
 import AddContentBytes from "../pages/Pages/ContentBytes/add-edit/add";
+import EditProfile from "../pages/Pages/Profile/edit";
 
 const routes = [
   // Dashboard Routes
+  { path: "/profile/edit", component: <EditProfile />, allowedRoles: ["admin", "customer"] },
   { path: "/dashboard", component: <Dashboard />, allowedRoles: ["admin"] },
   {
     path: "/dashboard/user",
