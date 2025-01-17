@@ -12,10 +12,12 @@ import { db } from "../../../helper/firebase-config";
 import { postRequest } from "../../../service/fetch-services";
 import AnimationComponent from "../../../Common/AnimationComponent/AnimationComponent";
 // import Subscription from "../../../Common/Subscription/Subscription";
+import { useNavigate } from "react-router-dom";
 
 //import Components
 
 const UserDashboard = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setdata] = useState<IRecommendation[]>([]);
   const [activeSection, setActiveSection] = useState("recommendation");
@@ -258,6 +260,9 @@ const UserDashboard = () => {
                     <button
                       type="button"
                       className="btn btn-sm my-2 me-1 btn-light-success"
+                      onClick={() =>
+                        navigate("/content")
+                      }
                     >
                       View All
                       <i className="ms-2 fas fa-arrow-circle-right"></i>

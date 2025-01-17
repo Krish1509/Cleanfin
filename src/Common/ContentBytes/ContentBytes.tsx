@@ -3,6 +3,7 @@ import { IContentbytes } from "../../pages/Pages/UserDashboard/Helper/interfaces
 import audio from "../../assets/images/user/audio.jpg";
 import video from "../../assets/images/user/video.jpg";
 import file from "../../assets/images/user/file.jpg";
+import { useNavigate } from "react-router-dom";
 
 //import Components
 
@@ -11,9 +12,11 @@ interface IContentbytesProps {
 }
 
 const ContentBytes: React.FC<IContentbytesProps> = ({ data }) => {
+  const navigate = useNavigate();
+  
   return (
     <React.Fragment>
-      <div className="mb-3">
+      <div className="mb-3" onClick={() => navigate("/content/view", { state: { id: data._id } })}>
         <div className="card overflow-hidden">
           <div className="row g-0">
             <div className="col-md-4">
@@ -50,13 +53,9 @@ const ContentBytes: React.FC<IContentbytesProps> = ({ data }) => {
 
                 <div className="card-text d-flex justify-content-between align-items-center">
                   <div className="d-flex align-middle">
-                    <small className="text-muted">
+                    <small className="text-muted d-flex gap-1 align-items-center">
                       <i className="ti ti-clock f-13"></i>
-                      {new Date(data?.createdAt).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      })}
+                      {data?.uploaded}
                     </small>
                   </div>
                   <span className="badge bg-light-primary ms-2">

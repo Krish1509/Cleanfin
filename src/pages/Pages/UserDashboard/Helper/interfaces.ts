@@ -36,5 +36,6 @@ export   interface IRecommendation {
     updatedAt: string;
     createdAt: string;
     __v: number;
+    uploaded: string;
   }
   

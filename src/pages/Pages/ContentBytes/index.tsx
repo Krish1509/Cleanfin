@@ -132,6 +132,15 @@ const ContentBytes = () => {
                           </td>
                           <td className="html-content">
                             <span
+                              style={{
+                                display: "-webkit-box",
+                                WebkitLineClamp: 2,
+                                WebkitBoxOrient: "vertical",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                maxHeight: "300px",
+                                whiteSpace: "normal"
+                              }}
                               dangerouslySetInnerHTML={{
                                 __html: item?.description,
                               }}
