@@ -13,6 +13,8 @@ import StaticPages from "../pages/Pages/StaticPages";
 import UpdateStaticPages from "../pages/Pages/StaticPages/add-edit/add";
 import ContentBytes from "../pages/Pages/ContentBytes";
 import AddContentBytes from "../pages/Pages/ContentBytes/add-edit/add";
+import ViewContentBytes from "../pages/Pages/UserDashboard/Content/view";
+import Content from "../pages/Pages/UserDashboard/Content";
 
 const routes = [
   // Dashboard Routes
@@ -20,6 +22,16 @@ const routes = [
   {
     path: "/dashboard/user",
     component: <UserDashboard />,
+    allowedRoles: ["customer"],
+  },
+  {
+    path: "/content",
+    component: <Content />,
+    allowedRoles: ["customer"],
+  },
+  {
+    path: "/content/view",
+    component: <ViewContentBytes />,
     allowedRoles: ["customer"],
   },
 

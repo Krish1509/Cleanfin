@@ -30,6 +30,7 @@ interface FormValues {
   time: string;
   action: string;
   priceCondition: string;
+  price: number;
   target1: number;
   target2: number;
   target3: number;
@@ -53,6 +54,7 @@ const AddRecommendation = () => {
   const PriceOptions = [
     { value: "above", label: "Above" },
     { value: "below", label: "Below" },
+    { value: "cmp", label: "CMP" },
   ];
 
   const [loading, setLoading] = useState(false);
@@ -132,6 +134,7 @@ const AddRecommendation = () => {
                       time: editData?.time || "",
                       action: editData?.action || "",
                       priceCondition: editData?.priceCondition || "",
+                      price: editData?.price || "",
                       target1: editData?.target1 || "",
                       target2: editData?.target2 || "",
                       target3: editData?.target3 || "",
@@ -246,6 +249,25 @@ const AddRecommendation = () => {
                               touched.priceCondition ? (
                                 <div className="invalid-feedback d-flex align-items-start">
                                   {errors.priceCondition}
+                                </div>
+                              ) : null}
+                            </div>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col sm={12}>
+                            <div className="mb-3">
+                              <label className="form-label">Price</label>
+                              <Field
+                                type="number"
+                                className="form-control"
+                                id="price"
+                                placeholder="Price"
+                                name="price"
+                              />
+                              {errors.price && touched.price ? (
+                                <div className="invalid-feedback d-flex align-items-start">
+                                  {errors.price}
                                 </div>
                               ) : null}
                             </div>
