@@ -15,6 +15,7 @@ import ContentBytes from "../pages/Pages/ContentBytes";
 import AddContentBytes from "../pages/Pages/ContentBytes/add-edit/add";
 import ViewContentBytes from "../pages/Pages/UserDashboard/Content/view";
 import Content from "../pages/Pages/UserDashboard/Content";
+import EventList from "../pages/Pages/UserDashboard/EventList";
 import EditProfile from "../pages/Pages/Profile/edit";
 
 const routes = [
@@ -71,6 +72,7 @@ const routes = [
 
   // Event Routes
   { path: "/event", component: <Event />, allowedRoles: ["admin"] },
+  { path: "/eventlist", component: <EventList />, allowedRoles: ["customer"] },
 
   // Feedback Routes
   { path: "/feedback", component: <Feedback />, allowedRoles: ["admin"] },
