@@ -39,3 +39,12 @@ export   interface IRecommendation {
     uploaded: string;
   }
   
+  export interface IEventList {
+    _id: string;
+    title: string;
+    country: string;
+    date: string;
+    impact: string;
+    forecast: string;
+    previous: string;
+  }

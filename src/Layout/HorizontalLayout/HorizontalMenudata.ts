@@ -72,6 +72,13 @@ const userMenuData = [
     link: "/content",
     icon: "",
   },
+  {
+    id: "event",
+    label: "Event",
+    dataPage: null,
+    link: "/eventlist",
+    icon: "",
+  },
 ];
 
 const getMenuByRole = (role: string) => {
