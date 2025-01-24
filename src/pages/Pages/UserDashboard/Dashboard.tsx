@@ -10,9 +10,10 @@ import { IRecommendation, IContentbytes } from "./Helper/interfaces";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../../../helper/firebase-config";
 import { postRequest } from "../../../service/fetch-services";
-import AnimationComponent from "../../../Common/AnimationComponent/AnimationComponent";
+// import AnimationComponent from "../../../Common/AnimationComponent/AnimationComponent";
 // import Subscription from "../../../Common/Subscription/Subscription";
 import { useNavigate } from "react-router-dom";
+import LottieAnimation, { Varient } from "../../../Common/AnimationComponent/LottieAnimation";
 
 //import Components
 
@@ -23,6 +24,7 @@ const UserDashboard = () => {
   const [activeSection, setActiveSection] = useState("recommendation");
   const [contentBytes, SetcontentBytes] = useState<IContentbytes[]>([]);
   const [ShowAnimation, setShowAnimation] = useState<boolean>(false);
+  const [animationVarient, setAnimationVarient] = useState<{ type: Varient, info: string }>({ type: Varient.Target, info: "" });
   const [contentBytesLoading, SetcontentBytesLoading] =
     useState<boolean>(false);
 
@@ -75,6 +77,15 @@ const UserDashboard = () => {
               target3Changed ||
               stopLossChanged
             ) {
+              if (stopLossChanged) {
+                setAnimationVarient({ type: Varient.StopLoss, info: `Milestone Reached on Stop Loss!` });
+              } else {
+                let targetInfo: number = target1Changed ? 1 : target2Changed ? 2 : target3Changed ? 3 : 0;
+                setAnimationVarient({
+                  type: Varient.Target,
+                  info: `Milestone Reached on Target ${targetInfo}!`
+                });
+              }
               triggerAnimation(); // Trigger animation
             }
           }
@@ -176,25 +187,22 @@ const UserDashboard = () => {
           <div className="menu">
             <div
               onClick={() => scrollToSection("recommendation")}
-              className={`menu-item ${
-                activeSection === "recommendation" ? "active" : ""
-              }`}
+              className={`menu-item ${activeSection === "recommendation" ? "active" : ""
+                }`}
             >
               Recommendations
             </div>
             <div
               onClick={() => scrollToSection("content-bytes")}
-              className={`menu-item ${
-                activeSection === "content-bytes" ? "active" : ""
-              }`}
+              className={`menu-item ${activeSection === "content-bytes" ? "active" : ""
+                }`}
             >
               Content Bytes
             </div>
             <div
               onClick={() => scrollToSection("past-performance")}
-              className={`menu-item ${
-                activeSection === "past-performance" ? "active" : ""
-              }`}
+              className={`menu-item ${activeSection === "past-performance" ? "active" : ""
+                }`}
             >
               Past Performance
             </div>
@@ -297,7 +305,7 @@ const UserDashboard = () => {
           </CardBody>
         </Card>
       </div>
-      <AnimationComponent show={ShowAnimation} />
+      <LottieAnimation show={ShowAnimation} varient={animationVarient.type} info={animationVarient.info} />
       {/* add bellow component in reccomendation */}
       {/* <Subscription /> */}
     </React.Fragment>
