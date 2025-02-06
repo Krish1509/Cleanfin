@@ -23,6 +23,7 @@ const validationSchema = Yup.object().shape({
   priceCondition: Yup.string().required("Price Condition is required!"),
   stopLoss: Yup.string().required("Stop loss is required!"),
   recommendation: Yup.string().required("Recommendation is required!"),
+  scriptId: Yup.string().required("Script Id is required!"),
 });
 
 interface FormValues {
@@ -40,13 +41,16 @@ interface FormValues {
   target2Achieved: boolean;
   target3Achieved: boolean;
   stopLossAchieved: boolean;
+  scriptId: string;
+  segmentID: number;
 }
 
 const AddRecommendation = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const editId = location?.state !== undefined ? location?.state?.id : "";
-
+  const segmentId =
+    location?.state !== undefined ? location?.state?.segmentID : "";
   const ActionOptions = [
     { value: "buy", label: "Buy" },
     { value: "sell", label: "Sell" },
@@ -56,10 +60,17 @@ const AddRecommendation = () => {
     { value: "below", label: "Below" },
     { value: "cmp", label: "CMP" },
   ];
+  const SegmentOptions = [
+    { value: 1, label: "NSE_EQ" },
+    { value: 2, label: "NSE_FO" },
+    { value: 5, label: "MCX_FO" },
+  ];
 
   const [loading, setLoading] = useState(false);
   const [editData, setEditData] = useState<any>({});
   const [getLoading, setGetLoading] = useState(false);
+  const [scriptloading, setScriptloading] = useState(false);
+  const [scriptdata, setScriptdata] = useState<any>([]);
 
   const handleSubmit = async (values: any) => {
     try {
@@ -89,6 +100,36 @@ const AddRecommendation = () => {
       console.error("Error:", error);
     }
   };
+
+  const handlechange = async (value: number) => {
+    try {
+      setScriptloading(true);
+      const result = await postRequest("option-scripts/list", {
+        segmentID: value,
+      });
+
+      if (result) {
+        const formattedArray = result?.data?.map(
+          (item: { _id: any; name: any }) => ({
+            value: item._id,
+            label: item.name,
+          })
+        );
+
+        setScriptdata(formattedArray);
+      }
+
+      setScriptloading(false);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (segmentId) {
+      handlechange(segmentId);
+    }
+  }, [segmentId]);
 
   const fetchDetail = async () => {
     try {
@@ -144,12 +185,84 @@ const AddRecommendation = () => {
                       target2Achieved: editData?.target2Achieved || false,
                       target3Achieved: editData?.target3Achieved || false,
                       stopLossAchieved: editData?.stopLossAchieved || false,
+                      scriptId: editData?.scriptId || "",
+                      segmentID: segmentId || "",
                     }}
                     validationSchema={validationSchema}
                     onSubmit={handleSubmit}
                   >
                     {({ errors, touched, values, setFieldValue }) => (
                       <Form>
+                        <Row>
+                          <Col sm={6}>
+                            <div className="mb-3">
+                              <label className="form-label">Segment</label>
+                              <Select
+                                isSearchable={true}
+                                isClearable
+                                options={SegmentOptions}
+                                placeholder="Select"
+                                className="react-select"
+                                classNamePrefix="react-select"
+                                onChange={(value) => {
+                                  setFieldValue(
+                                    "segmentID",
+                                    value?.value || ""
+                                  );
+
+                                  // Only call handlechange if a value is selected
+                                  if (value) {
+                                    handlechange(value?.value);
+                                  }
+                                  if (!value) {
+                                    setScriptdata([]);
+                                    setFieldValue("scriptId", "");
+                                  }
+                                }}
+                                value={SegmentOptions?.filter(
+                                  (obj) => values?.segmentID === obj.value
+                                )}
+                              />
+
+                              {errors.action && touched.action ? (
+                                <div className="invalid-feedback d-flex align-items-start">
+                                  {errors.action}
+                                </div>
+                              ) : null}
+                            </div>
+                          </Col>
+                          <Col sm={6}>
+                            <div className="mb-3">
+                              <label className="form-label">Script</label>
+                              <Select
+                                isClearable
+                                isSearchable={true}
+                                options={scriptdata}
+                                placeholder="Select"
+                                className="react-select"
+                                isDisabled={
+                                  scriptloading || !scriptdata?.length
+                                }
+                                classNamePrefix="react-select"
+                                onChange={(selectedOption) => {
+                                  setFieldValue(
+                                    "scriptId",
+                                    selectedOption ? selectedOption.value : ""
+                                  );
+                                }}
+                                value={scriptdata?.filter(
+                                  (obj: any) => values?.scriptId === obj.value
+                                )}
+                              />
+
+                              {errors.scriptId && touched.scriptId ? (
+                                <div className="invalid-feedback d-flex align-items-start">
+                                  {errors.scriptId}
+                                </div>
+                              ) : null}
+                            </div>
+                          </Col>
+                        </Row>
                         <Row>
                           <Col sm={6}>
                             <div className="mb-3">
@@ -254,6 +367,7 @@ const AddRecommendation = () => {
                             </div>
                           </Col>
                         </Row>
+
                         <Row>
                           <Col sm={12}>
                             <div className="mb-3">
