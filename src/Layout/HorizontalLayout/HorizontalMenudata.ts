@@ -21,6 +21,13 @@ const adminMenuData = [
     icon: "",
   },
   {
+    id: "optionscripts",
+    label: "Option Scripts",
+    dataPage: null,
+    link: "/optionscripts",
+    icon: "",
+  },
+  {
     id: "event",
     label: "Event",
     dataPage: null,
