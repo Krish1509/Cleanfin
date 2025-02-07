@@ -48,3 +48,19 @@ export   interface IRecommendation {
     forecast: string;
     previous: string;
   }
+
+  export interface IOptionScriptsList {
+    _id: string;
+    code: string | number;
+    segmentID: string | number;
+    exp: string
+    inst: string;
+    isActive: boolean;
+    lot: number;
+    name: string;
+    opt: string;
+    ser: string;
+    strike: string;
+    sym: string;
+    tick: number;
+  }

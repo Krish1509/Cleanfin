@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import ConfirmationModal from "../../../Common/ConfirmationModal";
 import fireStoreLogo from "../../../assets/images/firestore.png";
 import Loader from "../../../Common/Loader/Loader";
+import { IOptionScriptsList } from "../UserDashboard/Helper/interfaces";
 
 type RecommendationListData = {
   _id: string;
@@ -32,6 +33,7 @@ type RecommendationListData = {
   recommendation: string;
   isActive: boolean;
   firestore?: boolean;
+  scriptData: IOptionScriptsList[];
 };
 
 const Recommendation = () => {
@@ -121,7 +123,7 @@ const Recommendation = () => {
     updateRecommendationDetails(id, key, value);
   };
 
-  const handleEditDate = (id: string) => {    
+  const handleEditDate = (id: string) => {
     navigate("/recommendation/edit", { state: { id: id } });
   };
 
@@ -166,7 +168,7 @@ const Recommendation = () => {
                   <table className="table table-hover" id="pc-dt-simple">
                     <thead>
                       <tr>
-                        <th>ScriptId</th>
+                        <th>Script Name</th>
                         <th>Date</th>
                         <th>Target 1</th>
                         <th>Target 2</th>
@@ -191,7 +193,7 @@ const Recommendation = () => {
                             ) : (
                               ""
                             )}
-                            {item?.scriptId}
+                            {item?.scriptData[0].name}
                           </td>
                           <td>
                             {moment(item?.date).format("YYYY-MM-DD")}{" "}
@@ -327,9 +329,8 @@ const Recommendation = () => {
                 )
               }
               handleClose={() => setShowConfirm(false)}
-              message={`Are you sure you want to ${
-                selectedStatus ? "activate" : "deactivate"
-              } this record?`}
+              message={`Are you sure you want to ${selectedStatus ? "activate" : "deactivate"
+                } this record?`}
               loading={updateLoading}
             />
           ) : (
@@ -338,7 +339,7 @@ const Recommendation = () => {
         </Card>
       </div>
 
-    
+
       <Loader updateLoading={updateLoading}></Loader>
     </React.Fragment>
   );

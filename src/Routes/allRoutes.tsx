@@ -17,6 +17,7 @@ import ViewContentBytes from "../pages/Pages/UserDashboard/Content/view";
 import Content from "../pages/Pages/UserDashboard/Content";
 import EventList from "../pages/Pages/UserDashboard/EventList";
 import EditProfile from "../pages/Pages/Profile/edit";
+import OptionScripts from "../pages/Pages/OptionScripts";
 
 const routes = [
   // Dashboard Routes
@@ -55,6 +56,13 @@ const routes = [
   {
     path: "/recommendation/edit",
     component: <AddRecommendation />,
+    allowedRoles: ["admin"],
+  },
+
+  // Option Scripts Routes
+  {
+    path: "/optionscripts",
+    component: <OptionScripts />,
     allowedRoles: ["admin"],
   },
 
