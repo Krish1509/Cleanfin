@@ -123,10 +123,11 @@ const Recommendation = () => {
     updateRecommendationDetails(id, key, value);
   };
 
-  const handleEditDate = (id: string) => {
-    navigate("/recommendation/edit", { state: { id: id } });
+  const handleEditDate = (item: any) => {
+    navigate("/recommendation/edit", {
+      state: { id: item?._id, segmentID: item?.scriptData[0]?.segmentID },
+    });
   };
-
 
   return (
     <React.Fragment>
@@ -297,7 +298,7 @@ const Recommendation = () => {
                               <Button
                                 type="button"
                                 className="avtar avtar-xs btn btn-primary"
-                                onClick={() => handleEditDate(item?._id)}
+                                onClick={() => handleEditDate(item)}
                               >
                                 <i className="ti ti-pencil f-20"></i>
                               </Button>
@@ -338,7 +339,6 @@ const Recommendation = () => {
           )}
         </Card>
       </div>
-
 
       <Loader updateLoading={updateLoading}></Loader>
     </React.Fragment>
