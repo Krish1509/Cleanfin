@@ -2,8 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { Link } from "react-router-dom";
-import logoDark from "../../assets/images/logo-dark.svg";
-import logoLight from "../../assets/images/logo-white.svg";
+import mewaLogo from "../../assets/images/mewa-logo.png";
 import Navbar from "./Navbar";
 import { Card, CardBody, Dropdown } from "react-bootstrap";
 import TopBar from "../Topbar";
@@ -147,20 +146,17 @@ const Header = ({
             <Link to="/" className="b-brand text-primary">
               {themeMode === "dark" ? (
                 <img
-                  src={logoLight}
+                  src={mewaLogo}
                   alt="logo"
                   className="logo-lg landing-logo"
                 />
               ) : (
                 <img
-                  src={logoDark}
+                  src={mewaLogo}
                   alt="logo"
                   className="logo-lg landing-logo"
                 />
               )}
-              <span className="badge bg-brand-color-2 rounded-pill ms-2 theme-version">
-                v1.2.0
-              </span>
             </Link>
             <Dropdown as="li" className="pc-h-item d-inline-flex d-md-none">
               <Dropdown.Toggle

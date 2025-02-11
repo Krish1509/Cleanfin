@@ -1,11 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { Link } from "react-router-dom";
 //import images
 
-import navCardBg from '../assets/images/layout/nav-card-bg.svg'
-import logoDark from "../assets/images/logo-dark.svg";
-import logoLight from "../assets/images/logo-white.svg";
-import avatar1 from "../assets/images/user/avatar-1.jpg"
+import navCardBg from "../assets/images/layout/nav-card-bg.svg";
+import mewaLogo from "../assets/images/mewa-logo.png";
+import avatar1 from "../assets/images/user/avatar-1.jpg";
 import SimpleBar from "simplebar-react";
 import { menuItems } from "./MenuData";
 import NestedMenu from "./NestedMenu";
@@ -18,26 +18,28 @@ const Header = ({ themeMode }: any) => {
         <div className="navbar-wrapper">
           <div className="m-header">
             <Link to="/" className="b-brand text-primary">
-              {themeMode === "dark" ?
-                <img src={logoLight} alt="logo" className="logo-lg landing-logo" />
-                :
-                <img src={logoDark} alt="logo" className="logo-lg landing-logo" />
-              }
-              <span className="badge bg-brand-color-2 rounded-pill ms-2 theme-version">
-                v1.2.0
-              </span>
+              {themeMode === "dark" ? (
+                <img
+                  src={mewaLogo}
+                  alt="logo"
+                  className="logo-lg landing-logo"
+                />
+              ) : (
+                <img
+                  src={mewaLogo}
+                  alt="logo"
+                  className="logo-lg landing-logo"
+                />
+              )}
             </Link>
           </div>
 
           <SimpleBar className="navbar-content" style={{ maxHeight: "100vh" }}>
             <ul className="pc-navbar" id="pc-navbar">
-
               <NestedMenu menuItems={menuItems} />
             </ul>
             <Card className="nav-action-card bg-brand-color-4">
-              <CardBody
-                style={{ backgroundImage: `url(${navCardBg})` }}
-              >
+              <CardBody style={{ backgroundImage: `url(${navCardBg})` }}>
                 <h5 className="text-dark">Help Center</h5>
                 <p className="text-dark text-opacity-75">
                   Please contact us for more questions.
@@ -64,7 +66,13 @@ const Header = ({ themeMode }: any) => {
                   />
                 </div>
                 <div className="flex-grow-1 ms-3">
-                  <Link to="#" className="arrow-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="0,20"></Link>
+                  <Link
+                    to="#"
+                    className="arrow-none dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    data-bs-offset="0,20"
+                  ></Link>
                   <div className="d-flex align-items-center">
                     <div className="flex-grow-1">
                       <h6 className="mb-0">Jonh Smith</h6>
@@ -81,22 +89,30 @@ const Header = ({ themeMode }: any) => {
                       </Dropdown.Toggle>
                       <Dropdown.Menu>
                         <ul>
-                          <li><Dropdown.Item className="pc-user-links">
-                            <i className="ph-duotone ph-user"></i>
-                            <span>My Account</span>
-                          </Dropdown.Item></li>
-                          <li><Dropdown.Item className="pc-user-links">
-                            <i className="ph-duotone ph-gear"></i>
-                            <span>Settings</span>
-                          </Dropdown.Item></li>
-                          <li><Dropdown.Item className="pc-user-links">
-                            <i className="ph-duotone ph-lock-key"></i>
-                            <span>Lock Screen</span>
-                          </Dropdown.Item></li>
-                          <li><Dropdown.Item className="pc-user-links">
-                            <i className="ph-duotone ph-power"></i>
-                            <span>Logout</span>
-                          </Dropdown.Item></li>
+                          <li>
+                            <Dropdown.Item className="pc-user-links">
+                              <i className="ph-duotone ph-user"></i>
+                              <span>My Account</span>
+                            </Dropdown.Item>
+                          </li>
+                          <li>
+                            <Dropdown.Item className="pc-user-links">
+                              <i className="ph-duotone ph-gear"></i>
+                              <span>Settings</span>
+                            </Dropdown.Item>
+                          </li>
+                          <li>
+                            <Dropdown.Item className="pc-user-links">
+                              <i className="ph-duotone ph-lock-key"></i>
+                              <span>Lock Screen</span>
+                            </Dropdown.Item>
+                          </li>
+                          <li>
+                            <Dropdown.Item className="pc-user-links">
+                              <i className="ph-duotone ph-power"></i>
+                              <span>Logout</span>
+                            </Dropdown.Item>
+                          </li>
                         </ul>
                       </Dropdown.Menu>
                     </Dropdown>
@@ -107,7 +123,7 @@ const Header = ({ themeMode }: any) => {
           </Card>
         </div>
       </nav>
-    </React.Fragment >
+    </React.Fragment>
   );
 };
 

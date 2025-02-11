@@ -1,7 +1,6 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-
-import darklogo from "../assets/images/logo-dark.svg";
+import mewaLogo from "../assets/images/mewa-logo.png";
 import { Link } from "react-router-dom";
 
 // css
@@ -18,7 +17,12 @@ const Footerpage = () => {
                 className="col-md-4 wow animate__fadeInUp"
                 data-wow-delay="0.2s"
               >
-                <img src={darklogo} alt="image" className="img-fluid mb-3" />
+                <img
+                  src={mewaLogo}
+                  alt="image"
+                  className="img-fluid mb-3"
+                  style={{ width: "100px" }}
+                />
                 <p className="mb-0">
                   Since 2014, over 6.3K developers have placed their trust in
                   Phoenixcoded&apos;s Templates. Light Able is managed by their
