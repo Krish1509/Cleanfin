@@ -2,8 +2,10 @@ import React from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import { doc, DocumentSnapshot, getDoc } from "firebase/firestore";
 import { db } from "../../helper/firebase-config";
-import { IOptionScriptsList, IRecommendation } from "../../pages/Pages/UserDashboard/Helper/interfaces";
-import moment from "moment";
+import {
+  IOptionScriptsList,
+  IRecommendation,
+} from "../../pages/Pages/UserDashboard/Helper/interfaces";
 interface RecommendationProps {
   data: IRecommendation;
 }
@@ -16,10 +18,13 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
       try {
         if (data?.scriptId) {
           const optionScriptDocRef = doc(db, "optionScripts", data.scriptId);
-          const optionScriptDocSnap: DocumentSnapshot = await getDoc(optionScriptDocRef);
+          const optionScriptDocSnap: DocumentSnapshot = await getDoc(
+            optionScriptDocRef
+          );
 
           if (optionScriptDocSnap.exists()) {
-            const optionScriptData = optionScriptDocSnap.data() as IOptionScriptsList;
+            const optionScriptData =
+              optionScriptDocSnap.data() as IOptionScriptsList;
 
             if (optionScriptData) {
               setOptionScript(optionScriptData);
@@ -44,7 +49,9 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
             <div className="d-flex align-items-center justify-content-between">
               <div className="d-flex align-items-center">
                 <div className="flex-grow-1 ms-3">
-                  <h5 className="mb-0 text-muted font-bold">{optionScript?.name}</h5>
+                  <h5 className="mb-0 text-muted font-bold">
+                    {optionScript?.name}
+                  </h5>
                 </div>
               </div>
 
@@ -102,9 +109,12 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
                 <p className="mb-0 text-muted">Date</p>
                 <h5 className="mb-0">
                   {" "}
-                  {data?.date
-                    ? moment.utc(data?.date?.timestamp).format("DD-MM-YYYY")
-                    : "No date available"}
+                  {data?.date?.seconds
+                    ? new Date(
+                        data.date.seconds * 1000 +
+                          Math.floor(data.date.nanoseconds / 1e6)
+                      ).toLocaleDateString("en-GB")
+                    : "-"}
                 </h5>
               </div>
               <div className="col-6 border-start">
