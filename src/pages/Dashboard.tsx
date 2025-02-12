@@ -24,7 +24,7 @@ const Dashboard = () => {
       const { users } = result.data;
       setActiveUsers(users);
     } catch (err) {
-      console.error("Error fetching data from Firestore:", err);
+      console.error("Error fetching data", err);
     }
   };
 
