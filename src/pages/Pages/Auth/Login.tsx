@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import BcakImg from "../../../assets/images/authentication/img-auth-bg.jpg";
+import mewaLogo from "../../../assets/images/login-logo.png";
 
 import { Card, CardBody, Col, Row } from "react-bootstrap";
 import PhoneStep from "./PhoneStep";
@@ -52,6 +53,14 @@ const Login = () => {
           <div className="auth-form">
             <Card className="my-5 mx-3">
               <CardBody className="d-flex justify-content-between">
+                <div className="d-flex justify-content-center">
+                  <img
+                    className="img-fluid"
+                    src={mewaLogo}
+                    alt="mewa"
+                    style={{ width: "250px" }}
+                  />
+                </div>
                 <div className="py-4 mb-3">
                   <Row className="nav-pills justify-content-between">
                     <Col className="nav-item auth-step">

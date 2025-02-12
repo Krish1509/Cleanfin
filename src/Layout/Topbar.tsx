@@ -153,7 +153,7 @@ const TopBar = ({
                 </a>
               </li> */}
 
-              <Dropdown as="li" className="pc-h-item">
+              {/* <Dropdown as="li" className="pc-h-item">
                 <Dropdown.Toggle
                   as="a"
                   className="pc-head-link arrow-none me-0"
@@ -542,7 +542,7 @@ const TopBar = ({
                     </div>
                   </div>
                 </Dropdown.Menu>
-              </Dropdown>
+              </Dropdown> */}
               <Dropdown as="li" className="pc-h-item header-user-profile">
                 <Dropdown.Toggle
                   className="pc-head-link arrow-none me-0"

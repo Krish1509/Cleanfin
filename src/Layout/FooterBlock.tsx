@@ -8,7 +8,12 @@ const FooterBlock = () => {
   return (
     <React.Fragment>
       <div className="auth-sidefooter">
-        <img src={mewaLogo} className="img-brand img-fluid" alt="images" />
+        <img
+          src={mewaLogo}
+          className="img-brand img-fluid"
+          alt="images"
+          style={{ width: "70px", height: "35px" }}
+        />
         <hr className="mb-3 mt-4" />
         <Row>
           <Col className="my-1">
