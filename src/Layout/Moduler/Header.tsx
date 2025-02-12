@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { Link } from "react-router-dom";
 //import images
 
 import navCardBg from "../../assets/images/layout/nav-card-bg.svg";
-import logoDark from "../../assets/images/logo-dark.svg";
-import logoLight from "../../assets/images/logo-white.svg";
+import mewaLogo from "../../assets/images/mewa-logo.png";
 import avatar1 from "../../assets/images/user/avatar-1.jpg";
 import SimpleBar from "simplebar-react";
 import { menuItems } from "../MenuData";
@@ -21,20 +21,17 @@ const Header = ({ themeMode }: any) => {
             <Link to="/" className="b-brand text-primary">
               {themeMode === "dark" ? (
                 <img
-                  src={logoLight}
+                  src={mewaLogo}
                   alt="logo"
                   className="logo-lg landing-logo"
                 />
               ) : (
                 <img
-                  src={logoDark}
+                  src={mewaLogo}
                   alt="logo"
                   className="logo-lg landing-logo"
                 />
               )}
-              <span className="badge bg-brand-color-2 rounded-pill ms-2 theme-version">
-                v1.2.0
-              </span>
             </Link>
             <Dropdown align="end">
               <Dropdown.Toggle className="avtar avtar-s btn-link-secondary dropdown-toggle arrow-none me-0">

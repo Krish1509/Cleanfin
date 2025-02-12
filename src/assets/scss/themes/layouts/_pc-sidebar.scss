@@ -83,7 +83,7 @@
       }
     }
 
-    >svg {
+    > svg {
       width: 22px;
       height: 22px;
       display: inline-block;
@@ -116,12 +116,12 @@
     }
   }
 
-  .pc-navbar>.pc-item {
+  .pc-navbar > .pc-item {
     margin: 0 10px;
 
-    >.pc-link {
+    > .pc-link {
       &::after {
-        content: '';
+        content: "";
         border-radius: var(--bs-border-radius);
         position: absolute;
         top: 2px;
@@ -133,7 +133,7 @@
     }
 
     &.active {
-      >.pc-link {
+      > .pc-link {
         font-weight: 500;
         color: var(--pc-sidebar-active-color);
 
@@ -144,7 +144,7 @@
     }
 
     &:hover:not(.active) {
-      >.pc-link {
+      > .pc-link {
         &:after {
           background: var(--pc-sidebar-color);
         }
@@ -155,7 +155,7 @@
       position: relative;
 
       &:after {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: 30px;
@@ -165,9 +165,9 @@
       }
 
       .pc-item {
-        >.pc-link {
+        > .pc-link {
           &:after {
-            content: '';
+            content: "";
             position: absolute;
             top: 20px;
             left: 45px;
@@ -180,7 +180,7 @@
 
         &.pc-trigger,
         &.active {
-          >.pc-link {
+          > .pc-link {
             font-weight: 500;
             color: var(--pc-sidebar-active-color);
           }
@@ -190,7 +190,7 @@
         &.active,
         &:focus,
         &:hover {
-          >.pc-link {
+          > .pc-link {
             &:after {
               background: var(--pc-sidebar-active-color);
             }
@@ -256,7 +256,7 @@
     display: inline-block;
     transition: all 0.2s ease-in-out;
 
-    >svg {
+    > svg {
       width: 14px;
       height: 14px;
     }
@@ -286,6 +286,10 @@
     .logo-sm {
       display: none;
     }
+    .landing-logo {
+      width: 70px;
+      height: 35px;
+    }
   }
 
   .navbar-content {
@@ -312,7 +316,7 @@
         h6 {
           color: var(--pc-sidebar-color);
 
-          ~small {
+          ~ small {
             color: var(--pc-sidebar-color);
             opacity: 0.6;
           }
@@ -336,7 +340,7 @@
             flex: 50%;
 
             &::before {
-              content: '';
+              content: "";
               position: absolute;
               bottom: -2px;
               left: 0;
@@ -348,7 +352,7 @@
 
             &:nth-child(even) {
               &:after {
-                content: '';
+                content: "";
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -382,7 +386,7 @@
         overflow: hidden;
 
         &::after {
-          content: '';
+          content: "";
           position: absolute;
           top: 0;
           left: 0;
@@ -418,18 +422,18 @@
 
   .pc-hasmenu {
     &:not(.pc-trigger) {
-      >.pc-submenu {
+      > .pc-submenu {
         display: none;
       }
     }
 
     &.pc-trigger {
-      >.pc-submenu {
+      > .pc-submenu {
         display: block;
       }
 
-      >.pc-link {
-        >.pc-arrow {
+      > .pc-link {
+        > .pc-arrow {
           transform: rotate(90deg);
         }
       }
@@ -448,7 +452,7 @@
   background: rgba(0, 0, 0, 0.15);
 }
 
-[data-pc-sidebar-caption='false'] {
+[data-pc-sidebar-caption="false"] {
   .pc-sidebar .pc-caption {
     display: none;
   }
@@ -474,12 +478,12 @@
   .pc-sidebar {
     transition: width 0.2s ease;
 
-    ~.pc-header {
+    ~ .pc-header {
       transition: left 0.2s ease;
     }
 
-    ~.pc-footer,
-    ~.pc-container {
+    ~ .pc-footer,
+    ~ .pc-container {
       transition: margin-left 0.2s ease;
     }
 
@@ -487,12 +491,12 @@
       width: 0;
       --pc-sidebar-border: none;
 
-      ~.pc-header {
+      ~ .pc-header {
         left: 0;
       }
 
-      ~.pc-footer,
-      ~.pc-container {
+      ~ .pc-footer,
+      ~ .pc-container {
         margin-left: 0px;
       }
     }
@@ -529,11 +533,11 @@
 .layout-creative {
   .pc-sidebar {
     .pc-navbar {
-      >.pc-item {
+      > .pc-item {
         margin: 0;
 
-        >.pc-link {
-          border-bottom: 1px solid rgba(255, 255, 255, .05);
+        > .pc-link {
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
           margin: 0;
           padding-top: 23px;
           padding-bottom: 23px;
@@ -551,7 +555,7 @@
         &.active {
           background-color: rgba(var(--pc-sidebar-color-rgb), 0.08);
 
-          >.pc-link {
+          > .pc-link {
             &:after {
               background: transparent;
             }
@@ -563,7 +567,7 @@
           padding-bottom: 10px;
 
           &:after {
-            opacity: .3;
+            opacity: 0.3;
           }
         }
       }
@@ -656,9 +660,8 @@
     overflow-y: auto;
     border-top: 1px solid var(--bs-border-color);
     width: calc(#{$sidebar-width} - 50px);
-    background: #FFF;
+    background: #fff;
     box-shadow: var(--pc-sidebar-shadow);
-
 
     &::-webkit-scrollbar {
       width: 0px;
@@ -725,7 +728,7 @@
   }
 
   .pc-footer {
-    $temp : $sidebar-width - 50px;
+    $temp: $sidebar-width - 50px;
     margin-left: calc(#{$sidebar-width} + #{$temp});
   }
 
@@ -824,7 +827,7 @@
         width: 100%;
       }
 
-      .pc-item>.pc-link {
+      .pc-item > .pc-link {
         text-align: center;
         position: relative;
       }
@@ -858,19 +861,17 @@
 
   @media (min-width: 1025px) {
     .pc-sidebar {
-
       &.pc-sidebar-hide {
         width: 0;
       }
 
       &:not(.pc-sidebar-hide) {
-
-        ~.pc-footer,
-        ~.pc-container {
+        ~ .pc-footer,
+        ~ .pc-container {
           margin-left: $sidebar-compact-width;
         }
 
-        ~.pc-header {
+        ~ .pc-header {
           left: $sidebar-compact-width;
         }
       }
@@ -952,17 +953,17 @@
 .layout-modern {
   .pc-header {
     .pc-head-link::before {
-      background: rgba(255, 255, 255, .2);
+      background: rgba(255, 255, 255, 0.2);
     }
 
     .form-search {
       .form-control {
-        background: rgba(255, 255, 255, .06);
+        background: rgba(255, 255, 255, 0.06);
         border-color: transparent;
         color: #fff;
 
         &::placeholder {
-          color: rgba(255, 255, 255, .7);
+          color: rgba(255, 255, 255, 0.7);
         }
       }
     }
@@ -1012,7 +1013,7 @@
 
     .pc-footer,
     .pc-container {
-      margin-left : calc(#{$sidebar-width} + 40px)
+      margin-left: calc(#{$sidebar-width} + 40px);
     }
 
     .pc-header {
@@ -1037,19 +1038,27 @@
 
   @each $name, $value in $preset-colors {
     a.preset.preset-#{$i} {
-      background: map-get($value, 'primary');
+      background: map-get($value, "primary");
     }
 
     a.preset.preset-gradient-#{$i} {
-      background: linear-gradient(to right, map-get($value, 'primary') 0%, lighten(map-get($value, 'primary'), 10%) 100%);
+      background: linear-gradient(
+        to right,
+        map-get($value, "primary") 0%,
+        lighten(map-get($value, "primary"), 10%) 100%
+      );
     }
 
     &.preset-#{$i} {
-      --pc-layout-2-color: #{map-get($value, 'primary')};
+      --pc-layout-2-color: #{map-get($value, "primary")};
     }
 
     &.preset-gradient-#{$i} {
-      --pc-layout-2-color: linear-gradient(to right, #{map-get($value, 'primary')} 0%, #{lighten(map-get($value, 'primary'), 10%)} 100%);
+      --pc-layout-2-color: linear-gradient(
+        to right,
+        #{map-get($value, "primary")} 0%,
+        #{lighten(map-get($value, "primary"), 10%)} 100%
+      );
     }
 
     $i: $i + 1;
@@ -1107,9 +1116,11 @@
         margin-bottom: 5px;
         --bs-breadcrumb-divider-color: #fff;
 
-        .breadcrumb-item+.breadcrumb-item::before {
-          content: var(--bs-breadcrumb-divider,
-              url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14' stroke='%23ffffff' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' class='css-i6dzq1'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E"));
+        .breadcrumb-item + .breadcrumb-item::before {
+          content: var(
+            --bs-breadcrumb-divider,
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14' stroke='%23ffffff' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' class='css-i6dzq1'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E")
+          );
         }
 
         .breadcrumb-item,
@@ -1122,7 +1133,6 @@
 }
 
 .layout-extended {
-
   .pc-container,
   .pc-sidebar {
     top: 169px;

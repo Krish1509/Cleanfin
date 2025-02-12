@@ -18,11 +18,9 @@ import ToggleSwitch from "../../../../Common/ToggleSwitch";
 
 const validationSchema = Yup.object().shape({
   date: Yup.string().required("Date is required!"),
-  time: Yup.string().required("Time is required!"),
   action: Yup.string().required("Action is required!"),
   priceCondition: Yup.string().required("Price Condition is required!"),
   stopLoss: Yup.string().required("Stop loss is required!"),
-  recommendation: Yup.string().required("Recommendation is required!"),
   scriptId: Yup.string().required("Script Id is required!"),
 });
 
@@ -273,6 +271,7 @@ const AddRecommendation = () => {
                                   onChange={(date: any) =>
                                     setFieldValue("date", date)
                                   }
+                                  minDate={new Date()}
                                 />
                               </div>
                               {errors.date && touched.date ? (
