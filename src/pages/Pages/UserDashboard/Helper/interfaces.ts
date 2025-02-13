@@ -1,66 +1,65 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+export interface IRecommendation {
+  firestore: boolean;
+  _id: string;
+  date: any; // Use `Date` if you prefer working with date objects
+  time: string;
+  action: "buy" | "sell"; // Use a union type to restrict possible values
+  priceCondition: "above" | "below"; // Based on common conditions
+  target1: number;
+  target1Achieved: boolean;
+  target2: number;
+  target2Achieved: boolean;
+  target3: number;
+  target3Achieved: boolean;
+  stopLoss: number;
+  stopLossAchieved: boolean;
+  recommendation: string;
+  isActive: boolean;
+  updatedAt: string; // Use `Date` if you prefer working with date objects
+  createdAt: string; // Use `Date` if you prefer working with date objects
+  scriptId: string;
+  __v: number;
+  scriptData: IOptionScriptsList[];
+}
 
-export   interface IRecommendation {
-    firestore: boolean;
-    _id: string;
-    date: any;        // Use `Date` if you prefer working with date objects
-    time: string;
-    action: "buy" | "sell";  // Use a union type to restrict possible values
-    priceCondition: "above" | "below";  // Based on common conditions
-    target1: number;
-    target1Achieved: boolean;
-    target2: number;
-    target2Achieved: boolean;
-    target3: number;
-    target3Achieved: boolean;
-    stopLoss: number;
-    stopLossAchieved: boolean;
-    recommendation: string;
-    isActive: boolean;
-    updatedAt: string;    // Use `Date` if you prefer working with date objects
-    createdAt: string;    // Use `Date` if you prefer working with date objects
-    scriptId: string;
-    __v: number;
-  }
-  
+export interface IContentbytes {
+  _id: string;
+  userId: string;
+  title: string;
+  description: string;
+  type: "file" | string; // If you expect other types, you can add them here
+  url: string | null;
+  fileExtension: string;
+  updatedAt: string;
+  createdAt: string;
+  __v: number;
+  uploaded: string;
+}
 
-  export interface IContentbytes {
-    _id: string;
-    userId: string;
-    title: string;
-    description: string;
-    type: "file" | string;  // If you expect other types, you can add them here
-    url: string | null;
-    fileExtension: string;
-    updatedAt: string;
-    createdAt: string;
-    __v: number;
-    uploaded: string;
-  }
-  
-  export interface IEventList {
-    _id: string;
-    title: string;
-    country: string;
-    date: string;
-    impact: string;
-    forecast: string;
-    previous: string;
-  }
+export interface IEventList {
+  _id: string;
+  title: string;
+  country: string;
+  date: string;
+  impact: string;
+  forecast: string;
+  previous: string;
+}
 
-  export interface IOptionScriptsList {
-    _id: string;
-    code: string | number;
-    segmentID: string | number;
-    exp: string
-    inst: string;
-    isActive: boolean;
-    lot: number;
-    name: string;
-    opt: string;
-    ser: string;
-    strike: string;
-    sym: string;
-    tick: number;
-  }
+export interface IOptionScriptsList {
+  _id: string;
+  code: string | number;
+  segmentID: string | number;
+  exp: string;
+  inst: string;
+  isActive: boolean;
+  lot: number;
+  name: string;
+  opt: string;
+  ser: string;
+  strike: string;
+  sym: string;
+  tick: number;
+}
