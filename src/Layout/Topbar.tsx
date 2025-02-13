@@ -63,46 +63,6 @@ const TopBar = ({
                   <i className="ti ti-menu-2"></i>
                 </Link>
               </li>
-              <Dropdown as="li" className="pc-h-item d-inline-flex d-md-none">
-                <Dropdown.Toggle
-                  as="a"
-                  className="pc-head-link arrow-none m-0"
-                  data-bs-toggle="dropdown"
-                  href="#"
-                  role="button"
-                  aria-haspopup="false"
-                  aria-expanded="false"
-                >
-                  <i className="ph-duotone ph-magnifying-glass"></i>
-                </Dropdown.Toggle>
-                <Dropdown.Menu className="pc-h-dropdown drp-search">
-                  <form className="px-3">
-                    <div className="form-group mb-0 d-flex align-items-center">
-                      <input
-                        type="search"
-                        className="form-control border-0 shadow-none"
-                        placeholder="Search here. . ."
-                      />
-                      <button className="btn btn-light-secondary btn-search">
-                        Search
-                      </button>
-                    </div>
-                  </form>
-                </Dropdown.Menu>
-              </Dropdown>
-              <li className="pc-h-item d-none d-md-inline-flex">
-                <form className="form-search">
-                  <i className="ph-duotone ph-magnifying-glass icon-search"></i>
-                  <input
-                    type="search"
-                    className="form-control"
-                    placeholder="Search..."
-                  />
-                  <button className="btn btn-search" style={{ padding: "0" }}>
-                    <kbd>ctrl+k</kbd>
-                  </button>
-                </form>
-              </li>
             </ul>
           </div>
 

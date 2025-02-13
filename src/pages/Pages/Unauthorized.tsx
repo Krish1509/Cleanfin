@@ -5,11 +5,10 @@ import { Card } from "react-bootstrap";
 import ImgConnectionLost from "../../assets/images/pages/img-connection-lost.png";
 import { Link } from "react-router-dom";
 import FooterBlock from "../../Layout/FooterBlock";
+import { getAllowedDashboard } from "../../helper/auth";
 
 const Unauthorized = () => {
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
-  const allowedDashboard =
-    user?.role === "admin" ? "dashboard" : "dashboard/user";
+  const allowedDashboard = getAllowedDashboard();
   return (
     <React.Fragment>
       <div className="auth-main v1">

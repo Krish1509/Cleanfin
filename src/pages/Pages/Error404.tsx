@@ -5,11 +5,10 @@ import { Card } from "react-bootstrap";
 import ImgError404 from "../../assets/images/pages/img-error-404.png";
 import { Link } from "react-router-dom";
 import FooterBlock from "../../Layout/FooterBlock";
+import { getAllowedDashboard } from "../../helper/auth";
 
 const Error404 = () => {
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
-  const allowedDashboard =
-    user?.role === "admin" ? "dashboard" : "dashboard/user";
+  const allowedDashboard = getAllowedDashboard();
   return (
     <React.Fragment>
       <div className="auth-main v1">
