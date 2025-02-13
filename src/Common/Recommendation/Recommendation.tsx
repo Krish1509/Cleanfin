@@ -119,7 +119,14 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
               </div>
               <div className="col-6 border-start">
                 <p className="mb-0 text-muted">Stop Loss</p>
-                <h5 className="mb-0">{data?.stopLoss}</h5>
+                <div className="d-flex align-items-center justify-content-center gap-1">
+                  <div>{data?.stopLoss || "-"}</div>
+                  {data?.stopLossAchieved && (
+                    <div className="check-icon beat-animation">
+                      <i className="ph-duotone ph-seal-check "></i>
+                    </div>
+                  )}
+                </div>
               </div>
             </Row>
           </Card.Body>
