@@ -151,6 +151,7 @@ const UserDashboard = () => {
       const result = await postRequest("contentBites/list", {
         limit: 5,
         page: 1,
+        isActive: true,
       });
       SetcontentBytes(result?.data?.contentBites);
       SetcontentBytesLoading(false);

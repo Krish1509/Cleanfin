@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { THEME_MODE } from "../Common/layoutConfig";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 import { Dropdown } from "react-bootstrap";
 import { useDispatch } from "react-redux";
@@ -31,6 +31,8 @@ const TopBar = ({
   const handleThemeChange = (value: any) => {
     dispatch(changeThemeMode(value));
   };
+
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.clear();
@@ -555,26 +557,25 @@ const TopBar = ({
                             {/* <span className="badge bg-primary">PRO</span> */}
                           </div>
                         </li>
-                        <li className="list-group-item">
-                          <Dropdown.Item>
-                            <span className="d-flex align-items-center">
-                              <i className="ph-duotone ph-key"></i>
-                              <span>Change password</span>
-                            </span>
-                          </Dropdown.Item>
-                        </li>
+                        {userDetails?.role === "customer" ? (
+                          <li className="list-group-item">
+                            <Dropdown.Item
+                              onClick={() => navigate("/feedback/add")}
+                            >
+                              <span className="d-flex align-items-center">
+                                <i className="ph-duotone ph-chat-text"></i>
+                                <span>Feedback</span>
+                              </span>
+                            </Dropdown.Item>
+                          </li>
+                        ) : (
+                          ""
+                        )}
                         <li className="list-group-item">
                           <Dropdown.Item href="/profile/edit">
                             <span className="d-flex align-items-center">
                               <i className="ph-duotone ph-user-circle"></i>
                               <span>Edit profile</span>
-                            </span>
-                          </Dropdown.Item>
-
-                          <Dropdown.Item>
-                            <span className="d-flex align-items-center">
-                              <i className="ph-duotone ph-bell"></i>
-                              <span>Notifications</span>
                             </span>
                           </Dropdown.Item>
                         </li>

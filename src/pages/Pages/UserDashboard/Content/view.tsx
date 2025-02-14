@@ -30,7 +30,10 @@ const ViewContentBytes = () => {
         id: viewId,
       };
       const result = await postRequest("contentBites/view", body);
-      const listResult = await postRequest("contentBites/list", { limit: 5 });
+      const listResult = await postRequest("contentBites/list", {
+        limit: 5,
+        isActive: true,
+      });
 
       if (result) {
         setData(result?.data);
