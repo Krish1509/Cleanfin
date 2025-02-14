@@ -18,10 +18,15 @@ import Content from "../pages/Pages/UserDashboard/Content";
 import EventList from "../pages/Pages/UserDashboard/EventList";
 import EditProfile from "../pages/Pages/Profile/edit";
 import OptionScripts from "../pages/Pages/OptionScripts";
+import AddFeedback from "../pages/Pages/Feedback/add";
 
 const routes = [
   // Dashboard Routes
-  { path: "/profile/edit", component: <EditProfile />, allowedRoles: ["admin", "customer"] },
+  {
+    path: "/profile/edit",
+    component: <EditProfile />,
+    allowedRoles: ["admin", "customer"],
+  },
   { path: "/dashboard", component: <Dashboard />, allowedRoles: ["admin"] },
   {
     path: "/dashboard/user",
@@ -84,6 +89,11 @@ const routes = [
 
   // Feedback Routes
   { path: "/feedback", component: <Feedback />, allowedRoles: ["admin"] },
+  {
+    path: "/feedback/add",
+    component: <AddFeedback />,
+    allowedRoles: ["customer"],
+  },
 
   {
     path: "/contentBytes",

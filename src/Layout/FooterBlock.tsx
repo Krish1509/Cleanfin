@@ -3,6 +3,7 @@ import React from "react";
 import mewaLogo from "../assets/images/mewa-logo.png";
 import { Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { getAllowedDashboard } from "../helper/auth";
 
 const FooterBlock = () => {
   return (
@@ -31,7 +32,7 @@ const FooterBlock = () => {
           <div className="col-auto my-1">
             <ul className="list-inline footer-link mb-0">
               <li className="list-inline-item">
-                <Link to="/dashboard">Home</Link>
+                <Link to={`/${getAllowedDashboard()}`}>Home</Link>
               </li>
               <li className="list-inline-item">
                 <Link
