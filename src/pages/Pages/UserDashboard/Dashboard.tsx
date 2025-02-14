@@ -215,11 +215,24 @@ const UserDashboard = () => {
               className="user-dashboard-container dashboard-recommendation container-min"
               id="recommendation"
             >
-              <div>
-                <h3>Hey Vishal Soni</h3>
-                <p className="mt-3 mb-5 font-weight-normal fs-5">
-                  Here is your command center
-                </p>
+              <div className="d-flex justify-content-between">
+                <div>
+                  <h3>Hey Vishal Soni</h3>
+                  <p className="mt-3 mb-5 font-weight-normal fs-5">
+                    Here is your command center
+                  </p>
+                </div>
+                <div>
+                  <button
+                    type="button"
+                    className="btn my-2 me-1 btn-primary"
+                    onClick={() =>
+                      navigate("/plans")
+                    }
+                  >
+                    Subscription
+                  </button>
+                </div>
               </div>
               <Col lg={12}>
                 <div className="d-flex align-items-center justify-content-between mb-3">

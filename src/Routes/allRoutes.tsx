@@ -18,6 +18,7 @@ import Content from "../pages/Pages/UserDashboard/Content";
 import EventList from "../pages/Pages/UserDashboard/EventList";
 import EditProfile from "../pages/Pages/Profile/edit";
 import OptionScripts from "../pages/Pages/OptionScripts";
+import Plans from "../pages/Pages/UserDashboard/Plans";
 
 const routes = [
   // Dashboard Routes
@@ -36,6 +37,11 @@ const routes = [
   {
     path: "/content/view",
     component: <ViewContentBytes />,
+    allowedRoles: ["customer"],
+  },
+  {
+    path: "/plans",
+    component: <Plans />,
     allowedRoles: ["customer"],
   },
 
