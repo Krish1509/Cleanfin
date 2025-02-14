@@ -69,7 +69,7 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
               <div className="d-flex align-items-center justify-content-between flex-column">
                 <div>Target 1</div>
                 <div className="d-flex align-items-center justify-content-around gap-1">
-                  <div>{data?.target1}</div>
+                  <div>{data?.target1 || "-"}</div>
                   {data?.target1Achieved && (
                     <div className="check-icon beat-animation">
                       <i className="ph-duotone ph-seal-check "></i>
@@ -81,7 +81,7 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
               <div className="d-flex align-items-center justify-content-between flex-column">
                 <div>Target 2</div>
                 <div className="d-flex align-items-center justify-content-around gap-1">
-                  <div>{data?.target2}</div>
+                  <div>{data?.target2 || "-"}</div>
                   {data?.target2Achieved && (
                     <div className="check-icon beat-animation">
                       <i className="ph-duotone ph-seal-check "></i>
@@ -92,7 +92,7 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
               <div className="d-flex align-items-center justify-content-between flex-column">
                 <div>Target 3</div>
                 <div className="d-flex align-items-center justify-content-around gap-1">
-                  <div>{data?.target3}</div>
+                  <div>{data?.target3 || "-"}</div>
                   {data?.target3Achieved && (
                     <div className="check-icon beat-animation">
                       <i className="ph-duotone ph-seal-check "></i>
@@ -119,7 +119,14 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
               </div>
               <div className="col-6 border-start">
                 <p className="mb-0 text-muted">Stop Loss</p>
-                <h5 className="mb-0">{data?.stopLoss}</h5>
+                <div className="d-flex align-items-center justify-content-center gap-1">
+                  <div>{data?.stopLoss || "-"}</div>
+                  {data?.stopLossAchieved && (
+                    <div className="check-icon beat-animation">
+                      <i className="ph-duotone ph-seal-check "></i>
+                    </div>
+                  )}
+                </div>
               </div>
             </Row>
           </Card.Body>

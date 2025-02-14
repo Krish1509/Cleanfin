@@ -1,13 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 //import Components
 import BreadcrumbItem from "../../../Common/BreadcrumbItem";
 import { Button, Card, CardBody, CardHeader, Form } from "react-bootstrap";
-import { postRequest } from "../../../service/fetch-services";
+import { handleFormData, postRequest } from "../../../service/fetch-services";
 import Pagination from "../../../Common/Pagination";
 import { useNavigate } from "react-router-dom";
 import { TypeOptions } from "./type";
 import Loader from "../../../Common/Loader/Loader";
+import ToggleSwitch from "../../../Common/ToggleSwitch";
+import ConfirmationModal from "../../../Common/ConfirmationModal";
+import ToastAlert from "../../../helper/toast-alert";
 
 type ContentBytesData = {
   _id: string;
@@ -17,6 +21,7 @@ type ContentBytesData = {
   url?: string;
   filePath?: string;
   fileExtension: string;
+  isActive: boolean;
 };
 
 const ContentBytes = () => {
@@ -30,6 +35,10 @@ const ContentBytes = () => {
   const [entriesPerPage, setEntriesPerPage] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
+  const [showConfirm, setShowConfirm] = useState<boolean>(false);
+  const [selectedId, setSelectedId] = useState<string>("");
+  const [selectedStatus, setSelectedStatus] = useState<boolean>();
+  const [updateLoading, setUpdateLoading] = useState<boolean>(false);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -73,6 +82,33 @@ const ContentBytes = () => {
   const handleEditDate = (id: string) => {
     navigate("/contentBytes/edit", { state: { id: id } });
   };
+
+  const updateUserDetails = React.useCallback(
+    async (id: string, key: string, value: any) => {
+      setUpdateLoading(true);
+      try {
+        const formData = new FormData();
+
+        formData.append("id", id);
+        formData.append("isActive", value);
+
+        const result = await handleFormData("contentBites/edit", formData);
+        ToastAlert.success(result.message);
+        // Update user in the local state
+        setContentBytesData((prevList) =>
+          prevList.map((content) =>
+            content._id === id ? { ...content, [key]: value } : content
+          )
+        );
+        setUpdateLoading(false);
+        setShowConfirm(false);
+        setSelectedId("");
+      } catch (err) {
+        setUpdateLoading(false);
+      }
+    },
+    []
+  );
 
   return (
     <React.Fragment>
@@ -139,7 +175,7 @@ const ContentBytes = () => {
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
                                 maxHeight: "300px",
-                                whiteSpace: "normal"
+                                whiteSpace: "normal",
                               }}
                               dangerouslySetInnerHTML={{
                                 __html: item?.description,
@@ -155,6 +191,14 @@ const ContentBytes = () => {
                               >
                                 <i className="ti ti-pencil f-20"></i>
                               </Button>
+                              <ToggleSwitch
+                                checked={item?.isActive}
+                                onChange={() => {
+                                  setShowConfirm(!showConfirm);
+                                  setSelectedStatus(!item?.isActive);
+                                  setSelectedId(item?._id);
+                                }}
+                              />
                             </div>
                           </td>
                         </tr>
@@ -172,10 +216,25 @@ const ContentBytes = () => {
             entriesPerPage={entriesPerPage}
             onEntriesPerPageChange={handleEntriesPerPageChange}
           />
+          {showConfirm ? (
+            <ConfirmationModal
+              show={showConfirm}
+              handleConfirm={() =>
+                updateUserDetails(selectedId, "isActive", selectedStatus)
+              }
+              handleClose={() => setShowConfirm(false)}
+              message={`Are you sure you want to ${
+                selectedStatus ? "activate" : "deactivate"
+              } this record?`}
+              loading={updateLoading}
+            />
+          ) : (
+            ""
+          )}
         </Card>
       </div>
 
-      <Loader updateLoading={loading}></Loader>
+      <Loader updateLoading={loading || updateLoading}></Loader>
     </React.Fragment>
   );
 };

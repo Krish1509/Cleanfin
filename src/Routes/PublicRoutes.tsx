@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
+import { getAllowedDashboard } from "../helper/auth";
 
 // Define the prop types for PublicRoutes
 interface PublicRoutesProps {
@@ -9,7 +10,11 @@ interface PublicRoutesProps {
 
 const PublicRoutes: React.FC<PublicRoutesProps> = ({ children }) => {
   const token = localStorage.getItem("userToken");
-  return token ? <Navigate to="/dashboard" /> : <>{children}</>;
+  return token ? (
+    <Navigate to={`/${getAllowedDashboard()}`} />
+  ) : (
+    <>{children}</>
+  );
 };
 
 export default PublicRoutes;

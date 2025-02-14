@@ -13,7 +13,9 @@ import { postRequest } from "../../../service/fetch-services";
 // import AnimationComponent from "../../../Common/AnimationComponent/AnimationComponent";
 // import Subscription from "../../../Common/Subscription/Subscription";
 import { useNavigate } from "react-router-dom";
-import LottieAnimation, { Varient } from "../../../Common/AnimationComponent/LottieAnimation";
+import LottieAnimation, {
+  Varient,
+} from "../../../Common/AnimationComponent/LottieAnimation";
 
 //import Components
 
@@ -24,9 +26,14 @@ const UserDashboard = () => {
   const [activeSection, setActiveSection] = useState("recommendation");
   const [contentBytes, SetcontentBytes] = useState<IContentbytes[]>([]);
   const [ShowAnimation, setShowAnimation] = useState<boolean>(false);
-  const [animationVarient, setAnimationVarient] = useState<{ type: Varient, info: string }>({ type: Varient.Target, info: "" });
+  const [animationVarient, setAnimationVarient] = useState<{
+    type: Varient;
+    info: string;
+  }>({ type: Varient.Target, info: "" });
   const [contentBytesLoading, SetcontentBytesLoading] =
     useState<boolean>(false);
+
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
 
   const fetchData = () => {
     try {
@@ -78,12 +85,21 @@ const UserDashboard = () => {
               stopLossChanged
             ) {
               if (stopLossChanged) {
-                setAnimationVarient({ type: Varient.StopLoss, info: `Milestone Reached on Stop Loss!` });
+                setAnimationVarient({
+                  type: Varient.StopLoss,
+                  info: `Milestone Reached on Stop Loss!`,
+                });
               } else {
-                let targetInfo: number = target1Changed ? 1 : target2Changed ? 2 : target3Changed ? 3 : 0;
+                let targetInfo: number = target1Changed
+                  ? 1
+                  : target2Changed
+                    ? 2
+                    : target3Changed
+                      ? 3
+                      : 0;
                 setAnimationVarient({
                   type: Varient.Target,
-                  info: `Milestone Reached on Target ${targetInfo}!`
+                  info: `Milestone Reached on Target ${targetInfo}!`,
                 });
               }
               triggerAnimation(); // Trigger animation
@@ -135,6 +151,7 @@ const UserDashboard = () => {
       const result = await postRequest("contentBites/list", {
         limit: 5,
         page: 1,
+        isActive: true,
       });
       SetcontentBytes(result?.data?.contentBites);
       SetcontentBytesLoading(false);
@@ -217,7 +234,7 @@ const UserDashboard = () => {
             >
               <div className="d-flex justify-content-between">
                 <div>
-                  <h3>Hey Vishal Soni</h3>
+                  <h3>Hey {user?.firstName} {user?.lastName}</h3>
                   <p className="mt-3 mb-5 font-weight-normal fs-5">
                     Here is your command center
                   </p>
@@ -237,13 +254,6 @@ const UserDashboard = () => {
               <Col lg={12}>
                 <div className="d-flex align-items-center justify-content-between mb-3">
                   <h5 className="mb-0">Recommendations</h5>
-                  <button
-                    type="button"
-                    className="btn btn-sm my-2 me-1 btn-light-success"
-                  >
-                    View All
-                    <i className="ms-2 fas fa-arrow-circle-right"></i>
-                  </button>
                 </div>
               </Col>
               <Row>
@@ -281,9 +291,7 @@ const UserDashboard = () => {
                     <button
                       type="button"
                       className="btn btn-sm my-2 me-1 btn-light-success"
-                      onClick={() =>
-                        navigate("/content")
-                      }
+                      onClick={() => navigate("/content")}
                     >
                       View All
                       <i className="ms-2 fas fa-arrow-circle-right"></i>
@@ -318,7 +326,11 @@ const UserDashboard = () => {
           </CardBody>
         </Card>
       </div>
-      <LottieAnimation show={ShowAnimation} varient={animationVarient.type} info={animationVarient.info} />
+      <LottieAnimation
+        show={ShowAnimation}
+        varient={animationVarient.type}
+        info={animationVarient.info}
+      />
       {/* add bellow component in reccomendation */}
       {/* <Subscription /> */}
     </React.Fragment>

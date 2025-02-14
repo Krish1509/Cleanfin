@@ -14,7 +14,7 @@ const Footerpage = () => {
           <Container>
             <Row className="gy-4">
               <div
-                className="col-md-4 wow animate__fadeInUp"
+                className="col-md-2 wow animate__fadeInUp"
                 data-wow-delay="0.2s"
               >
                 <img
@@ -23,52 +23,9 @@ const Footerpage = () => {
                   className="img-fluid mb-3"
                   style={{ width: "100px" }}
                 />
-                <p className="mb-0">
-                  Since 2014, over 6.3K developers have placed their trust in
-                  Phoenixcoded&apos;s Templates. Light Able is managed by their
-                  experienced team of professionals.
-                </p>
               </div>
               <Col md={8}>
                 <Row className="gy-4">
-                  <Col
-                    sm={4}
-                    className="wow animate__fadeInUp"
-                    data-wow-delay="0.6s"
-                  >
-                    <h5 className="mb-sm-4 mb-2">Company</h5>
-                    <ul className="list-unstyled footer-link mb-0">
-                      <li>
-                        <Link
-                          to="https://themeforest.net/user/phoenixcoded"
-                          target="_blank"
-                        >
-                          Profile
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="https://themeforest.net/user/phoenixcoded/portfolio"
-                          target="_blank"
-                        >
-                          Portfolio
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="https://themeforest.net/user/phoenixcoded/followers"
-                          target="_blank"
-                        >
-                          Follow Us
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="https://phoenixcoded.net" target="_blank">
-                          Website
-                        </Link>
-                      </li>
-                    </ul>
-                  </Col>
                   <Col
                     sm={4}
                     className="wow animate__fadeInUp"
@@ -102,66 +59,8 @@ const Footerpage = () => {
                       </li>
                     </ul>
                   </Col>
-                  <Col
-                    sm={4}
-                    className="wow animate__fadeInUp"
-                    data-wow-delay="1s"
-                  >
-                    <h5 className="mb-sm-4 mb-2">Useful Resources</h5>
-                    <ul className="list-unstyled footer-link mb-0">
-                      <li>
-                        <Link
-                          to="https://themeforest.net/page/item_support_policy"
-                          target="_blank"
-                        >
-                          Support Policy
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="https://themeforest.net/licenses/standard"
-                          target="_blank"
-                        >
-                          License
-                        </Link>
-                      </li>
-                    </ul>
-                  </Col>
                 </Row>
               </Col>
-            </Row>
-          </Container>
-        </div>
-        <div className="footer-bottom">
-          <Container>
-            <Row className="align-items-center">
-              <div
-                className="col my-1 wow animate__fadeInUp"
-                data-wow-delay="0.4s"
-              >
-                <p className="m-0">
-                  Made with &#9829; by Team{" "}
-                  <Link
-                    to="https://themeforest.net/user/phoenixcoded"
-                    target="_blank"
-                  >
-                    {" "}
-                    Phoenixcoded
-                  </Link>
-                </p>
-              </div>
-              <div className="col-auto my-1">
-                <ul className="list-inline footer-sos-link mb-0">
-                  <li
-                    className="list-inline-item wow animate__fadeInUp"
-                    data-wow-delay="0.4s"
-                  >
-                    <Link to="https://fb.com/phoenixcoded">
-                      <i className="ph-duotone ph-facebook-logo f-20"></i>
-                    </Link>
-                  </li>
-                </ul>
-              </div>
             </Row>
           </Container>
         </div>

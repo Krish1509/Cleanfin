@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import React from "react";
 import { Row, Col } from "react-bootstrap";
+import { getAllowedDashboard } from "../helper/auth";
 
 interface BreadcrumbItemProps {
   mainTitle: string;
@@ -23,7 +24,7 @@ const BreadcrumbItem: React.FC<BreadcrumbItemProps> = ({
             <Col md={12}>
               <ul className="breadcrumb">
                 <li className="breadcrumb-item">
-                  <Link to="/dashboard">Home</Link>
+                  <Link to={`/${getAllowedDashboard()}`}>Home</Link>
                 </li>
                 <li className="breadcrumb-item">
                   <Link to="#">{mainTitle}</Link>
