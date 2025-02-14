@@ -48,18 +48,49 @@ export interface IEventList {
   previous: string;
 }
 
-export interface IOptionScriptsList {
-  _id: string;
-  code: string | number;
-  segmentID: string | number;
-  exp: string;
-  inst: string;
-  isActive: boolean;
-  lot: number;
-  name: string;
-  opt: string;
-  ser: string;
-  strike: string;
-  sym: string;
-  tick: number;
-}
+  export interface IOptionScriptsList {
+    _id: string;
+    code: string | number;
+    segmentID: string | number;
+    exp: string
+    inst: string;
+    isActive: boolean;
+    lot: number;
+    name: string;
+    opt: string;
+    ser: string;
+    strike: string;
+    sym: string;
+    tick: number;
+  }
+
+  export interface IItem {
+    id: string;
+    active: boolean;
+    name: string;
+    description: string;
+    amount: number;
+    unit_amount: number;
+    currency: string;
+    type: string;
+    unit: string | null;
+    tax_inclusive: boolean;
+    hsn_code: string | null;
+    sac_code: string | null;
+    tax_rate: number | null;
+    tax_id: string | null;
+    tax_group_id: string | null;
+    created_at: number;
+    updated_at: number;
+  }
+
+  export interface ISubPlan {
+    id: string;
+    entity: string;
+    interval: number;
+    period: string;
+    item: IItem;
+    notes: string[];
+    created_at: number;
+    updated_at?: number;
+  }

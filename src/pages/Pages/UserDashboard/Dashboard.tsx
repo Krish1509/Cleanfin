@@ -93,10 +93,10 @@ const UserDashboard = () => {
                 let targetInfo: number = target1Changed
                   ? 1
                   : target2Changed
-                  ? 2
-                  : target3Changed
-                  ? 3
-                  : 0;
+                    ? 2
+                    : target3Changed
+                      ? 3
+                      : 0;
                 setAnimationVarient({
                   type: Varient.Target,
                   info: `Milestone Reached on Target ${targetInfo}!`,
@@ -204,25 +204,22 @@ const UserDashboard = () => {
           <div className="menu">
             <div
               onClick={() => scrollToSection("recommendation")}
-              className={`menu-item ${
-                activeSection === "recommendation" ? "active" : ""
-              }`}
+              className={`menu-item ${activeSection === "recommendation" ? "active" : ""
+                }`}
             >
               Recommendations
             </div>
             <div
               onClick={() => scrollToSection("content-bytes")}
-              className={`menu-item ${
-                activeSection === "content-bytes" ? "active" : ""
-              }`}
+              className={`menu-item ${activeSection === "content-bytes" ? "active" : ""
+                }`}
             >
               Content Bytes
             </div>
             <div
               onClick={() => scrollToSection("past-performance")}
-              className={`menu-item ${
-                activeSection === "past-performance" ? "active" : ""
-              }`}
+              className={`menu-item ${activeSection === "past-performance" ? "active" : ""
+                }`}
             >
               Past Performance
             </div>
@@ -235,13 +232,24 @@ const UserDashboard = () => {
               className="user-dashboard-container dashboard-recommendation container-min"
               id="recommendation"
             >
-              <div>
-                <h3>
-                  Hey {user?.firstName} {user?.lastName}
-                </h3>
-                <p className="mt-3 mb-5 font-weight-normal fs-5">
-                  Here is your command center
-                </p>
+              <div className="d-flex justify-content-between">
+                <div>
+                  <h3>Hey {user?.firstName} {user?.lastName}</h3>
+                  <p className="mt-3 mb-5 font-weight-normal fs-5">
+                    Here is your command center
+                  </p>
+                </div>
+                <div>
+                  <button
+                    type="button"
+                    className="btn my-2 me-1 btn-primary"
+                    onClick={() =>
+                      navigate("/plans")
+                    }
+                  >
+                    Subscription
+                  </button>
+                </div>
               </div>
               <Col lg={12}>
                 <div className="d-flex align-items-center justify-content-between mb-3">
