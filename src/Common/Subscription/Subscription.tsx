@@ -1,6 +1,8 @@
 import { Card } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Subscription = () => {
+  const navigate = useNavigate();
   return (
     <div
       style={{
@@ -9,7 +11,7 @@ const Subscription = () => {
       }}
     >
       <Card
-        className="price-card p-1 border border-primary border-2 h-100 card bg-primary bg-opacity-10"
+        className="price-card p-1 border-primary border-2 h-100 card bg-primary bg-opacity-10 mb-0"
         style={{
           borderRadius: "10px",
           background: "white",
@@ -37,6 +39,7 @@ const Subscription = () => {
               <button
                 className="w-100 btn btn-dark "
                 style={{ borderRadius: "5px" }}
+                onClick={() => navigate("/plans")}
               >
                 Subscribe to Unlock
               </button>
