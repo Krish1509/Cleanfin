@@ -11,7 +11,7 @@ import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../../../helper/firebase-config";
 import { postRequest } from "../../../service/fetch-services";
 // import AnimationComponent from "../../../Common/AnimationComponent/AnimationComponent";
-// import Subscription from "../../../Common/Subscription/Subscription";
+import Subscription from "../../../Common/Subscription/Subscription";
 import { useNavigate } from "react-router-dom";
 import LottieAnimation, {
   Varient,
@@ -93,10 +93,10 @@ const UserDashboard = () => {
                 let targetInfo: number = target1Changed
                   ? 1
                   : target2Changed
-                    ? 2
-                    : target3Changed
-                      ? 3
-                      : 0;
+                  ? 2
+                  : target3Changed
+                  ? 3
+                  : 0;
                 setAnimationVarient({
                   type: Varient.Target,
                   info: `Milestone Reached on Target ${targetInfo}!`,
@@ -197,6 +197,51 @@ const UserDashboard = () => {
     }
   };
 
+  const [showSubscriptionButton, setShowSubscriptionButton] = useState(false);
+  useEffect(() => {
+    // let intervalId: any;
+    const fetchUserSubscriptionDetails = async () => {
+      try {
+        const response = await postRequest("subscription/details", {
+          userId: user?._id,
+        });
+        if (response?.success) {
+          // Convert subscription_end to a Date object
+          const subscriptionEndDate = new Date(
+            response?.subscription?.subscription_end
+          );
+          const currentDate = new Date();
+
+          // Check if subscription has ended and status is not active
+          if (
+            subscriptionEndDate < currentDate &&
+            response?.subscription?.subscription_status !== "active"
+          ) {
+            setShowSubscriptionButton(true);
+          }
+          // else {
+          //   // Stop polling when the subscription is active
+          //   if (intervalId) {
+          //     clearInterval(intervalId);
+          //   }
+          // }
+        } else {
+          // Show if no subscription
+          setShowSubscriptionButton(true);
+        }
+      } catch (error) {
+        setShowSubscriptionButton(true);
+      }
+    };
+
+    fetchUserSubscriptionDetails();
+    // Set interval to poll API every 30 seconds
+    // intervalId = setInterval(fetchUserSubscriptionDetails, 30000);
+
+    // Cleanup function to clear interval on unmount
+    // return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <React.Fragment>
       <div className="pb-2">
@@ -204,22 +249,25 @@ const UserDashboard = () => {
           <div className="menu">
             <div
               onClick={() => scrollToSection("recommendation")}
-              className={`menu-item ${activeSection === "recommendation" ? "active" : ""
-                }`}
+              className={`menu-item ${
+                activeSection === "recommendation" ? "active" : ""
+              }`}
             >
               Recommendations
             </div>
             <div
               onClick={() => scrollToSection("content-bytes")}
-              className={`menu-item ${activeSection === "content-bytes" ? "active" : ""
-                }`}
+              className={`menu-item ${
+                activeSection === "content-bytes" ? "active" : ""
+              }`}
             >
               Content Bytes
             </div>
             <div
               onClick={() => scrollToSection("past-performance")}
-              className={`menu-item ${activeSection === "past-performance" ? "active" : ""
-                }`}
+              className={`menu-item ${
+                activeSection === "past-performance" ? "active" : ""
+              }`}
             >
               Past Performance
             </div>
@@ -234,21 +282,12 @@ const UserDashboard = () => {
             >
               <div className="d-flex justify-content-between">
                 <div>
-                  <h3>Hey {user?.firstName} {user?.lastName}</h3>
+                  <h3>
+                    Hey {user?.firstName} {user?.lastName}
+                  </h3>
                   <p className="mt-3 mb-5 font-weight-normal fs-5">
                     Here is your command center
                   </p>
-                </div>
-                <div>
-                  <button
-                    type="button"
-                    className="btn my-2 me-1 btn-primary"
-                    onClick={() =>
-                      navigate("/plans")
-                    }
-                  >
-                    Subscription
-                  </button>
                 </div>
               </div>
               <Col lg={12}>
@@ -257,7 +296,11 @@ const UserDashboard = () => {
                 </div>
               </Col>
               <Row>
-                {!loading ? (
+                {showSubscriptionButton ? (
+                  <Col xs={12} sm={6} xxl={6}>
+                    <Subscription />
+                  </Col>
+                ) : !loading ? (
                   data?.length > 0 ? (
                     data.map((item, i) => (
                       <Col xs={12} sm={6} xxl={4} key={i}>
