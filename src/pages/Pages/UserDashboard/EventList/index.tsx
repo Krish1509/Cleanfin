@@ -55,7 +55,7 @@ const EventList = () => {
                                                 <tr key={key}>
                                                     <td>{item?.title}</td>
                                                     <td>{item?.country}</td>
-                                                    <td>{moment(item?.date).format("YYYY-MM-DD")}</td>
+                                                    <td>{moment(item?.date).format("YYYY-MM-DD hh:mm A")}</td>
                                                     <td>{item?.impact}</td>
                                                     <td>{item?.forecast}</td>
                                                     <td>{item?.previous}</td>
