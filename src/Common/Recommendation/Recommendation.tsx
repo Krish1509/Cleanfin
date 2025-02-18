@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Col, Row } from "react-bootstrap";
+import { Card, Col, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
 import { doc, DocumentSnapshot, getDoc } from "firebase/firestore";
 import { db } from "../../helper/firebase-config";
 import {
@@ -52,15 +52,36 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
                   <h5 className="mb-0 text-muted font-bold">
                     {optionScript?.name}
                   </h5>
+                  <div className="d-inline-flex align-items-center mt-1">
+                    <p className="f-w-300 d-flex align-items-center m-b-0">
+                      {data?.price}
+                    </p>
+                    <span className="badge bg-light-secondary ms-2">
+                      {data?.priceCondition?.toUpperCase()}
+                    </span>
+                  </div>
                 </div>
               </div>
 
-              <div className="d-flex align-items-center">
+              <div
+                className="d-flex align-items-center"
+                style={{ marginBottom: "auto" }}
+              >
                 <span className="badge bg-light-primary ms-2">
                   {data?.action.toUpperCase()}
                 </span>
                 <div className="flex-grow-1 ms-3">
-                  <i className="fas fa-exclamation-circle"></i>
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={
+                      <Tooltip id="top">{data?.recommendation || ""}</Tooltip>
+                    }
+                  >
+                    <i
+                      className="fas fa-exclamation-circle"
+                      style={{ cursor: "pointer" }}
+                    ></i>
+                  </OverlayTrigger>
                 </div>
               </div>
             </div>
