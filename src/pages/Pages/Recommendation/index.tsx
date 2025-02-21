@@ -11,6 +11,7 @@ import Pagination from "../../../Common/Pagination";
 import EditableNumberInput from "../../../Common/EditableNumberInput";
 import { useNavigate } from "react-router-dom";
 import ConfirmationModal from "../../../Common/ConfirmationModal";
+import ReasonModal from "../../../Common/ReasonModal";
 import fireStoreLogo from "../../../assets/images/firestore.png";
 import Loader from "../../../Common/Loader/Loader";
 import { IOptionScriptsList } from "../UserDashboard/Helper/interfaces";
@@ -48,6 +49,7 @@ const Recommendation = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
+  const [showReason, setShowReason] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<string>("");
   const [selectedStatus, setSelectedStatus] = useState<boolean>();
   const [updateLoading, setUpdateLoading] = useState<boolean>(false);
@@ -95,16 +97,16 @@ const Recommendation = () => {
   }, [entriesPerPage, currentPage, searchQuery, fetchRecommendationListData]);
 
   const updateRecommendationDetails = React.useCallback(
-    async (id: string, key: string, value: unknown) => {
+    async (id: string, updates: { [key: string]: unknown }) => {
       try {
         setUpdateLoading(true);
-        const body = { id, [key]: value };
+        const body = { id, ...updates };
         const result = await postRequest("recommendation/edit", body, true);
         ToastAlert.success(result.message);
         // Update user in the local state
         setRecommendationListData((prevList) =>
           prevList.map((data) =>
-            data._id === id ? { ...data, [key]: value } : data
+            data._id === id ? { ...data, ...updates } : data
           )
         );
         setShowConfirm(false);
@@ -120,7 +122,7 @@ const Recommendation = () => {
 
   // Update recommendation details when a value is changed
   const handleValueUpdate = (id: string, key: string, value: unknown) => {
-    updateRecommendationDetails(id, key, value);
+    updateRecommendationDetails(id, { [key]: value });
   };
 
   const handleEditDate = (item: any) => {
@@ -212,11 +214,7 @@ const Recommendation = () => {
                               <ToggleSwitch
                                 checked={item?.target1Achieved}
                                 onChange={() =>
-                                  updateRecommendationDetails(
-                                    item?._id,
-                                    "target1Achieved",
-                                    !item?.target1Achieved
-                                  )
+                                  updateRecommendationDetails(item?._id, { target1Achieved: !item?.target1Achieved })
                                 }
                               />
                             </div>
@@ -233,11 +231,7 @@ const Recommendation = () => {
                               <ToggleSwitch
                                 checked={item?.target2Achieved}
                                 onChange={() =>
-                                  updateRecommendationDetails(
-                                    item?._id,
-                                    "target2Achieved",
-                                    !item?.target2Achieved
-                                  )
+                                  updateRecommendationDetails(item?._id, { target2Achieved: !item?.target2Achieved })
                                 }
                               />
                             </div>
@@ -255,11 +249,7 @@ const Recommendation = () => {
                                 disabled={updateLoading}
                                 checked={item?.target3Achieved}
                                 onChange={() =>
-                                  updateRecommendationDetails(
-                                    item?._id,
-                                    "target3Achieved",
-                                    !item?.target3Achieved
-                                  )
+                                  updateRecommendationDetails(item?._id, { target3Achieved: !item?.target3Achieved })
                                 }
                               />
                             </div>
@@ -276,11 +266,7 @@ const Recommendation = () => {
                               <ToggleSwitch
                                 checked={item?.stopLossAchieved}
                                 onChange={() =>
-                                  updateRecommendationDetails(
-                                    item?._id,
-                                    "stopLossAchieved",
-                                    !item?.stopLossAchieved
-                                  )
+                                  updateRecommendationDetails(item?._id, { stopLossAchieved: !item?.stopLossAchieved })
                                 }
                               />
                             </div>
@@ -322,16 +308,31 @@ const Recommendation = () => {
           {showConfirm ? (
             <ConfirmationModal
               show={showConfirm}
-              handleConfirm={() =>
-                updateRecommendationDetails(
-                  selectedId,
-                  "isActive",
-                  selectedStatus
-                )
-              }
+              handleConfirm={() => {
+                if (selectedStatus) {
+                  updateRecommendationDetails(selectedId, { isActive: selectedStatus })
+                } else {
+                  setShowConfirm(false)
+                  setShowReason(true)
+                }
+              }}
               handleClose={() => setShowConfirm(false)}
               message={`Are you sure you want to ${selectedStatus ? "activate" : "deactivate"
                 } this record?`}
+              loading={updateLoading}
+            />
+          ) : (
+            ""
+          )}
+
+          {showReason ? (
+            <ReasonModal
+              show={showReason}
+              handleClose={() => setShowReason(false)}
+              handleConfirm={(reason) => {
+                updateRecommendationDetails(selectedId, { isActive: selectedStatus, reason: reason })
+                setShowReason(false)
+              }}
               loading={updateLoading}
             />
           ) : (

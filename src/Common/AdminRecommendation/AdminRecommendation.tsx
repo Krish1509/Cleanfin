@@ -6,40 +6,40 @@ import { IRecommendation } from "../../pages/Pages/UserDashboard/Helper/interfac
 import ToggleSwitch from "../ToggleSwitch";
 import { postRequest } from "../../service/fetch-services";
 import ToastAlert from "../../helper/toast-alert";
-import Loader from "../Loader/Loader";
 import ConfirmationModal from "../ConfirmationModal";
+import ReasonModal from "../ReasonModal";
 import moment from "moment";
 interface RecommendationProps {
   data: IRecommendation;
   setdata: (data: any) => void;
+  updateLoading: boolean;
+  setUpdateLoading: (data: boolean) => void;
 }
 
 const AdminRecommendation: React.FC<RecommendationProps> = ({
   data,
   setdata,
+  updateLoading,
+  setUpdateLoading,
 }) => {
-  const [updateLoading, setUpdateLoading] = useState<boolean>(false);
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
+  const [showReason, setShowReason] = useState<boolean>(false);
 
-  const updateRecommendationDetails = async (
-    id: string,
-    key: string,
-    value: unknown
-  ) => {
+  const updateRecommendationDetails = async (id: string, updates: { [key: string]: unknown }) => {
     try {
       setUpdateLoading(true);
-      const body = { id, [key]: value };
+      const body = { id, ...updates };
       const result = await postRequest("recommendation/edit", body, true);
       ToastAlert.success(result.message);
       // Update user in the local state
       setdata((prevList: any) => {
-        if (key === "isActive" && value === false) {
+        if (updates.isActive === false) {
           // Remove only the specific item
           return prevList.filter((rec: any) => rec._id !== id);
         } else {
           // Update the specific item
           return prevList.map((rec: any) =>
-            rec._id === id ? { ...rec, [key]: value } : rec
+            rec._id === id ? { ...rec, ...updates } : rec
           );
         }
       });
@@ -86,12 +86,7 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
                 <ToggleSwitch
                   checked={data?.target1Achieved}
                   onChange={() =>
-                    updateRecommendationDetails(
-                      data?._id,
-                      "target1Achieved",
-                      !data?.target1Achieved
-                    )
-                  }
+                    updateRecommendationDetails(data?._id, { target1Achieved: !data?.target1Achieved })}
                 />
               </div>
               <div className="mb-0 text-muted">{data?.target1 || "-"}</div>
@@ -102,12 +97,7 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
                 <ToggleSwitch
                   checked={data?.target2Achieved}
                   onChange={() =>
-                    updateRecommendationDetails(
-                      data?._id,
-                      "target2Achieved",
-                      !data?.target2Achieved
-                    )
-                  }
+                    updateRecommendationDetails(data?._id, { target2Achieved: !data?.target2Achieved })}
                 />
               </div>
               <div className="mb-0 text-muted">{data?.target2 || "-"}</div>
@@ -118,12 +108,7 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
                 <ToggleSwitch
                   checked={data?.target3Achieved}
                   onChange={() =>
-                    updateRecommendationDetails(
-                      data?._id,
-                      "target3Achieved",
-                      !data?.target3Achieved
-                    )
-                  }
+                    updateRecommendationDetails(data?._id, { target3Achieved: !data?.target3Achieved })}
                 />
               </div>
               <div className="mb-0 text-muted">{data?.target3 || "-"}</div>
@@ -142,13 +127,7 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
                 <p className="mb-0 f-w-600">Stop Loss</p>
                 <ToggleSwitch
                   checked={data?.stopLossAchieved}
-                  onChange={() =>
-                    updateRecommendationDetails(
-                      data?._id,
-                      "stopLossAchieved",
-                      !data?.stopLossAchieved
-                    )
-                  }
+                  onChange={() => updateRecommendationDetails(data?._id, { stopLossAchieved: !data?.stopLossAchieved })}
                 />
               </div>
               <div className="mb-0 text-muted">{data?.stopLoss}</div>
@@ -156,17 +135,35 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
           </Row>
         </Card.Body>
       </Card>
-      <Loader updateLoading={updateLoading}></Loader>
       {showConfirm ? (
         <ConfirmationModal
           show={showConfirm}
-          handleConfirm={() =>
-            updateRecommendationDetails(data?._id, "isActive", !data?.isActive)
-          }
+          handleConfirm={() => {
+            if (!data?.isActive) {
+              updateRecommendationDetails(data?._id, { isActive: !data?.isActive })
+            } else {
+              setShowConfirm(false)
+              setShowReason(true)
+            }
+          }}
           handleClose={() => setShowConfirm(false)}
           message={`Are you sure you want to ${
             data?.isActive ? "deactivate" : "activate"
           } this record?`}
+          loading={updateLoading}
+        />
+      ) : (
+        ""
+      )}
+
+      {showReason ? (
+        <ReasonModal
+          show={showReason}
+          handleClose={() => setShowReason(false)}
+          handleConfirm={(reason) => {
+            updateRecommendationDetails(data?._id, { isActive: !data?.isActive, reason: reason })
+            setShowReason(false)
+          }}
           loading={updateLoading}
         />
       ) : (
