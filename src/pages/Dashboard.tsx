@@ -9,11 +9,13 @@ import { Card, Col, Spinner } from "react-bootstrap";
 import AdminRecommendation from "../Common/AdminRecommendation/AdminRecommendation";
 import { postRequest } from "../service/fetch-services";
 import { IRecommendation } from "./Pages/UserDashboard/Helper/interfaces";
+import Loader from "../Common/Loader/Loader";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(false);
   const [data, setdata] = useState<IRecommendation[]>([]);
   const [activeUsers, setActiveUsers] = useState();
+  const [recommendationLoading, setRecommendationLoading] = useState<boolean>(false);
 
   const fetchActiveUsersCount = async () => {
     try {
@@ -78,11 +80,12 @@ const Dashboard = () => {
         ) : (
           data?.map((item) => (
             <Col md={6} xl={4} key={item?._id}>
-              <AdminRecommendation data={item} setdata={setdata} />
+              <AdminRecommendation data={item} setdata={setdata} updateLoading={recommendationLoading} setUpdateLoading={(val: boolean) => setRecommendationLoading(val)} />
             </Col>
           ))
         )}
       </div>
+      <Loader updateLoading={recommendationLoading}></Loader>
     </React.Fragment>
   );
 };
