@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Col, Row } from "react-bootstrap";
+import { Card, Col, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
 import { doc, DocumentSnapshot, getDoc } from "firebase/firestore";
 import { db } from "../../helper/firebase-config";
 import {
@@ -55,12 +55,38 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
                 </div>
               </div>
 
-              <div className="d-flex align-items-center">
+              <div
+                className="d-flex align-items-center"
+                style={{ marginBottom: "auto" }}
+              >
                 <span className="badge bg-light-primary ms-2">
                   {data?.action.toUpperCase()}
                 </span>
                 <div className="flex-grow-1 ms-3">
-                  <i className="fas fa-exclamation-circle"></i>
+                  {data?.recommendation ? (
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={
+                        <Tooltip id="top">
+                          <span
+                            dangerouslySetInnerHTML={{
+                              __html: data.recommendation,
+                            }}
+                          />
+                        </Tooltip>
+                      }
+                    >
+                      <i
+                        className="fas fa-exclamation-circle"
+                        style={{ cursor: "pointer" }}
+                      ></i>
+                    </OverlayTrigger>
+                  ) : (
+                    <i
+                      className="fas fa-exclamation-circle"
+                      style={{ cursor: "pointer" }}
+                    ></i>
+                  )}
                 </div>
               </div>
             </div>
@@ -105,7 +131,7 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
             <div className="border w-100 mt-3"></div>
 
             <Row className="g-3 mt-2 text-center">
-              <div className="col-6">
+              <div className="col-4">
                 <p className="mb-0 text-muted">Date</p>
                 <h5 className="mb-0">
                   {" "}
@@ -117,7 +143,7 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
                     : "-"}
                 </h5>
               </div>
-              <div className="col-6 border-start">
+              <div className="col-4 border-start">
                 <p className="mb-0 text-muted">Stop Loss</p>
                 <div className="d-flex align-items-center justify-content-center gap-1">
                   <div>{data?.stopLoss || "-"}</div>
@@ -126,6 +152,15 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
                       <i className="ph-duotone ph-seal-check "></i>
                     </div>
                   )}
+                </div>
+              </div>
+              <div className="col-4 border-start">
+                <p className="mb-0 text-muted">Price</p>
+                <div className="d-flex align-items-center justify-content-center gap-1">
+                  <div>{data?.price || "-"}</div>
+                  <span className="badge bg-light-secondary ms-2">
+                    {data?.priceCondition?.toUpperCase()}
+                  </span>
                 </div>
               </div>
             </Row>

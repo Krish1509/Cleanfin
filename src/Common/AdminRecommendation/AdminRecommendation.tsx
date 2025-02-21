@@ -25,7 +25,10 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
   const [showReason, setShowReason] = useState<boolean>(false);
 
-  const updateRecommendationDetails = async (id: string, updates: { [key: string]: unknown }) => {
+  const updateRecommendationDetails = async (
+    id: string,
+    updates: { [key: string]: unknown }
+  ) => {
     try {
       setUpdateLoading(true);
       const body = { id, ...updates };
@@ -86,7 +89,10 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
                 <ToggleSwitch
                   checked={data?.target1Achieved}
                   onChange={() =>
-                    updateRecommendationDetails(data?._id, { target1Achieved: !data?.target1Achieved })}
+                    updateRecommendationDetails(data?._id, {
+                      target1Achieved: !data?.target1Achieved,
+                    })
+                  }
                 />
               </div>
               <div className="mb-0 text-muted">{data?.target1 || "-"}</div>
@@ -97,7 +103,10 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
                 <ToggleSwitch
                   checked={data?.target2Achieved}
                   onChange={() =>
-                    updateRecommendationDetails(data?._id, { target2Achieved: !data?.target2Achieved })}
+                    updateRecommendationDetails(data?._id, {
+                      target2Achieved: !data?.target2Achieved,
+                    })
+                  }
                 />
               </div>
               <div className="mb-0 text-muted">{data?.target2 || "-"}</div>
@@ -108,7 +117,10 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
                 <ToggleSwitch
                   checked={data?.target3Achieved}
                   onChange={() =>
-                    updateRecommendationDetails(data?._id, { target3Achieved: !data?.target3Achieved })}
+                    updateRecommendationDetails(data?._id, {
+                      target3Achieved: !data?.target3Achieved,
+                    })
+                  }
                 />
               </div>
               <div className="mb-0 text-muted">{data?.target3 || "-"}</div>
@@ -116,21 +128,36 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
           </Row>
           <hr className="my-4 border-top border-secondary border-opacity-50" />
           <Row className="g-3 text-center">
-            <div className="col-6">
+            <div className="col-4">
               <p className="mb-0 f-w-600">Date</p>
               <div className="mb-0 text-muted">
                 {moment(data?.date).format("YYYY-MM-DD")}
               </div>
             </div>
-            <div className="col-6 border-start">
-              <div className="d-flex align-items-center mb-2 justify-content-center">
+            <div className="col-4 border-start">
+              <div className="d-flex align-items-center justify-content-center">
                 <p className="mb-0 f-w-600">Stop Loss</p>
+              </div>
+              <div className="d-flex align-items-center justify-content-center">
+                <div className="mb-0 text-muted">{data?.stopLoss}</div>
                 <ToggleSwitch
                   checked={data?.stopLossAchieved}
-                  onChange={() => updateRecommendationDetails(data?._id, { stopLossAchieved: !data?.stopLossAchieved })}
+                  onChange={() =>
+                    updateRecommendationDetails(data?._id, {
+                      stopLossAchieved: !data?.stopLossAchieved,
+                    })
+                  }
                 />
               </div>
-              <div className="mb-0 text-muted">{data?.stopLoss}</div>
+            </div>
+            <div className="col-4 border-start">
+              <p className="mb-0 f-w-600">Price</p>
+              <div className="d-flex align-items-center justify-content-center gap-1">
+                <div className="mb-0 text-muted">{data?.price}</div>
+                <span className="badge bg-light-secondary ms-2">
+                  {data?.priceCondition?.toUpperCase()}
+                </span>
+              </div>
             </div>
           </Row>
         </Card.Body>
@@ -140,10 +167,12 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
           show={showConfirm}
           handleConfirm={() => {
             if (!data?.isActive) {
-              updateRecommendationDetails(data?._id, { isActive: !data?.isActive })
+              updateRecommendationDetails(data?._id, {
+                isActive: !data?.isActive,
+              });
             } else {
-              setShowConfirm(false)
-              setShowReason(true)
+              setShowConfirm(false);
+              setShowReason(true);
             }
           }}
           handleClose={() => setShowConfirm(false)}
@@ -161,8 +190,11 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
           show={showReason}
           handleClose={() => setShowReason(false)}
           handleConfirm={(reason) => {
-            updateRecommendationDetails(data?._id, { isActive: !data?.isActive, reason: reason })
-            setShowReason(false)
+            updateRecommendationDetails(data?._id, {
+              isActive: !data?.isActive,
+              reason: reason,
+            });
+            setShowReason(false);
           }}
           loading={updateLoading}
         />
