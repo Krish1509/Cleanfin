@@ -1,7 +1,6 @@
 import { Form, Formik } from "formik";
 import React from "react";
 import { Button, Modal, Spinner } from "react-bootstrap";
-import * as Yup from "yup";
 
 interface ReasonModalProps {
   show: boolean;
@@ -16,10 +15,6 @@ const ReasonModal: React.FC<ReasonModalProps> = ({
   handleConfirm,
   loading = false,
 }) => {
-  const validationSchema = Yup.object({
-    reason: Yup.string().required("Reason is required"),
-  });
-
   return (
     <Modal
       show={show}
@@ -36,7 +31,6 @@ const ReasonModal: React.FC<ReasonModalProps> = ({
             <h5>Tell a reason for inactivation:</h5>
             <Formik
               initialValues={{ reason: "" }}
-              validationSchema={validationSchema}
               onSubmit={({ reason }) => handleConfirm(reason)}
             >
               {({ isSubmitting, errors, touched, setFieldValue }) => (
