@@ -9,6 +9,7 @@ import SimpleBar from "simplebar-react";
 //import images
 // import avatar1 from "../assets/images/user/avatar-1.jpg";
 import avatar2 from "../assets/images/user/avatar-2.jpg";
+import { postRequest } from "../service/fetch-services";
 // import avatar3 from "../assets/images/user/avatar-3.jpg";
 
 interface HeaderProps {
@@ -34,9 +35,20 @@ const TopBar = ({
 
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.clear();
-    window.location.reload();
+  const handleLogout = async () => {
+    try {
+      const body = {
+        userId: userDetails?._id,
+        fcmToken: localStorage.getItem("fcmToken") || "",
+      };
+      const result = await postRequest("auth/logout", body);
+      if (result) {
+        localStorage.clear();
+        window.location.reload();
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
