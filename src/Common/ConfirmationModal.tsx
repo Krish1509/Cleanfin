@@ -22,7 +22,7 @@ const ConfirmationModal = ({
           closeButton
           style={{ borderBottom: "none" }}
         ></Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="bg-transparent">
           <div className="mt-2 text-center">
             <i className="fas fa-exclamation-circle fs-1"></i>
             <div className="mt-4 pt-2 fs-15 mx-4 mx-sm-5">

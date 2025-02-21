@@ -64,7 +64,10 @@ const OTPStep: React.FC<Props> = ({ setActiveTab }) => {
   };
 
   const generateToken = async () => {
-    const token = await requestFCMToken();
+    const token: string | undefined = await requestFCMToken();
+    if (token) {
+      localStorage.setItem("fcmToken", token);
+    }
     return token || "";
   };
 
