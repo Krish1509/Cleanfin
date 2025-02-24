@@ -10,6 +10,7 @@ import SimpleBar from "simplebar-react";
 // import avatar1 from "../assets/images/user/avatar-1.jpg";
 import avatar2 from "../assets/images/user/avatar-2.jpg";
 import { postRequest } from "../service/fetch-services";
+import SocketUI from "../Common/SocketUI";
 // import avatar3 from "../assets/images/user/avatar-3.jpg";
 
 interface HeaderProps {
@@ -82,6 +83,11 @@ const TopBar = ({
 
           <div className="ms-auto">
             <ul className="list-unstyled">
+              {userDetails?.role === "admin" &&
+                <span className="pc-h-item">
+                  <SocketUI />
+                </span>
+              }
               <Dropdown as="li" className="pc-h-item">
                 <Dropdown.Toggle
                   as="a"
