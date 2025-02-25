@@ -9,8 +9,13 @@ import ToastAlert from "../../helper/toast-alert";
 import ConfirmationModal from "../ConfirmationModal";
 import ReasonModal from "../ReasonModal";
 import moment from "moment";
+import { TouchlineData } from "../../service/socketService";
+
+interface RecommendationWithTouchline extends IRecommendation {
+  touchlineData?: TouchlineData;  // Optional touchlineData property
+}
 interface RecommendationProps {
-  data: IRecommendation;
+  data: RecommendationWithTouchline;
   setdata: (data: any) => void;
   updateLoading: boolean;
   setUpdateLoading: (data: boolean) => void;
@@ -153,7 +158,10 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
             <div className="col-4 border-start">
               <p className="mb-0 f-w-600">Price</p>
               <div className="d-flex align-items-center justify-content-center gap-1">
-                <div className="mb-0 text-muted">{data?.price}</div>
+                <div className="mb-0 text-muted">
+                  {/* {parseFloat(data?.touchlineData?.data?.last_traded_price || '0').toFixed(0)} */}
+                  {data?.touchlineData?.data?.last_traded_price}
+                </div>
                 <span className="badge bg-light-secondary ms-2">
                   {data?.priceCondition?.toUpperCase()}
                 </span>
@@ -176,9 +184,8 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
             }
           }}
           handleClose={() => setShowConfirm(false)}
-          message={`Are you sure you want to ${
-            data?.isActive ? "deactivate" : "activate"
-          } this record?`}
+          message={`Are you sure you want to ${data?.isActive ? "deactivate" : "activate"
+            } this record?`}
           loading={updateLoading}
         />
       ) : (

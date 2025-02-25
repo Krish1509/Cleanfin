@@ -23,6 +23,8 @@ export interface IRecommendation {
   __v: number;
   scriptData: IOptionScriptsList[];
   price: number;
+  scriptCode: number;
+  segmentId: number;
 }
 
 export interface IContentbytes {

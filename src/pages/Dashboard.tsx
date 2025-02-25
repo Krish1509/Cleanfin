@@ -10,12 +10,32 @@ import AdminRecommendation from "../Common/AdminRecommendation/AdminRecommendati
 import { postRequest } from "../service/fetch-services";
 import { IRecommendation } from "./Pages/UserDashboard/Helper/interfaces";
 import Loader from "../Common/Loader/Loader";
+import { initializeSocket, disconnectSocket, TouchlineData } from "../service/socketService";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(false);
   const [data, setdata] = useState<IRecommendation[]>([]);
   const [activeUsers, setActiveUsers] = useState();
   const [recommendationLoading, setRecommendationLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    const socket = initializeSocket();
+
+    socket.on("newTouchlineData", (data: TouchlineData) => {
+      setdata(prevData =>
+        prevData.map((item) => {
+          if (data?.data.scrip.scrip_token === item.scriptCode.toString()) {
+            return { ...item, touchlineData: data };
+          }
+          return item;
+        })
+      );
+    });
+
+    return () => {
+      disconnectSocket();
+    };
+  }, []);
 
   const fetchActiveUsersCount = async () => {
     try {
