@@ -1,6 +1,6 @@
 import { io, Socket } from "socket.io-client";
 
-const SOCKET_URL = "http://localhost:8000"; // Update with your backend URL
+const SOCKET_URL = import.meta.env.VITE_BASE_URL as string; // Update with your backend URL
 let socket: Socket | null = null;
 
 // Define TouchlineData Type (Adjust based on your backend structure)
