@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import LottieAnimation, {
   Varient,
 } from "../../../Common/AnimationComponent/LottieAnimation";
+import { initializeSocket, disconnectSocket, TouchlineData } from "../../../service/socketService";
 
 //import Components
 
@@ -34,6 +35,25 @@ const UserDashboard = () => {
     useState<boolean>(false);
 
   const user = JSON.parse(localStorage.getItem("user") || "{}");
+
+  useEffect(() => {
+    const socket = initializeSocket();
+
+    socket.on("newTouchlineData", (data: TouchlineData) => {
+      setdata(prevData =>
+        prevData.map((item) => {
+          if (data?.data.scrip.scrip_token === item.scriptCode.toString()) {
+            return { ...item, touchlineData: data };
+          }
+          return item;
+        })
+      );
+    });
+
+    return () => {
+      disconnectSocket();
+    };
+  }, []);
 
   const fetchData = () => {
     try {

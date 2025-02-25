@@ -6,8 +6,12 @@ import {
   IOptionScriptsList,
   IRecommendation,
 } from "../../pages/Pages/UserDashboard/Helper/interfaces";
+import { TouchlineData } from "../../service/socketService";
+interface RecommendationWithTouchline extends IRecommendation {
+  touchlineData?: TouchlineData;  // Optional touchlineData property
+}
 interface RecommendationProps {
-  data: IRecommendation;
+  data: RecommendationWithTouchline;
 }
 
 const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
@@ -157,7 +161,7 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
               <div className="col-4 border-start">
                 <p className="mb-0 text-muted">Price</p>
                 <div className="d-flex align-items-center justify-content-center gap-1">
-                  <div>{data?.price || "-"}</div>
+                  <div>{data?.touchlineData?.data?.last_traded_price || "-"}</div>
                   <span className="badge bg-light-secondary ms-2">
                     {data?.priceCondition?.toUpperCase()}
                   </span>
