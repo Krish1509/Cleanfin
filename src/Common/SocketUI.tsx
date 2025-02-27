@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
-import { getRequest } from "../service/fetch-services";
+import { getRequest, postRequest } from "../service/fetch-services";
 import { Button } from "react-bootstrap";
 
 const SocketUI = () => {
@@ -8,7 +8,7 @@ const SocketUI = () => {
 
     const checkConnection = React.useCallback(async () => {
         try {
-            const result = await getRequest("common/check-b2c-websocket");
+            const result = await postRequest("common/check-b2c-websocket", {});
             setStatus(result.isConnected);
         } catch (error) {
             console.log(error);
@@ -17,7 +17,7 @@ const SocketUI = () => {
 
     const reconnectConnection = React.useCallback(async () => {
         try {
-            await getRequest("common/reconnect-b2c-websocket");
+            await postRequest("common/reconnect-b2c-websocket", {});
         } catch (error) {
             console.log(error);
         }
