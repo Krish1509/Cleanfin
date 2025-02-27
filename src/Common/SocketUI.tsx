@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
-import { getRequest, postRequest } from "../service/fetch-services";
+import { postRequest } from "../service/fetch-services";
 import { Button } from "react-bootstrap";
 
 const SocketUI = () => {
