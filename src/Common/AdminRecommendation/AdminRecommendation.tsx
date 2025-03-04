@@ -72,6 +72,7 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
           <div className="d-flex align-items-center">
             <div className="flex-grow-1">
               <p className="mb-0 f-w-600">{data?.scriptData[0]?.name || ""} </p>
+              <p className="mb-0">{data?.touchlineData?.data?.last_traded_price} </p>
             </div>
             <div className="d-flex align-items-center">
               <span className="badge bg-light-primary ms-2">
@@ -159,8 +160,7 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
               <p className="mb-0 f-w-600">Price</p>
               <div className="d-flex align-items-center justify-content-center gap-1">
                 <div className="mb-0 text-muted">
-                  {/* {parseFloat(data?.touchlineData?.data?.last_traded_price || '0').toFixed(0)} */}
-                  {data?.touchlineData?.data?.last_traded_price}
+                  {data?.price || "-"}
                 </div>
                 <span className="badge bg-light-secondary ms-2">
                   {data?.priceCondition?.toUpperCase()}
