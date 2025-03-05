@@ -10,7 +10,7 @@ import AdminRecommendation from "../Common/AdminRecommendation/AdminRecommendati
 import { postRequest } from "../service/fetch-services";
 import { IRecommendation } from "./Pages/UserDashboard/Helper/interfaces";
 import Loader from "../Common/Loader/Loader";
-import { initializeSocket, disconnectSocket, TouchlineData, reconnectSocket } from "../service/socketService";
+import { initializeSocket, TouchlineData, reconnectSocket } from "../service/socketService";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(false);
@@ -32,10 +32,6 @@ const Dashboard = () => {
         })
       );
     });
-
-    return () => {
-      disconnectSocket();
-    };
   }, []);
 
   const fetchActiveUsersCount = async () => {

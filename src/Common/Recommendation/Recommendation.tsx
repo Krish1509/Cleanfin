@@ -53,9 +53,8 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
             <div className="d-flex align-items-center justify-content-between">
               <div className="d-flex align-items-center">
                 <div className="flex-grow-1 ms-3">
-                  <h5 className="mb-0 text-muted font-bold">
-                    {optionScript?.name}
-                  </h5>
+                  <h5 className="mb-0 text-muted font-bold">{optionScript?.name}</h5>
+                  <p className="mb-0">{data?.touchlineData?.data?.last_traded_price}</p>
                 </div>
               </div>
 
@@ -141,9 +140,9 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
                   {" "}
                   {data?.date?.seconds
                     ? new Date(
-                        data.date.seconds * 1000 +
-                          Math.floor(data.date.nanoseconds / 1e6)
-                      ).toLocaleDateString("en-GB")
+                      data.date.seconds * 1000 +
+                      Math.floor(data.date.nanoseconds / 1e6)
+                    ).toLocaleDateString("en-GB")
                     : "-"}
                 </h5>
               </div>
@@ -161,7 +160,7 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
               <div className="col-4 border-start">
                 <p className="mb-0 text-muted">Price</p>
                 <div className="d-flex align-items-center justify-content-center gap-1">
-                  <div>{data?.touchlineData?.data?.last_traded_price || "-"}</div>
+                  <div>{data?.price || "-"}</div>
                   <span className="badge bg-light-secondary ms-2">
                     {data?.priceCondition?.toUpperCase()}
                   </span>

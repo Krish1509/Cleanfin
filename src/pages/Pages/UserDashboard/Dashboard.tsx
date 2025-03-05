@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 import LottieAnimation, {
   Varient,
 } from "../../../Common/AnimationComponent/LottieAnimation";
-import { initializeSocket, disconnectSocket, TouchlineData } from "../../../service/socketService";
+import { initializeSocket, TouchlineData, reconnectSocket } from "../../../service/socketService";
 
 //import Components
 
@@ -37,6 +37,7 @@ const UserDashboard = () => {
   const user = JSON.parse(localStorage.getItem("user") || "{}");
 
   useEffect(() => {
+    reconnectSocket();
     const socket = initializeSocket();
 
     socket.on("newTouchlineData", (data: TouchlineData) => {
@@ -49,10 +50,6 @@ const UserDashboard = () => {
         })
       );
     });
-
-    return () => {
-      disconnectSocket();
-    };
   }, []);
 
   const fetchData = () => {
@@ -113,10 +110,10 @@ const UserDashboard = () => {
                 let targetInfo: number = target1Changed
                   ? 1
                   : target2Changed
-                  ? 2
-                  : target3Changed
-                  ? 3
-                  : 0;
+                    ? 2
+                    : target3Changed
+                      ? 3
+                      : 0;
                 setAnimationVarient({
                   type: Varient.Target,
                   info: `Milestone Reached on Target ${targetInfo}!`,
@@ -269,25 +266,22 @@ const UserDashboard = () => {
           <div className="menu">
             <div
               onClick={() => scrollToSection("recommendation")}
-              className={`menu-item ${
-                activeSection === "recommendation" ? "active" : ""
-              }`}
+              className={`menu-item ${activeSection === "recommendation" ? "active" : ""
+                }`}
             >
               Recommendations
             </div>
             <div
               onClick={() => scrollToSection("content-bytes")}
-              className={`menu-item ${
-                activeSection === "content-bytes" ? "active" : ""
-              }`}
+              className={`menu-item ${activeSection === "content-bytes" ? "active" : ""
+                }`}
             >
               Content Bytes
             </div>
             <div
               onClick={() => scrollToSection("past-performance")}
-              className={`menu-item ${
-                activeSection === "past-performance" ? "active" : ""
-              }`}
+              className={`menu-item ${activeSection === "past-performance" ? "active" : ""
+                }`}
             >
               Past Performance
             </div>
