@@ -22,15 +22,15 @@ export const initializeSocket = (): Socket => {
     });
 
     socket.on("connect", () => {
-      console.log("✅ Connected to WebSocket:", socket?.id);
+      // console.log("✅ Connected to WebSocket:", socket?.id);
     });
 
     socket.on("disconnect", () => {
-      console.log("❌ Disconnected from WebSocket");
+      // console.log("❌ Disconnected from WebSocket");
     });
 
     socket.on("reconnect_attempt", () => {
-      console.log("♻️ Attempting to reconnect...");
+      // console.log("♻️ Attempting to reconnect...");
     });
   }
   return socket;
@@ -43,5 +43,12 @@ export const getSocket = (): Socket | null => socket;
 export const disconnectSocket = (): void => {
   if (socket) {
     socket.disconnect();
+  }
+};
+
+// Function to reconnect WebSocket
+export const reconnectSocket = (): void => {
+  if (socket) {
+    socket.connect();
   }
 };

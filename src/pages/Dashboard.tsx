@@ -10,7 +10,7 @@ import AdminRecommendation from "../Common/AdminRecommendation/AdminRecommendati
 import { postRequest } from "../service/fetch-services";
 import { IRecommendation } from "./Pages/UserDashboard/Helper/interfaces";
 import Loader from "../Common/Loader/Loader";
-import { initializeSocket, disconnectSocket, TouchlineData } from "../service/socketService";
+import { initializeSocket, disconnectSocket, TouchlineData, reconnectSocket } from "../service/socketService";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(false);
@@ -19,6 +19,7 @@ const Dashboard = () => {
   const [recommendationLoading, setRecommendationLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    reconnectSocket();
     const socket = initializeSocket();
 
     socket.on("newTouchlineData", (data: TouchlineData) => {
