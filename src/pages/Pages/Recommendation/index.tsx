@@ -50,6 +50,7 @@ const Recommendation = () => {
   const [totalPages, setTotalPages] = useState<number>(0);
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
   const [showReason, setShowReason] = useState<boolean>(false);
+  const [showDeletion, setShowDeletion] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<string>("");
   const [selectedStatus, setSelectedStatus] = useState<boolean>();
   const [updateLoading, setUpdateLoading] = useState<boolean>(false);
@@ -130,6 +131,29 @@ const Recommendation = () => {
       state: { id: item?._id, segmentID: item?.scriptData[0]?.segmentID },
     });
   };
+
+  const handleDelete = React.useCallback(async () => {
+    try {
+      setUpdateLoading(true);
+      const result = await postRequest("recommendation/delete", { id: selectedId }, true);
+
+      if (result) {
+        ToastAlert.success(result.message);
+
+        setRecommendationListData((prevList) =>
+          prevList.filter((item) => item._id !== selectedId)
+        );
+      }
+
+      setShowDeletion(false);
+      setUpdateLoading(false);
+    } catch (err) {
+      console.log(err);
+      setUpdateLoading(false);
+      setShowDeletion(false);
+      ToastAlert.error("Failed to delete the recommendation.");
+    }
+  }, [selectedId]);
 
   return (
     <React.Fragment>
@@ -288,6 +312,17 @@ const Recommendation = () => {
                               >
                                 <i className="ti ti-pencil f-20"></i>
                               </Button>
+                              <Button
+                                type="button"
+                                className="avtar avtar-xs btn btn-danger ms-1"
+                                variant="danger"
+                                onClick={() => {
+                                  setShowDeletion(!showDeletion);
+                                  setSelectedId(item?._id);
+                                }}
+                              >
+                                <i className="ti ti-trash f-20"></i>
+                              </Button>
                             </div>
                           </td>
                         </tr>
@@ -305,6 +340,19 @@ const Recommendation = () => {
             entriesPerPage={entriesPerPage}
             onEntriesPerPageChange={handleEntriesPerPageChange}
           />
+
+          {showDeletion ? (
+            <ConfirmationModal
+              show={showDeletion}
+              handleConfirm={handleDelete}
+              handleClose={() => setShowDeletion(false)}
+              message={`Are you sure you want to delete this record?`}
+              loading={updateLoading}
+            />
+          ) : (
+            ""
+          )}
+
           {showConfirm ? (
             <ConfirmationModal
               show={showConfirm}
