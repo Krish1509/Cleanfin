@@ -20,6 +20,7 @@ import EditProfile from "../pages/Pages/Profile/edit";
 import OptionScripts from "../pages/Pages/OptionScripts";
 import Plans from "../pages/Pages/UserDashboard/Plans";
 import AddFeedback from "../pages/Pages/Feedback/add";
+import Notifications from "../pages/Pages/Notifications";
 
 const routes = [
   // Dashboard Routes
@@ -114,6 +115,11 @@ const routes = [
   {
     path: "/contentBytes/edit",
     component: <AddContentBytes />,
+    allowedRoles: ["admin"],
+  },
+  {
+    path: "/notifications",
+    component: <Notifications />,
     allowedRoles: ["admin"],
   },
 ];
