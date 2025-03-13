@@ -55,6 +55,13 @@ const adminMenuData = [
     link: "/contentBytes",
     icon: "",
   },
+  {
+    id: "notifications",
+    label: "Notifications",
+    dataPage: null,
+    link: "/notifications",
+    icon: "",
+  },
 ];
 
 const userMenuData = [
