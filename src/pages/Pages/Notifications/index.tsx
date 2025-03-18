@@ -9,7 +9,6 @@ import * as Yup from "yup";
 import { postRequest } from "../../../service/fetch-services";
 import ToastAlert from "../../../helper/toast-alert";
 import BreadcrumbItem from "../../../Common/BreadcrumbItem";
-import RichTextEditor from "../../../Common/Editor/RichTextEditor";
 import Loader from "../../../Common/Loader/Loader";
 
 const validationSchema = Yup.object().shape({
@@ -72,11 +71,13 @@ const Notifications = () => {
                         <Col sm={12}>
                           <div className="mb-3">
                             <label className="form-label">Message</label>
-                            <RichTextEditor
-                              value={values?.message}
-                              onChange={(value: any) =>
-                                setFieldValue("message", value)
-                              }
+                            <textarea
+                              className={`form-control ${
+                                errors.message && touched.message ? "is-invalid" : ""
+                              }`}
+                              value={values.message}
+                              onChange={(e) => setFieldValue("message", e.target.value)}
+                              rows={5}
                             />
                             {errors.message && touched.message ? (
                               <div className="invalid-feedback d-flex align-items-start">
