@@ -69,102 +69,65 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
     <React.Fragment>
       <Card className="statistics-card-1">
         <Card.Body>
-          <div className="d-flex align-items-center">
-            <div className="flex-grow-1">
-              <p className="mb-0 f-w-600">{data?.scriptData[0]?.name || ""} </p>
-              <p className="mb-0">{data?.touchlineData?.data?.last_traded_price} </p>
+          <div className="d-flex" style={{ height: "100%" }}>
+            <div className="flex-grow-1 ms-3">
+              <div className="d-flex">
+                <h5 className="mb-0 text-muted font-bold" style={{ minWidth: 60 }}>
+                  {data?.scriptData[0]?.name || ""}
+                </h5>
+              </div>
+              <div className="d-flex">
+                <span>{data?.touchlineData?.data?.last_traded_price}</span>
+              </div>
+              <div className="d-flex">
+                <span>{moment(data?.date).format("YYYY-MM-DD")}</span>
+              </div>
             </div>
-            <div className="d-flex align-items-center">
+            <div className="d-flex flex-grow-1 justify-content-end" style={{ height: "100%" }}>
               <span className="badge bg-light-primary ms-2">
                 {data?.action.toUpperCase()}
               </span>
-              <div className="flex-grow-1 ms-3">
-                <ToggleSwitch
-                  checked={data?.isActive}
-                  onChange={() => {
-                    setShowConfirm(!showConfirm);
-                  }}
-                />
-              </div>
             </div>
           </div>
-          <Row className="g-3 mt-2 text-center">
-            <div className="col-4">
-              <div className="d-flex align-items-center mb-2">
-                <p className="mb-0 ">Target 1</p>
-                <ToggleSwitch
-                  checked={data?.target1Achieved}
-                  onChange={() =>
-                    updateRecommendationDetails(data?._id, {
-                      target1Achieved: !data?.target1Achieved,
-                    })
-                  }
-                />
-              </div>
-              <div className="mb-0 text-muted">{data?.target1 || "-"}</div>
-            </div>
-            <div className="col-4">
-              <div className="d-flex align-items-center mb-2">
-                <p className="mb-0 ">Target 2</p>
-                <ToggleSwitch
-                  checked={data?.target2Achieved}
-                  onChange={() =>
-                    updateRecommendationDetails(data?._id, {
-                      target2Achieved: !data?.target2Achieved,
-                    })
-                  }
-                />
-              </div>
-              <div className="mb-0 text-muted">{data?.target2 || "-"}</div>
-            </div>
-            <div className="col-4">
-              <div className="d-flex align-items-center mb-2">
-                <p className="mb-0 ">Target 3</p>
-                <ToggleSwitch
-                  checked={data?.target3Achieved}
-                  onChange={() =>
-                    updateRecommendationDetails(data?._id, {
-                      target3Achieved: !data?.target3Achieved,
-                    })
-                  }
-                />
-              </div>
-              <div className="mb-0 text-muted">{data?.target3 || "-"}</div>
-            </div>
-          </Row>
           <hr className="my-4 border-top border-secondary border-opacity-50" />
           <Row className="g-3 text-center">
-            <div className="col-4">
-              <p className="mb-0 f-w-600">Date</p>
-              <div className="mb-0 text-muted">
-                {moment(data?.date).format("YYYY-MM-DD")}
+            <div className="col-6">
+              <p className="mb-0 f-w-600 pb-1">Price</p>
+              <div className="mb-0 text-muted pb-1">
+                {data?.price || "-"}
               </div>
+              <span className="badge bg-light-secondary">
+                {data?.priceCondition?.toUpperCase()}
+              </span>
             </div>
-            <div className="col-4 border-start">
-              <div className="d-flex align-items-center justify-content-center">
-                <p className="mb-0 f-w-600">Stop Loss</p>
-              </div>
-              <div className="d-flex align-items-center justify-content-center">
-                <div className="mb-0 text-muted">{data?.stopLoss}</div>
-                <ToggleSwitch
-                  checked={data?.stopLossAchieved}
-                  onChange={() =>
-                    updateRecommendationDetails(data?._id, {
-                      stopLossAchieved: !data?.stopLossAchieved,
-                    })
-                  }
-                />
-              </div>
-            </div>
-            <div className="col-4 border-start">
-              <p className="mb-0 f-w-600">Price</p>
-              <div className="d-flex align-items-center justify-content-center gap-1">
-                <div className="mb-0 text-muted">
-                  {data?.price || "-"}
+            <div className="col-6 border-start">
+              <div className="d-flex align-items-center justify-content-start py-2">
+                <p className="mb-0 f-w-600 text-start" style={{ width: 70 }}>Target:</p>
+                <div className="d-flex align-items-center justify-content-center ms-1">
+                  <div className="mb-0 text-muted">{data?.target1}</div>
+                  <ToggleSwitch
+                    checked={data?.target1Achieved}
+                    onChange={() =>
+                      updateRecommendationDetails(data?._id, {
+                        target1Achieved: !data?.target1Achieved,
+                      })
+                    }
+                  />
                 </div>
-                <span className="badge bg-light-secondary ms-2">
-                  {data?.priceCondition?.toUpperCase()}
-                </span>
+              </div>
+              <div className="d-flex align-items-center justify-content-start py-2 border-top">
+                <p className="mb-0 f-w-600 text-start" style={{ width: 70 }}>Stop Loss:</p>
+                <div className="d-flex align-items-center justify-content-center ms-1">
+                  <div className="mb-0 text-muted">{data?.stopLoss}</div>
+                  <ToggleSwitch
+                    checked={data?.stopLossAchieved}
+                    onChange={() =>
+                      updateRecommendationDetails(data?._id, {
+                        stopLossAchieved: !data?.stopLossAchieved,
+                      })
+                    }
+                  />
+                </div>
               </div>
             </div>
           </Row>
