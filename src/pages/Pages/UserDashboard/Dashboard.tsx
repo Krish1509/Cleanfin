@@ -225,14 +225,14 @@ const UserDashboard = () => {
         if (response?.success) {
           // Convert subscription_end to a Date object
           const subscriptionEndDate = new Date(
-            response?.subscription?.subscription_end
+            response?.data?.User?.subscription_end
           );
           const currentDate = new Date();
 
           // Check if subscription has ended and status is not active
           if (
             subscriptionEndDate < currentDate &&
-            response?.subscription?.subscription_status !== "active"
+            response?.data?.status !== "active"
           ) {
             setShowSubscriptionButton(true);
           }
