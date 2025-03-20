@@ -84,7 +84,7 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
               </div>
             </div>
             <div className="d-flex flex-grow-1 justify-content-end" style={{ height: "100%" }}>
-              <span className="badge bg-light-primary ms-2">
+              <span className={`badge ms-2 ${data.action === "buy" ? "bg-light-success" : "bg-light-danger"}`}>
                 {data?.action.toUpperCase()}
               </span>
             </div>
