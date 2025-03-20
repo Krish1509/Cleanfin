@@ -198,6 +198,8 @@ const Recommendation = () => {
                         <th>Script Name</th>
                         <th>Date</th>
                         <th>Target 1</th>
+                        <th>Target 2</th>
+                        <th>Target 3</th>
                         <th>Stop Loss</th>
                         <th>Action</th>
                       </tr>
@@ -238,6 +240,28 @@ const Recommendation = () => {
                                 onChange={() =>
                                   updateRecommendationDetails(item?._id, { target1Achieved: !item?.target1Achieved })
                                 }
+                              />
+                            </div>
+                          </td>
+                          <td>
+                            <div className="d-flex align-items-center justify-content-between">
+                              <EditableNumberInput
+                                id={item._id}
+                                value={item.target2}
+                                placeholder="target2"
+                                keyName="target2"
+                                onUpdate={handleValueUpdate}
+                              />
+                            </div>
+                          </td>
+                          <td>
+                            <div className="d-flex align-items-center justify-content-between">
+                              <EditableNumberInput
+                                id={item._id}
+                                value={item.target3}
+                                placeholder="target3"
+                                keyName="target3"
+                                onUpdate={handleValueUpdate}
                               />
                             </div>
                           </td>
