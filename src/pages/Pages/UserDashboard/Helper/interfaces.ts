@@ -25,6 +25,7 @@ export interface IRecommendation {
   price: number;
   scriptCode: number;
   segmentId: number;
+  profitLoss: number;
 }
 
 export interface IContentbytes {
@@ -96,4 +97,19 @@ export interface ISubPlan {
   notes: string[];
   created_at: number;
   updated_at?: number;
+}
+export interface IPastPer {
+  totalCalls: number;
+  exitedCalls: number;
+  successRate: string;
+  annualReturns: string;
+}
+export interface INotification {
+  _id: string;
+  body: string;
+  isRead: boolean;
+  isSent: boolean;
+  title: string;
+  type: string;
+  userId: string;
 }
