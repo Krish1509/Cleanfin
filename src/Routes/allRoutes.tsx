@@ -21,6 +21,7 @@ import OptionScripts from "../pages/Pages/OptionScripts";
 import Plans from "../pages/Pages/UserDashboard/Plans";
 import AddFeedback from "../pages/Pages/Feedback/add";
 import Notifications from "../pages/Pages/Notifications";
+import PastPerformance from "../pages/Pages/UserDashboard/PastPerformance";
 
 const routes = [
   // Dashboard Routes
@@ -121,6 +122,12 @@ const routes = [
     path: "/notifications",
     component: <Notifications />,
     allowedRoles: ["admin"],
+  },
+  // Past Performance Route
+  {
+    path: "/pastPerformance",
+    component: <PastPerformance />,
+    allowedRoles: ["customer"],
   },
 ];
 

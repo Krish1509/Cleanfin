@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { THEME_MODE } from "../Common/layoutConfig";
 import { Link, useNavigate } from "react-router-dom";
-import React from "react";
-import { Dropdown } from "react-bootstrap";
+import React, { useRef, useState } from "react";
+import { Dropdown, Spinner } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import SimpleBar from "simplebar-react";
 
@@ -11,6 +11,7 @@ import SimpleBar from "simplebar-react";
 import avatar2 from "../assets/images/user/avatar-2.jpg";
 import { postRequest } from "../service/fetch-services";
 import SocketUI from "../Common/SocketUI";
+import { INotification } from "../pages/Pages/UserDashboard/Helper/interfaces";
 // import avatar3 from "../assets/images/user/avatar-3.jpg";
 
 interface HeaderProps {
@@ -52,6 +53,57 @@ const TopBar = ({
     }
   };
 
+  const [loading, setLoading] = useState<boolean>(false);
+  const [notifications, setNotifications] = useState<INotification[]>([]);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [updateLoading, setUpdateLoading] = useState<boolean>(false);
+
+  const fetchNotifications = async (page = 1) => {
+    try {
+      setLoading(true);
+      const result = await postRequest("notification/list", {
+        limit: 10,
+        page: page,
+        userId: userDetails?._id,
+      });
+      const { data } = result;
+      setNotifications((prev) => (page === 1 ? data : [...prev, ...data]));
+      setTotalPages(result?.pagination?.totalPages);
+      setCurrentPage(page);
+      setLoading(false);
+      setDropdownOpen(true);
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
+    }
+  };
+
+  // Detect scroll to bottom
+  const handleScroll = () => {
+    if (!containerRef.current || loading || currentPage >= totalPages) return;
+
+    const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
+    if (scrollTop + clientHeight >= scrollHeight - 10) {
+      fetchNotifications(currentPage + 1);
+    }
+  };
+
+  const readAllNotification = async () => {
+    try {
+      const body = {
+        userId: userDetails?._id,
+      };
+      setUpdateLoading(true);
+      await postRequest("notification/mark-all-as-read", body);
+      setUpdateLoading(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <React.Fragment>
       <header className="pc-header">
@@ -83,11 +135,11 @@ const TopBar = ({
 
           <div className="ms-auto">
             <ul className="list-unstyled">
-              {userDetails?.role === "admin" &&
+              {userDetails?.role === "admin" && (
                 <span className="pc-h-item">
                   <SocketUI />
                 </span>
-              }
+              )}
               <Dropdown as="li" className="pc-h-item">
                 <Dropdown.Toggle
                   as="a"
@@ -133,396 +185,95 @@ const TopBar = ({
                 </a>
               </li> */}
 
-              {/* <Dropdown as="li" className="pc-h-item">
+              <Dropdown
+                as="li"
+                className="pc-h-item"
+                show={dropdownOpen}
+                onToggle={(isOpen) => setDropdownOpen(isOpen)}
+              >
                 <Dropdown.Toggle
                   as="a"
                   className="pc-head-link arrow-none me-0"
                   data-bs-toggle="dropdown"
-                  href="#"
                   aria-haspopup="false"
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    fetchNotifications();
+                  }}
                 >
                   <i className="ph-duotone ph-bell"></i>
-                  <span className="badge bg-success pc-h-badge">3</span>
+                  {/* <span className="badge bg-success pc-h-badge">3</span> */}
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="dropdown-notification dropdown-menu-end pc-h-dropdown">
                   <div className="dropdown-header d-flex align-items-center justify-content-between">
                     <h4 className="m-0">Notifications</h4>
-                    <ul className="list-inline ms-auto mb-0">
-                      <li className="list-inline-item">
-                        <Link
-                          to="#"
-                          className="avtar avtar-s btn-link-hover-primary"
-                        >
-                          <i className="ti ti-link f-18"></i>
-                        </Link>
-                      </li>
-                    </ul>
                   </div>
                   <SimpleBar
                     className="dropdown-body text-wrap header-notification-scroll position-relative h-100"
                     style={{ maxHeight: "calc(100vh - 235px)" }}
+                    scrollableNodeProps={{
+                      ref: containerRef,
+                      onScroll: handleScroll,
+                    }}
                   >
-                    <ul className="list-group list-group-flush">
-                      <li className="list-group-item">
-                        <p className="text-span">Today</p>
-                        <div className="d-flex">
-                          <div className="flex-shrink-0">
-                            <img
-                              src={avatar2}
-                              alt="user-image"
-                              className="user-avtar avtar avtar-s"
-                            />
-                          </div>
-                          <div className="flex-grow-1 ms-3">
-                            <div className="d-flex">
-                              <div className="flex-grow-1 me-3 position-relative">
-                                <h6 className="mb-0 text-truncate">
-                                  Keefe Bond added new tags to 💪 Design system
-                                </h6>
-                              </div>
-                              <div className="flex-shrink-0">
-                                <span className="text-sm">2 min ago</span>
-                              </div>
-                            </div>
-                            <p className="position-relative text-muted mt-1 mb-2">
-                              <br />
-                              <span className="text-truncate">
-                                Lorem Ipsum has been the industry&apos;s
-                                standard dummy text ever since the 1500s.
-                              </span>
-                            </p>
-                            <span className="badge bg-light-primary border border-primary me-1 mt-1">
-                              web design
-                            </span>
-                            <span className="badge bg-light-warning border border-warning me-1 mt-1">
-                              Dashobard
-                            </span>
-                            <span className="badge bg-light-success border border-success me-1 mt-1">
-                              Design System
-                            </span>
-                          </div>
-                        </div>
-                      </li>
-                      <li className="list-group-item">
-                        <div className="d-flex">
-                          <div className="flex-shrink-0">
-                            <div className="avtar avtar-s bg-light-primary">
-                              <i className="ph-duotone ph-chats-teardrop f-18"></i>
-                            </div>
-                          </div>
-                          <div className="flex-grow-1 ms-3">
-                            <div className="d-flex">
-                              <div className="flex-grow-1 me-3 position-relative">
-                                <h6 className="mb-0 text-truncate">Message</h6>
-                              </div>
-                              <div className="flex-shrink-0">
-                                <span className="text-sm text-muted">
-                                  1 hour ago
-                                </span>
+                    <ul className="list-group list-group-flush w-100">
+                      {loading ? (
+                        <li className="list-group-item d-flex justify-content-center">
+                          <Spinner
+                            size="sm"
+                            className="d-flex justify-content-center"
+                          />
+                        </li>
+                      ) : (
+                        ""
+                      )}
+                      {notifications?.length ? (
+                        notifications?.map((notification, index) => (
+                          <li className="list-group-item" key={index}>
+                            <div>
+                              <div>
+                                <div className="d-flex justify-content-between">
+                                  <div className=" me-3 position-relative">
+                                    <h6 className="mb-0">
+                                      {notification?.title}
+                                    </h6>
+                                  </div>
+                                </div>
+                                <p className="position-relative text-muted mt-1 mb-2">
+                                  <span>{notification?.body}</span>
+                                </p>
                               </div>
                             </div>
-                            <p className="position-relative text-muted mt-1 mb-2">
-                              <br />
-                              <span className="text-truncate">
-                                Lorem Ipsum has been the industry&apos;s
-                                standard dummy text ever since the 1500s.
-                              </span>
-                            </p>
-                          </div>
-                        </div>
-                      </li>
-                      <li className="list-group-item">
-                        <p className="text-span">Yesterday</p>
-                        <div className="d-flex">
-                          <div className="flex-shrink-0">
-                            <div className="avtar avtar-s bg-light-danger">
-                              <i className="ph-duotone ph-user f-18"></i>
-                            </div>
-                          </div>
-                          <div className="flex-grow-1 ms-3">
-                            <div className="d-flex">
-                              <div className="flex-grow-1 me-3 position-relative">
-                                <h6 className="mb-0 text-truncate">
-                                  Challenge invitation
-                                </h6>
-                              </div>
-                              <div className="flex-shrink-0">
-                                <span className="text-sm text-muted">
-                                  12 hour ago
-                                </span>
-                              </div>
-                            </div>
-                            <p className="position-relative text-muted mt-1 mb-2">
-                              <br />
-                              <span className="text-truncate">
-                                <strong> Jonny aber</strong> invites to join the
-                                challenge
-                              </span>
-                            </p>
-                            <button className="btn btn-sm rounded-pill btn-outline-secondary me-2">
-                              Decline
-                            </button>
-                            <button className="btn btn-sm rounded-pill btn-primary">
-                              Accept
-                            </button>
-                          </div>
-                        </div>
-                      </li>
-                      <li className="list-group-item">
-                        <div className="d-flex">
-                          <div className="flex-shrink-0">
-                            <div className="avtar avtar-s bg-light-info">
-                              <i className="ph-duotone ph-notebook f-18"></i>
-                            </div>
-                          </div>
-                          <div className="flex-grow-1 ms-3">
-                            <div className="d-flex">
-                              <div className="flex-grow-1 me-3 position-relative">
-                                <h6 className="mb-0 text-truncate">Forms</h6>
-                              </div>
-                              <div className="flex-shrink-0">
-                                <span className="text-sm text-muted">
-                                  2 hour ago
-                                </span>
-                              </div>
-                            </div>
-                            <p className="position-relative text-muted mt-1 mb-2">
-                              Lorem Ipsum is simply dummy text of the printing
-                              and typesetting industry. Lorem Ipsum has been the
-                              industry&apos;s standard dummy text ever since the
-                              1500s.
-                            </p>
-                          </div>
-                        </div>
-                      </li>
-                      <li className="list-group-item">
-                        <div className="d-flex">
-                          <div className="flex-shrink-0">
-                            <img
-                              src={avatar2}
-                              alt="user-image"
-                              className="user-avtar avtar avtar-s"
-                            />
-                          </div>
-                          <div className="flex-grow-1 ms-3">
-                            <div className="d-flex">
-                              <div className="flex-grow-1 me-3 position-relative">
-                                <h6 className="mb-0 text-truncate">
-                                  Keefe Bond{" "}
-                                  <span className="text-body">
-                                    {" "}
-                                    added new tags to{" "}
-                                  </span>{" "}
-                                  💪 Design system
-                                </h6>
-                              </div>
-                              <div className="flex-shrink-0">
-                                <span className="text-sm">2 min ago</span>
-                              </div>
-                            </div>
-                            <p className="position-relative text-muted mt-1 mb-2">
-                              <br />
-                              <span className="text-truncate">
-                                Lorem Ipsum has been the industry&apos;s
-                                standard dummy text ever since the 1500s.
-                              </span>
-                            </p>
-                            <span className="badge bg-light-primary border border-primary me-1 mt-1">
-                              web design
-                            </span>
-                            <span className="badge bg-light-warning border border-warning me-1 mt-1">
-                              Dashobard
-                            </span>
-                            <span className="badge bg-light-success border border-success me-1 mt-1">
-                              Design System
-                            </span>
-                          </div>
-                        </div>
-                      </li>
-                      <li className="list-group-item">
-                        <div className="d-flex">
-                          <div className="flex-shrink-0">
-                            <div className="avtar avtar-s bg-light-primary">
-                              <i className="ph-duotone ph-chats-teardrop f-18"></i>
-                            </div>
-                          </div>
-                          <div className="flex-grow-1 ms-3">
-                            <div className="d-flex">
-                              <div className="flex-grow-1 me-3 position-relative">
-                                <h6 className="mb-0 text-truncate">Message</h6>
-                              </div>
-                              <div className="flex-shrink-0">
-                                <span className="text-sm text-muted">
-                                  1 hour ago
-                                </span>
-                              </div>
-                            </div>
-                            <p className="position-relative text-muted mt-1 mb-2">
-                              <br />
-                              <span className="text-truncate">
-                                Lorem Ipsum has been the industry&apos;s
-                                standard dummy text ever since the 1500s.
-                              </span>
-                            </p>
-                          </div>
-                        </div>
-                      </li>
-                      <li className="list-group-item">
-                        <p className="text-span">Yesterday</p>
-                        <div className="d-flex">
-                          <div className="flex-shrink-0">
-                            <div className="avtar avtar-s bg-light-danger">
-                              <i className="ph-duotone ph-user f-18"></i>
-                            </div>
-                          </div>
-                          <div className="flex-grow-1 ms-3">
-                            <div className="d-flex">
-                              <div className="flex-grow-1 me-3 position-relative">
-                                <h6 className="mb-0 text-truncate">
-                                  Challenge invitation
-                                </h6>
-                              </div>
-                              <div className="flex-shrink-0">
-                                <span className="text-sm text-muted">
-                                  12 hour ago
-                                </span>
-                              </div>
-                            </div>
-                            <p className="position-relative text-muted mt-1 mb-2">
-                              <br />
-                              <span className="text-truncate">
-                                <strong> Jonny aber</strong> invites to join the
-                                challenge
-                              </span>
-                            </p>
-                            <button className="btn btn-sm rounded-pill btn-outline-secondary me-2">
-                              Decline
-                            </button>
-                            <button className="btn btn-sm rounded-pill btn-primary">
-                              Accept
-                            </button>
-                          </div>
-                        </div>
-                      </li>
-                      <li className="list-group-item">
-                        <div className="d-flex">
-                          <div className="flex-shrink-0">
-                            <div className="avtar avtar-s bg-light-info">
-                              <i className="ph-duotone ph-notebook f-18"></i>
-                            </div>
-                          </div>
-                          <div className="flex-grow-1 ms-3">
-                            <div className="d-flex">
-                              <div className="flex-grow-1 me-3 position-relative">
-                                <h6 className="mb-0 text-truncate">Forms</h6>
-                              </div>
-                              <div className="flex-shrink-0">
-                                <span className="text-sm text-muted">
-                                  2 hour ago
-                                </span>
-                              </div>
-                            </div>
-                            <p className="position-relative text-muted mt-1 mb-2">
-                              Lorem Ipsum is simply dummy text of the printing
-                              and typesetting industry. Lorem Ipsum has been the
-                              industry&apos;s standard dummy text ever since the
-                              1500s.
-                            </p>
-                          </div>
-                        </div>
-                      </li>
-                      <li className="list-group-item">
-                        <div className="d-flex">
-                          <div className="flex-shrink-0">
-                            <img
-                              src={avatar2}
-                              alt="user-image"
-                              className="user-avtar avtar avtar-s"
-                            />
-                          </div>
-                          <div className="flex-grow-1 ms-3">
-                            <div className="d-flex">
-                              <div className="flex-grow-1 me-3 position-relative">
-                                <h6 className="mb-0 text-truncate">
-                                  Keefe Bond{" "}
-                                  <span className="text-body">
-                                    {" "}
-                                    added new tags to{" "}
-                                  </span>{" "}
-                                  💪 Design system
-                                </h6>
-                              </div>
-                              <div className="flex-shrink-0">
-                                <span className="text-sm text-muted">
-                                  2 min ago
-                                </span>
-                              </div>
-                            </div>
-                            <p className="position-relative text-muted mt-1 mb-2">
-                              <br />
-                              <span className="text-truncate">
-                                Lorem Ipsum has been the industry&apos;s
-                                standard dummy text ever since the 1500s.
-                              </span>
-                            </p>
-                            <button className="btn btn-sm rounded-pill btn-outline-secondary me-2">
-                              Decline
-                            </button>
-                            <button className="btn btn-sm rounded-pill btn-primary">
-                              Accept
-                            </button>
-                          </div>
-                        </div>
-                      </li>
-                      <li className="list-group-item">
-                        <div className="d-flex">
-                          <div className="flex-shrink-0">
-                            <div className="avtar avtar-s bg-light-success">
-                              <i className="ph-duotone ph-shield-checkered f-18"></i>
-                            </div>
-                          </div>
-                          <div className="flex-grow-1 ms-3">
-                            <div className="d-flex">
-                              <div className="flex-grow-1 me-3 position-relative">
-                                <h6 className="mb-0 text-truncate">Security</h6>
-                              </div>
-                              <div className="flex-shrink-0">
-                                <span className="text-sm text-muted">
-                                  5 hour ago
-                                </span>
-                              </div>
-                            </div>
-                            <p className="position-relative text-muted mt-1 mb-2">
-                              Lorem Ipsum is simply dummy text of the printing
-                              and typesetting industry. Lorem Ipsum has been the
-                              industry&apos;s standard dummy text ever since the
-                              1500s.
-                            </p>
-                          </div>
-                        </div>
-                      </li>
+                          </li>
+                        ))
+                      ) : (
+                        <li className="list-group-item">No Data Found!</li>
+                      )}
                     </ul>
                   </SimpleBar>
                   <div className="dropdown-footer">
-                    <div className="row g-3">
+                    <div className="row g-3 justify-content-end">
                       <div className="col-6">
                         <div className="d-grid">
-                          <button className="btn btn-primary">
-                            Archive all
-                          </button>
-                        </div>
-                      </div>
-                      <div className="col-6">
-                        <div className="d-grid">
-                          <button className="btn btn-outline-secondary">
-                            Mark all as read
+                          <button
+                            className="btn btn-outline-secondary"
+                            onClick={() => readAllNotification()}
+                            disabled={updateLoading || !notifications?.length}
+                          >
+                            Mark all as read{" "}
+                            {updateLoading ? (
+                              <Spinner className="ms-2" size="sm" />
+                            ) : (
+                              ""
+                            )}
                           </button>
                         </div>
                       </div>
                     </div>
                   </div>
                 </Dropdown.Menu>
-              </Dropdown> */}
+              </Dropdown>
               <Dropdown as="li" className="pc-h-item header-user-profile">
                 <Dropdown.Toggle
                   className="pc-head-link arrow-none me-0"

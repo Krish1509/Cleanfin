@@ -5,7 +5,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { Card, CardBody, Col, Row } from "react-bootstrap";
 import ContentBytes from "../../../Common/ContentBytes/ContentBytes";
 import Recommendation from "../../../Common/Recommendation/Recommendation";
-import PerformanceCard from "../../../Common/PerformanceCard/PerformanceCard";
 import { IRecommendation, IContentbytes } from "./Helper/interfaces";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../../../helper/firebase-config";
@@ -16,7 +15,12 @@ import { useNavigate } from "react-router-dom";
 import LottieAnimation, {
   Varient,
 } from "../../../Common/AnimationComponent/LottieAnimation";
-import { initializeSocket, TouchlineData, reconnectSocket } from "../../../service/socketService";
+import {
+  initializeSocket,
+  TouchlineData,
+  reconnectSocket,
+} from "../../../service/socketService";
+import PerformanceCard from "../../../Common/PerformanceCard/PerformanceCard";
 
 //import Components
 
@@ -41,7 +45,7 @@ const UserDashboard = () => {
     const socket = initializeSocket();
 
     socket.on("newTouchlineData", (data: TouchlineData) => {
-      setdata(prevData =>
+      setdata((prevData) =>
         prevData.map((item) => {
           if (data?.data.scrip.scrip_token === item.scriptCode.toString()) {
             return { ...item, touchlineData: data };
@@ -110,10 +114,10 @@ const UserDashboard = () => {
                 let targetInfo: number = target1Changed
                   ? 1
                   : target2Changed
-                    ? 2
-                    : target3Changed
-                      ? 3
-                      : 0;
+                  ? 2
+                  : target3Changed
+                  ? 3
+                  : 0;
                 setAnimationVarient({
                   type: Varient.Target,
                   info: `Milestone Reached on Target ${targetInfo}!`,
@@ -266,22 +270,25 @@ const UserDashboard = () => {
           <div className="menu">
             <div
               onClick={() => scrollToSection("recommendation")}
-              className={`menu-item ${activeSection === "recommendation" ? "active" : ""
-                }`}
+              className={`menu-item ${
+                activeSection === "recommendation" ? "active" : ""
+              }`}
             >
               Recommendations
             </div>
             <div
               onClick={() => scrollToSection("content-bytes")}
-              className={`menu-item ${activeSection === "content-bytes" ? "active" : ""
-                }`}
+              className={`menu-item ${
+                activeSection === "content-bytes" ? "active" : ""
+              }`}
             >
               Content Bytes
             </div>
             <div
               onClick={() => scrollToSection("past-performance")}
-              className={`menu-item ${activeSection === "past-performance" ? "active" : ""
-                }`}
+              className={`menu-item ${
+                activeSection === "past-performance" ? "active" : ""
+              }`}
             >
               Past Performance
             </div>
@@ -369,16 +376,21 @@ const UserDashboard = () => {
               className="user-dashboard-container container-min"
               id="past-performance"
             >
-              <h5 className="mb-4">Past Performance</h5>
-              <Row>
-                {[1, 2, 3]?.map((i) => {
-                  return (
-                    <Col xs={6} sm={4} md={4} lg={4} xxl={3} key={i}>
-                      <PerformanceCard />
-                    </Col>
-                  );
-                })}
-              </Row>
+              {/* <h5 className="mb-4">Past Performance</h5> */}
+              <Col lg={12}>
+                <div className="d-flex align-items-center justify-content-between mb-3">
+                  <h5 className="mb-0">Past Performance</h5>
+                  <button
+                    type="button"
+                    className="btn btn-sm my-2 me-1 btn-light-success"
+                    onClick={() => navigate("/pastPerformance")}
+                  >
+                    View All
+                    <i className="ms-2 fas fa-arrow-circle-right"></i>
+                  </button>
+                </div>
+              </Col>
+              <PerformanceCard />
             </div>
           </CardBody>
         </Card>
