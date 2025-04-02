@@ -358,7 +358,7 @@ const AddRecommendation = () => {
                                 )}
                               />
                               {errors.priceCondition &&
-                                touched.priceCondition ? (
+                              touched.priceCondition ? (
                                 <div className="invalid-feedback d-flex align-items-start">
                                   {errors.priceCondition}
                                 </div>
@@ -424,44 +424,6 @@ const AddRecommendation = () => {
                           )}
                           <Col sm={`${editData?._id ? "5" : "6"}`}>
                             <div className="mb-3">
-                              <label className="form-label">Target 2</label>
-                              <Field
-                                type="number"
-                                className="form-control"
-                                id="target2"
-                                placeholder="Target 2"
-                                name="target2"
-                              />
-                              {errors.target2 && touched.target2 ? (
-                                <div className="invalid-feedback d-flex align-items-start">
-                                  {errors.target2}
-                                </div>
-                              ) : null}
-                            </div>
-                          </Col>
-                          {editData?._id && <Col sm={1} />}
-                        </Row>
-                        <Row>
-                          <Col sm={`${editData?._id ? "5" : "6"}`}>
-                            <div className="mb-3">
-                              <label className="form-label">Target 3</label>
-                              <Field
-                                type="number"
-                                className="form-control"
-                                id="target3"
-                                placeholder="Target 3"
-                                name="target3"
-                              />
-                              {errors.target3 && touched.target3 ? (
-                                <div className="invalid-feedback d-flex align-items-start">
-                                  {errors.target3}
-                                </div>
-                              ) : null}
-                            </div>
-                          </Col>
-                          {editData?._id && <Col sm={1} />}
-                          <Col sm={`${editData?._id ? "5" : "6"}`}>
-                            <div className="mb-3">
                               <label className="form-label">Stop Loss</label>
                               <Field
                                 type="number"
@@ -497,6 +459,44 @@ const AddRecommendation = () => {
                           )}
                         </Row>
                         <Row>
+                          <Col sm={`${editData?._id ? "5" : "6"}`}>
+                            <div className="mb-3">
+                              <label className="form-label">Target 2</label>
+                              <Field
+                                type="number"
+                                className="form-control"
+                                id="target2"
+                                placeholder="Target 2"
+                                name="target2"
+                              />
+                              {errors.target2 && touched.target2 ? (
+                                <div className="invalid-feedback d-flex align-items-start">
+                                  {errors.target2}
+                                </div>
+                              ) : null}
+                            </div>
+                          </Col>
+                          {editData?._id && <Col sm={1} />}
+                          <Col sm={`${editData?._id ? "5" : "6"}`}>
+                            <div className="mb-3">
+                              <label className="form-label">Target 3</label>
+                              <Field
+                                type="number"
+                                className="form-control"
+                                id="target3"
+                                placeholder="Target 3"
+                                name="target3"
+                              />
+                              {errors.target3 && touched.target3 ? (
+                                <div className="invalid-feedback d-flex align-items-start">
+                                  {errors.target3}
+                                </div>
+                              ) : null}
+                            </div>
+                          </Col>
+                          {editData?._id && <Col sm={1} />}
+                        </Row>
+                        <Row>
                           <Col sm={12}>
                             <div className="mb-3">
                               <label className="form-label">
@@ -509,7 +509,7 @@ const AddRecommendation = () => {
                                 }
                               />
                               {errors.recommendation &&
-                                touched.recommendation ? (
+                              touched.recommendation ? (
                                 <div className="invalid-feedback d-flex align-items-start">
                                   {errors.recommendation}
                                 </div>

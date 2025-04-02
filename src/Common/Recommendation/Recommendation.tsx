@@ -8,7 +8,7 @@ import {
 } from "../../pages/Pages/UserDashboard/Helper/interfaces";
 import { TouchlineData } from "../../service/socketService";
 interface RecommendationWithTouchline extends IRecommendation {
-  touchlineData?: TouchlineData;  // Optional touchlineData property
+  touchlineData?: TouchlineData; // Optional touchlineData property
 }
 interface RecommendationProps {
   data: RecommendationWithTouchline;
@@ -49,23 +49,45 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
     <React.Fragment>
       <Col>
         <Card className="statistics-card-1">
-          <Card.Body>
-            <div className="d-flex align-items-center justify-content-between">
-              <div className="d-flex align-items-center">
-                <div className="flex-grow-1 ms-3">
-                  <h5 className="mb-0 text-muted font-bold">{optionScript?.name}</h5>
-                  <p className="mb-0">{data?.touchlineData?.data?.last_traded_price}</p>
+          <Card.Body className="p-3">
+            <div className="d-flex" style={{ height: "100%" }}>
+              <div className="flex-grow-1">
+                <div className="d-flex">
+                  <h5
+                    className="mb-0 text-muted font-bold"
+                    style={{ minWidth: 60 }}
+                  >
+                    {optionScript?.name || ""}
+                  </h5>
+                </div>
+                <div className="d-flex">
+                  <span>{data?.touchlineData?.data?.last_traded_price}</span>
+                </div>
+                <div className="d-flex">
+                  <span>
+                    {data?.date?.seconds
+                      ? new Date(
+                          data.date.seconds * 1000 +
+                            Math.floor(data.date.nanoseconds / 1e6)
+                        ).toLocaleDateString("en-GB")
+                      : "-"}
+                  </span>
                 </div>
               </div>
-
               <div
-                className="d-flex align-items-center"
-                style={{ marginBottom: "auto" }}
+                className="d-flex flex-grow-1 justify-content-end"
+                style={{ height: "100%" }}
               >
-                <span className="badge bg-light-primary ms-2">
+                <span
+                  className={`badge ms-2 ${
+                    data.action === "buy"
+                      ? "bg-light-success"
+                      : "bg-light-danger"
+                  }`}
+                >
                   {data?.action.toUpperCase()}
                 </span>
-                <div className="flex-grow-1 ms-3">
+                <div className="ms-3">
                   {data?.recommendation ? (
                     <OverlayTrigger
                       placement="top"
@@ -85,85 +107,40 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
                       ></i>
                     </OverlayTrigger>
                   ) : (
-                    <i
-                      className="fas fa-exclamation-circle"
-                      style={{ cursor: "pointer" }}
-                    ></i>
+                    <i className="fas fa-exclamation-circle"></i>
                   )}
                 </div>
               </div>
             </div>
-
-            <div className="d-flex align-items-center justify-content-around mt-4">
-              <div className="d-flex align-items-center justify-content-between flex-column">
-                <div>Target 1</div>
-                <div className="d-flex align-items-center justify-content-around gap-1">
-                  <div>{data?.target1 || "-"}</div>
-                  {data?.target1Achieved && (
-                    <div className="check-icon beat-animation">
-                      <i className="ph-duotone ph-seal-check "></i>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              <div className="d-flex align-items-center justify-content-between flex-column">
-                <div>Target 2</div>
-                <div className="d-flex align-items-center justify-content-around gap-1">
-                  <div>{data?.target2 || "-"}</div>
-                  {data?.target2Achieved && (
-                    <div className="check-icon beat-animation">
-                      <i className="ph-duotone ph-seal-check "></i>
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="d-flex align-items-center justify-content-between flex-column">
-                <div>Target 3</div>
-                <div className="d-flex align-items-center justify-content-around gap-1">
-                  <div>{data?.target3 || "-"}</div>
-                  {data?.target3Achieved && (
-                    <div className="check-icon beat-animation">
-                      <i className="ph-duotone ph-seal-check "></i>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div className="border w-100 mt-3"></div>
-
-            <Row className="g-3 mt-2 text-center">
-              <div className="col-4">
-                <p className="mb-0 text-muted">Date</p>
-                <h5 className="mb-0">
-                  {" "}
-                  {data?.date?.seconds
-                    ? new Date(
-                      data.date.seconds * 1000 +
-                      Math.floor(data.date.nanoseconds / 1e6)
-                    ).toLocaleDateString("en-GB")
-                    : "-"}
-                </h5>
-              </div>
-              <div className="col-4 border-start">
-                <p className="mb-0 text-muted">Stop Loss</p>
-                <div className="d-flex align-items-center justify-content-center gap-1">
-                  <div>{data?.stopLoss || "-"}</div>
-                  {data?.stopLossAchieved && (
-                    <div className="check-icon beat-animation">
-                      <i className="ph-duotone ph-seal-check "></i>
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="col-4 border-start">
-                <p className="mb-0 text-muted">Price</p>
-                <div className="d-flex align-items-center justify-content-center gap-1">
-                  <div>{data?.price || "-"}</div>
-                  <span className="badge bg-light-secondary ms-2">
+            <hr className="my-3 border-top border-secondary border-opacity-50" />
+            <Row className="g-3 text-center">
+              <div className="col-6">
+                <div className="d-flex align-items-center justify-content-between">
+                  <p className="mb-0 f-w-600 pb-1 h5">Price</p>
+                  <span className="badge bg-light-secondary me-2">
                     {data?.priceCondition?.toUpperCase()}
                   </span>
+                </div>
+                <div className="mb-0 text-muted pb-1 pt-2 d-flex">
+                  {data?.price || "-"}
+                </div>
+              </div>
+              <div className="col-6 border-start">
+                <div className="d-flex align-items-center justify-content-start pb-2">
+                  <p className="mb-0 f-w-600 text-start" style={{ width: 70 }}>
+                    Target:
+                  </p>
+                  <div className="d-flex align-items-center justify-content-center ms-1">
+                    <div className="mb-0 text-muted">{data?.target1}</div>
+                  </div>
+                </div>
+                <div className="d-flex align-items-center justify-content-start pt-2 border-top">
+                  <p className="mb-0 f-w-600 text-start" style={{ width: 70 }}>
+                    Stop Loss:
+                  </p>
+                  <div className="d-flex align-items-center justify-content-center ms-1">
+                    <div className="mb-0 text-muted">{data?.stopLoss}</div>
+                  </div>
                 </div>
               </div>
             </Row>
