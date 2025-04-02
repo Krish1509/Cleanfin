@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
-import { Card, Row } from "react-bootstrap";
+import { Card, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
 import { IRecommendation } from "../../pages/Pages/UserDashboard/Helper/interfaces";
 import ToggleSwitch from "../ToggleSwitch";
 import { postRequest } from "../../service/fetch-services";
@@ -12,7 +12,7 @@ import moment from "moment";
 import { TouchlineData } from "../../service/socketService";
 
 interface RecommendationWithTouchline extends IRecommendation {
-  touchlineData?: TouchlineData;  // Optional touchlineData property
+  touchlineData?: TouchlineData; // Optional touchlineData property
 }
 interface RecommendationProps {
   data: RecommendationWithTouchline;
@@ -68,11 +68,14 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
   return (
     <React.Fragment>
       <Card className="statistics-card-1">
-        <Card.Body>
+        <Card.Body className="p-3">
           <div className="d-flex" style={{ height: "100%" }}>
-            <div className="flex-grow-1 ms-3">
+            <div className="flex-grow-1">
               <div className="d-flex">
-                <h5 className="mb-0 text-muted font-bold" style={{ minWidth: 60 }}>
+                <h5
+                  className="mb-0 text-muted font-bold"
+                  style={{ minWidth: 60 }}
+                >
                   {data?.scriptData[0]?.name || ""}
                 </h5>
               </div>
@@ -83,26 +86,60 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
                 <span>{moment(data?.date).format("YYYY-MM-DD")}</span>
               </div>
             </div>
-            <div className="d-flex flex-grow-1 justify-content-end" style={{ height: "100%" }}>
-              <span className={`badge ms-2 ${data.action === "buy" ? "bg-light-success" : "bg-light-danger"}`}>
+            <div
+              className="d-flex flex-grow-1 justify-content-end"
+              style={{ height: "100%" }}
+            >
+              <span
+                className={`badge ms-2 ${
+                  data.action === "buy" ? "bg-light-success" : "bg-light-danger"
+                }`}
+              >
                 {data?.action.toUpperCase()}
               </span>
+              <div className="ms-3">
+                {data?.recommendation ? (
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={
+                      <Tooltip id="top">
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: data.recommendation,
+                          }}
+                        />
+                      </Tooltip>
+                    }
+                  >
+                    <i
+                      className="fas fa-exclamation-circle"
+                      style={{ cursor: "pointer" }}
+                    ></i>
+                  </OverlayTrigger>
+                ) : (
+                  <i className="fas fa-exclamation-circle"></i>
+                )}
+              </div>
             </div>
           </div>
-          <hr className="my-4 border-top border-secondary border-opacity-50" />
+          <hr className="my-3 border-top border-secondary border-opacity-50" />
           <Row className="g-3 text-center">
             <div className="col-6">
-              <p className="mb-0 f-w-600 pb-1">Price</p>
-              <div className="mb-0 text-muted pb-1">
+              <div className="d-flex align-items-center justify-content-between">
+                <p className="mb-0 f-w-600 pb-1 h5">Price</p>
+                <span className="badge bg-light-secondary me-2">
+                  {data?.priceCondition?.toUpperCase()}
+                </span>
+              </div>
+              <div className="mb-0 text-muted pb-1 pt-2 d-flex">
                 {data?.price || "-"}
               </div>
-              <span className="badge bg-light-secondary">
-                {data?.priceCondition?.toUpperCase()}
-              </span>
             </div>
             <div className="col-6 border-start">
-              <div className="d-flex align-items-center justify-content-start py-2">
-                <p className="mb-0 f-w-600 text-start" style={{ width: 70 }}>Target:</p>
+              <div className="d-flex align-items-center justify-content-start pb-2">
+                <p className="mb-0 f-w-600 text-start" style={{ width: 70 }}>
+                  Target:
+                </p>
                 <div className="d-flex align-items-center justify-content-center ms-1">
                   <div className="mb-0 text-muted">{data?.target1}</div>
                   <ToggleSwitch
@@ -115,8 +152,10 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
                   />
                 </div>
               </div>
-              <div className="d-flex align-items-center justify-content-start py-2 border-top">
-                <p className="mb-0 f-w-600 text-start" style={{ width: 70 }}>Stop Loss:</p>
+              <div className="d-flex align-items-center justify-content-start pt-2 border-top">
+                <p className="mb-0 f-w-600 text-start" style={{ width: 70 }}>
+                  Stop Loss:
+                </p>
                 <div className="d-flex align-items-center justify-content-center ms-1">
                   <div className="mb-0 text-muted">{data?.stopLoss}</div>
                   <ToggleSwitch
@@ -147,8 +186,9 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
             }
           }}
           handleClose={() => setShowConfirm(false)}
-          message={`Are you sure you want to ${data?.isActive ? "deactivate" : "activate"
-            } this record?`}
+          message={`Are you sure you want to ${
+            data?.isActive ? "deactivate" : "activate"
+          } this record?`}
           loading={updateLoading}
         />
       ) : (
