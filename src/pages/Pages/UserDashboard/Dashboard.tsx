@@ -39,6 +39,9 @@ const UserDashboard = () => {
     useState<boolean>(false);
 
   const user = JSON.parse(localStorage.getItem("user") || "{}");
+  // Convert subscription_end to a Date object
+  const subscriptionEndDate = new Date(user?.subscription_end);
+  const currentDate = new Date();
 
   useEffect(() => {
     reconnectSocket();
@@ -201,7 +204,9 @@ const UserDashboard = () => {
 
   useEffect(() => {
     setShowAnimation(false);
-    fetchData(); // Call the function to start listening for real-time updates
+    if (subscriptionEndDate > currentDate) {
+      fetchData(); // Call the function to start listening for real-time updates
+    }
     // Optionally, return a cleanup function to unsubscribe when the component unmounts
     fetchContentBytes();
 
@@ -221,33 +226,10 @@ const UserDashboard = () => {
   const [showSubscriptionButton, setShowSubscriptionButton] = useState(false);
   useEffect(() => {
     // let intervalId: any;
-    const fetchUserSubscriptionDetails = async () => {
+    const checkSubscriptionEndDate = async () => {
       try {
-        const response = await postRequest("subscription/details", {
-          userId: user?._id,
-        });
-        if (response?.success) {
-          // Convert subscription_end to a Date object
-          const subscriptionEndDate = new Date(
-            response?.data?.User?.subscription_end
-          );
-          const currentDate = new Date();
-
-          // Check if subscription has ended and status is not active
-          if (
-            subscriptionEndDate < currentDate &&
-            response?.data?.status !== "active"
-          ) {
-            setShowSubscriptionButton(true);
-          }
-          // else {
-          //   // Stop polling when the subscription is active
-          //   if (intervalId) {
-          //     clearInterval(intervalId);
-          //   }
-          // }
-        } else {
-          // Show if no subscription
+        // Check if subscription has ended and status is not active
+        if (subscriptionEndDate < currentDate) {
           setShowSubscriptionButton(true);
         }
       } catch (error) {
@@ -255,7 +237,7 @@ const UserDashboard = () => {
       }
     };
 
-    fetchUserSubscriptionDetails();
+    checkSubscriptionEndDate();
     // Set interval to poll API every 30 seconds
     // intervalId = setInterval(fetchUserSubscriptionDetails, 30000);
 
