@@ -1,0 +1,1360 @@
+/* Landing Page Styles */
+
+/* Global Styles - Force immediate application */
+.landing-page {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+  color: #333 !important;
+  overflow-x: hidden !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.landing-page h1, 
+.landing-page h2, 
+.landing-page h3, 
+.landing-page h4, 
+.landing-page h5, 
+.landing-page h6 {
+  font-weight: 600 !important;
+  margin-bottom: 1rem !important;
+}
+
+/* Navbar - Enhanced for consistent rendering */
+.landing-page .navbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
+  width: 100% !important;
+  background-color: rgba(0, 0, 0, 0.85) !important;
+  min-height: 70px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.landing-page .navbar .container {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  padding: 1rem 15px !important;
+}
+
+.landing-page .navbar-brand {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.landing-page .navbar-brand img {
+  max-height: 40px !important;
+}
+
+.landing-page .navbar-collapse {
+  flex-grow: 1 !important;
+  display: flex !important;
+  justify-content: space-between !important;
+}
+
+.landing-page .nav-link {
+  color: #fff !important;
+  font-weight: 500 !important;
+  margin: 0 0.5rem !important;
+  transition: color 0.3s ease !important;
+}
+
+.landing-page .nav-link:hover, 
+.landing-page .nav-link.active {
+  color: #10b981 !important;
+}
+
+/* Button styles for consistent spacing */
+.landing-page .navbar .d-flex > .btn {
+  margin-right: 10px !important;
+}
+
+.landing-page .navbar .d-flex > .btn:last-child {
+  margin-right: 0 !important;
+}
+
+/* Ensure the button container has proper spacing */
+.landing-page .navbar .d-flex {
+  display: flex !important;
+  gap: 10px !important;
+  align-items: center !important;
+}
+
+/* Hero Section - Improved for working with fixed navbar */
+.landing-page .hero-section {
+  background: linear-gradient(135deg, #111827 0%, #1f2937 100%) !important;
+  padding: 100px 0 5rem !important;
+  position: relative !important;
+  overflow: hidden !important;
+  margin-top: 0 !important;
+  border-top: none !important;
+}
+
+.landing-page .hero-section::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-image: url('../images/landing/img-dot-bg.png') !important;
+  opacity: 0.2 !important;
+  z-index: 0 !important;
+}
+
+.landing-page .hero-section .container {
+  position: relative !important;
+  z-index: 1 !important;
+  padding: 0 15px !important;
+}
+
+.landing-page .hero-section .row {
+  align-items: center !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+}
+
+.landing-page .hero-section h1 {
+  font-size: 2.5rem !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  color: #fff !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.landing-page .hero-section p {
+  font-size: 1.125rem !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  margin-bottom: 2rem !important;
+}
+
+.landing-page .hero-section .d-flex {
+  display: flex !important;
+  align-items: center !important;
+  gap: 1rem !important;
+  flex-wrap: wrap !important;
+}
+
+.landing-page .hero-section .btn {
+  padding: 0.75rem 1.5rem !important;
+  font-weight: 500 !important;
+  border-radius: 0.5rem !important;
+}
+
+.landing-page .hero-image {
+  max-width: 100% !important;
+  animation: float 6s ease-in-out infinite !important;
+  margin: 0 auto !important;
+  display: block !important;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Features Section - Improved for consistent initial rendering */
+.landing-page .py-5 {
+  padding-top: 3rem !important;
+  padding-bottom: 3rem !important;
+  text-align: center !important;
+}
+
+.landing-page .text-center {
+  text-align: center !important;
+}
+
+.landing-page .feature-card {
+  border: none !important;
+  border-radius: 12px !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  overflow: hidden !important;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05) !important;
+  height: 100% !important;
+  text-align: center !important;
+  margin: 0 auto !important;
+}
+
+.landing-page .py-5 .container {
+  max-width: 1140px !important;
+  margin: 0 auto !important;
+  padding: 0 15px !important;
+}
+
+.landing-page .py-5 .row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  margin: 0 -15px !important;
+}
+
+.landing-page .py-5 .col-md-4 {
+  padding: 0 15px !important;
+  margin-bottom: 30px !important;
+  flex: 0 0 33.333333% !important;
+  max-width: 33.333333% !important;
+  position: relative !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+@media (max-width: 767.98px) {
+  .landing-page .py-5 .col-md-4 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Fix for feature content alignment */
+.landing-page .feature-card .card-body {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 2rem !important;
+}
+
+.landing-page .lead {
+  font-size: 1.125rem !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  margin-bottom: 1.5rem !important;
+  text-align: center !important;
+}
+
+.landing-page .py-5 h2 {
+  font-size: 2rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 1rem !important;
+  text-align: center !important;
+}
+
+/* Benefits Section - New Card Design */
+.landing-page #benefits {
+  background-color: #f8fafc !important;
+  padding: 5rem 0 !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.landing-page #benefits::before,
+.landing-page #benefits::after {
+  content: '' !important;
+  position: absolute !important;
+  width: 300px !important;
+  height: 300px !important;
+  border-radius: 50% !important;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(59, 130, 246, 0.05)) !important;
+  z-index: 0 !important;
+}
+
+.landing-page #benefits::before {
+  top: -150px !important;
+  left: -150px !important;
+}
+
+.landing-page #benefits::after {
+  bottom: -150px !important;
+  right: -150px !important;
+}
+
+.landing-page .benefit-card {
+  background-color: #ffffff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05) !important;
+  padding: 2rem !important;
+  height: 100% !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  text-align: center !important;
+  z-index: 1 !important;
+}
+
+.landing-page .benefit-card:hover {
+  transform: translateY(-10px) !important;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+.landing-page .benefit-icon {
+  width: 80px !important;
+  height: 80px !important;
+  background-color: rgba(16, 185, 129, 0.1) !important;
+  color: #10b981 !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 auto 1.5rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.landing-page .benefit-card:hover .benefit-icon {
+  background-color: #10b981 !important;
+  color: white !important;
+  transform: rotateY(180deg) !important;
+}
+
+.landing-page .benefit-card h3 {
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 1rem !important;
+  color: #333 !important;
+  transition: color 0.3s ease !important;
+}
+
+.landing-page .benefit-card p {
+  color: #666 !important;
+  margin-bottom: 0 !important;
+  transition: color 0.3s ease !important;
+}
+
+.landing-page .benefit-card:hover h3 {
+  color: #10b981 !important;
+}
+
+.landing-page .benefit-card:hover p {
+  color: #444 !important;
+}
+
+/* Gradient border effect */
+.landing-page .benefit-card::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  border-radius: 12px !important;
+  padding: 2px !important;
+  background: linear-gradient(135deg, #10b981, #3b82f6) !important;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0) !important;
+  -webkit-mask-composite: xor !important;
+  mask-composite: exclude !important;
+  opacity: 0 !important;
+  transition: opacity 0.3s ease !important;
+}
+
+.landing-page .benefit-card:hover::before {
+  opacity: 1 !important;
+}
+
+/* Testimonials */
+.landing-page #testimonials {
+  padding: 5rem 0 !important;
+}
+
+.landing-page .testimonial-card {
+  border: none !important;
+  border-radius: 12px !important;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05) !important;
+  transition: transform 0.3s ease !important;
+  height: 100% !important;
+}
+
+.landing-page .testimonial-card:hover {
+  transform: translateY(-5px) !important;
+}
+
+.landing-page .testimonial-avatar {
+  width: 40px !important;
+  height: 40px !important;
+  background-color: #e5e7eb !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #64748b !important;
+}
+
+.landing-page .text-warning svg {
+  color: #f59e0b !important;
+  fill: #f59e0b !important;
+}
+
+/* CTA Section */
+.landing-page .cta-section {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  padding: 5rem 0 !important;
+}
+
+.landing-page .cta-section::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  background-image: url('../images/landing/img-counter-bg.svg') !important;
+  background-size: cover !important;
+  opacity: 0.1 !important;
+}
+
+/* Footer - Enhanced for dark theme */
+.landing-page footer {
+  background-color: #111827 !important;
+  padding: 4rem 0 2rem !important;
+  color: #ffffff !important;
+}
+
+.landing-page footer h5 {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  margin-bottom: 1.5rem !important;
+  font-size: 1.125rem !important;
+}
+
+.landing-page footer p {
+  color: rgba(255, 255, 255, 0.8) !important;
+  margin-bottom: 1.5rem !important;
+  line-height: 1.6 !important;
+}
+
+.landing-page .footer-link {
+  color: rgba(255, 255, 255, 0.7) !important;
+  text-decoration: none !important;
+  transition: color 0.3s ease !important;
+  display: inline-block !important;
+  margin-bottom: 0.75rem !important;
+  font-size: 0.9375rem !important;
+}
+
+.landing-page .footer-link:hover {
+  color: #10b981 !important;
+  text-decoration: none !important;
+}
+
+.landing-page footer .list-unstyled li {
+  margin-bottom: 0.75rem !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.landing-page footer .d-flex {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.landing-page .social-icons {
+  display: flex !important;
+  align-items: center !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.landing-page .social-icons a {
+  color: rgba(255, 255, 255, 0.7) !important;
+  transition: color 0.3s ease !important;
+  margin-right: 1.25rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.landing-page .social-icons a:hover {
+  color: #10b981 !important;
+}
+
+.landing-page footer hr {
+  margin: 2rem 0 !important;
+  opacity: 0.1 !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.landing-page footer .text-center {
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-size: 0.875rem !important;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 991.98px) {
+  .landing-page .navbar-collapse {
+    display: none !important;
+    position: fixed !important;
+    top: 70px !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    background-color: rgba(0, 0, 0, 0.95) !important;
+    z-index: 999 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+    max-height: calc(100vh - 70px) !important;
+    overflow-y: auto !important;
+    margin: 0 !important;
+  }
+  
+  .landing-page .navbar-collapse.show {
+    display: block !important;
+  }
+  
+  /* Child nav elements need padding */
+  .landing-page .navbar-collapse .nav {
+    padding: 0 !important;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+  
+  .landing-page .navbar-nav {
+    padding: 10px 0 !important;
+  }
+  
+  .landing-page .nav-link {
+    padding: 12px 0 !important;
+    font-size: 16px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    transition: all 0.2s ease !important;
+  }
+  
+  .landing-page .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    padding-left: 5px !important;
+  }
+  
+  .landing-page .navbar-collapse .d-flex {
+    margin-top: 15px !important;
+    padding-top: 15px !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+  }
+  
+  /* Fix for navbar toggler button */
+  .landing-page .navbar-toggler {
+    padding: 0.5rem !important;
+    margin-right: 0 !important;
+    border: none !important;
+    color: white !important;
+    outline: none !important;
+    box-shadow: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.3s ease !important;
+    background: transparent !important;
+    z-index: 1001 !important;
+  }
+  
+  .landing-page .navbar-toggler:focus {
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  
+  /* Ensure the hero section has proper spacing */
+  .landing-page .hero-section {
+    margin-top: 70px !important; 
+  }
+  
+  /* Adjust benefit cards for tablet */
+  .landing-page .benefit-card {
+    margin-bottom: 30px !important;
+  }
+  
+  /* Process flow adjustments for tablet */
+  .landing-page .process-flow-container {
+    flex-direction: column !important;
+    gap: 2rem !important;
+  }
+  
+  .landing-page .process-connector {
+    flex-direction: row !important;
+    width: auto !important;
+    margin: 1rem 0 !important;
+  }
+  
+  .landing-page .connector-line {
+    width: 2px !important;
+    height: 40px !important;
+    margin-bottom: 0 !important;
+    margin-right: 8px !important;
+  }
+  
+  /* Pricing cards adjustments */
+  .landing-page .pricing-card {
+    margin-bottom: 2rem !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .landing-page .hero-section {
+    text-align: center !important;
+    padding: 4rem 0 2rem !important;
+  }
+  
+  .landing-page .hero-section .btn {
+    margin-bottom: 1rem !important;
+  }
+  
+  .landing-page .hero-section .d-flex {
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+  }
+  
+  .landing-page .navbar .navbar-collapse {
+    background-color: rgba(0, 0, 0, 0.9) !important;
+    padding: 1rem !important;
+    border-radius: 8px !important;
+    margin-top: 0.5rem !important;
+  }
+  
+  /* Adjust column layout for mobile */
+  .landing-page .py-5 .col-md-4 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+  
+  /* Adjust benefits section for mobile */
+  .landing-page #benefits h2 {
+    font-size: 1.75rem !important;
+  }
+  
+  /* Adjust pricing section for mobile */
+  .landing-page .pricing-title {
+    font-size: 1.75rem !important;
+  }
+  
+  /* Make footer sections full width on mobile */
+  .landing-page footer .col-md-5,
+  .landing-page footer .col-md-3,
+  .landing-page footer .col-md-4 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 2rem !important;
+  }
+  
+  /* Fix back to top button position */
+  .landing-page .back-to-top {
+    bottom: 20px !important;
+    right: 20px !important;
+    width: 45px !important;
+    height: 45px !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .landing-page h1.display-4 {
+    font-size: 2rem !important;
+  }
+  
+  .landing-page .hero-image {
+    max-width: 80% !important;
+    margin: 2rem auto 0 !important;
+  }
+  
+  .landing-page .hero-section h1 {
+    font-size: 2rem !important;
+  }
+  
+  .landing-page .how-we-do-title,
+  .landing-page .what-you-get-title,
+  .landing-page .pricing-title,
+  .landing-page .py-5 h2 {
+    font-size: 1.75rem !important;
+  }
+  
+  .landing-page .lead {
+    font-size: 1rem !important;
+  }
+  
+  .landing-page .process-card {
+    width: 200px !important;
+  }
+  
+  /* Smaller icons on mobile */
+  .landing-page .benefit-icon {
+    width: 60px !important;
+    height: 60px !important;
+  }
+  
+  /* Adjust pricing elements */
+  .landing-page .price-amount {
+    font-size: 2rem !important;
+  }
+  
+  .landing-page .check-circle {
+    width: 28px !important;
+    height: 28px !important;
+    margin-right: 0.75rem !important;
+  }
+  
+  /* Increase font readability on small devices */
+  .landing-page .footer-link {
+    font-size: 0.875rem !important;
+  }
+}
+
+/* Fix for when the navbar appears transparent and overlaps content */
+@media screen and (min-width: 992px) {
+  .landing-page .hero-section {
+    margin-top: 0 !important;
+    padding-top: 9rem !important;
+  }
+}
+
+/* Make sure the whole page gets proper styling on initial load */
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Feature card hover effect */
+.landing-page .feature-card:hover {
+  transform: translateY(-10px) !important;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+}
+
+/* Feature icon styling */
+.landing-page .feature-icon {
+  color: #10b981 !important;
+  background-color: rgba(16, 185, 129, 0.1) !important;
+  width: 70px !important;
+  height: 70px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+  margin: 1.5rem auto 1.5rem !important;
+}
+
+/* Remove all whitespace between navbar and content */
+.landing-page .navbar + section,
+.landing-page .navbar + div {
+  margin-top: 0 !important;
+  padding-top: 7rem !important;
+}
+
+/* Pricing Section - Updated to match original design */
+.landing-page .pricing-section {
+  background-color: #021817 !important;
+  background-image: radial-gradient(circle, rgba(16, 185, 129, 0.03) 0%, rgba(0, 0, 0, 0.3) 100%) !important;
+  padding: 5rem 0 !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.landing-page .pricing-section::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background-image: url('../images/landing/img-dot-bg.png') !important;
+  opacity: 0.02 !important;
+  z-index: 0 !important;
+}
+
+.landing-page .pricing-title {
+  font-size: 2.5rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 1.5rem !important;
+  text-align: center !important;
+  color: white !important;
+}
+
+.landing-page .pricing-title .text-success {
+  color: #10b981 !important;
+}
+
+.landing-page .pricing-subtitle {
+  font-size: 1.125rem !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  margin-bottom: 3rem !important;
+  max-width: 600px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.landing-page .pricing-card {
+  background-color: #0f1a1a !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2) !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.landing-page .pricing-card:hover {
+  transform: translateY(-10px) !important;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+.landing-page .pricing-card.highlighted {
+  background-color: #0d251e !important;
+  border: 1px solid #10b981 !important;
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2) !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.landing-page .pricing-header {
+  padding: 2rem 1.5rem !important;
+  text-align: center !important;
+}
+
+.landing-page .pricing-divider {
+  height: 1px !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  width: 100% !important;
+}
+
+.landing-page .plan-name {
+  font-size: 1.25rem !important;
+  color: white !important;
+  font-weight: 600 !important;
+  margin-bottom: 1.5rem !important;
+  letter-spacing: 0.05em !important;
+}
+
+.landing-page .plan-price {
+  display: flex !important;
+  align-items: baseline !important;
+  justify-content: center !important;
+}
+
+.landing-page .price-amount {
+  font-size: 2.5rem !important;
+  font-weight: 700 !important;
+  color: #10b981 !important;
+}
+
+.landing-page .price-period {
+  font-size: 1rem !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  margin-left: 0.25rem !important;
+}
+
+.landing-page .pricing-features {
+  padding: 2rem 1.5rem !important;
+  flex-grow: 1 !important;
+}
+
+.landing-page .feature-list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.landing-page .feature-list li {
+  display: flex !important;
+  align-items: center !important;
+  margin-bottom: 20px !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.landing-page .feature-list li span {
+  line-height: 1.2 !important;
+  margin-top: 1px !important;
+}
+
+.landing-page .check-circle {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-right: 1rem !important;
+  flex-shrink: 0 !important;
+  margin-top: -2px !important; /* Slight adjustment for vertical alignment */
+}
+
+.landing-page .feature-icon {
+  color: #10b981 !important;
+  stroke-width: 3 !important;
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.landing-page .pricing-footer {
+  padding: 1.5rem !important;
+  text-align: center !important;
+}
+
+.landing-page .choose-plan-btn {
+  width: 100% !important;
+  padding: 0.75rem 0 !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.05em !important;
+  border-radius: 6px !important;
+  transition: all 0.3s ease !important;
+}
+
+.landing-page .choose-plan-btn.highlighted {
+  background-color: #10b981 !important;
+  border-color: #10b981 !important;
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4) !important;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 991.98px) {
+  .landing-page .pricing-card {
+    margin-bottom: 2rem !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .landing-page .pricing-title {
+    font-size: 2rem !important;
+  }
+  
+  .landing-page .price-amount {
+    font-size: 2rem !important;
+  }
+  
+  .landing-page .check-circle {
+    width: 32px !important;
+    height: 32px !important;
+  }
+}
+
+/* How We Do Section */
+.landing-page .how-we-do-section {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  padding: 5rem 0 !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.landing-page .how-we-do-title {
+  font-size: 2.5rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 3rem !important;
+  text-align: center !important;
+  color: white !important;
+}
+
+.landing-page .process-flow-container {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  gap: 0 !important;
+  padding: 2rem 0 !important;
+}
+
+.landing-page .process-card {
+  width: 240px !important;
+  height: 120px !important;
+  position: relative !important;
+  padding: 2px !important;
+  border-radius: 8px !important;
+  background: linear-gradient(90deg, #08AEEA 0%, #2AF598 100%) !important;
+}
+
+.landing-page .process-card-inner {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: #121212 !important;
+  border-radius: 6px !important;
+  padding: 1.5rem !important;
+}
+
+.landing-page .process-title {
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  color: white !important;
+  margin: 0 !important;
+  line-height: 1.4 !important;
+}
+
+.landing-page .process-connector {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100px !important;
+  position: relative !important;
+}
+
+.landing-page .connector-line {
+  width: 70px !important;
+  height: 2px !important;
+  background: linear-gradient(90deg, #08AEEA 0%, #2AF598 100%) !important;
+  margin-bottom: 8px !important;
+}
+
+.landing-page .connector-text {
+  font-size: 1rem !important;
+  color: #2AF598 !important;
+  font-weight: 500 !important;
+}
+
+/* Media Queries for How We Do Section */
+@media (max-width: 991.98px) {
+  .landing-page .process-flow-container {
+    flex-direction: column !important;
+    gap: 2rem !important;
+  }
+  
+  .landing-page .process-connector {
+    flex-direction: row !important;
+    width: auto !important;
+    margin: 1rem 0 !important;
+  }
+  
+  .landing-page .connector-line {
+    width: 2px !important;
+    height: 40px !important;
+    margin-bottom: 0 !important;
+    margin-right: 8px !important;
+  }
+}
+
+/* What You Get Section */
+.landing-page .what-you-get-section {
+  padding: 5rem 0 !important;
+  background-color: #ffffff !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Title animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.landing-page .what-you-get-title {
+  font-size: 2.5rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 3rem !important;
+  text-align: center !important;
+  color: #333 !important;
+  animation: fadeInUp 0.8s ease forwards !important;
+}
+
+/* Feature box animations */
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  70% {
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes floatAnimation {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.landing-page .feature-box {
+  padding: 2rem 1.5rem !important;
+  border-radius: 12px !important;
+  height: 100% !important;
+  min-height: 300px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  position: relative !important;
+  overflow: hidden !important;
+  opacity: 0;
+  animation: popIn 0.6s ease forwards !important;
+}
+
+.landing-page .feature-box:hover {
+  transform: translateY(-10px) !important;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+.landing-page .feature-box.purple {
+  background-color: #f8f0ff !important;
+  animation-delay: 0.1s !important;
+}
+
+.landing-page .feature-box.teal {
+  background-color: #e6faf8 !important;
+  animation-delay: 0.3s !important;
+}
+
+.landing-page .feature-box.blue {
+  background-color: #e6f3ff !important;
+  animation-delay: 0.5s !important;
+}
+
+.landing-page .feature-box.beige {
+  background-color: #fff8e6 !important;
+  animation-delay: 0.7s !important;
+}
+
+/* Gradient border animation */
+@keyframes borderAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.landing-page .feature-box::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  z-index: -1 !important;
+  margin: -2px !important;
+  border-radius: 14px !important;
+  background: linear-gradient(45deg, #10b981, #3b82f6, #9333ea, #f59e0b) !important;
+  background-size: 300% 300% !important;
+  animation: borderAnimation 6s ease infinite !important;
+  opacity: 0 !important;
+  transition: opacity 0.3s ease !important;
+}
+
+.landing-page .feature-box:hover::before {
+  opacity: 1 !important;
+}
+
+.landing-page .feature-icon-wrapper {
+  margin-bottom: 1rem !important;
+  animation: floatAnimation 4s ease-in-out infinite !important;
+  margin-top: 1rem !important;
+}
+
+.landing-page .feature-content {
+  margin-top: auto !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.landing-page .feature-title {
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 0.75rem !important;
+  color: #333 !important;
+  opacity: 1 !important;
+  animation: fadeIn 0.4s ease forwards !important;
+  animation-delay: 0.4s !important;
+  text-align: center !important;
+  width: 100% !important;
+  display: block !important;
+}
+
+.landing-page .feature-text {
+  color: #666 !important;
+  font-size: 0.95rem !important;
+  line-height: 1.6 !important;
+  margin-bottom: 0 !important;
+  opacity: 1 !important;
+  animation: fadeIn 0.4s ease forwards !important;
+  animation-delay: 0.6s !important;
+  text-align: center !important;
+  width: 100% !important;
+  display: block !important;
+  padding: 0 0.5rem !important;
+}
+
+/* Hover effect for text */
+.landing-page .feature-box:hover .feature-title {
+  color: #111 !important;
+}
+
+.landing-page .feature-box:hover .feature-text {
+  color: #444 !important;
+}
+
+/* Background decoration */
+.landing-page .what-you-get-section::before,
+.landing-page .what-you-get-section::after {
+  content: "" !important;
+  position: absolute !important;
+  width: 200px !important;
+  height: 200px !important;
+  border-radius: 50% !important;
+  background: linear-gradient(45deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1)) !important;
+  animation: floatAnimation 8s ease-in-out infinite !important;
+  z-index: 0 !important;
+}
+
+.landing-page .what-you-get-section::before {
+  top: -100px !important;
+  left: -100px !important;
+}
+
+.landing-page .what-you-get-section::after {
+  bottom: -100px !important;
+  right: -100px !important;
+  animation-delay: 4s !important;
+}
+
+/* Media query for responsive design */
+@media (max-width: 991.98px) {
+  .landing-page .feature-box {
+    margin-bottom: 2rem !important;
+  }
+}
+
+/* Text animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Icon spin animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.1);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+.landing-page .feature-icon-bg {
+  width: 80px !important;
+  height: 80px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 12px !important;
+  background-color: #ffffff !important;
+  margin: 0 auto !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05) !important;
+}
+
+.landing-page .feature-box:hover .feature-icon-bg {
+  animation: pulse 1s ease-in-out !important;
+}
+
+.landing-page .feature-box:hover .feature-icon {
+  animation: spin 2s linear 1 !important;
+}
+
+.landing-page .feature-box.purple .feature-icon {
+  color: #9333ea !important;
+}
+
+.landing-page .feature-box.teal .feature-icon {
+  color: #0d9488 !important;
+}
+
+.landing-page .feature-box.blue .feature-icon {
+  color: #3b82f6 !important;
+}
+
+.landing-page .feature-box.beige .feature-icon {
+  color: #d97706 !important;
+}
+
+/* Back to Top Button */
+.landing-page .back-to-top {
+  position: fixed !important;
+  bottom: 30px !important;
+  right: 30px !important;
+  width: 50px !important;
+  height: 50px !important;
+  background-color: #10b981 !important;
+  color: white !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+  transition: all 0.3s ease !important;
+  z-index: 999 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(20px) !important;
+}
+
+.landing-page .back-to-top.show,
+.landing-page .back-to-top[data-aos="fade-up"].aos-animate {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) !important;
+}
+
+.landing-page .back-to-top:hover {
+  transform: translateY(-5px) !important;
+  background-color: #0d9488 !important;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3) !important;
+}
+
+@keyframes floatBackToTop {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.landing-page .back-to-top svg {
+  stroke-width: 2.5 !important;
+  animation: floatBackToTop 2s ease-in-out infinite !important;
+} 
