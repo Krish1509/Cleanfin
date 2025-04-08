@@ -1,3 +1,6 @@
+// Import polyfills first
+import "./polyfills";
+
 import "./assets/scss/custom.scss";
 import React from "react";
 import ReactDOM from "react-dom/client";
