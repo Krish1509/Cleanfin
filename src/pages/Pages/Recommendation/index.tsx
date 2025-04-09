@@ -15,6 +15,7 @@ import ReasonModal from "../../../Common/ReasonModal";
 import fireStoreLogo from "../../../assets/images/firestore.png";
 import Loader from "../../../Common/Loader/Loader";
 import { IOptionScriptsList } from "../UserDashboard/Helper/interfaces";
+import exportToExcel from "../../../helper/exportToExcel";
 
 type RecommendationListData = {
   _id: string;
@@ -34,8 +35,18 @@ type RecommendationListData = {
   recommendation: string;
   isActive: boolean;
   firestore?: boolean;
+  segmentId: number;
+  scriptCode: number;
+  price: number;
+  reason: string;
   scriptData: IOptionScriptsList[];
 };
+
+const SegmentOptions = [
+  { value: 1, label: "NSE_EQ" },
+  { value: 2, label: "NSE_FO" },
+  { value: 5, label: "MCX_FO" },
+];
 
 const Recommendation = () => {
   const navigate = useNavigate();
@@ -54,6 +65,7 @@ const Recommendation = () => {
   const [selectedId, setSelectedId] = useState<string>("");
   const [selectedStatus, setSelectedStatus] = useState<boolean>();
   const [updateLoading, setUpdateLoading] = useState<boolean>(false);
+  const [exportLoading, setExportLoading] = useState<boolean>(false);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -155,6 +167,45 @@ const Recommendation = () => {
     }
   }, [selectedId]);
 
+  const exportExcel = async () => {
+    const segmentLabel = (segmentId: string | number) => {
+      const segmentObj = SegmentOptions.find(itm => itm.value === segmentId)
+      return segmentObj ? segmentObj.label : ""
+    }
+
+    const excelData = [{
+      workBookColumns: ["Segment", "Script", "Date", "Time", "Active", "Action", "Price Condition", "Price", "Target 1", "Target Achieved", "Stop Loss", "Stop Loss Achieved", "Target 2", "Target 3", "Recommendation"],
+      data: recommendationListData?.map((item: RecommendationListData) => [
+        segmentLabel(item.segmentId),
+        item.scriptData[0].name,
+        moment(item.date).format("YYYY-MM-DD"),
+        item.time,
+        item.isActive ? "Yes" : "No",
+        item.action,
+        item.priceCondition,
+        item.price,
+        item.target1,
+        item.target1Achieved ? "Yes" : "No",
+        item.stopLoss,
+        item.stopLossAchieved ? "Yes" : "No",
+        item.target2,
+        item.target3,
+        item.recommendation
+      ]),
+      workSheetName: "Recommendation"
+    }]
+
+    try {
+      setExportLoading(true);
+      await exportToExcel(excelData, `Recommendation-${moment().format("YYYY-MM-DD-HH-mm")}`);
+      ToastAlert.success("Successfully file exported")
+    } catch (error) {
+      ToastAlert.error(`Export failed`);
+    } finally {
+      setExportLoading(false);
+    }
+  }
+
   return (
     <React.Fragment>
       <BreadcrumbItem
@@ -166,12 +217,21 @@ const Recommendation = () => {
           <CardHeader>
             <div className="d-sm-flex align-items-center justify-content-between">
               <h5 className="mb-3 mb-sm-0">Recommendation List</h5>
-              <Button
-                onClick={() => navigate("/recommendation/add")}
-                className="btn btn-primary"
-              >
-                Add
-              </Button>
+              <div className="d-flex gap-2">
+                <Button
+                  onClick={exportExcel}
+                  className="btn btn-primary"
+                  disabled={exportLoading}
+                >
+                  {exportLoading ? "Exporting..." : "Export"}
+                </Button>
+                <Button
+                  onClick={() => navigate("/recommendation/add")}
+                  className="btn btn-primary"
+                >
+                  Add
+                </Button>
+              </div>
             </div>
           </CardHeader>
           <div className="d-sm-flex align-items-center mt-4">
