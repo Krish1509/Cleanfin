@@ -12,6 +12,7 @@ import avatar2 from "../assets/images/user/avatar-2.jpg";
 import { postRequest } from "../service/fetch-services";
 import SocketUI from "../Common/SocketUI";
 import { INotification } from "../pages/Pages/UserDashboard/Helper/interfaces";
+import moment from "moment";
 // import avatar3 from "../assets/images/user/avatar-3.jpg";
 
 interface HeaderProps {
@@ -234,10 +235,11 @@ const TopBar = ({
                             <div>
                               <div>
                                 <div className="d-flex justify-content-between">
-                                  <div className=" me-3 position-relative">
+                                  <div className="me-3 position-relative d-flex gap-2">
                                     <h6 className="mb-0">
                                       {notification?.title}
                                     </h6>
+                                    <span>{moment(notification.createdAt).format("YYYY-MM-DD h:mm A")}</span>
                                   </div>
                                 </div>
                                 <p className="position-relative text-muted mt-1 mb-2">
