@@ -112,4 +112,5 @@ export interface INotification {
   title: string;
   type: string;
   userId: string;
+  createdAt: string;
 }
