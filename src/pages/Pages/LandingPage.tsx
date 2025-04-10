@@ -1,4 +1,4 @@
-import { useState, useEffect, MouseEvent } from 'react';
+import { useState, useEffect, MouseEvent } from "react";
 import { Container, Row, Col, Button, Card, Navbar, Nav } from "react-bootstrap";
 import { ChevronUp } from "react-feather";
 import { useNavigate } from "react-router-dom";
@@ -7,804 +7,793 @@ import "../../assets/css/landing-page.css";
 import mewaLogo from "../../assets/images/mewa-logo.png";
 import marketImage from "../../assets/images/landing-page/market-image.png";
 // Import AOS library and its styles
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const LandingPage = () => {
   const navigate = useNavigate();
-  const [activeSection, setActiveSection] = useState('hero');
+  const [activeSection, setActiveSection] = useState("hero");
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     // Initialize AOS
     AOS.init({
       duration: 800,
-      easing: 'ease-in-out',
+      easing: "ease-in-out",
       once: true,
-      mirror: false
+      mirror: false,
     });
-    
+
     // Force immediate styling for all sections
     const initPageStyles = () => {
       // Navbar styling
-      const navbar = document.querySelector('.navbar') as HTMLElement;
+      const navbar = document.querySelector(".navbar") as HTMLElement;
       if (navbar) {
-        navbar.classList.add('navbar-dark');
-        navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-        navbar.style.width = '100%';
-        navbar.style.padding = '0';
-        navbar.style.position = 'absolute';
-        navbar.style.top = '0';
-        navbar.style.left = '0';
-        navbar.style.right = '0';
-        navbar.style.marginBottom = '0';
-        navbar.style.borderBottom = 'none';
-        
+        navbar.classList.add("navbar-dark");
+        navbar.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+        navbar.style.width = "100%";
+        navbar.style.padding = "0";
+        navbar.style.position = "absolute";
+        navbar.style.top = "0";
+        navbar.style.left = "0";
+        navbar.style.right = "0";
+        navbar.style.marginBottom = "0";
+        navbar.style.borderBottom = "none";
+
         // Container styling
-        const container = navbar.querySelector('.container') as HTMLElement;
+        const container = navbar.querySelector(".container") as HTMLElement;
         if (container) {
-          container.style.display = 'flex';
-          container.style.alignItems = 'center';
-          container.style.justifyContent = 'space-between';
-          container.style.padding = '1rem 15px';
+          container.style.display = "flex";
+          container.style.alignItems = "center";
+          container.style.justifyContent = "space-between";
+          container.style.padding = "1rem 15px";
         }
-        
+
         // Button container styling
-        const buttonContainer = navbar.querySelector('.d-flex') as HTMLElement;
+        const buttonContainer = navbar.querySelector(".d-flex") as HTMLElement;
         if (buttonContainer) {
-          buttonContainer.style.display = 'flex';
-          buttonContainer.style.gap = '10px';
-          buttonContainer.style.alignItems = 'center';
+          buttonContainer.style.display = "flex";
+          buttonContainer.style.gap = "10px";
+          buttonContainer.style.alignItems = "center";
         }
-        
+
         // Button styling
-        const buttons = buttonContainer?.querySelectorAll('.btn');
+        const buttons = buttonContainer?.querySelectorAll(".btn");
         if (buttons?.length) {
           buttons.forEach((btn, index) => {
             if (index < buttons.length - 1) {
-              (btn as HTMLElement).style.marginRight = '10px';
+              (btn as HTMLElement).style.marginRight = "10px";
             }
           });
         }
       }
-      
+
       // Hero section styling
-      const heroSection = document.querySelector('.hero-section') as HTMLElement;
+      const heroSection = document.querySelector(".hero-section") as HTMLElement;
       if (heroSection) {
-        heroSection.style.background = 'linear-gradient(135deg, #111827 0%, #1f2937 100%)';
-        heroSection.style.padding = '9rem 0 5rem';
-        heroSection.style.marginTop = '0';
-        heroSection.style.borderTop = 'none';
-        
+        heroSection.style.background = "linear-gradient(135deg, #111827 0%, #1f2937 100%)";
+        heroSection.style.padding = "9rem 0 5rem";
+        heroSection.style.marginTop = "0";
+        heroSection.style.borderTop = "none";
+
         // Hero content styling
-        const heroContainer = heroSection.querySelector('.container') as HTMLElement;
+        const heroContainer = heroSection.querySelector(".container") as HTMLElement;
         if (heroContainer) {
-          heroContainer.style.position = 'relative';
-          heroContainer.style.zIndex = '1';
+          heroContainer.style.position = "relative";
+          heroContainer.style.zIndex = "1";
         }
-        
+
         // Hero buttons styling
-        const heroButtons = heroSection.querySelectorAll('.btn');
+        const heroButtons = heroSection.querySelectorAll(".btn");
         if (heroButtons.length) {
-          heroButtons.forEach(btn => {
-            (btn as HTMLElement).style.margin = '0 10px 0 0';
+          heroButtons.forEach((btn) => {
+            (btn as HTMLElement).style.margin = "0 10px 0 0";
           });
         }
       }
-      
+
       // Features section styling
-      const featuresSection = document.querySelector('#features') as HTMLElement;
+      const featuresSection = document.querySelector("#features") as HTMLElement;
       if (featuresSection) {
-        featuresSection.style.textAlign = 'center';
-        
+        featuresSection.style.textAlign = "center";
+
         // Center the section title and text
-        const titleContainer = featuresSection.querySelector('.text-center') as HTMLElement;
+        const titleContainer = featuresSection.querySelector(".text-center") as HTMLElement;
         if (titleContainer) {
-          titleContainer.style.textAlign = 'center';
-          
-          const heading = titleContainer.querySelector('h2') as HTMLElement;
+          titleContainer.style.textAlign = "center";
+
+          const heading = titleContainer.querySelector("h2") as HTMLElement;
           if (heading) {
-            heading.style.textAlign = 'center';
-            heading.style.marginBottom = '1rem';
+            heading.style.textAlign = "center";
+            heading.style.marginBottom = "1rem";
           }
-          
-          const lead = titleContainer.querySelector('.lead') as HTMLElement;
+
+          const lead = titleContainer.querySelector(".lead") as HTMLElement;
           if (lead) {
-            lead.style.textAlign = 'center';
-            lead.style.marginBottom = '1.5rem';
+            lead.style.textAlign = "center";
+            lead.style.marginBottom = "1.5rem";
           }
         }
-        
+
         // Fix the row and columns for proper layout
-        const row = featuresSection.querySelector('.row') as HTMLElement;
+        const row = featuresSection.querySelector(".row") as HTMLElement;
         if (row) {
-          row.style.display = 'flex';
-          row.style.flexWrap = 'wrap';
-          row.style.justifyContent = 'center';
-          row.style.margin = '0 -15px';
-          
+          row.style.display = "flex";
+          row.style.flexWrap = "wrap";
+          row.style.justifyContent = "center";
+          row.style.margin = "0 -15px";
+
           // Apply styling to each column
-          const columns = row.querySelectorAll('.col-md-4');
+          const columns = row.querySelectorAll(".col-md-4");
           columns.forEach((col) => {
-            (col as HTMLElement).style.padding = '0 15px';
-            (col as HTMLElement).style.marginBottom = '30px';
-            (col as HTMLElement).style.display = 'flex';
-            (col as HTMLElement).style.flexDirection = 'column';
+            (col as HTMLElement).style.padding = "0 15px";
+            (col as HTMLElement).style.marginBottom = "30px";
+            (col as HTMLElement).style.display = "flex";
+            (col as HTMLElement).style.flexDirection = "column";
           });
-          
+
           // Apply styling to each card
-          const cards = row.querySelectorAll('.feature-card');
+          const cards = row.querySelectorAll(".feature-card");
           cards.forEach((card) => {
-            (card as HTMLElement).style.height = '100%';
-            (card as HTMLElement).style.textAlign = 'center';
-            (card as HTMLElement).style.boxShadow = '0 5px 15px rgba(0,0,0,0.05)';
-            
+            (card as HTMLElement).style.height = "100%";
+            (card as HTMLElement).style.textAlign = "center";
+            (card as HTMLElement).style.boxShadow = "0 5px 15px rgba(0,0,0,0.05)";
+
             // Style the card body
-            const cardBody = card.querySelector('.card-body') as HTMLElement;
+            const cardBody = card.querySelector(".card-body") as HTMLElement;
             if (cardBody) {
-              cardBody.style.display = 'flex';
-              cardBody.style.flexDirection = 'column';
-              cardBody.style.alignItems = 'center';
-              cardBody.style.justifyContent = 'center';
-              cardBody.style.padding = '2rem';
+              cardBody.style.display = "flex";
+              cardBody.style.flexDirection = "column";
+              cardBody.style.alignItems = "center";
+              cardBody.style.justifyContent = "center";
+              cardBody.style.padding = "2rem";
             }
-            
+
             // Style the icon container
-            const iconContainer = cardBody?.querySelector('.feature-icon') as HTMLElement;
+            const iconContainer = cardBody?.querySelector(".feature-icon") as HTMLElement;
             if (iconContainer) {
-              iconContainer.style.display = 'flex';
-              iconContainer.style.alignItems = 'center';
-              iconContainer.style.justifyContent = 'center';
-              iconContainer.style.width = '70px';
-              iconContainer.style.height = '70px';
-              iconContainer.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
-              iconContainer.style.borderRadius = '50%';
-              iconContainer.style.margin = '0 auto 1.5rem';
+              iconContainer.style.display = "flex";
+              iconContainer.style.alignItems = "center";
+              iconContainer.style.justifyContent = "center";
+              iconContainer.style.width = "70px";
+              iconContainer.style.height = "70px";
+              iconContainer.style.backgroundColor = "rgba(16, 185, 129, 0.1)";
+              iconContainer.style.borderRadius = "50%";
+              iconContainer.style.margin = "0 auto 1.5rem";
             }
           });
         }
       }
-      
+
       // Testimonial cards styling
-      const testimonialCards = document.querySelectorAll('.testimonial-card');
+      const testimonialCards = document.querySelectorAll(".testimonial-card");
       if (testimonialCards.length) {
-        testimonialCards.forEach(card => {
-          (card as HTMLElement).style.height = '100%';
-          (card as HTMLElement).style.boxShadow = '0 5px 15px rgba(0,0,0,0.05)';
+        testimonialCards.forEach((card) => {
+          (card as HTMLElement).style.height = "100%";
+          (card as HTMLElement).style.boxShadow = "0 5px 15px rgba(0,0,0,0.05)";
         });
       }
-      
+
       // CTA section styling
-      const ctaSection = document.querySelector('.cta-section') as HTMLElement;
+      const ctaSection = document.querySelector(".cta-section") as HTMLElement;
       if (ctaSection) {
-        ctaSection.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
-        ctaSection.style.padding = '5rem 0';
+        ctaSection.style.background = "linear-gradient(135deg, #10b981 0%, #059669 100%)";
+        ctaSection.style.padding = "5rem 0";
       }
-      
+
       // Footer styling
-      const footer = document.querySelector('footer') as HTMLElement;
+      const footer = document.querySelector("footer") as HTMLElement;
       if (footer) {
-        footer.style.backgroundColor = '#111827';
-        footer.style.padding = '4rem 0 2rem';
-        footer.style.color = '#ffffff';
-        
+        footer.style.backgroundColor = "#111827";
+        footer.style.padding = "4rem 0 2rem";
+        footer.style.color = "#ffffff";
+
         // Style footer headings
-        const headings = footer.querySelectorAll('h5');
-        headings.forEach(heading => {
-          (heading as HTMLElement).style.color = '#ffffff';
-          (heading as HTMLElement).style.fontWeight = '600';
-          (heading as HTMLElement).style.marginBottom = '1.5rem';
-          (heading as HTMLElement).style.fontSize = '1.125rem';
+        const headings = footer.querySelectorAll("h5");
+        headings.forEach((heading) => {
+          (heading as HTMLElement).style.color = "#ffffff";
+          (heading as HTMLElement).style.fontWeight = "600";
+          (heading as HTMLElement).style.marginBottom = "1.5rem";
+          (heading as HTMLElement).style.fontSize = "1.125rem";
         });
-        
+
         // Style footer paragraphs
-        const paragraphs = footer.querySelectorAll('p');
-        paragraphs.forEach(paragraph => {
-          (paragraph as HTMLElement).style.color = 'rgba(255, 255, 255, 0.8)';
-          (paragraph as HTMLElement).style.marginBottom = '1.5rem';
-          (paragraph as HTMLElement).style.lineHeight = '1.6';
+        const paragraphs = footer.querySelectorAll("p");
+        paragraphs.forEach((paragraph) => {
+          (paragraph as HTMLElement).style.color = "rgba(255, 255, 255, 0.8)";
+          (paragraph as HTMLElement).style.marginBottom = "1.5rem";
+          (paragraph as HTMLElement).style.lineHeight = "1.6";
         });
-        
+
         // Style footer links
-        const links = footer.querySelectorAll('.footer-link');
-        links.forEach(link => {
-          (link as HTMLElement).style.color = 'rgba(255, 255, 255, 0.7)';
-          (link as HTMLElement).style.transition = 'color 0.3s ease';
-          (link as HTMLElement).style.marginBottom = '0.75rem';
-          (link as HTMLElement).style.fontSize = '0.9375rem';
+        const links = footer.querySelectorAll(".footer-link");
+        links.forEach((link) => {
+          (link as HTMLElement).style.color = "rgba(255, 255, 255, 0.7)";
+          (link as HTMLElement).style.transition = "color 0.3s ease";
+          (link as HTMLElement).style.marginBottom = "0.75rem";
+          (link as HTMLElement).style.fontSize = "0.9375rem";
         });
-        
+
         // Style list items
-        const listItems = footer.querySelectorAll('.list-unstyled li');
-        listItems.forEach(item => {
-          (item as HTMLElement).style.marginBottom = '0.75rem';
-          (item as HTMLElement).style.color = 'rgba(255, 255, 255, 0.7)';
+        const listItems = footer.querySelectorAll(".list-unstyled li");
+        listItems.forEach((item) => {
+          (item as HTMLElement).style.marginBottom = "0.75rem";
+          (item as HTMLElement).style.color = "rgba(255, 255, 255, 0.7)";
         });
-        
+
         // Style social icons
-        const socialIcons = footer.querySelector('.social-icons') as HTMLElement;
+        const socialIcons = footer.querySelector(".social-icons") as HTMLElement;
         if (socialIcons) {
-          socialIcons.style.display = 'flex';
-          socialIcons.style.alignItems = 'center';
-          socialIcons.style.marginBottom = '1.5rem';
-          
-          const iconLinks = socialIcons.querySelectorAll('a');
-          iconLinks.forEach(link => {
-            (link as HTMLElement).style.color = 'rgba(255, 255, 255, 0.7)';
-            (link as HTMLElement).style.marginRight = '1.25rem';
-            (link as HTMLElement).style.display = 'flex';
-            (link as HTMLElement).style.alignItems = 'center';
-            (link as HTMLElement).style.justifyContent = 'center';
+          socialIcons.style.display = "flex";
+          socialIcons.style.alignItems = "center";
+          socialIcons.style.marginBottom = "1.5rem";
+
+          const iconLinks = socialIcons.querySelectorAll("a");
+          iconLinks.forEach((link) => {
+            (link as HTMLElement).style.color = "rgba(255, 255, 255, 0.7)";
+            (link as HTMLElement).style.marginRight = "1.25rem";
+            (link as HTMLElement).style.display = "flex";
+            (link as HTMLElement).style.alignItems = "center";
+            (link as HTMLElement).style.justifyContent = "center";
           });
         }
-        
+
         // Style the horizontal rule
-        const hr = footer.querySelector('hr') as HTMLElement;
+        const hr = footer.querySelector("hr") as HTMLElement;
         if (hr) {
-          hr.style.margin = '2rem 0';
-          hr.style.opacity = '0.1';
-          hr.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+          hr.style.margin = "2rem 0";
+          hr.style.opacity = "0.1";
+          hr.style.borderColor = "rgba(255, 255, 255, 0.2)";
         }
-        
+
         // Style copyright text
-        const copyright = footer.querySelector('.text-center') as HTMLElement;
+        const copyright = footer.querySelector(".text-center") as HTMLElement;
         if (copyright) {
-          copyright.style.color = 'rgba(255, 255, 255, 0.6)';
-          copyright.style.fontSize = '0.875rem';
+          copyright.style.color = "rgba(255, 255, 255, 0.6)";
+          copyright.style.fontSize = "0.875rem";
         }
-        
+
         // Style back to top button if it exists
-        const backToTopButton = document.querySelector('.back-to-top') as HTMLElement;
+        const backToTopButton = document.querySelector(".back-to-top") as HTMLElement;
         if (backToTopButton) {
-          backToTopButton.style.position = 'fixed';
-          backToTopButton.style.bottom = '30px';
-          backToTopButton.style.right = '30px';
-          backToTopButton.style.width = '50px';
-          backToTopButton.style.height = '50px';
-          backToTopButton.style.backgroundColor = '#10b981';
-          backToTopButton.style.color = 'white';
-          backToTopButton.style.borderRadius = '50%';
-          backToTopButton.style.display = 'flex';
-          backToTopButton.style.alignItems = 'center';
-          backToTopButton.style.justifyContent = 'center';
-          backToTopButton.style.cursor = 'pointer';
-          backToTopButton.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.2)';
-          backToTopButton.style.transition = 'all 0.3s ease';
-          backToTopButton.style.zIndex = '999';
-          
+          backToTopButton.style.position = "fixed";
+          backToTopButton.style.bottom = "30px";
+          backToTopButton.style.right = "30px";
+          backToTopButton.style.width = "50px";
+          backToTopButton.style.height = "50px";
+          backToTopButton.style.backgroundColor = "#10b981";
+          backToTopButton.style.color = "white";
+          backToTopButton.style.borderRadius = "50%";
+          backToTopButton.style.display = "flex";
+          backToTopButton.style.alignItems = "center";
+          backToTopButton.style.justifyContent = "center";
+          backToTopButton.style.cursor = "pointer";
+          backToTopButton.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.2)";
+          backToTopButton.style.transition = "all 0.3s ease";
+          backToTopButton.style.zIndex = "999";
+
           // Style the icon
-          const icon = backToTopButton.querySelector('svg') as SVGElement;
+          const icon = backToTopButton.querySelector("svg") as SVGElement;
           if (icon) {
-            icon.style.strokeWidth = '2.5';
+            icon.style.strokeWidth = "2.5";
           }
         }
       }
-      
+
       // Pricing section styling
-      const pricingSection = document.querySelector('#pricing') as HTMLElement;
+      const pricingSection = document.querySelector("#pricing") as HTMLElement;
       if (pricingSection) {
-        pricingSection.style.backgroundColor = '#021817';
-        pricingSection.style.backgroundImage = 'radial-gradient(circle, rgba(16, 185, 129, 0.03) 0%, rgba(0, 0, 0, 0.3) 100%)';
-        pricingSection.style.position = 'relative';
-        pricingSection.style.overflow = 'hidden';
-        pricingSection.style.padding = '5rem 0';
-        
+        pricingSection.style.backgroundColor = "#021817";
+        pricingSection.style.backgroundImage = "radial-gradient(circle, rgba(16, 185, 129, 0.03) 0%, rgba(0, 0, 0, 0.3) 100%)";
+        pricingSection.style.position = "relative";
+        pricingSection.style.overflow = "hidden";
+        pricingSection.style.padding = "5rem 0";
+
         // Style pricing title and subtitle
-        const title = pricingSection.querySelector('.pricing-title') as HTMLElement;
+        const title = pricingSection.querySelector(".pricing-title") as HTMLElement;
         if (title) {
-          title.style.fontSize = '2.5rem';
-          title.style.fontWeight = '700';
-          title.style.marginBottom = '1.5rem';
-          title.style.textAlign = 'center';
-          title.style.color = 'white';
-          
+          title.style.fontSize = "2.5rem";
+          title.style.fontWeight = "700";
+          title.style.marginBottom = "1.5rem";
+          title.style.textAlign = "center";
+          title.style.color = "white";
+
           // Style the "Pricings" text in green
-          const successText = title.querySelector('.text-success') as HTMLElement;
+          const successText = title.querySelector(".text-success") as HTMLElement;
           if (successText) {
-            successText.style.color = '#10b981';
+            successText.style.color = "#10b981";
           }
         }
-        
+
         // Style all pricing cards
-        const cards = pricingSection.querySelectorAll('.pricing-card');
+        const cards = pricingSection.querySelectorAll(".pricing-card");
         cards.forEach((card) => {
-          (card as HTMLElement).style.backgroundColor = '#0f1a1a';
-          (card as HTMLElement).style.borderRadius = '12px';
-          (card as HTMLElement).style.overflow = 'hidden';
-          (card as HTMLElement).style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.2)';
-          (card as HTMLElement).style.height = '100%';
-          (card as HTMLElement).style.display = 'flex';
-          (card as HTMLElement).style.flexDirection = 'column';
-          (card as HTMLElement).style.border = '1px solid rgba(255, 255, 255, 0.05)';
-          
+          (card as HTMLElement).style.backgroundColor = "#0f1a1a";
+          (card as HTMLElement).style.borderRadius = "12px";
+          (card as HTMLElement).style.overflow = "hidden";
+          (card as HTMLElement).style.boxShadow = "0 5px 20px rgba(0, 0, 0, 0.2)";
+          (card as HTMLElement).style.height = "100%";
+          (card as HTMLElement).style.display = "flex";
+          (card as HTMLElement).style.flexDirection = "column";
+          (card as HTMLElement).style.border = "1px solid rgba(255, 255, 255, 0.05)";
+
           // Handle highlighted card
-          if (card.classList.contains('highlighted')) {
-            (card as HTMLElement).style.backgroundColor = '#0d251e';
-            (card as HTMLElement).style.border = '1px solid #10b981';
-            (card as HTMLElement).style.boxShadow = '0 10px 30px rgba(16, 185, 129, 0.2)';
-            (card as HTMLElement).style.position = 'relative';
-            (card as HTMLElement).style.zIndex = '1';
+          if (card.classList.contains("highlighted")) {
+            (card as HTMLElement).style.backgroundColor = "#0d251e";
+            (card as HTMLElement).style.border = "1px solid #10b981";
+            (card as HTMLElement).style.boxShadow = "0 10px 30px rgba(16, 185, 129, 0.2)";
+            (card as HTMLElement).style.position = "relative";
+            (card as HTMLElement).style.zIndex = "1";
           }
         });
-        
+
         // Style pricing dividers
-        const dividers = pricingSection.querySelectorAll('.pricing-divider');
+        const dividers = pricingSection.querySelectorAll(".pricing-divider");
         dividers.forEach((divider) => {
-          (divider as HTMLElement).style.height = '1px';
-          (divider as HTMLElement).style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-          (divider as HTMLElement).style.width = '100%';
+          (divider as HTMLElement).style.height = "1px";
+          (divider as HTMLElement).style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+          (divider as HTMLElement).style.width = "100%";
         });
-        
+
         // Style plan names
-        const planNames = pricingSection.querySelectorAll('.plan-name');
+        const planNames = pricingSection.querySelectorAll(".plan-name");
         planNames.forEach((name) => {
-          (name as HTMLElement).style.fontSize = '1.25rem';
-          (name as HTMLElement).style.color = 'white';
-          (name as HTMLElement).style.fontWeight = '600';
-          (name as HTMLElement).style.marginBottom = '1.5rem';
-          (name as HTMLElement).style.letterSpacing = '0.05em';
+          (name as HTMLElement).style.fontSize = "1.25rem";
+          (name as HTMLElement).style.color = "white";
+          (name as HTMLElement).style.fontWeight = "600";
+          (name as HTMLElement).style.marginBottom = "1.5rem";
+          (name as HTMLElement).style.letterSpacing = "0.05em";
         });
-        
+
         // Style price amounts
-        const priceAmounts = pricingSection.querySelectorAll('.price-amount');
+        const priceAmounts = pricingSection.querySelectorAll(".price-amount");
         priceAmounts.forEach((price) => {
-          (price as HTMLElement).style.fontSize = '2.5rem';
-          (price as HTMLElement).style.fontWeight = '700';
-          (price as HTMLElement).style.color = '#10b981';
+          (price as HTMLElement).style.fontSize = "2.5rem";
+          (price as HTMLElement).style.fontWeight = "700";
+          (price as HTMLElement).style.color = "#10b981";
         });
-        
+
         // Style feature list items
-        const featureItems = pricingSection.querySelectorAll('.feature-list li');
+        const featureItems = pricingSection.querySelectorAll(".feature-list li");
         featureItems.forEach((item) => {
-          (item as HTMLElement).style.display = 'flex';
-          (item as HTMLElement).style.alignItems = 'center';
-          (item as HTMLElement).style.marginBottom = '1.5rem';
-          (item as HTMLElement).style.color = 'rgba(255, 255, 255, 0.8)';
-          
+          (item as HTMLElement).style.display = "flex";
+          (item as HTMLElement).style.alignItems = "center";
+          (item as HTMLElement).style.marginBottom = "1.5rem";
+          (item as HTMLElement).style.color = "rgba(255, 255, 255, 0.8)";
+
           // Fix vertical alignment of text with icon
-          const textSpan = item.querySelector('span') as HTMLElement;
+          const textSpan = item.querySelector("span") as HTMLElement;
           if (textSpan) {
-            textSpan.style.lineHeight = '1.2';
-            textSpan.style.marginTop = '1px';
+            textSpan.style.lineHeight = "1.2";
+            textSpan.style.marginTop = "1px";
           }
         });
-        
+
         // Style check circles
-        const checkCircles = pricingSection.querySelectorAll('.check-circle');
+        const checkCircles = pricingSection.querySelectorAll(".check-circle");
         checkCircles.forEach((circle) => {
-          (circle as HTMLElement).style.width = '32px';
-          (circle as HTMLElement).style.height = '32px';
-          (circle as HTMLElement).style.borderRadius = '50%';
-          (circle as HTMLElement).style.display = 'flex';
-          (circle as HTMLElement).style.alignItems = 'center';
-          (circle as HTMLElement).style.justifyContent = 'center';
-          (circle as HTMLElement).style.marginRight = '1rem';
-          (circle as HTMLElement).style.flexShrink = '0';
-          (circle as HTMLElement).style.marginTop = '-2px';
-          
+          (circle as HTMLElement).style.width = "32px";
+          (circle as HTMLElement).style.height = "32px";
+          (circle as HTMLElement).style.borderRadius = "50%";
+          (circle as HTMLElement).style.display = "flex";
+          (circle as HTMLElement).style.alignItems = "center";
+          (circle as HTMLElement).style.justifyContent = "center";
+          (circle as HTMLElement).style.marginRight = "1rem";
+          (circle as HTMLElement).style.flexShrink = "0";
+          (circle as HTMLElement).style.marginTop = "-2px";
+
           // Style the icon inside
-          const icon = circle.querySelector('.feature-icon') as HTMLElement;
+          const icon = circle.querySelector(".feature-icon") as HTMLElement;
           if (icon) {
-            icon.style.color = '#10b981';
-            icon.style.strokeWidth = '3';
-            icon.style.width = '16px';
-            icon.style.height = '16px';
+            icon.style.color = "#10b981";
+            icon.style.strokeWidth = "3";
+            icon.style.width = "16px";
+            icon.style.height = "16px";
           }
         });
-        
+
         // Fix alignment of text with icons
-        const featureTexts = pricingSection.querySelectorAll('.feature-list li span');
+        const featureTexts = pricingSection.querySelectorAll(".feature-list li span");
         featureTexts.forEach((text) => {
-          (text as HTMLElement).style.lineHeight = '1.2';
-          (text as HTMLElement).style.marginTop = '1px';
+          (text as HTMLElement).style.lineHeight = "1.2";
+          (text as HTMLElement).style.marginTop = "1px";
         });
-        
+
         // Style buttons
-        const buttons = pricingSection.querySelectorAll('.choose-plan-btn');
+        const buttons = pricingSection.querySelectorAll(".choose-plan-btn");
         buttons.forEach((btn) => {
-          (btn as HTMLElement).style.width = '100%';
-          (btn as HTMLElement).style.padding = '0.75rem 0';
-          (btn as HTMLElement).style.fontWeight = '500';
-          (btn as HTMLElement).style.borderRadius = '6px';
-          
-          if (btn.classList.contains('highlighted')) {
-            (btn as HTMLElement).style.backgroundColor = '#10b981';
-            (btn as HTMLElement).style.borderColor = '#10b981';
-            (btn as HTMLElement).style.color = 'white';            
+          (btn as HTMLElement).style.width = "100%";
+          (btn as HTMLElement).style.padding = "0.75rem 0";
+          (btn as HTMLElement).style.fontWeight = "500";
+          (btn as HTMLElement).style.borderRadius = "6px";
+
+          if (btn.classList.contains("highlighted")) {
+            (btn as HTMLElement).style.backgroundColor = "#10b981";
+            (btn as HTMLElement).style.borderColor = "#10b981";
+            (btn as HTMLElement).style.color = "white";
           }
         });
       }
-      
+
       // How We Do section styling
-      const howWeDoSection = document.querySelector('.how-we-do-section') as HTMLElement;
+      const howWeDoSection = document.querySelector(".how-we-do-section") as HTMLElement;
       if (howWeDoSection) {
-        howWeDoSection.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
-        howWeDoSection.style.padding = '5rem 0';
-        howWeDoSection.style.position = 'relative';
-        howWeDoSection.style.overflow = 'hidden';
-        
+        howWeDoSection.style.background = "linear-gradient(135deg, #10b981 0%, #059669 100%)";
+        howWeDoSection.style.padding = "5rem 0";
+        howWeDoSection.style.position = "relative";
+        howWeDoSection.style.overflow = "hidden";
+
         // Style the title
-        const title = howWeDoSection.querySelector('.how-we-do-title') as HTMLElement;
+        const title = howWeDoSection.querySelector(".how-we-do-title") as HTMLElement;
         if (title) {
-          title.style.fontSize = '2.5rem';
-          title.style.fontWeight = '700';
-          title.style.marginBottom = '3rem';
-          title.style.textAlign = 'center';
-          title.style.color = 'white';
+          title.style.fontSize = "2.5rem";
+          title.style.fontWeight = "700";
+          title.style.marginBottom = "3rem";
+          title.style.textAlign = "center";
+          title.style.color = "white";
         }
-        
+
         // Style process cards
-        const processCards = howWeDoSection.querySelectorAll('.process-card');
+        const processCards = howWeDoSection.querySelectorAll(".process-card");
         processCards.forEach((card) => {
-          (card as HTMLElement).style.width = '240px';
-          (card as HTMLElement).style.height = '120px';
-          (card as HTMLElement).style.position = 'relative';
-          (card as HTMLElement).style.padding = '2px';
-          (card as HTMLElement).style.borderRadius = '8px';
-          (card as HTMLElement).style.background = 'linear-gradient(90deg, #08AEEA 0%, #2AF598 100%)';
-          
+          (card as HTMLElement).style.width = "240px";
+          (card as HTMLElement).style.height = "120px";
+          (card as HTMLElement).style.position = "relative";
+          (card as HTMLElement).style.padding = "2px";
+          (card as HTMLElement).style.borderRadius = "8px";
+          (card as HTMLElement).style.background = "linear-gradient(90deg, #08AEEA 0%, #2AF598 100%)";
+
           // Style card inner
-          const cardInner = card.querySelector('.process-card-inner') as HTMLElement;
+          const cardInner = card.querySelector(".process-card-inner") as HTMLElement;
           if (cardInner) {
-            cardInner.style.width = '100%';
-            cardInner.style.height = '100%';
-            cardInner.style.display = 'flex';
-            cardInner.style.alignItems = 'center';
-            cardInner.style.justifyContent = 'center';
-            cardInner.style.backgroundColor = '#121212';
-            cardInner.style.borderRadius = '6px';
-            cardInner.style.padding = '1.5rem';
+            cardInner.style.width = "100%";
+            cardInner.style.height = "100%";
+            cardInner.style.display = "flex";
+            cardInner.style.alignItems = "center";
+            cardInner.style.justifyContent = "center";
+            cardInner.style.backgroundColor = "#121212";
+            cardInner.style.borderRadius = "6px";
+            cardInner.style.padding = "1.5rem";
           }
-          
+
           // Style process title
-          const processTitle = card.querySelector('.process-title') as HTMLElement;
+          const processTitle = card.querySelector(".process-title") as HTMLElement;
           if (processTitle) {
-            processTitle.style.fontSize = '1.25rem';
-            processTitle.style.fontWeight = '600';
-            processTitle.style.color = 'white';
-            processTitle.style.margin = '0';
-            processTitle.style.lineHeight = '1.4';
+            processTitle.style.fontSize = "1.25rem";
+            processTitle.style.fontWeight = "600";
+            processTitle.style.color = "white";
+            processTitle.style.margin = "0";
+            processTitle.style.lineHeight = "1.4";
           }
         });
-        
+
         // Style connectors
-        const connectors = howWeDoSection.querySelectorAll('.process-connector');
+        const connectors = howWeDoSection.querySelectorAll(".process-connector");
         connectors.forEach((connector) => {
-          (connector as HTMLElement).style.display = 'flex';
-          (connector as HTMLElement).style.flexDirection = 'column';
-          (connector as HTMLElement).style.alignItems = 'center';
-          (connector as HTMLElement).style.width = '100px';
-          (connector as HTMLElement).style.position = 'relative';
-          
+          (connector as HTMLElement).style.display = "flex";
+          (connector as HTMLElement).style.flexDirection = "column";
+          (connector as HTMLElement).style.alignItems = "center";
+          (connector as HTMLElement).style.width = "100px";
+          (connector as HTMLElement).style.position = "relative";
+
           // Style connector line
-          const connectorLine = connector.querySelector('.connector-line') as HTMLElement;
+          const connectorLine = connector.querySelector(".connector-line") as HTMLElement;
           if (connectorLine) {
-            connectorLine.style.width = '70px';
-            connectorLine.style.height = '2px';
-            connectorLine.style.background = 'linear-gradient(90deg, #08AEEA 0%, #2AF598 100%)';
-            connectorLine.style.marginBottom = '8px';
+            connectorLine.style.width = "70px";
+            connectorLine.style.height = "2px";
+            connectorLine.style.background = "linear-gradient(90deg, #08AEEA 0%, #2AF598 100%)";
+            connectorLine.style.marginBottom = "8px";
           }
-          
+
           // Style connector text
-          const connectorText = connector.querySelector('.connector-text') as HTMLElement;
+          const connectorText = connector.querySelector(".connector-text") as HTMLElement;
           if (connectorText) {
-            connectorText.style.fontSize = '1rem';
-            connectorText.style.color = '#2AF598';
-            connectorText.style.fontWeight = '500';
+            connectorText.style.fontSize = "1rem";
+            connectorText.style.color = "#2AF598";
+            connectorText.style.fontWeight = "500";
           }
         });
-        
+
         // Style container
-        const container = howWeDoSection.querySelector('.process-flow-container') as HTMLElement;
+        const container = howWeDoSection.querySelector(".process-flow-container") as HTMLElement;
         if (container) {
-          container.style.display = 'flex';
-          container.style.alignItems = 'center';
-          container.style.justifyContent = 'center';
-          container.style.flexWrap = 'wrap';
-          container.style.gap = '0';
-          container.style.padding = '2rem 0';
+          container.style.display = "flex";
+          container.style.alignItems = "center";
+          container.style.justifyContent = "center";
+          container.style.flexWrap = "wrap";
+          container.style.gap = "0";
+          container.style.padding = "2rem 0";
         }
       }
-      
+
       // What You Get section styling
-      const whatYouGetSection = document.querySelector('.what-you-get-section') as HTMLElement;
+      const whatYouGetSection = document.querySelector(".what-you-get-section") as HTMLElement;
       if (whatYouGetSection) {
-        whatYouGetSection.style.padding = '5rem 0';
-        whatYouGetSection.style.backgroundColor = '#ffffff';
-        whatYouGetSection.style.position = 'relative';
-        whatYouGetSection.style.overflow = 'hidden';
-        
+        whatYouGetSection.style.padding = "5rem 0";
+        whatYouGetSection.style.backgroundColor = "#ffffff";
+        whatYouGetSection.style.position = "relative";
+        whatYouGetSection.style.overflow = "hidden";
+
         // Add decorative background elements
-        const beforeElement = document.createElement('div');
-        beforeElement.className = 'decoration-circle decoration-before';
-        beforeElement.style.position = 'absolute';
-        beforeElement.style.width = '200px';
-        beforeElement.style.height = '200px';
-        beforeElement.style.borderRadius = '50%';
-        beforeElement.style.background = 'linear-gradient(45deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1))';
-        beforeElement.style.top = '-100px';
-        beforeElement.style.left = '-100px';
-        beforeElement.style.zIndex = '0';
-        
-        const afterElement = document.createElement('div');
-        afterElement.className = 'decoration-circle decoration-after';
-        afterElement.style.position = 'absolute';
-        afterElement.style.width = '200px';
-        afterElement.style.height = '200px';
-        afterElement.style.borderRadius = '50%';
-        afterElement.style.background = 'linear-gradient(45deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1))';
-        afterElement.style.bottom = '-100px';
-        afterElement.style.right = '-100px';
-        afterElement.style.zIndex = '0';
-        
+        const beforeElement = document.createElement("div");
+        beforeElement.className = "decoration-circle decoration-before";
+        beforeElement.style.position = "absolute";
+        beforeElement.style.width = "200px";
+        beforeElement.style.height = "200px";
+        beforeElement.style.borderRadius = "50%";
+        beforeElement.style.background = "linear-gradient(45deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1))";
+        beforeElement.style.top = "-100px";
+        beforeElement.style.left = "-100px";
+        beforeElement.style.zIndex = "0";
+
+        const afterElement = document.createElement("div");
+        afterElement.className = "decoration-circle decoration-after";
+        afterElement.style.position = "absolute";
+        afterElement.style.width = "200px";
+        afterElement.style.height = "200px";
+        afterElement.style.borderRadius = "50%";
+        afterElement.style.background = "linear-gradient(45deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1))";
+        afterElement.style.bottom = "-100px";
+        afterElement.style.right = "-100px";
+        afterElement.style.zIndex = "0";
+
         // Append decorative elements
         whatYouGetSection.appendChild(beforeElement);
         whatYouGetSection.appendChild(afterElement);
-        
+
         // Add floating animation to decorative elements
         const addFloatAnimation = (element: HTMLElement, delay: number) => {
           element.style.animation = `floatAnimation 8s ease-in-out infinite`;
           element.style.animationDelay = `${delay}s`;
         };
-        
+
         addFloatAnimation(beforeElement, 0);
         addFloatAnimation(afterElement, 4);
-        
+
         // Style the title
-        const title = whatYouGetSection.querySelector('.what-you-get-title') as HTMLElement;
+        const title = whatYouGetSection.querySelector(".what-you-get-title") as HTMLElement;
         if (title) {
-          title.style.fontSize = '2.5rem';
-          title.style.fontWeight = '700';
-          title.style.marginBottom = '3rem';
-          title.style.textAlign = 'center';
-          title.style.color = '#333';
-          title.style.animation = 'fadeInUp 0.8s ease forwards';
+          title.style.fontSize = "2.5rem";
+          title.style.fontWeight = "700";
+          title.style.marginBottom = "3rem";
+          title.style.textAlign = "center";
+          title.style.color = "#333";
+          title.style.animation = "fadeInUp 0.8s ease forwards";
         }
-        
+
         // Style feature boxes
-        const featureBoxes = whatYouGetSection.querySelectorAll('.feature-box');
+        const featureBoxes = whatYouGetSection.querySelectorAll(".feature-box");
         featureBoxes.forEach((box, index) => {
           // Apply styling to feature boxes
-          (box as HTMLElement).style.padding = '2rem 1.5rem';
-          (box as HTMLElement).style.borderRadius = '12px';
-          (box as HTMLElement).style.height = '100%';
-          (box as HTMLElement).style.minHeight = '300px';
-          (box as HTMLElement).style.display = 'flex';
-          (box as HTMLElement).style.flexDirection = 'column';
-          (box as HTMLElement).style.alignItems = 'center';
-          (box as HTMLElement).style.textAlign = 'center';
-          (box as HTMLElement).style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
-          (box as HTMLElement).style.position = 'relative';
-          (box as HTMLElement).style.overflow = 'hidden';
-          (box as HTMLElement).style.opacity = '0';
-          (box as HTMLElement).style.animation = 'popIn 0.6s ease forwards';
-          (box as HTMLElement).style.animationDelay = `${0.1 + (index * 0.2)}s`;
-          
+          (box as HTMLElement).style.padding = "2rem 1.5rem";
+          (box as HTMLElement).style.borderRadius = "12px";
+          (box as HTMLElement).style.height = "100%";
+          (box as HTMLElement).style.minHeight = "300px";
+          (box as HTMLElement).style.display = "flex";
+          (box as HTMLElement).style.flexDirection = "column";
+          (box as HTMLElement).style.alignItems = "center";
+          (box as HTMLElement).style.textAlign = "center";
+          (box as HTMLElement).style.transition = "transform 0.3s ease, box-shadow 0.3s ease";
+          (box as HTMLElement).style.position = "relative";
+          (box as HTMLElement).style.overflow = "hidden";
+          (box as HTMLElement).style.opacity = "0";
+          (box as HTMLElement).style.animation = "popIn 0.6s ease forwards";
+          (box as HTMLElement).style.animationDelay = `${0.1 + index * 0.2}s`;
+
           // Create pseudo-element for border animation
           const createBorderEffect = () => {
-            const borderEffect = document.createElement('div');
-            borderEffect.className = 'border-effect';
-            borderEffect.style.position = 'absolute';
-            borderEffect.style.top = '0';
-            borderEffect.style.right = '0';
-            borderEffect.style.bottom = '0';
-            borderEffect.style.left = '0';
-            borderEffect.style.zIndex = '-1';
-            borderEffect.style.margin = '-2px';
-            borderEffect.style.borderRadius = '14px';
-            borderEffect.style.background = 'linear-gradient(45deg, #10b981, #3b82f6, #9333ea, #f59e0b)';
-            borderEffect.style.backgroundSize = '300% 300%';
-            borderEffect.style.animation = 'borderAnimation 6s ease infinite';
-            borderEffect.style.opacity = '0';
-            borderEffect.style.transition = 'opacity 0.3s ease';
-            
+            const borderEffect = document.createElement("div");
+            borderEffect.className = "border-effect";
+            borderEffect.style.position = "absolute";
+            borderEffect.style.top = "0";
+            borderEffect.style.right = "0";
+            borderEffect.style.bottom = "0";
+            borderEffect.style.left = "0";
+            borderEffect.style.zIndex = "-1";
+            borderEffect.style.margin = "-2px";
+            borderEffect.style.borderRadius = "14px";
+            borderEffect.style.background = "linear-gradient(45deg, #10b981, #3b82f6, #9333ea, #f59e0b)";
+            borderEffect.style.backgroundSize = "300% 300%";
+            borderEffect.style.animation = "borderAnimation 6s ease infinite";
+            borderEffect.style.opacity = "0";
+            borderEffect.style.transition = "opacity 0.3s ease";
+
             box.appendChild(borderEffect);
-            
+
             // Add hover event to show border
-            box.addEventListener('mouseenter', () => {
-              borderEffect.style.opacity = '1';
+            box.addEventListener("mouseenter", () => {
+              borderEffect.style.opacity = "1";
             });
-            
-            box.addEventListener('mouseleave', () => {
-              borderEffect.style.opacity = '0';
+
+            box.addEventListener("mouseleave", () => {
+              borderEffect.style.opacity = "0";
             });
           };
-          
+
           createBorderEffect();
-          
+
           // Apply specific background colors based on class
-          if (box.classList.contains('purple')) {
-            (box as HTMLElement).style.backgroundColor = '#f8f0ff';
-          } else if (box.classList.contains('teal')) {
-            (box as HTMLElement).style.backgroundColor = '#e6faf8';
-          } else if (box.classList.contains('blue')) {
-            (box as HTMLElement).style.backgroundColor = '#e6f3ff';
-          } else if (box.classList.contains('beige')) {
-            (box as HTMLElement).style.backgroundColor = '#fff8e6';
+          if (box.classList.contains("purple")) {
+            (box as HTMLElement).style.backgroundColor = "#f8f0ff";
+          } else if (box.classList.contains("teal")) {
+            (box as HTMLElement).style.backgroundColor = "#e6faf8";
+          } else if (box.classList.contains("blue")) {
+            (box as HTMLElement).style.backgroundColor = "#e6f3ff";
+          } else if (box.classList.contains("beige")) {
+            (box as HTMLElement).style.backgroundColor = "#fff8e6";
           }
-          
+
           // Style icon wrapper with float animation
-          const iconWrapper = box.querySelector('.feature-icon-wrapper') as HTMLElement;
+          const iconWrapper = box.querySelector(".feature-icon-wrapper") as HTMLElement;
           if (iconWrapper) {
-            iconWrapper.style.marginBottom = '1rem';
-            iconWrapper.style.marginTop = '1rem';
-            iconWrapper.style.animation = 'floatAnimation 4s ease-in-out infinite';
+            iconWrapper.style.marginBottom = "1rem";
+            iconWrapper.style.marginTop = "1rem";
+            iconWrapper.style.animation = "floatAnimation 4s ease-in-out infinite";
           }
-          
+
           // Style icon background
-          const iconBg = box.querySelector('.feature-icon-bg') as HTMLElement;
+          const iconBg = box.querySelector(".feature-icon-bg") as HTMLElement;
           if (iconBg) {
-            iconBg.style.width = '80px';
-            iconBg.style.height = '80px';
-            iconBg.style.display = 'flex';
-            iconBg.style.alignItems = 'center';
-            iconBg.style.justifyContent = 'center';
-            iconBg.style.borderRadius = '12px';
-            iconBg.style.backgroundColor = '#ffffff';
-            iconBg.style.margin = '0 auto';
-            iconBg.style.transition = 'all 0.3s ease';
-            iconBg.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.05)';
-            
+            iconBg.style.width = "80px";
+            iconBg.style.height = "80px";
+            iconBg.style.display = "flex";
+            iconBg.style.alignItems = "center";
+            iconBg.style.justifyContent = "center";
+            iconBg.style.borderRadius = "12px";
+            iconBg.style.backgroundColor = "#ffffff";
+            iconBg.style.margin = "0 auto";
+            iconBg.style.transition = "all 0.3s ease";
+            iconBg.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.05)";
+
             // Add pulse animation on hover
-            box.addEventListener('mouseenter', () => {
-              iconBg.style.animation = 'pulse 1s ease-in-out';
+            box.addEventListener("mouseenter", () => {
+              iconBg.style.animation = "pulse 1s ease-in-out";
             });
-            
-            box.addEventListener('mouseleave', () => {
-              iconBg.style.animation = '';
+
+            box.addEventListener("mouseleave", () => {
+              iconBg.style.animation = "";
             });
           }
-          
+
           // Style icons based on parent box class
-          const icon = box.querySelector('.feature-icon') as HTMLElement;
+          const icon = box.querySelector(".feature-icon") as HTMLElement;
           if (icon) {
-            if (box.classList.contains('purple')) {
-              icon.style.color = '#9333ea';
-            } else if (box.classList.contains('teal')) {
-              icon.style.color = '#0d9488';
-            } else if (box.classList.contains('blue')) {
-              icon.style.color = '#3b82f6';
-            } else if (box.classList.contains('beige')) {
-              icon.style.color = '#d97706';
+            if (box.classList.contains("purple")) {
+              icon.style.color = "#9333ea";
+            } else if (box.classList.contains("teal")) {
+              icon.style.color = "#0d9488";
+            } else if (box.classList.contains("blue")) {
+              icon.style.color = "#3b82f6";
+            } else if (box.classList.contains("beige")) {
+              icon.style.color = "#d97706";
             }
-            
+
             // Add spin animation on hover
-            box.addEventListener('mouseenter', () => {
-              icon.style.animation = 'spin 2s linear 1';
+            box.addEventListener("mouseenter", () => {
+              icon.style.animation = "spin 2s linear 1";
             });
-            
-            box.addEventListener('mouseleave', () => {
-              icon.style.animation = '';
+
+            box.addEventListener("mouseleave", () => {
+              icon.style.animation = "";
             });
           }
-          
+
           // Style feature content
-          const featureContent = box.querySelector('.feature-content') as HTMLElement;
+          const featureContent = box.querySelector(".feature-content") as HTMLElement;
           if (featureContent) {
-            featureContent.style.marginTop = 'auto';
-            featureContent.style.width = '100%';
-            featureContent.style.display = 'flex';
-            featureContent.style.flexDirection = 'column';
-            featureContent.style.alignItems = 'center';
+            featureContent.style.marginTop = "auto";
+            featureContent.style.width = "100%";
+            featureContent.style.display = "flex";
+            featureContent.style.flexDirection = "column";
+            featureContent.style.alignItems = "center";
           }
-          
+
           // Style feature title with fade-in animation
-          const featureTitle = box.querySelector('.feature-title') as HTMLElement;
+          const featureTitle = box.querySelector(".feature-title") as HTMLElement;
           if (featureTitle) {
-            featureTitle.style.fontSize = '1.25rem';
-            featureTitle.style.fontWeight = '600';
-            featureTitle.style.marginBottom = '0.75rem';
-            featureTitle.style.color = '#333';
-            featureTitle.style.opacity = '1';
-            featureTitle.style.animation = 'fadeIn 0.4s ease forwards';
-            featureTitle.style.animationDelay = '0.4s';
-            featureTitle.style.textAlign = 'center';
-            featureTitle.style.width = '100%';
-            featureTitle.style.display = 'block';
-            
+            featureTitle.style.fontSize = "1.25rem";
+            featureTitle.style.fontWeight = "600";
+            featureTitle.style.marginBottom = "0.75rem";
+            featureTitle.style.color = "#333";
+            featureTitle.style.opacity = "1";
+            featureTitle.style.animation = "fadeIn 0.4s ease forwards";
+            featureTitle.style.animationDelay = "0.4s";
+            featureTitle.style.textAlign = "center";
+            featureTitle.style.width = "100%";
+            featureTitle.style.display = "block";
+
             // Darken text on hover
-            box.addEventListener('mouseenter', () => {
-              featureTitle.style.color = '#111';
+            box.addEventListener("mouseenter", () => {
+              featureTitle.style.color = "#111";
             });
-            
-            box.addEventListener('mouseleave', () => {
-              featureTitle.style.color = '#333';
+
+            box.addEventListener("mouseleave", () => {
+              featureTitle.style.color = "#333";
             });
           }
-          
+
           // Style feature text with fade-in animation
-          const featureText = box.querySelector('.feature-text') as HTMLElement;
+          const featureText = box.querySelector(".feature-text") as HTMLElement;
           if (featureText) {
-            featureText.style.color = '#666';
-            featureText.style.fontSize = '0.95rem';
-            featureText.style.lineHeight = '1.6';
-            featureText.style.marginBottom = '0';
-            featureText.style.opacity = '1';
-            featureText.style.animation = 'fadeIn 0.4s ease forwards';
-            featureText.style.animationDelay = '0.6s';
-            featureText.style.textAlign = 'center';
-            featureText.style.width = '100%';
-            featureText.style.display = 'block';
-            featureText.style.padding = '0 0.5rem';
-            
+            featureText.style.color = "#666";
+            featureText.style.fontSize = "0.95rem";
+            featureText.style.lineHeight = "1.6";
+            featureText.style.marginBottom = "0";
+            featureText.style.opacity = "1";
+            featureText.style.animation = "fadeIn 0.4s ease forwards";
+            featureText.style.animationDelay = "0.6s";
+            featureText.style.textAlign = "center";
+            featureText.style.width = "100%";
+            featureText.style.display = "block";
+            featureText.style.padding = "0 0.5rem";
+
             // Darken text on hover
-            box.addEventListener('mouseenter', () => {
-              featureText.style.color = '#444';
+            box.addEventListener("mouseenter", () => {
+              featureText.style.color = "#444";
             });
-            
-            box.addEventListener('mouseleave', () => {
-              featureText.style.color = '#666';
+
+            box.addEventListener("mouseleave", () => {
+              featureText.style.color = "#666";
             });
           }
         });
       }
     };
-    
+
     // Run initialization immediately and also after a short delay
     initPageStyles();
-    
+
     // Also run on window load to ensure all resources are loaded
-    window.addEventListener('load', initPageStyles);
-    
+    window.addEventListener("load", initPageStyles);
+
     // Force re-initialization after delays to ensure styles are applied
     const timeoutId1 = setTimeout(initPageStyles, 50);
     const timeoutId2 = setTimeout(initPageStyles, 100);
     const timeoutId3 = setTimeout(initPageStyles, 300);
-    
+
     // Add scroll event listener for back-to-top button and active section tracking
     const handleScroll = () => {
       // Show back-to-top button when scrolled down
-      const backToTopButton = document.querySelector('.back-to-top');
+      const backToTopButton = document.querySelector(".back-to-top");
       if (window.scrollY > 300) {
-        backToTopButton?.classList.add('show');
+        backToTopButton?.classList.add("show");
       } else {
-        backToTopButton?.classList.remove('show');
+        backToTopButton?.classList.remove("show");
       }
-      
+
       // Update active section based on scroll position
-      const howWeDoSection = document.getElementById('how-we-do');
-      const whatYouGetSection = document.getElementById('what-you-get');
-      const featuresSection = document.getElementById('features');
-      const benefitsSection = document.getElementById('benefits');
-      const testimonialsSection = document.getElementById('testimonials');
-      const pricingSection = document.getElementById('pricing');
-      
+      const howWeDoSection = document.getElementById("how-we-do");
+      const whatYouGetSection = document.getElementById("what-you-get");
+      const featuresSection = document.getElementById("features");
+      const benefitsSection = document.getElementById("benefits");
+      const testimonialsSection = document.getElementById("testimonials");
+      const pricingSection = document.getElementById("pricing");
+
       // Default to 'hero' section
       if (window.scrollY < 100) {
-        setActiveSection('hero');
+        setActiveSection("hero");
       }
       // Check each section's position and set the active section
-      else if (howWeDoSection && howWeDoSection.getBoundingClientRect().top <= 200 && 
-               howWeDoSection.getBoundingClientRect().bottom >= 200) {
-        setActiveSection('how-we-do');
-      }
-      else if (whatYouGetSection && whatYouGetSection.getBoundingClientRect().top <= 200 && 
-               whatYouGetSection.getBoundingClientRect().bottom >= 200) {
-        setActiveSection('what-you-get');
-      }
-      else if (featuresSection && featuresSection.getBoundingClientRect().top <= 200 && 
-               featuresSection.getBoundingClientRect().bottom >= 200) {
-        setActiveSection('features');
-      }
-      else if (benefitsSection && benefitsSection.getBoundingClientRect().top <= 200 && 
-               benefitsSection.getBoundingClientRect().bottom >= 200) {
-        setActiveSection('benefits');
-      }
-      else if (testimonialsSection && testimonialsSection.getBoundingClientRect().top <= 200 && 
-               testimonialsSection.getBoundingClientRect().bottom >= 200) {
-        setActiveSection('testimonials');
-      }
-      else if (pricingSection && pricingSection.getBoundingClientRect().top <= 200 && 
-               pricingSection.getBoundingClientRect().bottom >= 200) {
-        setActiveSection('pricing');
+      else if (howWeDoSection && howWeDoSection.getBoundingClientRect().top <= 200 && howWeDoSection.getBoundingClientRect().bottom >= 200) {
+        setActiveSection("how-we-do");
+      } else if (whatYouGetSection && whatYouGetSection.getBoundingClientRect().top <= 200 && whatYouGetSection.getBoundingClientRect().bottom >= 200) {
+        setActiveSection("what-you-get");
+      } else if (featuresSection && featuresSection.getBoundingClientRect().top <= 200 && featuresSection.getBoundingClientRect().bottom >= 200) {
+        setActiveSection("features");
+      } else if (benefitsSection && benefitsSection.getBoundingClientRect().top <= 200 && benefitsSection.getBoundingClientRect().bottom >= 200) {
+        setActiveSection("benefits");
+      } else if (testimonialsSection && testimonialsSection.getBoundingClientRect().top <= 200 && testimonialsSection.getBoundingClientRect().bottom >= 200) {
+        setActiveSection("testimonials");
+      } else if (pricingSection && pricingSection.getBoundingClientRect().top <= 200 && pricingSection.getBoundingClientRect().bottom >= 200) {
+        setActiveSection("pricing");
       }
     };
-    
-    window.addEventListener('scroll', handleScroll);
-    
+
+    window.addEventListener("scroll", handleScroll);
+
     return () => {
-      window.removeEventListener('load', initPageStyles);
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("load", initPageStyles);
+      window.removeEventListener("scroll", handleScroll);
       clearTimeout(timeoutId1);
       clearTimeout(timeoutId2);
       clearTimeout(timeoutId3);
@@ -823,7 +812,7 @@ const LandingPage = () => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
   };
 
@@ -831,17 +820,17 @@ const LandingPage = () => {
   const scrollToSection = (sectionId: string): void => {
     // Close the mobile menu
     setExpanded(false);
-    
+
     // Find the section element
     const section = document.getElementById(sectionId);
     if (!section) return;
-    
+
     // Scroll to the section with smooth behavior
     window.scrollTo({
       top: section.offsetTop - 80, // Account for navbar height
-      behavior: 'smooth'
+      behavior: "smooth",
     });
-    
+
     // Update active section
     setActiveSection(sectionId);
   };
@@ -854,24 +843,26 @@ const LandingPage = () => {
   return (
     <div className="landing-page position-relative">
       {/* Navbar - Update with expanded state and toggle handler */}
-      <Navbar 
-        variant="dark" 
-        expand="lg" 
-        expanded={expanded}
-        className="py-2 px-0"
-      >
+      <Navbar variant="dark" expand="lg" expanded={expanded} className="py-2 px-0">
         <Container fluid className="px-3">
           <Navbar.Brand href="#hero" className="d-flex align-items-center">
             <img src={mewaLogo} alt="Mewa Logo" className="me-2" height="40" />
             <span className="fw-bold text-white">Mewa</span>
           </Navbar.Brand>
-          
-          <Navbar.Toggle 
-            aria-controls="navbar-nav" 
-            onClick={toggleMenu}
-          >
+
+          <Navbar.Toggle aria-controls="navbar-nav" onClick={toggleMenu}>
             {expanded ? (
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
               </svg>
@@ -879,119 +870,120 @@ const LandingPage = () => {
               <span className="navbar-toggler-icon"></span>
             )}
           </Navbar.Toggle>
-          
+
           <Navbar.Collapse id="navbar-nav" className="p-0">
             <Nav className="ms-auto w-100">
-              <Nav.Link 
-                href="#hero" 
+              <Nav.Link
+                href="#hero"
                 className="px-0"
-                active={activeSection === 'hero'} 
-                onClick={(e: MouseEvent<HTMLAnchorElement>) => { 
-                  e.preventDefault(); 
-                  scrollToSection('hero'); 
-                  setExpanded(false); 
+                active={activeSection === "hero"}
+                onClick={(e: MouseEvent<HTMLAnchorElement>) => {
+                  e.preventDefault();
+                  scrollToSection("hero");
+                  setExpanded(false);
                 }}
               >
                 Home
               </Nav.Link>
-              
-              <Nav.Link 
-                href="#how-we-do" 
+
+              <Nav.Link
+                href="#how-we-do"
                 className="px-0"
-                active={activeSection === 'how-we-do'} 
-                onClick={(e: MouseEvent<HTMLAnchorElement>) => { 
-                  e.preventDefault(); 
-                  scrollToSection('how-we-do'); 
-                  setExpanded(false); 
+                active={activeSection === "how-we-do"}
+                onClick={(e: MouseEvent<HTMLAnchorElement>) => {
+                  e.preventDefault();
+                  scrollToSection("how-we-do");
+                  setExpanded(false);
                 }}
               >
                 How We Do
               </Nav.Link>
-              
-              <Nav.Link 
-                href="#what-you-get" 
+
+              <Nav.Link
+                href="#what-you-get"
                 className="px-0"
-                active={activeSection === 'what-you-get'} 
-                onClick={(e: MouseEvent<HTMLAnchorElement>) => { 
-                  e.preventDefault(); 
-                  scrollToSection('what-you-get'); 
-                  setExpanded(false); 
+                active={activeSection === "what-you-get"}
+                onClick={(e: MouseEvent<HTMLAnchorElement>) => {
+                  e.preventDefault();
+                  scrollToSection("what-you-get");
+                  setExpanded(false);
                 }}
               >
                 What You Get
               </Nav.Link>
-              
-              <Nav.Link 
-                href="#features" 
+
+              <Nav.Link
+                href="#features"
                 className="px-0"
-                active={activeSection === 'features'} 
-                onClick={(e: MouseEvent<HTMLAnchorElement>) => { 
-                  e.preventDefault(); 
-                  scrollToSection('features'); 
-                  setExpanded(false); 
+                active={activeSection === "features"}
+                onClick={(e: MouseEvent<HTMLAnchorElement>) => {
+                  e.preventDefault();
+                  scrollToSection("features");
+                  setExpanded(false);
                 }}
               >
                 Features
               </Nav.Link>
-              
-              <Nav.Link 
-                href="#benefits" 
+
+              <Nav.Link
+                href="#benefits"
                 className="px-0"
-                active={activeSection === 'benefits'} 
-                onClick={(e: MouseEvent<HTMLAnchorElement>) => { 
-                  e.preventDefault(); 
-                  scrollToSection('benefits'); 
-                  setExpanded(false); 
+                active={activeSection === "benefits"}
+                onClick={(e: MouseEvent<HTMLAnchorElement>) => {
+                  e.preventDefault();
+                  scrollToSection("benefits");
+                  setExpanded(false);
                 }}
               >
                 Benefits
               </Nav.Link>
-              
-              <Nav.Link 
-                href="#testimonials" 
+
+              <Nav.Link
+                href="#testimonials"
                 className="px-0"
-                active={activeSection === 'testimonials'} 
-                onClick={(e: MouseEvent<HTMLAnchorElement>) => { 
-                  e.preventDefault(); 
-                  scrollToSection('testimonials'); 
-                  setExpanded(false); 
+                active={activeSection === "testimonials"}
+                onClick={(e: MouseEvent<HTMLAnchorElement>) => {
+                  e.preventDefault();
+                  scrollToSection("testimonials");
+                  setExpanded(false);
                 }}
               >
                 Testimonials
               </Nav.Link>
-              
-              <Nav.Link 
-                href="#pricing" 
+
+              <Nav.Link
+                href="#pricing"
                 className="px-0"
-                active={activeSection === 'pricing'} 
-                onClick={(e: MouseEvent<HTMLAnchorElement>) => { 
-                  e.preventDefault(); 
-                  scrollToSection('pricing'); 
-                  setExpanded(false); 
+                active={activeSection === "pricing"}
+                onClick={(e: MouseEvent<HTMLAnchorElement>) => {
+                  e.preventDefault();
+                  scrollToSection("pricing");
+                  setExpanded(false);
                 }}
               >
                 Pricing
               </Nav.Link>
-              
-              <Nav.Link 
-                href="#contact" 
+
+              <Nav.Link
+                href="#contact"
                 className="px-0"
-                active={activeSection === 'contact'} 
-                onClick={(e: MouseEvent<HTMLAnchorElement>) => { 
-                  e.preventDefault(); 
-                  scrollToSection('contact'); 
-                  setExpanded(false); 
+                active={activeSection === "contact"}
+                onClick={(e: MouseEvent<HTMLAnchorElement>) => {
+                  e.preventDefault();
+                  scrollToSection("contact");
+                  setExpanded(false);
                 }}
               >
                 Contact
               </Nav.Link>
-              
+
               {/* Divider */}
               <div className="nav-divider"></div>
-              
-              {/* Login and Get Started buttons */}
-              <Nav.Link 
-                className="nav-button-link px-0"
+            </Nav>
+            {/* Desktop navigation links that will be hidden on mobile */}
+            <Nav className="desktop-only ms-auto">
+              <Nav.Link
+                className="nav-button-link"
                 onClick={(e: MouseEvent<HTMLAnchorElement>) => {
                   e.preventDefault();
                   handleLogin();
@@ -1000,9 +992,9 @@ const LandingPage = () => {
               >
                 Login
               </Nav.Link>
-              
-              <Nav.Link 
-                className="nav-button-primary px-0"
+
+              <Nav.Link
+                className="nav-button-link"
                 onClick={(e: MouseEvent<HTMLAnchorElement>) => {
                   e.preventDefault();
                   handleGetStarted();
@@ -1012,6 +1004,29 @@ const LandingPage = () => {
                 Get Started
               </Nav.Link>
             </Nav>
+
+            {/* Mobile only buttons that will be hidden on desktop */}
+            <div className="mobile-only-buttons">
+              <button
+                className="mobile-button mobile-login-button"
+                onClick={() => {
+                  handleLogin();
+                  setExpanded(false);
+                }}
+              >
+                Login
+              </button>
+
+              <button
+                className="mobile-button btn btn-success"
+                onClick={() => {
+                  handleGetStarted();
+                  setExpanded(false);
+                }}
+              >
+                Get Started
+              </button>
+            </div>
           </Navbar.Collapse>
         </Container>
       </Navbar>
@@ -1023,37 +1038,19 @@ const LandingPage = () => {
             <Col xs={12} lg={6} className="mb-5 mb-lg-0">
               <div data-aos="fade-right" data-aos-delay="100">
                 <h1 className="display-4">Find the Best Markets Near You</h1>
-                <p className="lead">
-                  Discover local markets, vendors, and fresh products all in one place.
-                  Connect with local businesses and support your community.
-                </p>
+                <p className="lead">Discover local markets, vendors, and fresh products all in one place. Connect with local businesses and support your community.</p>
                 <div className="d-flex mt-4">
-                  <Button
-                    variant="success"
-                    size="lg"
-                    onClick={handleGetStarted}
-                    className="me-3"
-                  >
+                  <Button variant="success" size="lg" onClick={handleGetStarted} className="me-3">
                     Get Started
                   </Button>
-                  <Button
-                    variant="outline-light"
-                    size="lg"
-                    onClick={handleLogin}
-                  >
+                  <Button variant="outline-light" size="lg" onClick={handleLogin}>
                     Login
                   </Button>
                 </div>
               </div>
             </Col>
             <Col xs={12} lg={6} className="text-center">
-              <img
-                src={marketImage}
-                alt="Market App"
-                className="hero-image img-fluid"
-                data-aos="fade-left"
-                data-aos-delay="300"
-              />
+              <img src={marketImage} alt="Market App" className="hero-image img-fluid" data-aos="fade-left" data-aos-delay="300" />
             </Col>
           </Row>
         </Container>
@@ -1064,7 +1061,9 @@ const LandingPage = () => {
         <Container>
           <Row className="justify-content-center">
             <Col xs={12}>
-              <h2 className="how-we-do-title" data-aos="fade-up">How We Do</h2>
+              <h2 className="how-we-do-title" data-aos="fade-up">
+                How We Do
+              </h2>
               <div className="process-flow-container">
                 <div className="process-card" data-aos="fade-up" data-aos-delay="100">
                   <div className="process-card-inner">
@@ -1100,11 +1099,13 @@ const LandingPage = () => {
         <Container>
           <Row className="justify-content-center">
             <Col xs={12}>
-              <h2 className="what-you-get-title" data-aos="fade-up">What You Get</h2>
+              <h2 className="what-you-get-title" data-aos="fade-up">
+                What You Get
+              </h2>
             </Col>
           </Row>
           <Row className="justify-content-center">
-            <Col xs={12} sm={6} md={6} lg={3} className="mb-4 mb-lg-0">
+            <Col xs={12} sm={6} md={6} lg={3} className="mb-4 mb-lg-0 feature-box-container">
               <div className="feature-box purple" data-aos="zoom-in" data-aos-delay="100">
                 <div className="feature-icon-wrapper">
                   <div className="feature-icon-bg">
@@ -1117,7 +1118,7 @@ const LandingPage = () => {
                 </div>
               </div>
             </Col>
-            <Col xs={12} sm={6} md={6} lg={3} className="mb-4 mb-lg-0">
+            <Col xs={12} sm={6} md={6} lg={3} className="mb-4 mb-lg-0 feature-box-container">
               <div className="feature-box teal" data-aos="zoom-in" data-aos-delay="200">
                 <div className="feature-icon-wrapper">
                   <div className="feature-icon-bg">
@@ -1130,7 +1131,7 @@ const LandingPage = () => {
                 </div>
               </div>
             </Col>
-            <Col xs={12} sm={6} md={6} lg={3} className="mb-4 mb-lg-0">
+            <Col xs={12} sm={6} md={6} lg={3} className="mb-4 mb-lg-0 feature-box-container">
               <div className="feature-box blue" data-aos="zoom-in" data-aos-delay="300">
                 <div className="feature-icon-wrapper">
                   <div className="feature-icon-bg">
@@ -1143,7 +1144,7 @@ const LandingPage = () => {
                 </div>
               </div>
             </Col>
-            <Col xs={12} sm={6} md={6} lg={3} className="mb-4 mb-lg-0">
+            <Col xs={12} sm={6} md={6} lg={3} className="mb-4 mb-lg-0 feature-box-container">
               <div className="feature-box beige" data-aos="zoom-in" data-aos-delay="400">
                 <div className="feature-icon-wrapper">
                   <div className="feature-icon-bg">
@@ -1159,7 +1160,7 @@ const LandingPage = () => {
           </Row>
         </Container>
       </section>
-      
+
       {/* Features Section */}
       <section className="py-5" id="features">
         <Container>
@@ -1175,9 +1176,7 @@ const LandingPage = () => {
                     <i className="fas fa-search fa-lg"></i>
                   </div>
                   <Card.Title>Advanced Search</Card.Title>
-                  <Card.Text>
-                    Find markets and vendors by location, product type, or special features.
-                  </Card.Text>
+                  <Card.Text>Find markets and vendors by location, product type, or special features.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -1188,9 +1187,7 @@ const LandingPage = () => {
                     <i className="fas fa-star fa-lg"></i>
                   </div>
                   <Card.Title>Reviews & Ratings</Card.Title>
-                  <Card.Text>
-                    See what others think and share your own experiences with markets and vendors.
-                  </Card.Text>
+                  <Card.Text>See what others think and share your own experiences with markets and vendors.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -1201,77 +1198,67 @@ const LandingPage = () => {
                     <i className="fas fa-bell fa-lg"></i>
                   </div>
                   <Card.Title>Notifications</Card.Title>
-                  <Card.Text>
-                    Get timely alerts about favorite vendors, new products, and market events.
-                  </Card.Text>
+                  <Card.Text>Get timely alerts about favorite vendors, new products, and market events.</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
           </Row>
         </Container>
       </section>
-      
+
       {/* Benefits Section */}
       <section className="py-5" id="benefits">
         <Container>
-          <h2 className="text-center mb-5" data-aos="fade-up">Benefits</h2>
+          <h2 className="text-center mb-5" data-aos="fade-up">
+            Benefits
+          </h2>
           <Row className="justify-content-center">
-            <Col sm={12} md={6} lg={3} className="mb-4">
+            <Col sm={12} md={6} lg={3} className="mb-4 benefit-card-container">
               <div className="benefit-card" data-aos="fade-up" data-aos-delay="100">
                 <div className="benefit-icon">
                   <i className="fas fa-leaf fa-2x"></i>
                 </div>
                 <h3>Support Local Business</h3>
-                <p>
-                  Help your community thrive by supporting local vendors and farmers.
-                  Your purchases make a direct impact on your local economy.
-                </p>
+                <p>Help your community thrive by supporting local vendors and farmers. Your purchases make a direct impact on your local economy.</p>
               </div>
             </Col>
-            <Col sm={12} md={6} lg={3} className="mb-4">
+            <Col sm={12} md={6} lg={3} className="mb-4 benefit-card-container">
               <div className="benefit-card" data-aos="fade-up" data-aos-delay="200">
                 <div className="benefit-icon">
                   <i className="fas fa-apple-alt fa-2x"></i>
                 </div>
                 <h3>Fresh Products</h3>
-                <p>
-                  Access the freshest produce and handcrafted goods directly from
-                  the people who make them.
-                </p>
+                <p>Access the freshest produce and handcrafted goods directly from the people who make them.</p>
               </div>
             </Col>
-            <Col sm={12} md={6} lg={3} className="mb-4">
+            <Col sm={12} md={6} lg={3} className="mb-4 benefit-card-container">
               <div className="benefit-card" data-aos="fade-up" data-aos-delay="300">
                 <div className="benefit-icon">
                   <i className="fas fa-users fa-2x"></i>
                 </div>
                 <h3>Community Connection</h3>
-                <p>
-                  Build relationships with the people who grow and make the products
-                  you love and connect with like-minded shoppers.
-                </p>
+                <p>Build relationships with the people who grow and make the products you love and connect with like-minded shoppers.</p>
               </div>
             </Col>
-            <Col sm={12} md={6} lg={3} className="mb-4">
+            <Col sm={12} md={6} lg={3} className="mb-4 benefit-card-container">
               <div className="benefit-card" data-aos="fade-up" data-aos-delay="400">
                 <div className="benefit-icon">
                   <i className="fas fa-map-marked-alt fa-2x"></i>
                 </div>
                 <h3>Discover Hidden Gems</h3>
-                <p>
-                  Find unique products and markets you might never have known about
-                  without our platform's curated recommendations.
-                </p>
+                <p>Find unique products and markets you might never have known about without our platform's curated recommendations.</p>
               </div>
             </Col>
           </Row>
         </Container>
       </section>
-      
+
       {/* Testimonials Section */}
       <section id="testimonials" className="py-5 bg-light">
         <Container>
-          <h2 className="text-center mb-5" data-aos="fade-up">What Our Users Say</h2>
+          <h2 className="text-center mb-5" data-aos="fade-up">
+            What Our Users Say
+          </h2>
           <Row className="justify-content-center">
             <Col sm={12} md={4} className="mb-4">
               <Card className="testimonial-card" data-aos="fade-up" data-aos-delay="100">
@@ -1292,10 +1279,7 @@ const LandingPage = () => {
                     <i className="fas fa-star"></i>
                     <i className="fas fa-star"></i>
                   </div>
-                  <Card.Text>
-                    "This app has completely changed how I shop for produce. I've discovered
-                    amazing local vendors I never knew existed in my area!"
-                  </Card.Text>
+                  <Card.Text>"This app has completely changed how I shop for produce. I've discovered amazing local vendors I never knew existed in my area!"</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -1318,10 +1302,7 @@ const LandingPage = () => {
                     <i className="fas fa-star"></i>
                     <i className="fas fa-star"></i>
                   </div>
-                  <Card.Text>
-                    "As a small vendor, this platform has helped me reach so many new customers.
-                    My business has grown significantly since I joined."
-                  </Card.Text>
+                  <Card.Text>"As a small vendor, this platform has helped me reach so many new customers. My business has grown significantly since I joined."</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -1344,10 +1325,7 @@ const LandingPage = () => {
                     <i className="fas fa-star"></i>
                     <i className="fas fa-star-half-alt"></i>
                   </div>
-                  <Card.Text>
-                    "The tools provided for market organizers are incredible. It's so much easier
-                    to coordinate vendors and promote our events now."
-                  </Card.Text>
+                  <Card.Text>"The tools provided for market organizers are incredible. It's so much easier to coordinate vendors and promote our events now."</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -1527,34 +1505,75 @@ const LandingPage = () => {
           <Row className="gy-4">
             <Col xs={12} md={5} className="mb-4 mb-md-0">
               <h5>About MarketApp</h5>
-              <p>
-                Discover local markets and vendors in your community.
-                Shop fresh products and connect with local businesses.
-              </p>
+              <p>Discover local markets and vendors in your community. Shop fresh products and connect with local businesses.</p>
               <div className="social-icons">
-                <a href="#" aria-label="Facebook"><i className="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="Twitter"><i className="fab fa-twitter"></i></a>
-                <a href="#" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
-                <a href="#" aria-label="LinkedIn"><i className="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Facebook">
+                  <i className="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" aria-label="Twitter">
+                  <i className="fab fa-twitter"></i>
+                </a>
+                <a href="#" aria-label="Instagram">
+                  <i className="fab fa-instagram"></i>
+                </a>
+                <a href="#" aria-label="LinkedIn">
+                  <i className="fab fa-linkedin-in"></i>
+                </a>
               </div>
             </Col>
             <Col xs={6} md={3} className="mb-4 mb-md-0">
               <h5>Quick Links</h5>
               <ul className="list-unstyled">
-                <li><a href="#hero" className="footer-link">Home</a></li>
-                <li><a href="#features" className="footer-link">Features</a></li>
-                <li><a href="#benefits" className="footer-link">Benefits</a></li>
-                <li><a href="#pricing" className="footer-link">Pricing</a></li>
+                <li>
+                  <a href="#hero" className="footer-link">
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a href="#features" className="footer-link">
+                    Features
+                  </a>
+                </li>
+                <li>
+                  <a href="#benefits" className="footer-link">
+                    Benefits
+                  </a>
+                </li>
+                <li>
+                  <a href="#pricing" className="footer-link">
+                    Pricing
+                  </a>
+                </li>
               </ul>
             </Col>
             <Col xs={6} md={4} className="mb-4 mb-md-0">
               <h5>Resources</h5>
               <ul className="list-unstyled">
-                <li><a href="#" className="footer-link">Blog</a></li>
-                <li><a href="#" className="footer-link">Help Center</a></li>
-                <li><a href="#" className="footer-link">FAQs</a></li>
-                <li><a href="#" className="footer-link">Privacy Policy</a></li>
-                <li><a href="#" className="footer-link">Terms of Service</a></li>
+                <li>
+                  <a href="#" className="footer-link">
+                    Blog
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="footer-link">
+                    Help Center
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="footer-link">
+                    FAQs
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="footer-link">
+                    Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="footer-link">
+                    Terms of Service
+                  </a>
+                </li>
               </ul>
             </Col>
           </Row>

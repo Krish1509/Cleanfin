@@ -2,18 +2,18 @@
 
 /* Global Styles - Force immediate application */
 .landing-page {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif !important;
   color: #333 !important;
   overflow-x: hidden !important;
   width: 100% !important;
   max-width: 100% !important;
 }
 
-.landing-page h1, 
-.landing-page h2, 
-.landing-page h3, 
-.landing-page h4, 
-.landing-page h5, 
+.landing-page h1,
+.landing-page h2,
+.landing-page h3,
+.landing-page h4,
+.landing-page h5,
 .landing-page h6 {
   font-weight: 600 !important;
   margin-bottom: 1rem !important;
@@ -63,7 +63,7 @@
   transition: color 0.3s ease !important;
 }
 
-.landing-page .nav-link:hover, 
+.landing-page .nav-link:hover,
 .landing-page .nav-link.active {
   color: #10b981 !important;
 }
@@ -95,13 +95,13 @@
 }
 
 .landing-page .hero-section::before {
-  content: '' !important;
+  content: "" !important;
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  background-image: url('../images/landing/img-dot-bg.png') !important;
+  background-image: url("../images/landing/img-dot-bg.png") !important;
   opacity: 0.2 !important;
   z-index: 0 !important;
 }
@@ -180,7 +180,7 @@
   border-radius: 12px !important;
   transition: transform 0.3s ease, box-shadow 0.3s ease !important;
   overflow: hidden !important;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05) !important;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
   height: 100% !important;
   text-align: center !important;
   margin: 0 auto !important;
@@ -251,7 +251,7 @@
 
 .landing-page #benefits::before,
 .landing-page #benefits::after {
-  content: '' !important;
+  content: "" !important;
   position: absolute !important;
   width: 300px !important;
   height: 300px !important;
@@ -331,7 +331,7 @@
 
 /* Gradient border effect */
 .landing-page .benefit-card::before {
-  content: '' !important;
+  content: "" !important;
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
@@ -340,8 +340,7 @@
   border-radius: 12px !important;
   padding: 2px !important;
   background: linear-gradient(135deg, #10b981, #3b82f6) !important;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box,
-                linear-gradient(#fff 0 0) !important;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0) !important;
   -webkit-mask-composite: xor !important;
   mask-composite: exclude !important;
   opacity: 0 !important;
@@ -360,9 +359,10 @@
 .landing-page .testimonial-card {
   border: none !important;
   border-radius: 12px !important;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05) !important;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
   transition: transform 0.3s ease !important;
   height: 100% !important;
+  margin-bottom: 0 !important;
 }
 
 .landing-page .testimonial-card:hover {
@@ -394,13 +394,13 @@
 }
 
 .landing-page .cta-section::before {
-  content: '' !important;
+  content: "" !important;
   position: absolute !important;
   top: 0 !important;
   right: 0 !important;
   bottom: 0 !important;
   left: 0 !important;
-  background-image: url('../images/landing/img-counter-bg.svg') !important;
+  background-image: url("../images/landing/img-counter-bg.svg") !important;
   background-size: cover !important;
   opacity: 0.1 !important;
 }
@@ -497,34 +497,34 @@
     overflow-y: auto !important;
     margin: 0 !important;
   }
-  
+
   .landing-page .navbar-collapse.show {
     display: block !important;
   }
-  
+
   /* Child nav elements need padding */
   .landing-page .navbar-collapse .nav {
     padding: 0 !important;
     width: 100% !important;
     margin: 0 !important;
   }
-  
+
   .landing-page .navbar-nav {
     padding: 10px 0 !important;
   }
-  
+
   .landing-page .nav-link {
     padding: 12px 0 !important;
     font-size: 16px !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
     transition: all 0.2s ease !important;
   }
-  
+
   .landing-page .nav-link:hover {
     background-color: rgba(255, 255, 255, 0.05) !important;
     padding-left: 5px !important;
   }
-  
+
   .landing-page .navbar-collapse .d-flex {
     margin-top: 15px !important;
     padding-top: 15px !important;
@@ -532,7 +532,7 @@
     flex-direction: row !important;
     justify-content: center !important;
   }
-  
+
   /* Fix for navbar toggler button */
   .landing-page .navbar-toggler {
     padding: 0.5rem !important;
@@ -548,41 +548,41 @@
     background: transparent !important;
     z-index: 1001 !important;
   }
-  
+
   .landing-page .navbar-toggler:focus {
     box-shadow: none !important;
     outline: none !important;
   }
-  
+
   /* Ensure the hero section has proper spacing */
   .landing-page .hero-section {
-    margin-top: 70px !important; 
+    margin-top: 70px !important;
   }
-  
+
   /* Adjust benefit cards for tablet */
   .landing-page .benefit-card {
     margin-bottom: 30px !important;
   }
-  
+
   /* Process flow adjustments for tablet */
   .landing-page .process-flow-container {
     flex-direction: column !important;
     gap: 2rem !important;
   }
-  
+
   .landing-page .process-connector {
     flex-direction: row !important;
     width: auto !important;
     margin: 1rem 0 !important;
   }
-  
+
   .landing-page .connector-line {
     width: 2px !important;
     height: 40px !important;
     margin-bottom: 0 !important;
     margin-right: 8px !important;
   }
-  
+
   /* Pricing cards adjustments */
   .landing-page .pricing-card {
     margin-bottom: 2rem !important;
@@ -594,39 +594,39 @@
     text-align: center !important;
     padding: 4rem 0 2rem !important;
   }
-  
+
   .landing-page .hero-section .btn {
     margin-bottom: 1rem !important;
   }
-  
+
   .landing-page .hero-section .d-flex {
     justify-content: center !important;
     flex-wrap: wrap !important;
   }
-  
+
   .landing-page .navbar .navbar-collapse {
     background-color: rgba(0, 0, 0, 0.9) !important;
     padding: 1rem !important;
     border-radius: 8px !important;
     margin-top: 0.5rem !important;
   }
-  
+
   /* Adjust column layout for mobile */
   .landing-page .py-5 .col-md-4 {
     flex: 0 0 100% !important;
     max-width: 100% !important;
   }
-  
+
   /* Adjust benefits section for mobile */
   .landing-page #benefits h2 {
     font-size: 1.75rem !important;
   }
-  
+
   /* Adjust pricing section for mobile */
   .landing-page .pricing-title {
     font-size: 1.75rem !important;
   }
-  
+
   /* Make footer sections full width on mobile */
   .landing-page footer .col-md-5,
   .landing-page footer .col-md-3,
@@ -635,7 +635,7 @@
     max-width: 100% !important;
     margin-bottom: 2rem !important;
   }
-  
+
   /* Fix back to top button position */
   .landing-page .back-to-top {
     bottom: 20px !important;
@@ -649,48 +649,48 @@
   .landing-page h1.display-4 {
     font-size: 2rem !important;
   }
-  
+
   .landing-page .hero-image {
     max-width: 80% !important;
     margin: 2rem auto 0 !important;
   }
-  
+
   .landing-page .hero-section h1 {
     font-size: 2rem !important;
   }
-  
+
   .landing-page .how-we-do-title,
   .landing-page .what-you-get-title,
   .landing-page .pricing-title,
   .landing-page .py-5 h2 {
     font-size: 1.75rem !important;
   }
-  
+
   .landing-page .lead {
     font-size: 1rem !important;
   }
-  
+
   .landing-page .process-card {
     width: 200px !important;
   }
-  
+
   /* Smaller icons on mobile */
   .landing-page .benefit-icon {
     width: 60px !important;
     height: 60px !important;
   }
-  
+
   /* Adjust pricing elements */
   .landing-page .price-amount {
     font-size: 2rem !important;
   }
-  
+
   .landing-page .check-circle {
     width: 28px !important;
     height: 28px !important;
     margin-right: 0.75rem !important;
   }
-  
+
   /* Increase font readability on small devices */
   .landing-page .footer-link {
     font-size: 0.875rem !important;
@@ -714,7 +714,7 @@ body {
 /* Feature card hover effect */
 .landing-page .feature-card:hover {
   transform: translateY(-10px) !important;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
 }
 
 /* Feature icon styling */
@@ -747,13 +747,13 @@ body {
 }
 
 .landing-page .pricing-section::before {
-  content: '' !important;
+  content: "" !important;
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
   right: 0 !important;
   bottom: 0 !important;
-  background-image: url('../images/landing/img-dot-bg.png') !important;
+  background-image: url("../images/landing/img-dot-bg.png") !important;
   opacity: 0.02 !important;
   z-index: 0 !important;
 }
@@ -915,11 +915,11 @@ body {
   .landing-page .pricing-title {
     font-size: 2rem !important;
   }
-  
+
   .landing-page .price-amount {
     font-size: 2rem !important;
   }
-  
+
   .landing-page .check-circle {
     width: 32px !important;
     height: 32px !important;
@@ -957,7 +957,7 @@ body {
   position: relative !important;
   padding: 2px !important;
   border-radius: 8px !important;
-  background: linear-gradient(90deg, #08AEEA 0%, #2AF598 100%) !important;
+  background: linear-gradient(90deg, #08aeea 0%, #2af598 100%) !important;
 }
 
 .landing-page .process-card-inner {
@@ -990,13 +990,13 @@ body {
 .landing-page .connector-line {
   width: 70px !important;
   height: 2px !important;
-  background: linear-gradient(90deg, #08AEEA 0%, #2AF598 100%) !important;
+  background: linear-gradient(90deg, #08aeea 0%, #2af598 100%) !important;
   margin-bottom: 8px !important;
 }
 
 .landing-page .connector-text {
   font-size: 1rem !important;
-  color: #2AF598 !important;
+  color: #2af598 !important;
   font-weight: 500 !important;
 }
 
@@ -1006,13 +1006,13 @@ body {
     flex-direction: column !important;
     gap: 2rem !important;
   }
-  
+
   .landing-page .process-connector {
     flex-direction: row !important;
     width: auto !important;
     margin: 1rem 0 !important;
   }
-  
+
   .landing-page .connector-line {
     width: 2px !important;
     height: 40px !important;
@@ -1132,7 +1132,7 @@ body {
 }
 
 .landing-page .feature-box::before {
-  content: '' !important;
+  content: "" !important;
   position: absolute !important;
   top: 0 !important;
   right: 0 !important;
@@ -1230,6 +1230,34 @@ body {
 @media (max-width: 991.98px) {
   .landing-page .feature-box {
     margin-bottom: 2rem !important;
+  }
+  .landing-page .feature-box-container {
+    margin-bottom: 20px !important;
+  }
+
+  /* Remove the bottom margin from the last feature-box in a container to avoid extra spacing */
+  .landing-page .row > div:last-child .feature-box-container {
+    margin-bottom: 0 !important;
+  }
+  .landing-page .benefit-card-container {
+    margin-bottom: 20px !important;
+  }
+
+  /* Remove the bottom margin from the last feature-box in a container to avoid extra spacing */
+  .landing-page .row > div:last-child .benefit-card-container {
+    margin-bottom: 0 !important;
+  }
+}
+
+/* Add media query for mobile view */
+@media (max-width: 767px) {
+  .landing-page .feature-box-container {
+    margin-bottom: 20px !important;
+  }
+
+  /* Remove the bottom margin from the last feature-box in a container to avoid extra spacing */
+  .landing-page .row > div:last-child .feature-box-container {
+    margin-bottom: 0 !important;
   }
 }
 
@@ -1357,4 +1385,81 @@ body {
 .landing-page .back-to-top svg {
   stroke-width: 2.5 !important;
   animation: floatBackToTop 2s ease-in-out infinite !important;
-} 
+}
+
+/* NavStyles.css */
+/* Desktop navigation styling */
+.desktop-only {
+  display: flex;
+  align-items: center;
+}
+
+.nav-button-link,
+.nav-button-primary {
+  padding: 8px 16px;
+  margin: 0 5px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.nav-button-link {
+  color: white;
+}
+
+.nav-button-primary {
+  background-color: #0d6efd;
+  color: white;
+  border-radius: 4px;
+}
+
+/* Mobile buttons styling */
+.mobile-only-buttons {
+  display: none;
+  width: 100%;
+  padding: 10px 15px;
+  margin-top: 15px;
+}
+
+.mobile-button {
+  width: 100%;
+  padding: 12px;
+  margin: 5px 0;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.mobile-login-button {
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: white;
+}
+
+.mobile-get-started-button {
+  background-color: #0d6efd;
+  color: white;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none; /* Hide desktop navigation on mobile */
+  }
+
+  .mobile-only-buttons {
+    display: block; /* Show mobile buttons on mobile */
+  }
+}
+
+@media (max-width: 991.98px) {
+  .desktop-only {
+    display: none; /* Hide desktop navigation on mobile */
+  }
+
+  .mobile-only-buttons {
+    display: block; /* Show mobile buttons on mobile */
+  }
+}
