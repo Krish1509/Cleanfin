@@ -22,6 +22,8 @@ import Plans from "../pages/Pages/UserDashboard/Plans";
 import AddFeedback from "../pages/Pages/Feedback/add";
 import Notifications from "../pages/Pages/Notifications";
 import PastPerformance from "../pages/Pages/UserDashboard/PastPerformance";
+import UserBroker from "../pages/Pages/UserBroker";
+import UserBrokerRegistration from "../pages/Pages/UserDashboard/UserBrokerRegistration";
 
 const routes = [
   // Dashboard Routes
@@ -128,6 +130,18 @@ const routes = [
     path: "/pastPerformance",
     component: <PastPerformance />,
     allowedRoles: ["customer"],
+  },
+
+  // User Broker Registration
+  {
+    path: "/userBrokerRegistration",
+    component: <UserBrokerRegistration />,
+    allowedRoles: ["customer"],
+  },
+  {
+    path: "/userBroker",
+    component: <UserBroker />,
+    allowedRoles: ["admin"],
   },
 ];
 

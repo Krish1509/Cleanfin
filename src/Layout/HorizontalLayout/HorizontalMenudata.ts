@@ -62,6 +62,13 @@ const adminMenuData = [
     link: "/notifications",
     icon: "",
   },
+  {
+    id: "userBrokerRegistration",
+    label: "User Broker Registration",
+    dataPage: null,
+    link: "/userBroker",
+    icon: "",
+  },
 ];
 
 const userMenuData = [
@@ -91,6 +98,13 @@ const userMenuData = [
     label: "Event",
     dataPage: null,
     link: "/eventlist",
+    icon: "",
+  },
+  {
+    id: "userBrokerRegistration",
+    label: "User Broker Registration",
+    dataPage: null,
+    link: "/userBrokerRegistration",
     icon: "",
   },
 ];
