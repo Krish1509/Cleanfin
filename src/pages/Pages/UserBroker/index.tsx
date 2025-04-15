@@ -16,6 +16,10 @@ type UserBrokerListData = {
   phone: string;
   broker_id: string;
   createdAt: string;
+  address: string;
+  city: string;
+  state: string;
+  pincode: string;
 };
 
 const UserBroker = () => {
@@ -32,9 +36,7 @@ const UserBroker = () => {
     setCurrentPage(1); // Reset page to 1 when search query changes
   };
 
-  const handleEntriesPerPageChange = (
-    e: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleEntriesPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setEntriesPerPage(parseInt(e.target.value));
     setCurrentPage(1); // Reset page to 1 when entries per page changes
   };
@@ -53,9 +55,9 @@ const UserBroker = () => {
         search: searchQuery,
       };
       const result = await postRequest("userBrokerRegistration/list", body, true);
-      const { userBrokerRegistration, totalPages } = result.data;
+      const { userBrokerRegistration, pages } = result.data;
       setUserBrokerListData(userBrokerRegistration);
-      setTotalPages(totalPages);
+      setTotalPages(pages);
       setLoading(false);
       setUpdateLoading(false);
     } catch (err) {
@@ -82,12 +84,7 @@ const UserBroker = () => {
             <ul className="list-inline ms-auto my-1 me-4">
               <li className="list-inline-item">
                 <form className="form-search">
-                  <Form.Control
-                    type="search"
-                    placeholder="Search...."
-                    className="ps-2 pe-3 pt-2"
-                    onChange={handleSearchChange}
-                  />
+                  <Form.Control type="search" placeholder="Search...." className="ps-2 pe-3 pt-2" onChange={handleSearchChange} />
                 </form>
               </li>
             </ul>
@@ -102,6 +99,10 @@ const UserBroker = () => {
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Pincode</th>
                         <th>Date</th>
                       </tr>
                     </thead>
@@ -117,6 +118,10 @@ const UserBroker = () => {
                           </td>
                           <td>{item?.email}</td>
                           <td>{item?.phone}</td>
+                          <td>{item?.address}</td>
+                          <td>{item?.city}</td>
+                          <td>{item?.state}</td>
+                          <td>{item?.pincode}</td>
                           <td>{moment(item?.createdAt).format("YYYY-MM-DD HH:mm A")}</td>
                         </tr>
                       ))}
