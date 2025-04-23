@@ -42,7 +42,7 @@ const TopBar = ({
     try {
       const body = {
         userId: userDetails?._id,
-        fcmToken: localStorage.getItem("fcmToken") || "",
+        source: "web",
       };
       const result = await postRequest("auth/logout", body);
       if (result) {
