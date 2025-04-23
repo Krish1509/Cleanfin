@@ -66,7 +66,7 @@ const OTPStep: React.FC<Props> = ({ setActiveTab }) => {
   const generateToken = async () => {
     const token: string | undefined = await requestFCMToken();
     if (token) {
-      localStorage.setItem("fcmToken", token);
+      localStorage.setItem("webFcmToken", token);
     }
     return token || "";
   };
@@ -78,7 +78,7 @@ const OTPStep: React.FC<Props> = ({ setActiveTab }) => {
       const body = {
         otp: values?.otp,
         userId: userDetails?._id,
-        fcmToken: token || "",
+        webFcmToken: token || "",
       };
       const result = await postRequest("auth/verifyOtp", body, false);
       if (result) {
