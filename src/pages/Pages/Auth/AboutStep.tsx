@@ -37,7 +37,7 @@ const AboutStep: React.FC = () => {
 
         if (result) {
           dispatch(setUserDetails(result?.data?.user));
-          localStorage.setItem("user", JSON.stringify(result?.data));
+          localStorage.setItem("user", JSON.stringify(result?.data?.user));
           ToastAlert.success("User registered successfully");
           if (result?.data?.user?.role === "admin") {
             navigate("/dashboard");
@@ -60,61 +60,23 @@ const AboutStep: React.FC = () => {
     <div className="text-center mb-4">
       <h4 className="f-w-500 mb-4">About You</h4>
       <div className="auth-inputs">
-        <Formik
-          initialValues={{ firstName: "", lastName: "", age: "" }}
-          validationSchema={AboutSchema}
-          onSubmit={handleSubmit}
-        >
+        <Formik initialValues={{ firstName: "", lastName: "", age: "" }} validationSchema={AboutSchema} onSubmit={handleSubmit}>
           {({ errors, touched }) => (
             <Form>
               <InputGroup className="mb-2">
-                <Field
-                  type="text"
-                  className="form-control"
-                  id="floatingInput"
-                  placeholder="First name"
-                  name="firstName"
-                />
-                {errors.firstName && touched.firstName ? (
-                  <div className="invalid-feedback d-flex align-items-start">
-                    {errors.firstName}
-                  </div>
-                ) : null}
+                <Field type="text" className="form-control" id="floatingInput" placeholder="First name" name="firstName" />
+                {errors.firstName && touched.firstName ? <div className="invalid-feedback d-flex align-items-start">{errors.firstName}</div> : null}
               </InputGroup>
               <InputGroup className="mb-2">
-                <Field
-                  type="text"
-                  className="form-control"
-                  id="floatingInput"
-                  placeholder="Last name"
-                  name="lastName"
-                />
-                {errors.lastName && touched.lastName ? (
-                  <div className="invalid-feedback d-flex align-items-start">
-                    {errors.lastName}
-                  </div>
-                ) : null}
+                <Field type="text" className="form-control" id="floatingInput" placeholder="Last name" name="lastName" />
+                {errors.lastName && touched.lastName ? <div className="invalid-feedback d-flex align-items-start">{errors.lastName}</div> : null}
               </InputGroup>
               <InputGroup>
-                <Field
-                  type="number"
-                  className="form-control"
-                  id="floatingInput"
-                  placeholder="Age"
-                  name="age"
-                />
-                {errors.age && touched.age ? (
-                  <div className="invalid-feedback d-flex align-items-start">
-                    {errors.age}
-                  </div>
-                ) : null}
+                <Field type="number" className="form-control" id="floatingInput" placeholder="Age" name="age" />
+                {errors.age && touched.age ? <div className="invalid-feedback d-flex align-items-start">{errors.age}</div> : null}
               </InputGroup>
               <div className="d-grid mt-4">
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  disabled={loading}
-                >
+                <button type="submit" className="btn btn-primary" disabled={loading}>
                   Submit {loading ? <Spinner className="ml-2" size="sm" /> : ""}
                 </button>
               </div>

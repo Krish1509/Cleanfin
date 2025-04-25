@@ -57,18 +57,25 @@ const StaticPages = () => {
                   <table className="table table-hover" id="pc-dt-simple">
                     <thead>
                       <tr>
-                        <th>Page Name</th>
-                        <th>Content</th>
-                        <th>Action</th>
+                        <th style={{ width: "15%" }}>Page Name</th>
+                        <th style={{ width: "70%" }}>Content</th>
+                        <th style={{ width: "15%", textAlign: "center" }}>Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       {data?.map((item, key) => (
                         <tr key={key}>
-                          <td>{item?.pageName}</td>
+                          <td style={{ width: "15%" }}>{item?.pageName}</td>
                           <td
-                            style={{ whiteSpace: "normal" }}
-                            className="html-content"
+                            style={{
+                              display: "-webkit-box",
+                              WebkitLineClamp: 4,
+                              WebkitBoxOrient: "vertical",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              maxHeight: "510px",
+                              whiteSpace: "normal",
+                            }}
                           >
                             <span
                               dangerouslySetInnerHTML={{
@@ -76,13 +83,9 @@ const StaticPages = () => {
                               }}
                             />
                           </td>
-                          <td>
-                            <div className="d-flex align-items-center">
-                              <Button
-                                type="button"
-                                className="avtar avtar-xs btn btn-primary"
-                                onClick={() => handleEditDate(item)}
-                              >
+                          <td style={{ width: "15%" }}>
+                            <div className="d-flex align-items-center justify-content-center">
+                              <Button type="button" className="avtar avtar-xs btn btn-primary" onClick={() => handleEditDate(item)}>
                                 <i className="ti ti-pencil f-20"></i>
                               </Button>
                             </div>
