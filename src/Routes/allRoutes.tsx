@@ -24,6 +24,7 @@ import Notifications from "../pages/Pages/Notifications";
 import PastPerformance from "../pages/Pages/UserDashboard/PastPerformance";
 import UserBroker from "../pages/Pages/UserBroker";
 import UserBrokerRegistration from "../pages/Pages/UserDashboard/UserBrokerRegistration";
+import StaticPage from "../pages/Pages/StaticPage";
 
 const routes = [
   // Dashboard Routes
@@ -157,6 +158,7 @@ const nonAuthRoutes = [
   },
   { path: "/pages/error-404", component: <Error404 /> },
   { path: "/unauthorized", component: <Unauthorized /> },
+  { path: "pages/:pageName", component: <StaticPage /> },
   // Add a catch-all route for 404 errors
   { path: "*", component: <Error404 /> },
 ];

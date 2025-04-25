@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, MouseEvent } from "react";
 import { Container, Row, Col, Button, Card, Navbar, Nav } from "react-bootstrap";
 import { ChevronUp } from "react-feather";
@@ -9,6 +10,13 @@ import marketImage from "../../assets/images/landing-page/market-image.png";
 // Import AOS library and its styles
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { getRequest } from "../../service/fetch-services";
+
+type StaticPageListData = {
+  _id: string;
+  pageName: string;
+  content?: any;
+};
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -840,6 +848,33 @@ const LandingPage = () => {
     setExpanded(!expanded);
   };
 
+  const [data, setData] = useState<StaticPageListData[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const result = await getRequest("static-pages/list", false);
+      const { pages } = result;
+      setData(pages);
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const formatPageName = (slug: string) => {
+    return slug
+      .split("-")
+      .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
+
   return (
     <div className="landing-page position-relative">
       {/* Navbar - Update with expanded state and toggle handler */}
@@ -1559,21 +1594,16 @@ const LandingPage = () => {
                     Help Center
                   </a>
                 </li>
-                <li>
-                  <a href="#" className="footer-link">
-                    FAQs
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="footer-link">
-                    Privacy Policy
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="footer-link">
-                    Terms of Service
-                  </a>
-                </li>
+                {!loading
+                  ? data?.length &&
+                    data?.map((staticLink) => (
+                      <li key={staticLink?._id}>
+                        <a href={`/pages/${staticLink?.pageName}`} className="footer-link">
+                          {formatPageName(staticLink?.pageName)}
+                        </a>
+                      </li>
+                    ))
+                  : ""}
               </ul>
             </Col>
           </Row>
