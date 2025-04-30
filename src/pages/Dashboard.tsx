@@ -11,6 +11,8 @@ import { postRequest } from "../service/fetch-services";
 import { IRecommendation } from "./Pages/UserDashboard/Helper/interfaces";
 import Loader from "../Common/Loader/Loader";
 import { initializeSocket, TouchlineData, reconnectSocket } from "../service/socketService";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { db } from "../helper/firebase-config";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(false);
@@ -23,7 +25,7 @@ const Dashboard = () => {
     const socket = initializeSocket();
 
     socket.on("newTouchlineData", (data: TouchlineData) => {
-      setdata(prevData =>
+      setdata((prevData) =>
         prevData.map((item) => {
           if (data?.data.scrip.scrip_token === item.scriptCode.toString()) {
             return { ...item, touchlineData: data };
@@ -48,23 +50,67 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    const fetchRecommendations = async () => {
-      try {
-        setLoading(true);
-        const body = {
-          isActiveOnly: true,
-        };
-        const result = await postRequest("recommendation/list", body);
-        const { recommendations } = result.data;
-        setdata(recommendations);
-        setLoading(false);
-      } catch (err) {
-        console.error("Error fetching data from Firestore:", err);
-        setLoading(false);
-      }
-    };
+    reconnectSocket();
+    const socket = initializeSocket();
 
-    fetchRecommendations();
+    socket.on("newTouchlineData", (data: TouchlineData) => {
+      setdata((prevData) =>
+        prevData.map((item) => {
+          if (data?.data.scrip.scrip_token === item.scriptCode.toString()) {
+            return { ...item, touchlineData: data };
+          }
+          return item;
+        })
+      );
+    });
+  }, []);
+
+  const fetchData = () => {
+    try {
+      setLoading(true);
+
+      // Create a query to filter documents where isActive is true
+      const recommendationsQuery = query(
+        collection(db, "recommendations"),
+        where("isActive", "==", true) // Filter for isActive = true
+      );
+
+      // Listening for real-time updates using onSnapshot
+      const unsubscribe = onSnapshot(recommendationsQuery, (querySnapshot) => {
+        const fetchedData = querySnapshot.docs.map((doc) => {
+          const data = doc.data() as IRecommendation;
+
+          // Include the document ID in the returned object
+          return {
+            ...data,
+            id: doc.id, // Add the document ID to each item
+          };
+        });
+
+        const sortedData = fetchedData.sort((a, b) => {
+          // Convert to Date objects if the date is stored as a string
+          // If it's a Firestore timestamp, use .toDate() method before comparison
+          const dateA = new Date(a.date.seconds * 1000 + Math.floor(a.date.nanoseconds / 1e6));
+          const dateB = new Date(b.date.seconds * 1000 + Math.floor(b.date.nanoseconds / 1e6));
+
+          // Sort in descending order (newest first)
+          return dateB.getTime() - dateA.getTime();
+        });
+
+        setdata(sortedData); // Set the sorted data to state
+        setLoading(false);
+      });
+
+      // Cleanup function to unsubscribe from the snapshot listener when the component is unmounted
+      return () => unsubscribe();
+    } catch (err) {
+      console.log("Error fetching data from Firestore:", err);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
     fetchActiveUsersCount();
   }, []);
 
