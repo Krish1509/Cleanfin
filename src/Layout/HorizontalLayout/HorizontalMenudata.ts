@@ -21,6 +21,13 @@ const adminMenuData = [
     icon: "",
   },
   {
+    id: "pastPerformance",
+    label: "Past Performance",
+    dataPage: null,
+    link: "/pastPerformance",
+    icon: "",
+  },
+  {
     id: "optionscripts",
     label: "Option Scripts",
     dataPage: null,
@@ -80,19 +87,20 @@ const userMenuData = [
     icon: "",
   },
   {
-    id: "pastPerformance",
-    label: "Past Performance",
-    dataPage: null,
-    link: "/pastPerformance",
-    icon: "",
-  },
-  {
     id: "content",
     label: "Content",
     dataPage: null,
     link: "/content",
     icon: "",
   },
+  {
+    id: "pastPerformance",
+    label: "Past Performance",
+    dataPage: null,
+    link: "/pastPerformance",
+    icon: "",
+  },
+
   {
     id: "event",
     label: "Event",

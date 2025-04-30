@@ -130,7 +130,7 @@ const routes = [
   {
     path: "/pastPerformance",
     component: <PastPerformance />,
-    allowedRoles: ["customer"],
+    allowedRoles: ["customer", "admin"],
   },
 
   // User Broker Registration
