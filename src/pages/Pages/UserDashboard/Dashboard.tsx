@@ -12,14 +12,8 @@ import { postRequest } from "../../../service/fetch-services";
 // import AnimationComponent from "../../../Common/AnimationComponent/AnimationComponent";
 import Subscription from "../../../Common/Subscription/Subscription";
 import { useNavigate } from "react-router-dom";
-import LottieAnimation, {
-  Varient,
-} from "../../../Common/AnimationComponent/LottieAnimation";
-import {
-  initializeSocket,
-  TouchlineData,
-  reconnectSocket,
-} from "../../../service/socketService";
+import LottieAnimation, { Varient } from "../../../Common/AnimationComponent/LottieAnimation";
+import { initializeSocket, TouchlineData, reconnectSocket } from "../../../service/socketService";
 import PerformanceCard from "../../../Common/PerformanceCard/PerformanceCard";
 
 //import Components
@@ -35,8 +29,7 @@ const UserDashboard = () => {
     type: Varient;
     info: string;
   }>({ type: Varient.Target, info: "" });
-  const [contentBytesLoading, SetcontentBytesLoading] =
-    useState<boolean>(false);
+  const [contentBytesLoading, SetcontentBytesLoading] = useState<boolean>(false);
 
   const user = JSON.parse(localStorage.getItem("user") || "{}");
   // Convert subscription_end to a Date object
@@ -92,35 +85,20 @@ const UserDashboard = () => {
           // Only proceed if prev is defined
           if (prev) {
             // Check if any of the specified fields changed from false to true
-            const target1Changed =
-              prev.target1Achieved === false && data.target1Achieved === true;
-            const target2Changed =
-              prev.target2Achieved === false && data.target2Achieved === true;
-            const target3Changed =
-              prev.target3Achieved === false && data.target3Achieved === true;
-            const stopLossChanged =
-              prev.stopLossAchieved === false && data.stopLossAchieved === true;
+            const target1Changed = prev.target1Achieved === false && data.target1Achieved === true;
+            const target2Changed = prev.target2Achieved === false && data.target2Achieved === true;
+            const target3Changed = prev.target3Achieved === false && data.target3Achieved === true;
+            const stopLossChanged = prev.stopLossAchieved === false && data.stopLossAchieved === true;
 
             // Trigger animation only if any of the fields changed from false to true
-            if (
-              target1Changed ||
-              target2Changed ||
-              target3Changed ||
-              stopLossChanged
-            ) {
+            if (target1Changed || target2Changed || target3Changed || stopLossChanged) {
               if (stopLossChanged) {
                 setAnimationVarient({
                   type: Varient.StopLoss,
                   info: `Milestone Reached on Stop Loss!`,
                 });
               } else {
-                let targetInfo: number = target1Changed
-                  ? 1
-                  : target2Changed
-                  ? 2
-                  : target3Changed
-                  ? 3
-                  : 0;
+                let targetInfo: number = target1Changed ? 1 : target2Changed ? 2 : target3Changed ? 3 : 0;
                 setAnimationVarient({
                   type: Varient.Target,
                   info: `Milestone Reached on Target ${targetInfo}!`,
@@ -218,8 +196,15 @@ const UserDashboard = () => {
 
   const scrollToSection = (sectionId: any) => {
     const element = document.getElementById(sectionId);
+    const headerOffset = 230; // Adjust this to your header height
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
     }
   };
 
@@ -250,28 +235,13 @@ const UserDashboard = () => {
       <div className="pb-2">
         <div className="menucontainer">
           <div className="menu">
-            <div
-              onClick={() => scrollToSection("recommendation")}
-              className={`menu-item ${
-                activeSection === "recommendation" ? "active" : ""
-              }`}
-            >
+            <div onClick={() => scrollToSection("recommendation")} className={`menu-item ${activeSection === "recommendation" ? "active" : ""}`}>
               Recommendations
             </div>
-            <div
-              onClick={() => scrollToSection("content-bytes")}
-              className={`menu-item ${
-                activeSection === "content-bytes" ? "active" : ""
-              }`}
-            >
+            <div onClick={() => scrollToSection("content-bytes")} className={`menu-item ${activeSection === "content-bytes" ? "active" : ""}`}>
               Content Bytes
             </div>
-            <div
-              onClick={() => scrollToSection("past-performance")}
-              className={`menu-item ${
-                activeSection === "past-performance" ? "active" : ""
-              }`}
-            >
+            <div onClick={() => scrollToSection("past-performance")} className={`menu-item ${activeSection === "past-performance" ? "active" : ""}`}>
               Past Performance
             </div>
           </div>
@@ -279,18 +249,13 @@ const UserDashboard = () => {
 
         <Card>
           <CardBody className="pt-0">
-            <div
-              className="user-dashboard-container dashboard-recommendation container-min"
-              id="recommendation"
-            >
+            <div className="user-dashboard-container dashboard-recommendation container-min" id="recommendation">
               <div className="d-flex justify-content-between">
                 <div>
                   <h3>
                     Hey {user?.firstName} {user?.lastName}
                   </h3>
-                  <p className="mt-3 mb-5 font-weight-normal fs-5">
-                    Here is your command center
-                  </p>
+                  <p className="mt-3 mb-5 font-weight-normal fs-5">Here is your command center</p>
                 </div>
               </div>
               <Col lg={12}>
@@ -314,10 +279,7 @@ const UserDashboard = () => {
                     <div className="no-data-container">
                       <div className="no-data-content">
                         <h2>No Recommendations Available</h2>
-                        <p>
-                          It seems there are no recommendations at the moment.
-                          Please check back later!
-                        </p>
+                        <p>It seems there are no recommendations at the moment. Please check back later!</p>
                       </div>
                     </div>
                   )
@@ -326,19 +288,12 @@ const UserDashboard = () => {
                 )}
               </Row>
             </div>
-            <div
-              className="user-dashboard-container container-min"
-              id="content-bytes"
-            >
+            <div className="user-dashboard-container container-min" id="content-bytes">
               <Row>
                 <Col lg={12}>
                   <div className="d-flex align-items-center justify-content-between mb-3">
                     <h5 className="mb-0">Content Bytes</h5>
-                    <button
-                      type="button"
-                      className="btn btn-sm my-2 me-1 btn-light-success"
-                      onClick={() => navigate("/content")}
-                    >
+                    <button type="button" className="btn btn-sm my-2 me-1 btn-light-success" onClick={() => navigate("/content")}>
                       View All
                       <i className="ms-2 fas fa-arrow-circle-right"></i>
                     </button>
@@ -354,19 +309,12 @@ const UserDashboard = () => {
                   })}
               </Row>
             </div>
-            <div
-              className="user-dashboard-container container-min"
-              id="past-performance"
-            >
+            <div className="user-dashboard-container container-min" id="past-performance">
               {/* <h5 className="mb-4">Past Performance</h5> */}
               <Col lg={12}>
                 <div className="d-flex align-items-center justify-content-between mb-3">
                   <h5 className="mb-0">Past Performance</h5>
-                  <button
-                    type="button"
-                    className="btn btn-sm my-2 me-1 btn-light-success"
-                    onClick={() => navigate("/pastPerformance")}
-                  >
+                  <button type="button" className="btn btn-sm my-2 me-1 btn-light-success" onClick={() => navigate("/pastPerformance")}>
                     View All
                     <i className="ms-2 fas fa-arrow-circle-right"></i>
                   </button>
@@ -377,11 +325,7 @@ const UserDashboard = () => {
           </CardBody>
         </Card>
       </div>
-      <LottieAnimation
-        show={ShowAnimation}
-        varient={animationVarient.type}
-        info={animationVarient.info}
-      />
+      <LottieAnimation show={ShowAnimation} varient={animationVarient.type} info={animationVarient.info} />
       {/* add bellow component in reccomendation */}
       {/* <Subscription /> */}
     </React.Fragment>
