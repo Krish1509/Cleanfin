@@ -13,9 +13,21 @@ import ToggleSwitch from "../../../Common/ToggleSwitch";
 import ConfirmationModal from "../../../Common/ConfirmationModal";
 import ToastAlert from "../../../helper/toast-alert";
 
+type EducationOptionsType = {
+  value: null | boolean;
+  label: string;
+}
+
+const EducationOptions: EducationOptionsType[] = [
+  { value: null, label: "All" },
+  { value: true, label: "Education" },
+  { value: false, label: "No education" },
+];
+
 type ContentBytesData = {
   _id: string;
   title: string;
+  isEducation: boolean;
   description: string;
   type: string;
   url?: string;
@@ -30,6 +42,7 @@ const ContentBytes = () => {
   const [contentBytesData, setContentBytesData] = useState<ContentBytesData[]>(
     []
   );
+  const [education, setEducation] = useState<EducationOptionsType>(EducationOptions[0]);
   const [loading, setLoading] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [entriesPerPage, setEntriesPerPage] = useState<number>(10);
@@ -63,6 +76,7 @@ const ContentBytes = () => {
         limit: entriesPerPage,
         page: currentPage,
         search: searchQuery,
+        isEducation: education.value
       };
       const result = await postRequest("contentBites/list", body, true);
       const { contentBites, totalPages } = result.data;
@@ -73,11 +87,11 @@ const ContentBytes = () => {
       console.log(err);
       setLoading(false);
     }
-  }, [entriesPerPage, currentPage, searchQuery]);
+  }, [entriesPerPage, currentPage, searchQuery, education]);
 
   useEffect(() => {
     fetchContentBytesData();
-  }, [entriesPerPage, currentPage, searchQuery]);
+  }, [entriesPerPage, currentPage, searchQuery, education]);
 
   const handleEditDate = (id: string) => {
     navigate("/contentBytes/edit", { state: { id: id } });
@@ -127,7 +141,23 @@ const ContentBytes = () => {
             </div>
           </CardHeader>
           <div className="d-sm-flex align-items-center mt-4">
-            <ul className="list-inline ms-auto my-1 me-4">
+            <ul className="d-flex justify-content-between list-inline my-1 mx-4 w-100">
+              <li className="d-flex align-items-center" style={{ gap: 10 }}>
+                <h6>Education</h6>
+                <Form.Select
+                  defaultValue={String(education.value).toString()}
+                  onChange={(e) => {
+                    setEducation(EducationOptions[e.target.selectedIndex])
+                  }}
+                  style={{ paddingTop: '0.55rem', paddingBottom: '0.55rem' }}
+                >
+                  {EducationOptions.map((item: EducationOptionsType) => {
+                    return (
+                      <option value={String(item.value).toString()} key={String(item.value).toString()}>{item.label}</option>
+                    )
+                  })}
+                </Form.Select>
+              </li>
               <li className="list-inline-item">
                 <form className="form-search">
                   <Form.Control
@@ -150,6 +180,7 @@ const ContentBytes = () => {
                         <th>Sr No</th>
                         <th>Title</th>
                         <th>Type</th>
+                        <th>is Education</th>
                         <th>Description</th>
                         <th>Action</th>
                       </tr>
@@ -162,10 +193,11 @@ const ContentBytes = () => {
                           <td>
                             {item?.type
                               ? TypeOptions?.find(
-                                  (type) => type?.value === item?.type
-                                )?.label
+                                (type) => type?.value === item?.type
+                              )?.label
                               : ""}
                           </td>
+                          <td>{item?.isEducation ? "Education" : "-"}</td>
                           <td className="html-content">
                             <span
                               style={{
@@ -223,9 +255,8 @@ const ContentBytes = () => {
                 updateUserDetails(selectedId, "isActive", selectedStatus)
               }
               handleClose={() => setShowConfirm(false)}
-              message={`Are you sure you want to ${
-                selectedStatus ? "activate" : "deactivate"
-              } this record?`}
+              message={`Are you sure you want to ${selectedStatus ? "activate" : "deactivate"
+                } this record?`}
               loading={updateLoading}
             />
           ) : (

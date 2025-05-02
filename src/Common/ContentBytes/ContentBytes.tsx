@@ -9,14 +9,15 @@ import { useNavigate } from "react-router-dom";
 
 interface IContentbytesProps {
   data: IContentbytes;
+  uri?: string;
 }
 
-const ContentBytes: React.FC<IContentbytesProps> = ({ data }) => {
+const ContentBytes: React.FC<IContentbytesProps> = ({ data, uri = "content" }) => {
   const navigate = useNavigate();
   
   return (
     <React.Fragment>
-      <div className="mb-3" onClick={() => navigate("/content/view", { state: { id: data._id } })}>
+      <div className="mb-3" onClick={() => navigate(`/${uri}/view`, { state: { id: data._id } })}>
         <div className="card overflow-hidden">
           <div className="row g-0">
             <div className="col-md-4">

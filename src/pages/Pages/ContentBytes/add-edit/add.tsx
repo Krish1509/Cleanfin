@@ -17,10 +17,12 @@ import {
 import ToastAlert from "../../../../helper/toast-alert";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { TypeOptions } from "../type";
+import ToggleSwitch from "../../../../Common/ToggleSwitch";
 
 const validationSchema = Yup.object().shape({
   type: Yup.string().required("Type is required!"),
   title: Yup.string().required("Title is required!"),
+  isEducation: Yup.bool().required("Education is required!"),
   description: Yup.string().required("Description is required!"),
   url: Yup.string().when("type", {
     is: "url",
@@ -33,6 +35,7 @@ const validationSchema = Yup.object().shape({
 interface FormValues {
   type: string;
   title: string;
+  isEducation: boolean;
   description: string;
   filePath?: string;
   url?: string;
@@ -57,6 +60,7 @@ const AddContentBytes = () => {
       formData.append("userId", user?._id);
       formData.append("type", values?.type);
       formData.append("title", values?.title);
+      formData.append("isEducation", values?.isEducation);
       formData.append("description", values?.description);
       formData.append("url", values?.url);
       if (selectedFile) {
@@ -155,6 +159,7 @@ const AddContentBytes = () => {
                     initialValues={{
                       type: editData?.type || "url",
                       title: editData?.title || "",
+                      isEducation: editData?.isEducation || false,
                       description: editData?.description || "",
                       url: editData?.url || "",
                       filePath: editData?.filePath || "",
@@ -275,21 +280,21 @@ const AddContentBytes = () => {
                                     ) : (
                                       // Display existing file from editData
                                       editData?.filePath ? (
-                                          <FilePreview
-                                            type={"url"}
-                                            // file={editData?.filePath}
-                                            url={editData?.filePath}
-                                          />
-                                        ) : (
-                                          <Link
-                                            to={editData.filePath}
-                                            target="_blank"
-                                            className="text-muted font-weight-bold"
-                                          >
-                                            {editData?.filePath}
-                                          </Link>
-                                        )
+                                        <FilePreview
+                                          type={"url"}
+                                          // file={editData?.filePath}
+                                          url={editData?.filePath}
+                                        />
+                                      ) : (
+                                        <Link
+                                          to={editData.filePath}
+                                          target="_blank"
+                                          className="text-muted font-weight-bold"
+                                        >
+                                          {editData?.filePath}
+                                        </Link>
                                       )
+                                    )
                                     }
                                   </Col>
                                 </Row>
@@ -299,6 +304,21 @@ const AddContentBytes = () => {
                         ) : (
                           ""
                         )}
+
+                        <Row>
+                          <Col sm={12}>
+                            <div className="mb-3">
+                              <label className="form-label">Is Education</label>
+                              <ToggleSwitch
+                                checked={values.isEducation}
+                                onChange={() => {
+                                  setFieldValue("isEducation", !values.isEducation);
+                                }}
+                              />
+                            </div>
+                          </Col>
+                        </Row>
+
                         <Row>
                           <Col sm={12}>
                             <div className="mb-3">
