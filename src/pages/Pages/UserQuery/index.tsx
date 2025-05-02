@@ -109,8 +109,8 @@ const UserQuery = () => {
                       <tr>
                         <th style={{ width: "15%" }}>Name</th>
                         <th style={{ width: "15%" }}>Email</th>
-                        <th style={{ width: "15%" }}>Phone</th>
-                        <th style={{ width: "35%" }}>Query</th>
+                        <th style={{ width: "10%" }}>Phone</th>
+                        <th style={{ width: "45%" }}>Query</th>
                         <th style={{ width: "10%" }}>Action</th>
                       </tr>
                     </thead>
@@ -121,7 +121,7 @@ const UserQuery = () => {
                             {item?.userId?.firstName} {item?.userId?.lastName || ""}
                           </td>
                           <td style={{ width: "15%" }}>{item?.email}</td>
-                          <td style={{ width: "15%" }}>{item?.phone}</td>
+                          <td style={{ width: "10%" }}>{item?.phone}</td>
                           <td
                             style={{
                               display: "-webkit-box",
