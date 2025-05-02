@@ -13,6 +13,8 @@ const Education = () => {
   const [contentBytesLoading, SetcontentBytesLoading] =
     useState<boolean>(false);
 
+    // Fetch content Bytes function
+
   const fetchContentBytes = async () => {
     try {
       setLoading(true);
