@@ -169,7 +169,7 @@ $googleFontsUrl: "https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;
 .menucontainer {
   position: sticky;
   background-color: rgb(255, 255, 255);
-  z-index: 0;
+  z-index: 999;
   top: 159px;
   width: 100%;
 }
