@@ -25,6 +25,8 @@ import PastPerformance from "../pages/Pages/UserDashboard/PastPerformance";
 import UserBroker from "../pages/Pages/UserBroker";
 import UserBrokerRegistration from "../pages/Pages/UserDashboard/UserBrokerRegistration";
 import StaticPage from "../pages/Pages/StaticPage";
+import AddHelp from "../pages/Pages/UserDashboard/Help";
+import UserQuery from "../pages/Pages/UserQuery";
 import Education from "../pages/Pages/UserDashboard/Education";
 import ViewEducation from "../pages/Pages/UserDashboard/Education/view";
 
@@ -156,6 +158,17 @@ const routes = [
   {
     path: "/userBroker",
     component: <UserBroker />,
+    allowedRoles: ["admin"],
+  },
+  // Help Section
+  {
+    path: "/addHelp",
+    component: <AddHelp />,
+    allowedRoles: ["customer"],
+  },
+  {
+    path: "/userQueries",
+    component: <UserQuery />,
     allowedRoles: ["admin"],
   },
 ];

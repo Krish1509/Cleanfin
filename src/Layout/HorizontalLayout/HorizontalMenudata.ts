@@ -76,6 +76,13 @@ const adminMenuData = [
     link: "/userBroker",
     icon: "",
   },
+  {
+    id: "userQuery",
+    label: "Help",
+    dataPage: null,
+    link: "/userQueries",
+    icon: "",
+  },
 ];
 
 const userMenuData = [
@@ -119,6 +126,13 @@ const userMenuData = [
     label: "User Broker Registration",
     dataPage: null,
     link: "/userBrokerRegistration",
+    icon: "",
+  },
+  {
+    id: "helpForm",
+    label: "Help",
+    dataPage: null,
+    link: "/addHelp",
     icon: "",
   },
 ];
