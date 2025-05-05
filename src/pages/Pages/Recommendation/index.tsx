@@ -32,6 +32,7 @@ type RecommendationListData = {
   target3Achieved: boolean;
   stopLoss: number;
   stopLossAchieved: boolean;
+  sellPrice: number;
   recommendation: string;
   isActive: boolean;
   firestore?: boolean;
@@ -64,6 +65,7 @@ const Recommendation = () => {
   const [showDeletion, setShowDeletion] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<string>("");
   const [selectedStatus, setSelectedStatus] = useState<boolean>();
+  const [selectedSellPrice, setSelectedSellPrice] = useState<number>(0);
   const [updateLoading, setUpdateLoading] = useState<boolean>(false);
   const [exportLoading, setExportLoading] = useState<boolean>(false);
 
@@ -258,8 +260,8 @@ const Recommendation = () => {
                         <th>Script Name</th>
                         <th>Date</th>
                         <th>Target 1</th>
-                        <th>Target 2</th>
-                        <th>Target 3</th>
+                        <th>Sell Price</th>
+                        {/* <th>Target 3</th> */}
                         <th>Stop Loss</th>
                         <th>Action</th>
                       </tr>
@@ -307,14 +309,14 @@ const Recommendation = () => {
                             <div className="d-flex align-items-center justify-content-between">
                               <EditableNumberInput
                                 id={item._id}
-                                value={item.target2}
-                                placeholder="target2"
-                                keyName="target2"
+                                value={item.sellPrice}
+                                placeholder="sellPrice"
+                                keyName="sellPrice"
                                 onUpdate={handleValueUpdate}
                               />
                             </div>
                           </td>
-                          <td>
+                          {/* <td>
                             <div className="d-flex align-items-center justify-content-between">
                               <EditableNumberInput
                                 id={item._id}
@@ -324,7 +326,7 @@ const Recommendation = () => {
                                 onUpdate={handleValueUpdate}
                               />
                             </div>
-                          </td>
+                          </td> */}
                           <td>
                             <div className="d-flex align-items-center justify-content-between">
                               <EditableNumberInput
@@ -350,6 +352,7 @@ const Recommendation = () => {
                                   setShowConfirm(!showConfirm);
                                   setSelectedStatus(!item?.isActive);
                                   setSelectedId(item?._id);
+                                  setSelectedSellPrice(item?.sellPrice);
                                 }}
                               />
                               <Button
@@ -429,6 +432,7 @@ const Recommendation = () => {
                 setShowReason(false)
               }}
               loading={updateLoading}
+              value={selectedSellPrice == 0 ? "" : `Kindly exit at ${selectedSellPrice} `}
             />
           ) : (
             ""
