@@ -32,7 +32,7 @@ type RecommendationListData = {
   target3Achieved: boolean;
   stopLoss: number;
   stopLossAchieved: boolean;
-  sell_price: number;
+  sellPrice: number;
   recommendation: string;
   isActive: boolean;
   firestore?: boolean;
@@ -309,9 +309,9 @@ const Recommendation = () => {
                             <div className="d-flex align-items-center justify-content-between">
                               <EditableNumberInput
                                 id={item._id}
-                                value={item.sell_price}
-                                placeholder="sell_price"
-                                keyName="sell_price"
+                                value={item.sellPrice}
+                                placeholder="sellPrice"
+                                keyName="sellPrice"
                                 onUpdate={handleValueUpdate}
                               />
                             </div>
@@ -352,7 +352,7 @@ const Recommendation = () => {
                                   setShowConfirm(!showConfirm);
                                   setSelectedStatus(!item?.isActive);
                                   setSelectedId(item?._id);
-                                  setSelectedSellPrice(item?.sell_price);
+                                  setSelectedSellPrice(item?.sellPrice);
                                 }}
                               />
                               <Button
