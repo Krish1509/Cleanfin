@@ -3,6 +3,7 @@
 export interface IRecommendation {
   firestore: boolean;
   _id: string;
+  id: string;
   date: any; // Use `Date` if you prefer working with date objects
   time: string;
   action: "buy" | "sell"; // Use a union type to restrict possible values

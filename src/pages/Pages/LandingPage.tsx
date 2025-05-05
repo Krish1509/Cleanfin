@@ -1598,7 +1598,7 @@ const LandingPage = () => {
                   ? data?.length &&
                     data?.map((staticLink) => (
                       <li key={staticLink?._id}>
-                        <a href={`/pages/${staticLink?.pageName}`} className="footer-link">
+                        <a href={`/pages/${staticLink?.pageName}`} className="footer-link" target="_blank">
                           {formatPageName(staticLink?.pageName)}
                         </a>
                       </li>

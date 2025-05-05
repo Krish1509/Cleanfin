@@ -4,10 +4,12 @@ import moment from "moment";
 
 //import Components
 import BreadcrumbItem from "../../../Common/BreadcrumbItem";
-import { Card, CardBody, CardHeader, Form } from "react-bootstrap";
+import { Button, Card, CardBody, CardHeader, Form } from "react-bootstrap";
 import { postRequest } from "../../../service/fetch-services";
 import Pagination from "../../../Common/Pagination"; // Import Pagination component
 import Loader from "../../../Common/Loader/Loader";
+import Reminder from "./Reminder";
+import ToastAlert from "../../../helper/toast-alert";
 
 type UserBrokerListData = {
   first_name: string;
@@ -20,6 +22,7 @@ type UserBrokerListData = {
   city: string;
   state: string;
   pincode: string;
+  _id: string;
 };
 
 const UserBroker = () => {
@@ -30,6 +33,8 @@ const UserBroker = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [updateLoading, setUpdateLoading] = useState<boolean>(false);
+  const [showReminder, setShowReminder] = useState<boolean>(false);
+  const [selectedId, setSelectedId] = useState<any>("");
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -47,7 +52,6 @@ const UserBroker = () => {
 
   const fetchUserBrokerListData = React.useCallback(async () => {
     try {
-      setUpdateLoading(true);
       setLoading(true);
       const body = {
         limit: entriesPerPage,
@@ -59,16 +63,30 @@ const UserBroker = () => {
       setUserBrokerListData(userBrokerRegistration);
       setTotalPages(pages);
       setLoading(false);
-      setUpdateLoading(false);
     } catch (err) {
       setLoading(false);
-      setUpdateLoading(false);
     }
   }, [entriesPerPage, currentPage, searchQuery]);
 
   useEffect(() => {
     fetchUserBrokerListData();
   }, [entriesPerPage, currentPage, searchQuery, fetchUserBrokerListData]);
+
+  const handleUpdateReminder = async (data: any) => {
+    try {
+      setUpdateLoading(true);
+      const body = { id: selectedId?._id, reminderDate: data?.date ? moment(data?.date) : "", remark: data?.remark };
+      const result = await postRequest("userBrokerRegistration/update", body);
+      ToastAlert.success(result.message);
+      setUserBrokerListData((prevList) => prevList.map((data) => (data._id === selectedId?._id ? { ...data, ...result?.data } : data)));
+      setShowReminder(false);
+      setSelectedId("");
+      setUpdateLoading(false);
+    } catch (err) {
+      console.log(err);
+      setUpdateLoading(false);
+    }
+  };
 
   return (
     <React.Fragment>
@@ -104,6 +122,7 @@ const UserBroker = () => {
                         <th>State</th>
                         <th>Pincode</th>
                         <th>Date</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -123,6 +142,18 @@ const UserBroker = () => {
                           <td>{item?.state}</td>
                           <td>{item?.pincode}</td>
                           <td>{moment(item?.createdAt).format("YYYY-MM-DD HH:mm A")}</td>
+                          <td>
+                            <Button
+                              type="button"
+                              className="btn btn-primary"
+                              onClick={() => {
+                                setShowReminder(true);
+                                setSelectedId(item);
+                              }}
+                            >
+                              Reminder
+                            </Button>
+                          </td>
                         </tr>
                       ))}
                     </tbody>
@@ -138,10 +169,23 @@ const UserBroker = () => {
             entriesPerPage={entriesPerPage}
             onEntriesPerPageChange={handleEntriesPerPageChange}
           />
+          {showReminder ? (
+            <Reminder
+              show={showReminder}
+              handleClose={() => setShowReminder(false)}
+              handleConfirm={(data: any) => {
+                handleUpdateReminder(data);
+              }}
+              loading={updateLoading}
+              selectedData={selectedId}
+            />
+          ) : (
+            ""
+          )}
         </Card>
       </div>
 
-      <Loader updateLoading={updateLoading}></Loader>
+      <Loader updateLoading={loading}></Loader>
     </React.Fragment>
   );
 };

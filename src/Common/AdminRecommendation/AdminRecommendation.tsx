@@ -2,14 +2,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import { Card, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
-import { IRecommendation } from "../../pages/Pages/UserDashboard/Helper/interfaces";
+import { IOptionScriptsList, IRecommendation } from "../../pages/Pages/UserDashboard/Helper/interfaces";
 import ToggleSwitch from "../ToggleSwitch";
 import { postRequest } from "../../service/fetch-services";
 import ToastAlert from "../../helper/toast-alert";
 import ConfirmationModal from "../ConfirmationModal";
 import ReasonModal from "../ReasonModal";
-import moment from "moment";
 import { TouchlineData } from "../../service/socketService";
+import { doc, DocumentSnapshot, getDoc } from "firebase/firestore";
+import { db } from "../../helper/firebase-config";
 
 interface RecommendationWithTouchline extends IRecommendation {
   touchlineData?: TouchlineData; // Optional touchlineData property
@@ -21,19 +22,10 @@ interface RecommendationProps {
   setUpdateLoading: (data: boolean) => void;
 }
 
-const AdminRecommendation: React.FC<RecommendationProps> = ({
-  data,
-  setdata,
-  updateLoading,
-  setUpdateLoading,
-}) => {
+const AdminRecommendation: React.FC<RecommendationProps> = ({ data, setdata, updateLoading, setUpdateLoading }) => {
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
   const [showReason, setShowReason] = useState<boolean>(false);
-
-  const updateRecommendationDetails = async (
-    id: string,
-    updates: { [key: string]: unknown }
-  ) => {
+  const updateRecommendationDetails = async (id: string, updates: { [key: string]: unknown }) => {
     try {
       setUpdateLoading(true);
       const body = { id, ...updates };
@@ -46,9 +38,7 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
           return prevList.filter((rec: any) => rec._id !== id);
         } else {
           // Update the specific item
-          return prevList.map((rec: any) =>
-            rec._id === id ? { ...rec, ...updates } : rec
-          );
+          return prevList.map((rec: any) => (rec._id === id ? { ...rec, ...updates } : rec));
         }
       });
       setShowConfirm(false);
@@ -65,6 +55,33 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
     }
   }, [data]);
 
+  const [optionScript, setOptionScript] = React.useState<IOptionScriptsList>();
+
+  React.useEffect(() => {
+    const fetchOptionScript = async () => {
+      try {
+        if (data?.scriptId) {
+          const optionScriptDocRef = doc(db, "optionScripts", data.scriptId);
+          const optionScriptDocSnap: DocumentSnapshot = await getDoc(optionScriptDocRef);
+
+          if (optionScriptDocSnap.exists()) {
+            const optionScriptData = optionScriptDocSnap.data() as IOptionScriptsList;
+
+            if (optionScriptData) {
+              setOptionScript(optionScriptData);
+            }
+          } else {
+            console.log("No such document in optionScripts!");
+          }
+        }
+      } catch (err) {
+        console.error("Error fetching optionScript:", err);
+      }
+    };
+
+    fetchOptionScript();
+  }, [data?.scriptId]);
+
   return (
     <React.Fragment>
       <Card className="statistics-card-1">
@@ -72,31 +89,20 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
           <div className="d-flex" style={{ height: "100%" }}>
             <div className="flex-grow-1">
               <div className="d-flex">
-                <h5
-                  className="mb-0 text-muted font-bold"
-                  style={{ minWidth: 60 }}
-                >
-                  {data?.scriptData[0]?.name || ""}
+                <h5 className="mb-0 text-muted font-bold" style={{ minWidth: 60 }}>
+                  {optionScript?.name || ""}
                 </h5>
               </div>
               <div className="d-flex">
                 <span>{data?.touchlineData?.data?.last_traded_price}</span>
               </div>
               <div className="d-flex">
-                <span>{moment(data?.date).format("YYYY-MM-DD")}</span>
+                <span>{data?.date?.seconds ? new Date(data.date.seconds * 1000 + Math.floor(data.date.nanoseconds / 1e6)).toLocaleDateString("en-GB") : "-"}</span>
+                <span className="ms-2">{data?.time || ""}</span>
               </div>
             </div>
-            <div
-              className="d-flex flex-grow-1 justify-content-end"
-              style={{ height: "100%" }}
-            >
-              <span
-                className={`badge ms-2 ${
-                  data.action === "buy" ? "bg-light-success" : "bg-light-danger"
-                }`}
-              >
-                {data?.action.toUpperCase()}
-              </span>
+            <div className="d-flex flex-grow-1 justify-content-end" style={{ height: "100%" }}>
+              <span className={`badge ms-2 ${data.action === "buy" ? "bg-light-success" : "bg-light-danger"}`}>{data?.action.toUpperCase()}</span>
               <div className="ms-3">
                 {data?.recommendation ? (
                   <OverlayTrigger
@@ -111,10 +117,7 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
                       </Tooltip>
                     }
                   >
-                    <i
-                      className="fas fa-exclamation-circle"
-                      style={{ cursor: "pointer" }}
-                    ></i>
+                    <i className="fas fa-exclamation-circle" style={{ cursor: "pointer" }}></i>
                   </OverlayTrigger>
                 ) : (
                   <i className="fas fa-exclamation-circle"></i>
@@ -127,13 +130,9 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
             <div className="col-6">
               <div className="d-flex align-items-center justify-content-between">
                 <p className="mb-0 f-w-600 pb-1 h5">Price</p>
-                <span className="badge bg-light-secondary me-2">
-                  {data?.priceCondition?.toUpperCase()}
-                </span>
+                <span className="badge bg-light-secondary me-2">{data?.priceCondition?.toUpperCase()}</span>
               </div>
-              <div className="mb-0 text-muted pb-1 pt-2 d-flex">
-                {data?.price || "-"}
-              </div>
+              <div className="mb-0 text-muted pb-1 pt-2 d-flex">{data?.price || "-"}</div>
             </div>
             <div className="col-6 border-start">
               <div className="d-flex align-items-center justify-content-start pb-2">
@@ -145,7 +144,7 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
                   <ToggleSwitch
                     checked={data?.target1Achieved}
                     onChange={() =>
-                      updateRecommendationDetails(data?._id, {
+                      updateRecommendationDetails(data?.id, {
                         target1Achieved: !data?.target1Achieved,
                       })
                     }
@@ -161,7 +160,7 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
                   <ToggleSwitch
                     checked={data?.stopLossAchieved}
                     onChange={() =>
-                      updateRecommendationDetails(data?._id, {
+                      updateRecommendationDetails(data?.id, {
                         stopLossAchieved: !data?.stopLossAchieved,
                       })
                     }
@@ -186,9 +185,7 @@ const AdminRecommendation: React.FC<RecommendationProps> = ({
             }
           }}
           handleClose={() => setShowConfirm(false)}
-          message={`Are you sure you want to ${
-            data?.isActive ? "deactivate" : "activate"
-          } this record?`}
+          message={`Are you sure you want to ${data?.isActive ? "deactivate" : "activate"} this record?`}
           loading={updateLoading}
         />
       ) : (
