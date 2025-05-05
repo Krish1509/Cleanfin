@@ -7,6 +7,7 @@ interface ReasonModalProps {
   handleClose: () => void;
   handleConfirm: (reason: string) => void;
   loading?: boolean;
+  value?: string;
 }
 
 const ReasonModal: React.FC<ReasonModalProps> = ({
@@ -14,6 +15,7 @@ const ReasonModal: React.FC<ReasonModalProps> = ({
   handleClose,
   handleConfirm,
   loading = false,
+  value = ""
 }) => {
   return (
     <Modal
@@ -47,6 +49,7 @@ const ReasonModal: React.FC<ReasonModalProps> = ({
                     }
                     rows={10}
                     cols={10}
+                    value={value}
                   />
                   {touched.reason && errors.reason && (
                     <div className="invalid-feedback">{errors.reason}</div>
