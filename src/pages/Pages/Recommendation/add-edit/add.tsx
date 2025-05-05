@@ -47,8 +47,7 @@ const AddRecommendation = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const editId = location?.state !== undefined ? location?.state?.id : "";
-  const segmentId =
-    location?.state !== undefined ? location?.state?.segmentID : "";
+  const segmentId = location?.state !== undefined ? location?.state?.segmentID : "";
   const ActionOptions = [
     { value: "buy", label: "Buy" },
     { value: "sell", label: "Sell" },
@@ -86,9 +85,7 @@ const AddRecommendation = () => {
       const result = await postRequest(url, body);
 
       if (result) {
-        ToastAlert.success(
-          `Recommendation ${editData?._id ? "updated" : "created"} successfully`
-        );
+        ToastAlert.success(`Recommendation ${editData?._id ? "updated" : "created"} successfully`);
         navigate("/recommendation");
       } else {
         setLoading(false);
@@ -107,12 +104,10 @@ const AddRecommendation = () => {
       });
 
       if (result) {
-        const formattedArray = result?.data?.map(
-          (item: { _id: any; name: any }) => ({
-            value: item._id,
-            label: item.name,
-          })
-        );
+        const formattedArray = result?.data?.map((item: { _id: any; name: any }) => ({
+          value: item._id,
+          label: item.name,
+        }));
 
         setScriptdata(formattedArray);
       }
@@ -155,10 +150,7 @@ const AddRecommendation = () => {
 
   return (
     <React.Fragment>
-      <BreadcrumbItem
-        mainTitle="Recommendation"
-        subTitle={`Recommendation ${editData?._id ? "Edit" : "Add"}`}
-      />
+      <BreadcrumbItem mainTitle="Recommendation" subTitle={`Recommendation ${editData?._id ? "Edit" : "Add"}`} />
       <Row>
         <Col sm={12}>
           <Card>
@@ -169,8 +161,8 @@ const AddRecommendation = () => {
                 <div className="container">
                   <Formik<FormValues>
                     initialValues={{
-                      date: editData?.date || "",
-                      time: editData?.time || "",
+                      date: editData?.date || new Date(),
+                      time: editData?.time || moment().format("HH:mm"),
                       action: editData?.action || "",
                       priceCondition: editData?.priceCondition || "",
                       price: editData?.price || "",
@@ -203,10 +195,7 @@ const AddRecommendation = () => {
                                 className="react-select"
                                 classNamePrefix="react-select"
                                 onChange={(value) => {
-                                  setFieldValue(
-                                    "segmentID",
-                                    value?.value || ""
-                                  );
+                                  setFieldValue("segmentID", value?.value || "");
 
                                   // Only call handlechange if a value is selected
                                   if (value) {
@@ -217,16 +206,10 @@ const AddRecommendation = () => {
                                     setFieldValue("scriptId", "");
                                   }
                                 }}
-                                value={SegmentOptions?.filter(
-                                  (obj) => values?.segmentID === obj.value
-                                )}
+                                value={SegmentOptions?.filter((obj) => values?.segmentID === obj.value)}
                               />
 
-                              {errors.action && touched.action ? (
-                                <div className="invalid-feedback d-flex align-items-start">
-                                  {errors.action}
-                                </div>
-                              ) : null}
+                              {errors.action && touched.action ? <div className="invalid-feedback d-flex align-items-start">{errors.action}</div> : null}
                             </div>
                           </Col>
                           <Col sm={6}>
@@ -238,26 +221,15 @@ const AddRecommendation = () => {
                                 options={scriptdata}
                                 placeholder="Select"
                                 className="react-select"
-                                isDisabled={
-                                  scriptloading || !scriptdata?.length
-                                }
+                                isDisabled={scriptloading || !scriptdata?.length}
                                 classNamePrefix="react-select"
                                 onChange={(selectedOption) => {
-                                  setFieldValue(
-                                    "scriptId",
-                                    selectedOption ? selectedOption.value : ""
-                                  );
+                                  setFieldValue("scriptId", selectedOption ? selectedOption.value : "");
                                 }}
-                                value={scriptdata?.filter(
-                                  (obj: any) => values?.scriptId === obj.value
-                                )}
+                                value={scriptdata?.filter((obj: any) => values?.scriptId === obj.value)}
                               />
 
-                              {errors.scriptId && touched.scriptId ? (
-                                <div className="invalid-feedback d-flex align-items-start">
-                                  {errors.scriptId}
-                                </div>
-                              ) : null}
+                              {errors.scriptId && touched.scriptId ? <div className="invalid-feedback d-flex align-items-start">{errors.scriptId}</div> : null}
                             </div>
                           </Col>
                         </Row>
@@ -266,19 +238,9 @@ const AddRecommendation = () => {
                             <div className="mb-3">
                               <label className="form-label">Date</label>
                               <div className="custom-date">
-                                <DatePicker
-                                  value={values?.date || null}
-                                  onChange={(date: any) =>
-                                    setFieldValue("date", date)
-                                  }
-                                  minDate={new Date()}
-                                />
+                                <DatePicker value={values?.date || null} onChange={(date: any) => setFieldValue("date", date)} minDate={new Date()} />
                               </div>
-                              {errors.date && touched.date ? (
-                                <div className="invalid-feedback d-flex align-items-start">
-                                  {errors.date}
-                                </div>
-                              ) : null}
+                              {errors.date && touched.date ? <div className="invalid-feedback d-flex align-items-start">{errors.date}</div> : null}
                             </div>
                           </Col>
                           <Col sm={6}>
@@ -286,17 +248,10 @@ const AddRecommendation = () => {
                               <label className="form-label">Time</label>
                               <div className="custom-date">
                                 <DatePicker
-                                  value={
-                                    values?.time
-                                      ? new Date(`1970-01-01T${values?.time}`)
-                                      : null
-                                  }
+                                  value={values?.time ? new Date(`1970-01-01T${values?.time}`) : null}
                                   onChange={(date: any) => {
                                     console.log(date);
-                                    setFieldValue(
-                                      "time",
-                                      moment(date).format("HH:mm")
-                                    );
+                                    setFieldValue("time", moment(date).format("HH:mm"));
                                   }}
                                   showTimeSelect
                                   showTimeSelectOnly
@@ -305,11 +260,7 @@ const AddRecommendation = () => {
                                   autoComplete="off"
                                 />
                               </div>
-                              {errors.time && touched.time ? (
-                                <div className="invalid-feedback d-flex align-items-start">
-                                  {errors.time}
-                                </div>
-                              ) : null}
+                              {errors.time && touched.time ? <div className="invalid-feedback d-flex align-items-start">{errors.time}</div> : null}
                             </div>
                           </Col>
                         </Row>
@@ -324,25 +275,15 @@ const AddRecommendation = () => {
                                 placeholder="Select"
                                 className="react-select"
                                 classNamePrefix="react-select"
-                                onChange={(value) =>
-                                  setFieldValue("action", value?.value)
-                                }
-                                value={ActionOptions?.filter(
-                                  (obj) => values?.action === obj.value
-                                )}
+                                onChange={(value) => setFieldValue("action", value?.value)}
+                                value={ActionOptions?.filter((obj) => values?.action === obj.value)}
                               />
-                              {errors.action && touched.action ? (
-                                <div className="invalid-feedback d-flex align-items-start">
-                                  {errors.action}
-                                </div>
-                              ) : null}
+                              {errors.action && touched.action ? <div className="invalid-feedback d-flex align-items-start">{errors.action}</div> : null}
                             </div>
                           </Col>
                           <Col sm={6}>
                             <div className="mb-3">
-                              <label className="form-label">
-                                Price Condition
-                              </label>
+                              <label className="form-label">Price Condition</label>
                               <Select
                                 isClearable
                                 isSearchable={true}
@@ -350,19 +291,10 @@ const AddRecommendation = () => {
                                 placeholder="Select"
                                 className="react-select"
                                 classNamePrefix="react-select"
-                                onChange={(value) =>
-                                  setFieldValue("priceCondition", value?.value)
-                                }
-                                value={PriceOptions?.filter(
-                                  (obj) => values?.priceCondition === obj.value
-                                )}
+                                onChange={(value) => setFieldValue("priceCondition", value?.value)}
+                                value={PriceOptions?.filter((obj) => values?.priceCondition === obj.value)}
                               />
-                              {errors.priceCondition &&
-                              touched.priceCondition ? (
-                                <div className="invalid-feedback d-flex align-items-start">
-                                  {errors.priceCondition}
-                                </div>
-                              ) : null}
+                              {errors.priceCondition && touched.priceCondition ? <div className="invalid-feedback d-flex align-items-start">{errors.priceCondition}</div> : null}
                             </div>
                           </Col>
                         </Row>
@@ -371,18 +303,8 @@ const AddRecommendation = () => {
                           <Col sm={12}>
                             <div className="mb-3">
                               <label className="form-label">Price</label>
-                              <Field
-                                type="number"
-                                className="form-control"
-                                id="price"
-                                placeholder="Price"
-                                name="price"
-                              />
-                              {errors.price && touched.price ? (
-                                <div className="invalid-feedback d-flex align-items-start">
-                                  {errors.price}
-                                </div>
-                              ) : null}
+                              <Field type="number" className="form-control" id="price" placeholder="Price" name="price" />
+                              {errors.price && touched.price ? <div className="invalid-feedback d-flex align-items-start">{errors.price}</div> : null}
                             </div>
                           </Col>
                         </Row>
@@ -390,33 +312,15 @@ const AddRecommendation = () => {
                           <Col sm={`${editData?._id ? "5" : "6"}`}>
                             <div className="mb-3">
                               <label className="form-label">Target 1</label>
-                              <Field
-                                type="number"
-                                className="form-control"
-                                id="target1"
-                                placeholder="Target 1"
-                                name="target1"
-                              />
-                              {errors.target1 && touched.target1 ? (
-                                <div className="invalid-feedback d-flex align-items-start">
-                                  {errors.target1}
-                                </div>
-                              ) : null}
+                              <Field type="number" className="form-control" id="target1" placeholder="Target 1" name="target1" />
+                              {errors.target1 && touched.target1 ? <div className="invalid-feedback d-flex align-items-start">{errors.target1}</div> : null}
                             </div>
                           </Col>
                           {editData?._id ? (
                             <Col sm={1}>
                               <div className="mb-3">
                                 <label className="form-label">Achived</label>
-                                <ToggleSwitch
-                                  checked={values?.target1Achieved}
-                                  onChange={() =>
-                                    setFieldValue(
-                                      "target1Achieved",
-                                      !values?.target1Achieved
-                                    )
-                                  }
-                                />
+                                <ToggleSwitch checked={values?.target1Achieved} onChange={() => setFieldValue("target1Achieved", !values?.target1Achieved)} />
                               </div>
                             </Col>
                           ) : (
@@ -425,33 +329,15 @@ const AddRecommendation = () => {
                           <Col sm={`${editData?._id ? "5" : "6"}`}>
                             <div className="mb-3">
                               <label className="form-label">Stop Loss</label>
-                              <Field
-                                type="number"
-                                className="form-control"
-                                id="stopLoss"
-                                placeholder="Stop Loss"
-                                name="stopLoss"
-                              />
-                              {errors.stopLoss && touched.stopLoss ? (
-                                <div className="invalid-feedback d-flex align-items-start">
-                                  {errors.stopLoss}
-                                </div>
-                              ) : null}
+                              <Field type="number" className="form-control" id="stopLoss" placeholder="Stop Loss" name="stopLoss" />
+                              {errors.stopLoss && touched.stopLoss ? <div className="invalid-feedback d-flex align-items-start">{errors.stopLoss}</div> : null}
                             </div>
                           </Col>
                           {editData?._id ? (
                             <Col sm={1}>
                               <div className="mb-3">
                                 <label className="form-label">Achived</label>
-                                <ToggleSwitch
-                                  checked={values?.stopLossAchieved}
-                                  onChange={() =>
-                                    setFieldValue(
-                                      "stopLossAchieved",
-                                      !values?.stopLossAchieved
-                                    )
-                                  }
-                                />
+                                <ToggleSwitch checked={values?.stopLossAchieved} onChange={() => setFieldValue("stopLossAchieved", !values?.stopLossAchieved)} />
                               </div>
                             </Col>
                           ) : (
@@ -462,36 +348,16 @@ const AddRecommendation = () => {
                           <Col sm={`${editData?._id ? "5" : "6"}`}>
                             <div className="mb-3">
                               <label className="form-label">Target 2</label>
-                              <Field
-                                type="number"
-                                className="form-control"
-                                id="target2"
-                                placeholder="Target 2"
-                                name="target2"
-                              />
-                              {errors.target2 && touched.target2 ? (
-                                <div className="invalid-feedback d-flex align-items-start">
-                                  {errors.target2}
-                                </div>
-                              ) : null}
+                              <Field type="number" className="form-control" id="target2" placeholder="Target 2" name="target2" />
+                              {errors.target2 && touched.target2 ? <div className="invalid-feedback d-flex align-items-start">{errors.target2}</div> : null}
                             </div>
                           </Col>
                           {editData?._id && <Col sm={1} />}
                           <Col sm={`${editData?._id ? "5" : "6"}`}>
                             <div className="mb-3">
                               <label className="form-label">Target 3</label>
-                              <Field
-                                type="number"
-                                className="form-control"
-                                id="target3"
-                                placeholder="Target 3"
-                                name="target3"
-                              />
-                              {errors.target3 && touched.target3 ? (
-                                <div className="invalid-feedback d-flex align-items-start">
-                                  {errors.target3}
-                                </div>
-                              ) : null}
+                              <Field type="number" className="form-control" id="target3" placeholder="Target 3" name="target3" />
+                              {errors.target3 && touched.target3 ? <div className="invalid-feedback d-flex align-items-start">{errors.target3}</div> : null}
                             </div>
                           </Col>
                           {editData?._id && <Col sm={1} />}
@@ -499,44 +365,19 @@ const AddRecommendation = () => {
                         <Row>
                           <Col sm={12}>
                             <div className="mb-3">
-                              <label className="form-label">
-                                Recommendation
-                              </label>
-                              <RichTextEditor
-                                value={values?.recommendation}
-                                onChange={(value) =>
-                                  setFieldValue("recommendation", value)
-                                }
-                              />
-                              {errors.recommendation &&
-                              touched.recommendation ? (
-                                <div className="invalid-feedback d-flex align-items-start">
-                                  {errors.recommendation}
-                                </div>
-                              ) : null}
+                              <label className="form-label">Recommendation</label>
+                              <RichTextEditor value={values?.recommendation} onChange={(value) => setFieldValue("recommendation", value)} />
+                              {errors.recommendation && touched.recommendation ? <div className="invalid-feedback d-flex align-items-start">{errors.recommendation}</div> : null}
                             </div>
                           </Col>
                         </Row>
                         <Row>
                           <div className="text-end">
-                            <button
-                              type="button"
-                              className="btn btn-outline-secondary me-1"
-                              onClick={() => navigate("/recommendation")}
-                            >
+                            <button type="button" className="btn btn-outline-secondary me-1" onClick={() => navigate("/recommendation")}>
                               Cancel
                             </button>
-                            <button
-                              type="submit"
-                              className="btn btn-primary"
-                              disabled={loading}
-                            >
-                              Submit{" "}
-                              {loading ? (
-                                <Spinner className="ml-2" size="sm" />
-                              ) : (
-                                ""
-                              )}
+                            <button type="submit" className="btn btn-primary" disabled={loading}>
+                              Submit {loading ? <Spinner className="ml-2" size="sm" /> : ""}
                             </button>
                           </div>
                         </Row>

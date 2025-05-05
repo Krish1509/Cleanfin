@@ -27,6 +27,8 @@ import UserBrokerRegistration from "../pages/Pages/UserDashboard/UserBrokerRegis
 import StaticPage from "../pages/Pages/StaticPage";
 import AddHelp from "../pages/Pages/UserDashboard/Help";
 import UserQuery from "../pages/Pages/UserQuery";
+import Education from "../pages/Pages/UserDashboard/Education";
+import ViewEducation from "../pages/Pages/UserDashboard/Education/view";
 
 const routes = [
   // Dashboard Routes
@@ -49,6 +51,18 @@ const routes = [
   {
     path: "/content/view",
     component: <ViewContentBytes />,
+    allowedRoles: ["customer"],
+  },
+
+  // Education
+  {
+    path: "/education",
+    component: <Education />,
+    allowedRoles: ["customer"],
+  },
+  {
+    path: "/education/view",
+    component: <ViewEducation />,
     allowedRoles: ["customer"],
   },
   {
@@ -132,7 +146,7 @@ const routes = [
   {
     path: "/pastPerformance",
     component: <PastPerformance />,
-    allowedRoles: ["customer"],
+    allowedRoles: ["customer", "admin"],
   },
 
   // User Broker Registration

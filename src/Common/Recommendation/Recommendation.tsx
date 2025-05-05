@@ -2,10 +2,7 @@ import React from "react";
 import { Card, Col, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
 import { doc, DocumentSnapshot, getDoc } from "firebase/firestore";
 import { db } from "../../helper/firebase-config";
-import {
-  IOptionScriptsList,
-  IRecommendation,
-} from "../../pages/Pages/UserDashboard/Helper/interfaces";
+import { IOptionScriptsList, IRecommendation } from "../../pages/Pages/UserDashboard/Helper/interfaces";
 import { TouchlineData } from "../../service/socketService";
 interface RecommendationWithTouchline extends IRecommendation {
   touchlineData?: TouchlineData; // Optional touchlineData property
@@ -22,13 +19,10 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
       try {
         if (data?.scriptId) {
           const optionScriptDocRef = doc(db, "optionScripts", data.scriptId);
-          const optionScriptDocSnap: DocumentSnapshot = await getDoc(
-            optionScriptDocRef
-          );
+          const optionScriptDocSnap: DocumentSnapshot = await getDoc(optionScriptDocRef);
 
           if (optionScriptDocSnap.exists()) {
-            const optionScriptData =
-              optionScriptDocSnap.data() as IOptionScriptsList;
+            const optionScriptData = optionScriptDocSnap.data() as IOptionScriptsList;
 
             if (optionScriptData) {
               setOptionScript(optionScriptData);
@@ -53,10 +47,7 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
             <div className="d-flex" style={{ height: "100%" }}>
               <div className="flex-grow-1">
                 <div className="d-flex">
-                  <h5
-                    className="mb-0 text-muted font-bold"
-                    style={{ minWidth: 60 }}
-                  >
+                  <h5 className="mb-0 text-muted font-bold" style={{ minWidth: 60 }}>
                     {optionScript?.name || ""}
                   </h5>
                 </div>
@@ -64,29 +55,12 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
                   <span>{data?.touchlineData?.data?.last_traded_price}</span>
                 </div>
                 <div className="d-flex">
-                  <span>
-                    {data?.date?.seconds
-                      ? new Date(
-                          data.date.seconds * 1000 +
-                            Math.floor(data.date.nanoseconds / 1e6)
-                        ).toLocaleDateString("en-GB")
-                      : "-"}
-                  </span>
+                  <span>{data?.date?.seconds ? new Date(data.date.seconds * 1000 + Math.floor(data.date.nanoseconds / 1e6)).toLocaleDateString("en-GB") : "-"}</span>
+                  <span className="ms-2">{data?.time || ""}</span>
                 </div>
               </div>
-              <div
-                className="d-flex flex-grow-1 justify-content-end"
-                style={{ height: "100%" }}
-              >
-                <span
-                  className={`badge ms-2 ${
-                    data.action === "buy"
-                      ? "bg-light-success"
-                      : "bg-light-danger"
-                  }`}
-                >
-                  {data?.action.toUpperCase()}
-                </span>
+              <div className="d-flex flex-grow-1 justify-content-end" style={{ height: "100%" }}>
+                <span className={`badge ms-2 ${data.action === "buy" ? "bg-light-success" : "bg-light-danger"}`}>{data?.action.toUpperCase()}</span>
                 <div className="ms-3">
                   {data?.recommendation ? (
                     <OverlayTrigger
@@ -101,10 +75,7 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
                         </Tooltip>
                       }
                     >
-                      <i
-                        className="fas fa-exclamation-circle"
-                        style={{ cursor: "pointer" }}
-                      ></i>
+                      <i className="fas fa-exclamation-circle" style={{ cursor: "pointer" }}></i>
                     </OverlayTrigger>
                   ) : (
                     <i className="fas fa-exclamation-circle"></i>
@@ -117,13 +88,9 @@ const Recommendation: React.FC<RecommendationProps> = ({ data }) => {
               <div className="col-6">
                 <div className="d-flex align-items-center justify-content-between">
                   <p className="mb-0 f-w-600 pb-1 h5">Price</p>
-                  <span className="badge bg-light-secondary me-2">
-                    {data?.priceCondition?.toUpperCase()}
-                  </span>
+                  <span className="badge bg-light-secondary me-2">{data?.priceCondition?.toUpperCase()}</span>
                 </div>
-                <div className="mb-0 text-muted pb-1 pt-2 d-flex">
-                  {data?.price || "-"}
-                </div>
+                <div className="mb-0 text-muted pb-1 pt-2 d-flex">{data?.price || "-"}</div>
               </div>
               <div className="col-6 border-start">
                 <div className="d-flex align-items-center justify-content-start pb-2">
