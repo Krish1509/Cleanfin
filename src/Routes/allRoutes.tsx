@@ -25,6 +25,8 @@ import PastPerformance from "../pages/Pages/UserDashboard/PastPerformance";
 import UserBroker from "../pages/Pages/UserBroker";
 import UserBrokerRegistration from "../pages/Pages/UserDashboard/UserBrokerRegistration";
 import StaticPage from "../pages/Pages/StaticPage";
+import Education from "../pages/Pages/UserDashboard/Education";
+import ViewEducation from "../pages/Pages/UserDashboard/Education/view";
 
 const routes = [
   // Dashboard Routes
@@ -47,6 +49,18 @@ const routes = [
   {
     path: "/content/view",
     component: <ViewContentBytes />,
+    allowedRoles: ["customer"],
+  },
+
+  // Education
+  {
+    path: "/education",
+    component: <Education />,
+    allowedRoles: ["customer"],
+  },
+  {
+    path: "/education/view",
+    component: <ViewEducation />,
     allowedRoles: ["customer"],
   },
   {

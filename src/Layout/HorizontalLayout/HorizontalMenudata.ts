@@ -101,6 +101,12 @@ const userMenuData = [
     icon: "",
   },
 
+    id: "education",
+    label: "Education",
+    dataPage: null,
+    link: "/education",
+    icon: "",
+  },
   {
     id: "event",
     label: "Event",
