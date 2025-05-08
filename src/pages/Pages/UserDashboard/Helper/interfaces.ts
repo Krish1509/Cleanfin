@@ -27,6 +27,8 @@ export interface IRecommendation {
   scriptCode: number;
   segmentId: number;
   profitLoss: number;
+  sellPrice: number;
+  closeDate: any;
 }
 
 export interface IContentbytes {

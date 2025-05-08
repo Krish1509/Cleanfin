@@ -16,9 +16,7 @@ const PastPerformance = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
 
-  const handleEntriesPerPageChange = (
-    e: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleEntriesPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setEntriesPerPage(parseInt(e.target.value));
     setCurrentPage(1); // Reset page to 1 when entries per page changes
   };
@@ -109,6 +107,8 @@ const PastPerformance = () => {
                       <th>Price</th>
                       <th>Return</th>
                       <th>Sell Price</th>
+                      <th>Sell Date</th>
+                      <th>Duration</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -116,43 +116,26 @@ const PastPerformance = () => {
                       <tr key={key}>
                         <td>{item?.scriptData[0].name}</td>
                         <td>
-                          {moment(item?.date).format("YYYY-MM-DD")} {item?.time}
+                          {moment(item?.createdAt).format("YYYY-MM-DD")} {item?.time}
                         </td>
                         <td>
-                          {item?.price}{" "}
-                          <span
-                            className={`badge ms-2 ${
-                              item.action === "buy"
-                                ? "bg-light-success"
-                                : "bg-light-danger"
-                            }`}
-                          >
-                            {item?.action.toUpperCase()}
-                          </span>
+                          {item?.price} <span className={`badge ms-2 ${item.action === "buy" ? "bg-light-success" : "bg-light-danger"}`}>{item?.action.toUpperCase()}</span>
                         </td>
                         <td>
                           <div className="d-flex align-items-center">
                             <>
                               {item?.profitLoss > 0 ? (
-                                <i className="material-icons-two-tone text-success me-1">
-                                  arrow_circle_up
-                                </i>
+                                <i className="material-icons-two-tone text-success me-1">arrow_circle_up</i>
                               ) : (
-                                <i className="material-icons-two-tone text-danger me-1">
-                                  arrow_circle_down
-                                </i>
+                                <i className="material-icons-two-tone text-danger me-1">arrow_circle_down</i>
                               )}
                               {item?.profitLoss?.toFixed(2)}%
                             </>
                           </div>
                         </td>
-                        <td>
-                          {item?.target1Achieved
-                            ? item?.target1
-                            : item?.stopLossAchieved
-                            ? item?.stopLoss
-                            : ""}
-                        </td>
+                        <td>{item?.sellPrice}</td>
+                        <td>{moment(item?.closeDate).format("YYYY-MM-DD")}</td>
+                        <td>{moment(item?.closeDate).diff(moment(item?.createdAt), "days")} days</td>
                       </tr>
                     ))}
                   </tbody>

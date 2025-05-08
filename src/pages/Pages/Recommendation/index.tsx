@@ -52,9 +52,7 @@ const SegmentOptions = [
 const Recommendation = () => {
   const navigate = useNavigate();
 
-  const [recommendationListData, setRecommendationListData] = useState<
-    RecommendationListData[]
-  >([]);
+  const [recommendationListData, setRecommendationListData] = useState<RecommendationListData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [entriesPerPage, setEntriesPerPage] = useState<number>(10);
@@ -74,9 +72,7 @@ const Recommendation = () => {
     setCurrentPage(1); // Reset page to 1 when search query changes
   };
 
-  const handleEntriesPerPageChange = (
-    e: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleEntriesPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setEntriesPerPage(parseInt(e.target.value));
     setCurrentPage(1); // Reset page to 1 when entries per page changes
   };
@@ -111,29 +107,22 @@ const Recommendation = () => {
     fetchRecommendationListData();
   }, [entriesPerPage, currentPage, searchQuery, fetchRecommendationListData]);
 
-  const updateRecommendationDetails = React.useCallback(
-    async (id: string, updates: { [key: string]: unknown }) => {
-      try {
-        setUpdateLoading(true);
-        const body = { id, ...updates };
-        const result = await postRequest("recommendation/edit", body, true);
-        ToastAlert.success(result.message);
-        // Update user in the local state
-        setRecommendationListData((prevList) =>
-          prevList.map((data) =>
-            data._id === id ? { ...data, ...updates } : data
-          )
-        );
-        setShowConfirm(false);
-        setSelectedId("");
-        setUpdateLoading(false);
-      } catch (err) {
-        console.log(err);
-        setUpdateLoading(false);
-      }
-    },
-    []
-  );
+  const updateRecommendationDetails = React.useCallback(async (id: string, updates: { [key: string]: unknown }) => {
+    try {
+      setUpdateLoading(true);
+      const body = { id, ...updates };
+      const result = await postRequest("recommendation/edit", body, true);
+      ToastAlert.success(result.message);
+      // Update user in the local state
+      setRecommendationListData((prevList) => prevList.map((data) => (data._id === id ? { ...data, ...updates } : data)));
+      setShowConfirm(false);
+      setSelectedId("");
+      setUpdateLoading(false);
+    } catch (err) {
+      console.log(err);
+      setUpdateLoading(false);
+    }
+  }, []);
 
   // Update recommendation details when a value is changed
   const handleValueUpdate = (id: string, key: string, value: unknown) => {
@@ -154,9 +143,7 @@ const Recommendation = () => {
       if (result) {
         ToastAlert.success(result.message);
 
-        setRecommendationListData((prevList) =>
-          prevList.filter((item) => item._id !== selectedId)
-        );
+        setRecommendationListData((prevList) => prevList.filter((item) => item._id !== selectedId));
       }
 
       setShowDeletion(false);
@@ -171,66 +158,74 @@ const Recommendation = () => {
 
   const exportExcel = async () => {
     const segmentLabel = (segmentId: string | number) => {
-      const segmentObj = SegmentOptions.find(itm => itm.value === segmentId)
-      return segmentObj ? segmentObj.label : ""
-    }
+      const segmentObj = SegmentOptions.find((itm) => itm.value === segmentId);
+      return segmentObj ? segmentObj.label : "";
+    };
 
-    const excelData = [{
-      workBookColumns: ["Segment", "Script", "Date", "Time", "Active", "Action", "Price Condition", "Price", "Target 1", "Target Achieved", "Stop Loss", "Stop Loss Achieved", "Target 2", "Target 3", "Recommendation"],
-      data: recommendationListData?.map((item: RecommendationListData) => [
-        segmentLabel(item.segmentId),
-        item.scriptData[0].name,
-        moment(item.date).format("YYYY-MM-DD"),
-        item.time,
-        item.isActive ? "Yes" : "No",
-        item.action,
-        item.priceCondition,
-        item.price,
-        item.target1,
-        item.target1Achieved ? "Yes" : "No",
-        item.stopLoss,
-        item.stopLossAchieved ? "Yes" : "No",
-        item.target2,
-        item.target3,
-        item.recommendation
-      ]),
-      workSheetName: "Recommendation"
-    }]
+    const excelData = [
+      {
+        workBookColumns: [
+          "Segment",
+          "Script",
+          "Date",
+          "Time",
+          "Active",
+          "Action",
+          "Price Condition",
+          "Price",
+          "Target 1",
+          "Target Achieved",
+          "Stop Loss",
+          "Stop Loss Achieved",
+          "Target 2",
+          "Target 3",
+          "Recommendation",
+        ],
+        data: recommendationListData?.map((item: RecommendationListData) => [
+          segmentLabel(item.segmentId),
+          item.scriptData[0].name,
+          moment(item.date).format("YYYY-MM-DD"),
+          item.time,
+          item.isActive ? "Yes" : "No",
+          item.action,
+          item.priceCondition,
+          item.price,
+          item.target1,
+          item.target1Achieved ? "Yes" : "No",
+          item.stopLoss,
+          item.stopLossAchieved ? "Yes" : "No",
+          item.target2,
+          item.target3,
+          item.recommendation,
+        ]),
+        workSheetName: "Recommendation",
+      },
+    ];
 
     try {
       setExportLoading(true);
       await exportToExcel(excelData, `Recommendation-${moment().format("YYYY-MM-DD-HH-mm")}`);
-      ToastAlert.success("Successfully file exported")
+      ToastAlert.success("Successfully file exported");
     } catch (error) {
       ToastAlert.error(`Export failed`);
     } finally {
       setExportLoading(false);
     }
-  }
+  };
 
   return (
     <React.Fragment>
-      <BreadcrumbItem
-        mainTitle="Recommendation"
-        subTitle="Recommendation List"
-      />
+      <BreadcrumbItem mainTitle="Recommendation" subTitle="Recommendation List" />
       <div className="col-12 mt-4 pb-4">
         <Card className="table-card">
           <CardHeader>
             <div className="d-sm-flex align-items-center justify-content-between">
               <h5 className="mb-3 mb-sm-0">Recommendation List</h5>
               <div className="d-flex gap-2">
-                <Button
-                  onClick={exportExcel}
-                  className="btn btn-primary"
-                  disabled={exportLoading}
-                >
+                <Button onClick={exportExcel} className="btn btn-primary" disabled={exportLoading}>
                   {exportLoading ? "Exporting..." : "Export"}
                 </Button>
-                <Button
-                  onClick={() => navigate("/recommendation/add")}
-                  className="btn btn-primary"
-                >
+                <Button onClick={() => navigate("/recommendation/add")} className="btn btn-primary">
                   Add
                 </Button>
               </div>
@@ -240,12 +235,7 @@ const Recommendation = () => {
             <ul className="list-inline ms-auto my-1 me-4">
               <li className="list-inline-item">
                 <form className="form-search">
-                  <Form.Control
-                    type="search"
-                    placeholder="Search...."
-                    className="ps-2 pe-3 pt-2"
-                    onChange={handleSearchChange}
-                  />
+                  <Form.Control type="search" placeholder="Search...." className="ps-2 pe-3 pt-2" onChange={handleSearchChange} />
                 </form>
               </li>
             </ul>
@@ -259,6 +249,7 @@ const Recommendation = () => {
                       <tr>
                         <th>Script Name</th>
                         <th>Date</th>
+                        <th>Action</th>
                         <th>Target 1</th>
                         <th>Sell Price</th>
                         {/* <th>Target 3</th> */}
@@ -285,35 +276,20 @@ const Recommendation = () => {
                             {item?.scriptData[0].name}
                           </td>
                           <td>
-                            {moment(item?.date).format("YYYY-MM-DD")}{" "}
-                            {item?.time}
+                            {moment(item?.date).format("YYYY-MM-DD")} {item?.time}
+                          </td>
+                          <td>
+                            <span className={`badge ms-2 ${item?.action === "buy" ? "bg-light-success" : "bg-light-danger"}`}>{item?.action.toUpperCase()}</span>
                           </td>
                           <td>
                             <div className="d-flex align-items-center justify-content-between">
-                              <EditableNumberInput
-                                id={item._id}
-                                value={item.target1}
-                                placeholder="target1"
-                                keyName="target1"
-                                onUpdate={handleValueUpdate}
-                              />
-                              <ToggleSwitch
-                                checked={item?.target1Achieved}
-                                onChange={() =>
-                                  updateRecommendationDetails(item?._id, { target1Achieved: !item?.target1Achieved })
-                                }
-                              />
+                              <EditableNumberInput id={item._id} value={item.target1} placeholder="target1" keyName="target1" onUpdate={handleValueUpdate} />
+                              <ToggleSwitch checked={item?.target1Achieved} onChange={() => updateRecommendationDetails(item?._id, { target1Achieved: !item?.target1Achieved })} />
                             </div>
                           </td>
                           <td>
                             <div className="d-flex align-items-center justify-content-between">
-                              <EditableNumberInput
-                                id={item._id}
-                                value={item.sellPrice}
-                                placeholder="sellPrice"
-                                keyName="sellPrice"
-                                onUpdate={handleValueUpdate}
-                              />
+                              <EditableNumberInput id={item._id} value={item.sellPrice} placeholder="sellPrice" keyName="sellPrice" onUpdate={handleValueUpdate} />
                             </div>
                           </td>
                           {/* <td>
@@ -329,18 +305,10 @@ const Recommendation = () => {
                           </td> */}
                           <td>
                             <div className="d-flex align-items-center justify-content-between">
-                              <EditableNumberInput
-                                id={item._id}
-                                value={item.stopLoss}
-                                placeholder="stopLoss"
-                                keyName="stopLoss"
-                                onUpdate={handleValueUpdate}
-                              />
+                              <EditableNumberInput id={item._id} value={item.stopLoss} placeholder="stopLoss" keyName="stopLoss" onUpdate={handleValueUpdate} />
                               <ToggleSwitch
                                 checked={item?.stopLossAchieved}
-                                onChange={() =>
-                                  updateRecommendationDetails(item?._id, { stopLossAchieved: !item?.stopLossAchieved })
-                                }
+                                onChange={() => updateRecommendationDetails(item?._id, { stopLossAchieved: !item?.stopLossAchieved })}
                               />
                             </div>
                           </td>
@@ -355,11 +323,7 @@ const Recommendation = () => {
                                   setSelectedSellPrice(item?.sellPrice);
                                 }}
                               />
-                              <Button
-                                type="button"
-                                className="avtar avtar-xs btn btn-primary"
-                                onClick={() => handleEditDate(item)}
-                              >
+                              <Button type="button" className="avtar avtar-xs btn btn-primary" onClick={() => handleEditDate(item)}>
                                 <i className="ti ti-pencil f-20"></i>
                               </Button>
                               <Button
@@ -408,15 +372,14 @@ const Recommendation = () => {
               show={showConfirm}
               handleConfirm={() => {
                 if (selectedStatus) {
-                  updateRecommendationDetails(selectedId, { isActive: selectedStatus })
+                  updateRecommendationDetails(selectedId, { isActive: selectedStatus });
                 } else {
-                  setShowConfirm(false)
-                  setShowReason(true)
+                  setShowConfirm(false);
+                  setShowReason(true);
                 }
               }}
               handleClose={() => setShowConfirm(false)}
-              message={`Are you sure you want to ${selectedStatus ? "activate" : "deactivate"
-                } this record?`}
+              message={`Are you sure you want to ${selectedStatus ? "activate" : "deactivate"} this record?`}
               loading={updateLoading}
             />
           ) : (
@@ -428,8 +391,8 @@ const Recommendation = () => {
               show={showReason}
               handleClose={() => setShowReason(false)}
               handleConfirm={(reason) => {
-                updateRecommendationDetails(selectedId, { isActive: selectedStatus, reason: reason })
-                setShowReason(false)
+                updateRecommendationDetails(selectedId, { isActive: selectedStatus, reason: reason });
+                setShowReason(false);
               }}
               loading={updateLoading}
               value={selectedSellPrice == 0 ? "" : `Kindly exit at ${selectedSellPrice} `}
