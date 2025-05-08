@@ -29,6 +29,7 @@ import AddHelp from "../pages/Pages/UserDashboard/Help";
 import UserQuery from "../pages/Pages/UserQuery";
 import Education from "../pages/Pages/UserDashboard/Education";
 import ViewEducation from "../pages/Pages/UserDashboard/Education/view";
+import FIIDIITrades from "../pages/Pages/FIIDIITrades";
 
 const routes = [
   // Dashboard Routes
@@ -169,6 +170,12 @@ const routes = [
   {
     path: "/userQueries",
     component: <UserQuery />,
+    allowedRoles: ["admin"],
+  },
+  // FII DII Section
+  {
+    path: "/fiidiitrades",
+    component: <FIIDIITrades />,
     allowedRoles: ["admin"],
   },
 ];

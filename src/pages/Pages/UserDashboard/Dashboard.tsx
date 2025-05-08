@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import LottieAnimation, { Varient } from "../../../Common/AnimationComponent/LottieAnimation";
 import { initializeSocket, TouchlineData, reconnectSocket } from "../../../service/socketService";
 import PerformanceCard from "../../../Common/PerformanceCard/PerformanceCard";
+import FIIDIITradesCard from "../../../Common/FIIDIITradesCard/FIIDIITrades";
 
 //import Components
 
@@ -164,7 +165,7 @@ const UserDashboard = () => {
   };
 
   const handleScroll = () => {
-    const sections = ["recommendation", "content-bytes", "past-performance"];
+    const sections = ["recommendation", "content-bytes", "past-performance", "fii-dii-trades"];
     let foundSection = "";
     sections.forEach((section) => {
       const element = document.getElementById(section);
@@ -244,6 +245,9 @@ const UserDashboard = () => {
             <div onClick={() => scrollToSection("past-performance")} className={`menu-item ${activeSection === "past-performance" ? "active" : ""}`}>
               Past Performance
             </div>
+            <div onClick={() => scrollToSection("fii-dii-trades")} className={`menu-item ${activeSection === "fii-dii-trades" ? "active" : ""}`}>
+              FII DII Trades
+            </div>
           </div>
         </div>
 
@@ -321,6 +325,14 @@ const UserDashboard = () => {
                 </div>
               </Col>
               <PerformanceCard />
+            </div>
+            <div className="user-dashboard-container container-min" id="fii-dii-trades">
+              <Col lg={12}>
+                <div className="d-flex align-items-center justify-content-between mb-3">
+                  <h5 className="mb-0">FII DII Trades</h5>
+                </div>
+              </Col>
+              <FIIDIITradesCard />
             </div>
           </CardBody>
         </Card>

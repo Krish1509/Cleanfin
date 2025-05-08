@@ -83,6 +83,13 @@ const adminMenuData = [
     link: "/userQueries",
     icon: "",
   },
+  {
+    id: "fiidiitrades",
+    label: "FII/DII Trades",
+    dataPage: null,
+    link: "/fiidiitrades",
+    icon: "",
+  },
 ];
 
 const userMenuData = [
@@ -107,7 +114,7 @@ const userMenuData = [
     link: "/pastPerformance",
     icon: "",
   },
-
+  {
     id: "education",
     label: "Education",
     dataPage: null,
