@@ -2,7 +2,7 @@
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useRef, useState } from "react";
-import { Card, CardBody, Col, Row } from "react-bootstrap";
+import { Button, ButtonGroup, Card, CardBody, Col, Row } from "react-bootstrap";
 import ContentBytes from "../../../Common/ContentBytes/ContentBytes";
 import Recommendation from "../../../Common/Recommendation/Recommendation";
 import { IRecommendation, IContentbytes } from "./Helper/interfaces";
@@ -16,6 +16,7 @@ import LottieAnimation, { Varient } from "../../../Common/AnimationComponent/Lot
 import { initializeSocket, TouchlineData, reconnectSocket } from "../../../service/socketService";
 import PerformanceCard from "../../../Common/PerformanceCard/PerformanceCard";
 import FIIDIITradesCard from "../../../Common/FIIDIITradesCard/FIIDIITrades";
+import { TradeTime } from "../../../Common/FIIDIITradesCard/contsant";
 
 //import Components
 
@@ -31,6 +32,7 @@ const UserDashboard = () => {
     info: string;
   }>({ type: Varient.Target, info: "" });
   const [contentBytesLoading, SetcontentBytesLoading] = useState<boolean>(false);
+  const [tradesTimes, setTradesTimes] = useState<TradeTime>(TradeTime.Day);
 
   const user = JSON.parse(localStorage.getItem("user") || "{}");
   // Convert subscription_end to a Date object
@@ -330,9 +332,15 @@ const UserDashboard = () => {
               <Col lg={12}>
                 <div className="d-flex align-items-center justify-content-between mb-3">
                   <h5 className="mb-0">FII DII Trades</h5>
+                  <div>
+                    <ButtonGroup>
+                      <Button style={{ flex: 1 }} variant={tradesTimes === TradeTime.Day ? "secondary" : "outline-secondary"} onClick={() => setTradesTimes(TradeTime.Day)}>Daily</Button>
+                      <Button style={{ flex: 1 }} variant={tradesTimes === TradeTime.Month ? "secondary" : "outline-secondary"} onClick={() => setTradesTimes(TradeTime.Month)}>Monthly</Button>
+                    </ButtonGroup>
+                  </div>
                 </div>
               </Col>
-              <FIIDIITradesCard />
+              <FIIDIITradesCard tradesTimes={tradesTimes} />
             </div>
           </CardBody>
         </Card>
