@@ -25,11 +25,11 @@ import PastPerformance from "../pages/Pages/UserDashboard/PastPerformance";
 import UserBroker from "../pages/Pages/UserBroker";
 import UserBrokerRegistration from "../pages/Pages/UserDashboard/UserBrokerRegistration";
 import StaticPage from "../pages/Pages/StaticPage";
-import AddHelp from "../pages/Pages/UserDashboard/Help";
-import UserQuery from "../pages/Pages/UserQuery";
+// import AddHelp from "../pages/Pages/UserDashboard/Help";
+// import UserQuery from "../pages/Pages/UserQuery";
 import Education from "../pages/Pages/UserDashboard/Education";
 import ViewEducation from "../pages/Pages/UserDashboard/Education/view";
-import FIIDIITrades from "../pages/Pages/FIIDIITrades";
+// import FIIDIITrades from "../pages/Pages/FIIDIITrades";
 
 const routes = [
   // Dashboard Routes
@@ -147,7 +147,7 @@ const routes = [
   {
     path: "/pastPerformance",
     component: <PastPerformance />,
-    allowedRoles: ["customer", "admin"],
+    allowedRoles: ["customer"],
   },
 
   // User Broker Registration
@@ -162,22 +162,22 @@ const routes = [
     allowedRoles: ["admin"],
   },
   // Help Section
-  {
-    path: "/addHelp",
-    component: <AddHelp />,
-    allowedRoles: ["customer"],
-  },
-  {
-    path: "/userQueries",
-    component: <UserQuery />,
-    allowedRoles: ["admin"],
-  },
+  // {
+  //   path: "/addHelp",
+  //   component: <AddHelp />,
+  //   allowedRoles: ["customer"],
+  // },
+  // {
+  //   path: "/userQueries",
+  //   component: <UserQuery />,
+  //   allowedRoles: ["admin"],
+  // },
   // FII DII Section
-  {
-    path: "/fiidiitrades",
-    component: <FIIDIITrades />,
-    allowedRoles: ["admin"],
-  },
+  // {
+  //   path: "/fiidiitrades",
+  //   component: <FIIDIITrades />,
+  //   allowedRoles: ["admin"],
+  // },
 ];
 
 const nonAuthRoutes = [
