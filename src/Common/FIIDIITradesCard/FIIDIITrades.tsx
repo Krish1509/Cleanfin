@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { postRequest } from "../../service/fetch-services";
 import BarChart from "./BarChart";
+import { TradeTime } from "./contsant";
 
 export interface FIIDIIData {
   [date: string]: {
@@ -18,17 +19,21 @@ export interface FIIDIIData {
   };
 }
 
-const FIIDIITradesCard = () => {
+type FIIDIITradesCardProps = {
+  tradesTimes: TradeTime;
+}
+
+const FIIDIITradesCard = ({ tradesTimes }: FIIDIITradesCardProps) => {
   const [countLoading, SetCountLoading] = useState<boolean>(false);
   const [pastPerformanceCount, SetPastPerformanceCount] =
     useState<FIIDIIData>(Object);
 
-  const fetchFIIDIITrades = async () => {
+  const fetchFIIDIITrades = React.useCallback(async () => {
     try {
       SetCountLoading(true);
       const result = await postRequest("fiiDiiTrades/list", {
-        groupBy: "day",
-        period: 10
+        groupBy: tradesTimes,
+        period: 7
       });
       SetPastPerformanceCount(result?.data);
       SetCountLoading(false);
@@ -36,18 +41,18 @@ const FIIDIITradesCard = () => {
       console.log(err);
       SetCountLoading(false);
     }
-  };
+  }, [tradesTimes]);
 
   useEffect(() => {
     fetchFIIDIITrades();
-  }, []);
+  }, [tradesTimes, fetchFIIDIITrades]);
 
   return (
     <React.Fragment>
       {!countLoading ? (
         <Row>
           <Col xs={12}>
-            <BarChart data={pastPerformanceCount} />
+            <BarChart data={pastPerformanceCount} tradesTimes={tradesTimes} />
           </Col>
         </Row>
       ) : (

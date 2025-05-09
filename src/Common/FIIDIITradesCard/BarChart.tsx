@@ -14,6 +14,7 @@ import {
 import { Bar } from 'react-chartjs-2';
 import { FIIDIIData } from './FIIDIITrades';
 import moment from 'moment';
+import { TradeTime } from './contsant';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -27,11 +28,19 @@ const getRoundedCorners = (ctx: ScriptableContext<'bar'>) => {
   };
 };
 
-const BarChart: React.FC<{ data: FIIDIIData }> = ({ data }) => {
+const BarChart: React.FC<{ data: FIIDIIData, tradesTimes: TradeTime }> = ({ data, tradesTimes }) => {
   let labels = Object.keys(data);
   const DII_Net = labels.map(date => data[date].DII.totalNet);
   const FII_Net = labels.map(date => data[date].FII.totalNet);
-  labels = labels.map(date => moment(date).format("DD MMM YYYY"));
+  labels = labels.map(date => {
+    if (tradesTimes === TradeTime.Year) {
+      return moment(date).format("YYYY")
+    } else if (tradesTimes === TradeTime.Month) {
+      return moment(date).format("MMM YYYY")
+    } else {
+      return moment(date).format("DD MMM YYYY")
+    }
+  });
 
   const allNetValues = [...FII_Net, ...DII_Net];
   const maxAbsValue = Math.ceil(Math.max(...allNetValues.map(Math.abs)) / 1000) * 1000; // rounded to nearest 1000
