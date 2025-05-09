@@ -43,7 +43,7 @@ const FIIDIITrades = () => {
   const fetchMonthData = async (month: string, year: string) => {
     try {
       setLoading(true);
-      const result = await postRequest(`fiiDiiTrades/getMonthlyData`, {
+      const result = await postRequest(`fiiDiiTrades/list`, {
         month: month,
         year: year
       });
