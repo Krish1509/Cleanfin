@@ -2,14 +2,7 @@
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useRef, useState } from "react";
-import { 
-  // Button,
-  // ButtonGroup,
-  Card,
-  CardBody,
-  Col,
-  Row
-} from "react-bootstrap";
+import { Button, ButtonGroup, Card, CardBody, Col, Row } from "react-bootstrap";
 import ContentBytes from "../../../Common/ContentBytes/ContentBytes";
 import Recommendation from "../../../Common/Recommendation/Recommendation";
 import { IRecommendation, IContentbytes } from "./Helper/interfaces";
@@ -22,8 +15,8 @@ import { useNavigate } from "react-router-dom";
 import LottieAnimation, { Varient } from "../../../Common/AnimationComponent/LottieAnimation";
 import { initializeSocket, TouchlineData, reconnectSocket } from "../../../service/socketService";
 import PerformanceCard from "../../../Common/PerformanceCard/PerformanceCard";
-// import FIIDIITradesCard from "../../../Common/FIIDIITradesCard/FIIDIITrades";
-// import { TradeTime } from "../../../Common/FIIDIITradesCard/contsant";
+import FIIDIITradesCard from "../../../Common/FIIDIITradesCard/FIIDIITrades";
+import { TradeTime } from "../../../Common/FIIDIITradesCard/contsant";
 
 //import Components
 
@@ -39,7 +32,7 @@ const UserDashboard = () => {
     info: string;
   }>({ type: Varient.Target, info: "" });
   const [contentBytesLoading, SetcontentBytesLoading] = useState<boolean>(false);
-  // const [tradesTimes, setTradesTimes] = useState<TradeTime>(TradeTime.Day);
+  const [tradesTimes, setTradesTimes] = useState<TradeTime>(TradeTime.Day);
 
   const user = JSON.parse(localStorage.getItem("user") || "{}");
   // Convert subscription_end to a Date object
@@ -254,9 +247,9 @@ const UserDashboard = () => {
             <div onClick={() => scrollToSection("past-performance")} className={`menu-item ${activeSection === "past-performance" ? "active" : ""}`}>
               Past Performance
             </div>
-            {/* <div onClick={() => scrollToSection("fii-dii-trades")} className={`menu-item ${activeSection === "fii-dii-trades" ? "active" : ""}`}>
+            <div onClick={() => scrollToSection("fii-dii-trades")} className={`menu-item ${activeSection === "fii-dii-trades" ? "active" : ""}`}>
               FII DII Trades
-            </div> */}
+            </div>
           </div>
         </div>
 
@@ -335,20 +328,24 @@ const UserDashboard = () => {
               </Col>
               <PerformanceCard />
             </div>
-            {/* <div className="user-dashboard-container container-min" id="fii-dii-trades">
+            <div className="user-dashboard-container container-min" id="fii-dii-trades">
               <Col lg={12}>
                 <div className="d-flex align-items-center justify-content-between mb-3">
                   <h5 className="mb-0">FII DII Trades</h5>
                   <div>
                     <ButtonGroup>
-                      <Button style={{ flex: 1 }} variant={tradesTimes === TradeTime.Day ? "secondary" : "outline-secondary"} onClick={() => setTradesTimes(TradeTime.Day)}>Daily</Button>
-                      <Button style={{ flex: 1 }} variant={tradesTimes === TradeTime.Month ? "secondary" : "outline-secondary"} onClick={() => setTradesTimes(TradeTime.Month)}>Monthly</Button>
+                      <Button style={{ flex: 1 }} variant={tradesTimes === TradeTime.Day ? "secondary" : "outline-secondary"} onClick={() => setTradesTimes(TradeTime.Day)}>
+                        Daily
+                      </Button>
+                      <Button style={{ flex: 1 }} variant={tradesTimes === TradeTime.Month ? "secondary" : "outline-secondary"} onClick={() => setTradesTimes(TradeTime.Month)}>
+                        Monthly
+                      </Button>
                     </ButtonGroup>
                   </div>
                 </div>
               </Col>
               <FIIDIITradesCard tradesTimes={tradesTimes} />
-            </div> */}
+            </div>
           </CardBody>
         </Card>
       </div>

@@ -20,13 +20,13 @@ const adminMenuData = [
     link: "/recommendation",
     icon: "",
   },
-  // {
-  //   id: "pastPerformance",
-  //   label: "Past Performance",
-  //   dataPage: null,
-  //   link: "/pastPerformance",
-  //   icon: "",
-  // },
+  {
+    id: "pastPerformance",
+    label: "Past Performance",
+    dataPage: null,
+    link: "/pastPerformance",
+    icon: "",
+  },
   {
     id: "optionscripts",
     label: "Option Scripts",
@@ -76,20 +76,20 @@ const adminMenuData = [
     link: "/userBroker",
     icon: "",
   },
-  // {
-  //   id: "userQuery",
-  //   label: "Help",
-  //   dataPage: null,
-  //   link: "/userQueries",
-  //   icon: "",
-  // },
-  // {
-  //   id: "fiidiitrades",
-  //   label: "FII/DII Trades",
-  //   dataPage: null,
-  //   link: "/fiidiitrades",
-  //   icon: "",
-  // },
+  {
+    id: "userQuery",
+    label: "Help",
+    dataPage: null,
+    link: "/userQueries",
+    icon: "",
+  },
+  {
+    id: "fiidiitrades",
+    label: "FII/DII Trades",
+    dataPage: null,
+    link: "/fiidiitrades",
+    icon: "",
+  },
 ];
 
 const userMenuData = [
@@ -107,13 +107,13 @@ const userMenuData = [
     link: "/content",
     icon: "",
   },
-  // {
-  //   id: "pastPerformance",
-  //   label: "Past Performance",
-  //   dataPage: null,
-  //   link: "/pastPerformance",
-  //   icon: "",
-  // },
+  {
+    id: "pastPerformance",
+    label: "Past Performance",
+    dataPage: null,
+    link: "/pastPerformance",
+    icon: "",
+  },
   {
     id: "education",
     label: "Education",
@@ -135,13 +135,13 @@ const userMenuData = [
     link: "/userBrokerRegistration",
     icon: "",
   },
-  // {
-  //   id: "helpForm",
-  //   label: "Help",
-  //   dataPage: null,
-  //   link: "/addHelp",
-  //   icon: "",
-  // },
+  {
+    id: "helpForm",
+    label: "Help",
+    dataPage: null,
+    link: "/addHelp",
+    icon: "",
+  },
 ];
 
 const getMenuByRole = (role: string) => {
