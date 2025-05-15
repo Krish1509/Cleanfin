@@ -106,7 +106,7 @@ const PastPerformance = () => {
                       <th>Date</th>
                       <th>Price</th>
                       <th>Return</th>
-                      <th>Sell Price</th>
+                      <th>Exit Price</th>
                       <th>Sell Date</th>
                       <th>Duration</th>
                     </tr>

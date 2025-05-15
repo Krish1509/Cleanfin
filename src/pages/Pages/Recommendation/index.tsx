@@ -251,7 +251,7 @@ const Recommendation = () => {
                         <th>Date</th>
                         <th>Action</th>
                         <th>Target 1</th>
-                        <th>Sell Price</th>
+                        <th>Exit Price</th>
                         {/* <th>Target 3</th> */}
                         <th>Stop Loss</th>
                         <th>Action</th>
