@@ -671,7 +671,8 @@
   }
 
   .landing-page .process-card {
-    width: 200px !important;
+    width: 280px !important;
+    height: 160px !important;
   }
 
   /* Smaller icons on mobile */
@@ -946,18 +947,22 @@ body {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  flex-wrap: wrap !important;
+  flex-wrap: nowrap !important;
   gap: 0 !important;
   padding: 2rem 0 !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
 }
 
 .landing-page .process-card {
-  width: 240px !important;
-  height: 120px !important;
+  width: 280px !important;
+  height: 160px !important;
   position: relative !important;
   padding: 2px !important;
   border-radius: 8px !important;
   background: linear-gradient(90deg, #08aeea 0%, #2af598 100%) !important;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1) !important;
+  flex-shrink: 0 !important;
 }
 
 .landing-page .process-card-inner {
@@ -969,6 +974,7 @@ body {
   background-color: #121212 !important;
   border-radius: 6px !important;
   padding: 1.5rem !important;
+  text-align: center !important;
 }
 
 .landing-page .process-title {
@@ -981,17 +987,19 @@ body {
 
 .landing-page .process-connector {
   display: flex !important;
-  flex-direction: column !important;
+  flex-direction: row !important;
   align-items: center !important;
-  width: 100px !important;
+  width: auto !important;
   position: relative !important;
+  flex-shrink: 0 !important;
+  padding: 0 10px !important;
 }
 
 .landing-page .connector-line {
-  width: 70px !important;
+  width: 60px !important;
   height: 2px !important;
   background: linear-gradient(90deg, #08aeea 0%, #2af598 100%) !important;
-  margin-bottom: 8px !important;
+  margin-right: 8px !important;
 }
 
 .landing-page .connector-text {
@@ -1001,23 +1009,46 @@ body {
 }
 
 /* Media Queries for How We Do Section */
+@media (max-width: 1200px) {
+  .landing-page .process-flow-container {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 20px !important;
+  }
+  
+  .landing-page .process-connector {
+    display: none !important;
+  }
+  
+  .landing-page .process-card {
+    margin: 10px !important;
+  }
+}
+
 @media (max-width: 991.98px) {
   .landing-page .process-flow-container {
     flex-direction: column !important;
-    gap: 2rem !important;
+    gap: 20px !important;
   }
 
   .landing-page .process-connector {
-    flex-direction: row !important;
-    width: auto !important;
-    margin: 1rem 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    margin: 10px 0 !important;
+    height: 50px !important;
   }
-
+  
   .landing-page .connector-line {
     width: 2px !important;
-    height: 40px !important;
-    margin-bottom: 0 !important;
-    margin-right: 8px !important;
+    height: 30px !important;
+    margin-bottom: 5px !important;
+    margin-right: 0 !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .landing-page .process-card {
+    width: 240px !important;
   }
 }
 
@@ -1081,7 +1112,7 @@ body {
   padding: 2rem 1.5rem !important;
   border-radius: 12px !important;
   height: 100% !important;
-  min-height: 300px !important;
+  min-height: 450px !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
@@ -1091,6 +1122,7 @@ body {
   overflow: hidden !important;
   opacity: 0;
   animation: popIn 0.6s ease forwards !important;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
 }
 
 .landing-page .feature-box:hover {
@@ -1153,23 +1185,24 @@ body {
 }
 
 .landing-page .feature-icon-wrapper {
-  margin-bottom: 1rem !important;
+  margin-bottom: 1.5rem !important;
   animation: floatAnimation 4s ease-in-out infinite !important;
   margin-top: 1rem !important;
 }
 
 .landing-page .feature-content {
-  margin-top: auto !important;
+  margin-top: 1rem !important;
   width: 100% !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
+  flex-grow: 1 !important;
 }
 
 .landing-page .feature-title {
   font-size: 1.25rem !important;
   font-weight: 600 !important;
-  margin-bottom: 0.75rem !important;
+  margin-bottom: 1rem !important;
   color: #333 !important;
   opacity: 1 !important;
   animation: fadeIn 0.4s ease forwards !important;
@@ -1227,37 +1260,25 @@ body {
 }
 
 /* Media query for responsive design */
-@media (max-width: 991.98px) {
+@media (max-width: 1199.98px) {
   .landing-page .feature-box {
-    margin-bottom: 2rem !important;
-  }
-  .landing-page .feature-box-container {
-    margin-bottom: 20px !important;
-  }
-
-  /* Remove the bottom margin from the last feature-box in a container to avoid extra spacing */
-  .landing-page .row > div:last-child .feature-box-container {
-    margin-bottom: 0 !important;
-  }
-  .landing-page .benefit-card-container {
-    margin-bottom: 20px !important;
-  }
-
-  /* Remove the bottom margin from the last feature-box in a container to avoid extra spacing */
-  .landing-page .row > div:last-child .benefit-card-container {
-    margin-bottom: 0 !important;
+    min-height: 500px !important;
   }
 }
 
-/* Add media query for mobile view */
-@media (max-width: 767px) {
+@media (max-width: 991.98px) {
+  .landing-page .feature-box {
+    min-height: 420px !important;
+  }
+  
   .landing-page .feature-box-container {
     margin-bottom: 20px !important;
   }
+}
 
-  /* Remove the bottom margin from the last feature-box in a container to avoid extra spacing */
-  .landing-page .row > div:last-child .feature-box-container {
-    margin-bottom: 0 !important;
+@media (max-width: 767.98px) {
+  .landing-page .feature-box {
+    min-height: auto !important;
   }
 }
 
@@ -1461,5 +1482,358 @@ body {
 
   .mobile-only-buttons {
     display: block; /* Show mobile buttons on mobile */
+  }
+}
+
+/* Recommendations Section Styling - REDESIGNED */
+.landing-page .recommendations-section {
+  background: linear-gradient(135deg, #000000 0%, #0a0a0a 100%) !important;
+  padding: 6rem 0 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  border-top: 1px solid rgba(16, 185, 129, 0.1) !important;
+  border-bottom: 1px solid rgba(16, 185, 129, 0.1) !important;
+}
+
+/* Add subtle pattern overlay */
+.landing-page .recommendations-section::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2310b981' fill-opacity='0.05' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='1'/%3E%3Ccircle cx='13' cy='13' r='1'/%3E%3C/g%3E%3C/svg%3E") !important;
+  opacity: 1 !important;
+  z-index: 0 !important;
+}
+
+/* Add ambient glow */
+.landing-page .recommendations-section::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 70% !important;
+  height: 250px !important;
+  background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0) 70%) !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+.landing-page .recommendations-section .container {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.landing-page .recommendations-section .section-title {
+  font-size: 2.75rem !important;
+  font-weight: 800 !important;
+  margin-bottom: 3.5rem !important;
+  color: #ffffff !important;
+  text-align: center !important;
+  position: relative !important;
+  display: inline-block !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+}
+
+.landing-page .text-gradient {
+  display: inline !important;
+  background: linear-gradient(90deg, #f0c14b, #f8d880) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  text-shadow: none !important;
+}
+
+/* Add wavy line decoration under title */
+.landing-page .section-title::after {
+  content: "" !important;
+  position: absolute !important;
+  bottom: -15px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  height: 3px !important;
+  width: 80px !important;
+  background: linear-gradient(90deg, #10b981, #f0c14b) !important;
+  border-radius: 3px !important;
+}
+
+/* Trading Cards Container */
+.landing-page .trading-cards-container {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  flex-wrap: nowrap !important;
+  gap: 25px !important;
+  padding: 30px 0 !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  -ms-overflow-style: none !important; /* IE and Edge */
+  scrollbar-width: none !important; /* Firefox */
+  scroll-behavior: smooth !important;
+  scroll-snap-type: x mandatory !important;
+}
+
+.landing-page .trading-cards-container::-webkit-scrollbar {
+  display: none !important; /* Chrome, Safari, Opera */
+}
+
+/* Trading Card Item */
+.landing-page .trading-card-item {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  flex: 0 0 auto !important;
+  width: 190px !important;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  scroll-snap-align: center !important;
+  padding: 10px !important;
+}
+
+.landing-page .trading-card-item:hover {
+  transform: translateY(-12px) scale(1.05) !important;
+  z-index: 10 !important;
+}
+
+/* Trading Card */
+.landing-page .trading-card {
+  width: 100% !important;
+  aspect-ratio: 4/5 !important;
+  background: linear-gradient(145deg, #121212, #1a1a1a) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5), 
+              0 0 0 1px rgba(16, 185, 129, 0.3) !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  position: relative !important;
+  overflow: hidden !important;
+  padding: 10px !important;
+  transition: all 0.3s ease !important;
+  margin-bottom: 16px !important;
+  isolation: isolate !important;
+}
+
+/* Add card icon styles for Font Awesome icons */
+.landing-page .card-icon {
+  position: relative !important;
+  z-index: 2 !important;
+  color: #10b981 !important;
+  filter: drop-shadow(0 2px 5px rgba(16, 185, 129, 0.3)) !important;
+  transition: all 0.5s ease !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.landing-page .trading-card:hover .card-icon {
+  transform: scale(1.15) !important;
+  color: #14e0a1 !important;
+  filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.5)) !important;
+}
+
+/* Add metallic shine effect */
+.landing-page .trading-card::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -50% !important;
+  left: -50% !important;
+  width: 200% !important;
+  height: 200% !important;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.02) 45%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.02) 55%,
+    transparent 100%
+  ) !important;
+  transform: rotate(45deg) !important;
+  transition: all 0.6s ease !important;
+  z-index: 0 !important;
+}
+
+.landing-page .trading-card:hover::before {
+  top: -100% !important;
+  left: -100% !important;
+}
+
+/* Card glow effect on hover */
+.landing-page .trading-card::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: radial-gradient(
+    circle at center,
+    rgba(16, 185, 129, 0.2) 0%,
+    rgba(16, 185, 129, 0) 70%
+  ) !important;
+  opacity: 0 !important;
+  transition: opacity 0.3s ease !important;
+  z-index: 1 !important;
+}
+
+.landing-page .trading-card:hover::after {
+  opacity: 1 !important;
+}
+
+.landing-page .trading-card svg {
+  width: 75% !important;
+  height: auto !important;
+  position: relative !important;
+  z-index: 2 !important;
+  color: #10b981 !important;
+  filter: drop-shadow(0 2px 5px rgba(16, 185, 129, 0.3)) !important;
+  transition: all 0.5s ease !important;
+}
+
+.landing-page .trading-card:hover svg {
+  transform: scale(1.15) !important;
+  color: #14e0a1 !important;
+  filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.5)) !important;
+}
+
+/* Card Label */
+.landing-page .card-label {
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  color: #10b981 !important;
+  text-align: center !important;
+  letter-spacing: 0.5px !important;
+  transition: all 0.3s ease !important;
+  position: relative !important;
+  padding-bottom: 8px !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+.landing-page .card-label::after {
+  content: "" !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 50% !important;
+  transform: translateX(-50%) scaleX(0) !important;
+  width: 30px !important;
+  height: 2px !important;
+  background: #f0c14b !important;
+  transition: transform 0.3s ease !important;
+  border-radius: 2px !important;
+}
+
+.landing-page .trading-card-item:hover .card-label {
+  color: #f0c14b !important;
+  transform: translateY(2px) !important;
+}
+
+.landing-page .trading-card-item:hover .card-label::after {
+  transform: translateX(-50%) scaleX(1) !important;
+}
+
+/* Market Types */
+.landing-page .market-types {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 20px !important;
+  margin-top: 35px !important;
+  position: relative !important;
+  padding: 15px 20px !important;
+  border-radius: 50px !important;
+  background-color: rgba(16, 185, 129, 0.05) !important;
+  max-width: 80% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.landing-page .market-types span {
+  color: #f0c14b !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  position: relative !important;
+  padding: 5px 15px !important;
+  border-radius: 20px !important;
+  background-color: rgba(16, 185, 129, 0.08) !important;
+  transition: all 0.3s ease !important;
+  cursor: default !important;
+}
+
+.landing-page .market-types span:hover {
+  background-color: rgba(16, 185, 129, 0.15) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Responsive Styles */
+@media (max-width: 991.98px) {
+  .landing-page .trading-cards-container {
+    justify-content: flex-start !important;
+    padding-left: 25px !important;
+    gap: 20px !important;
+    scroll-padding-left: 25px !important;
+  }
+  
+  .landing-page .trading-card-item {
+    width: 170px !important;
+  }
+  
+  .landing-page .market-types {
+    max-width: 90% !important;
+    gap: 12px !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .landing-page .trading-card-item {
+    width: 150px !important;
+  }
+  
+  .landing-page .card-label {
+    font-size: 0.9rem !important;
+  }
+  
+  .landing-page .recommendations-section {
+    padding: 5rem 0 !important;
+  }
+  
+  .landing-page .recommendations-section .section-title {
+    font-size: 2.25rem !important;
+  }
+  
+  .landing-page .market-types {
+    max-width: 100% !important;
+    gap: 10px !important;
+    padding: 12px 15px !important;
+  }
+  
+  .landing-page .market-types span {
+    font-size: 0.9rem !important;
+    padding: 4px 12px !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .landing-page .trading-card-item {
+    width: 130px !important;
+  }
+  
+  .landing-page .trading-cards-container {
+    gap: 15px !important;
+    padding-left: 20px !important;
+  }
+  
+  .landing-page .recommendations-section .section-title {
+    font-size: 1.9rem !important;
+  }
+  
+  .landing-page .market-types {
+    padding: 10px !important;
+  }
+  
+  .landing-page .market-types span {
+    font-size: 0.8rem !important;
+    padding: 3px 10px !important;
   }
 }

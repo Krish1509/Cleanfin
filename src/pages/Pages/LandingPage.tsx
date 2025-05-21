@@ -91,6 +91,24 @@ const LandingPage = () => {
           heroContainer.style.zIndex = "1";
         }
 
+        // Hero h4 styling
+        const heroH4 = heroSection.querySelector("h4") as HTMLElement;
+        if (heroH4) {
+          heroH4.style.color = "#ffffff";
+          heroH4.style.marginBottom = "1rem";
+          heroH4.style.fontSize = "1.2rem";
+        }
+
+        // Hero title styling
+        const heroTitle = heroSection.querySelector(".hero-title") as HTMLElement;
+        if (heroTitle) {
+          heroTitle.style.fontSize = "2.8rem";
+          heroTitle.style.fontWeight = "700";
+          heroTitle.style.marginBottom = "1rem";
+          heroTitle.style.color = "#f0c14b";
+          heroTitle.style.lineHeight = "1.2";
+        }
+
         // Hero buttons styling
         const heroButtons = heroSection.querySelectorAll(".btn");
         if (heroButtons.length) {
@@ -444,8 +462,8 @@ const LandingPage = () => {
         // Style process cards
         const processCards = howWeDoSection.querySelectorAll(".process-card");
         processCards.forEach((card) => {
-          (card as HTMLElement).style.width = "240px";
-          (card as HTMLElement).style.height = "120px";
+          (card as HTMLElement).style.width = "280px";
+          (card as HTMLElement).style.height = "160px";
           (card as HTMLElement).style.position = "relative";
           (card as HTMLElement).style.padding = "2px";
           (card as HTMLElement).style.borderRadius = "8px";
@@ -462,6 +480,7 @@ const LandingPage = () => {
             cardInner.style.backgroundColor = "#121212";
             cardInner.style.borderRadius = "6px";
             cardInner.style.padding = "1.5rem";
+            cardInner.style.textAlign = "center";
           }
 
           // Style process title
@@ -479,18 +498,20 @@ const LandingPage = () => {
         const connectors = howWeDoSection.querySelectorAll(".process-connector");
         connectors.forEach((connector) => {
           (connector as HTMLElement).style.display = "flex";
-          (connector as HTMLElement).style.flexDirection = "column";
+          (connector as HTMLElement).style.flexDirection = "row";
           (connector as HTMLElement).style.alignItems = "center";
-          (connector as HTMLElement).style.width = "100px";
+          (connector as HTMLElement).style.width = "auto";
           (connector as HTMLElement).style.position = "relative";
+          (connector as HTMLElement).style.padding = "0 10px";
 
           // Style connector line
           const connectorLine = connector.querySelector(".connector-line") as HTMLElement;
           if (connectorLine) {
-            connectorLine.style.width = "70px";
+            connectorLine.style.width = "60px";
             connectorLine.style.height = "2px";
             connectorLine.style.background = "linear-gradient(90deg, #08AEEA 0%, #2AF598 100%)";
-            connectorLine.style.marginBottom = "8px";
+            connectorLine.style.marginRight = "8px";
+            connectorLine.style.marginBottom = "0";
           }
 
           // Style connector text
@@ -506,11 +527,14 @@ const LandingPage = () => {
         const container = howWeDoSection.querySelector(".process-flow-container") as HTMLElement;
         if (container) {
           container.style.display = "flex";
+          container.style.flexDirection = "row";
           container.style.alignItems = "center";
           container.style.justifyContent = "center";
-          container.style.flexWrap = "wrap";
+          container.style.flexWrap = "nowrap";
           container.style.gap = "0";
           container.style.padding = "2rem 0";
+          container.style.maxWidth = "1200px";
+          container.style.margin = "0 auto";
         }
       }
 
@@ -772,7 +796,7 @@ const LandingPage = () => {
       // Update active section based on scroll position
       const howWeDoSection = document.getElementById("how-we-do");
       const whatYouGetSection = document.getElementById("what-you-get");
-      const featuresSection = document.getElementById("features");
+      const recommendationsSection = document.getElementById("recommendations");
       const benefitsSection = document.getElementById("benefits");
       const testimonialsSection = document.getElementById("testimonials");
       const pricingSection = document.getElementById("pricing");
@@ -786,8 +810,8 @@ const LandingPage = () => {
         setActiveSection("how-we-do");
       } else if (whatYouGetSection && whatYouGetSection.getBoundingClientRect().top <= 200 && whatYouGetSection.getBoundingClientRect().bottom >= 200) {
         setActiveSection("what-you-get");
-      } else if (featuresSection && featuresSection.getBoundingClientRect().top <= 200 && featuresSection.getBoundingClientRect().bottom >= 200) {
-        setActiveSection("features");
+      } else if (recommendationsSection && recommendationsSection.getBoundingClientRect().top <= 200 && recommendationsSection.getBoundingClientRect().bottom >= 200) {
+        setActiveSection("recommendations");
       } else if (benefitsSection && benefitsSection.getBoundingClientRect().top <= 200 && benefitsSection.getBoundingClientRect().bottom >= 200) {
         setActiveSection("benefits");
       } else if (testimonialsSection && testimonialsSection.getBoundingClientRect().top <= 200 && testimonialsSection.getBoundingClientRect().bottom >= 200) {
@@ -948,16 +972,16 @@ const LandingPage = () => {
               </Nav.Link>
 
               <Nav.Link
-                href="#features"
+                href="#recommendations"
                 className="px-0"
-                active={activeSection === "features"}
+                active={activeSection === "recommendations"}
                 onClick={(e: MouseEvent<HTMLAnchorElement>) => {
                   e.preventDefault();
-                  scrollToSection("features");
+                  scrollToSection("recommendations");
                   setExpanded(false);
                 }}
               >
-                Features
+                Recommendations
               </Nav.Link>
 
               <Nav.Link
@@ -1072,20 +1096,18 @@ const LandingPage = () => {
           <Row className="align-items-center justify-content-center">
             <Col xs={12} lg={6} className="mb-5 mb-lg-0">
               <div data-aos="fade-right" data-aos-delay="100">
-                <h1 className="display-4">Find the Best Markets Near You</h1>
-                <p className="lead">Discover local markets, vendors, and fresh products all in one place. Connect with local businesses and support your community.</p>
+                <h4>We'll Provide You</h4>
+                <h2 className="hero-title">Buy & Sell Alerts<br />With Target & Stop Loss</h2>
+                <p>Trade. Chill. Repeat.</p>
                 <div className="d-flex mt-4">
-                  <Button variant="success" size="lg" onClick={handleGetStarted} className="me-3">
-                    Get Started
-                  </Button>
                   <Button variant="outline-light" size="lg" onClick={handleLogin}>
-                    Login
+                    JOIN NOW
                   </Button>
                 </div>
               </div>
             </Col>
             <Col xs={12} lg={6} className="text-center">
-              <img src={marketImage} alt="Market App" className="hero-image img-fluid" data-aos="fade-left" data-aos-delay="300" />
+              <img src={marketImage} alt="Trading Alerts" className="hero-image img-fluid" data-aos="fade-left" data-aos-delay="300" />
             </Col>
           </Row>
         </Container>
@@ -1102,25 +1124,34 @@ const LandingPage = () => {
               <div className="process-flow-container">
                 <div className="process-card" data-aos="fade-up" data-aos-delay="100">
                   <div className="process-card-inner">
-                    <h3 className="process-title">Find Markets</h3>
+                    <h4 className="process-title">Our research-backed technical system generates accurate trade signals</h4>
                   </div>
                 </div>
                 <div className="process-connector" data-aos="fade-up" data-aos-delay="150">
                   <div className="connector-line"></div>
-                  <span className="connector-text">Then</span>
+                  <span className="connector-text">Next</span>
                 </div>
                 <div className="process-card" data-aos="fade-up" data-aos-delay="200">
                   <div className="process-card-inner">
-                    <h3 className="process-title">Explore Vendors</h3>
+                    <h4 className="process-title">AI + Human teamwork sharpens our recommendations</h4>
                   </div>
                 </div>
                 <div className="process-connector" data-aos="fade-up" data-aos-delay="250">
                   <div className="connector-line"></div>
-                  <span className="connector-text">Then</span>
+                  <span className="connector-text">Followed by</span>
                 </div>
                 <div className="process-card" data-aos="fade-up" data-aos-delay="300">
                   <div className="process-card-inner">
-                    <h3 className="process-title">Shop Products</h3>
+                    <h4 className="process-title">All recommendations are backed by logic and experience</h4>
+                  </div>
+                </div>
+                <div className="process-connector" data-aos="fade-up" data-aos-delay="350">
+                  <div className="connector-line"></div>
+                  <span className="connector-text">Finally</span>
+                </div>
+                <div className="process-card" data-aos="fade-up" data-aos-delay="400">
+                  <div className="process-card-inner">
+                    <h4 className="process-title">Complex data transformed into simple, actionable recommendations</h4>
                   </div>
                 </div>
               </div>
@@ -1144,12 +1175,12 @@ const LandingPage = () => {
               <div className="feature-box purple" data-aos="zoom-in" data-aos-delay="100">
                 <div className="feature-icon-wrapper">
                   <div className="feature-icon-bg">
-                    <i className="feature-icon fas fa-map-marker-alt fa-2x"></i>
+                    <i className="feature-icon fas fa-chart-line fa-2x"></i>
                   </div>
                 </div>
                 <div className="feature-content">
-                  <h3 className="feature-title">Local Discovery</h3>
-                  <p className="feature-text">Find markets and vendors in your area with our powerful location-based search.</p>
+                  <h3 className="feature-title">Strategic Recommendations</h3>
+                  <p className="feature-text">Receive meticulously researched buy & sell recommendations with precise target prices and protective stop-loss levels, all backed by expert analysis to maximize your trading potential.</p>
                 </div>
               </div>
             </Col>
@@ -1157,12 +1188,12 @@ const LandingPage = () => {
               <div className="feature-box teal" data-aos="zoom-in" data-aos-delay="200">
                 <div className="feature-icon-wrapper">
                   <div className="feature-icon-bg">
-                    <i className="feature-icon fas fa-store fa-2x"></i>
+                    <i className="feature-icon fas fa-chart-bar fa-2x"></i>
                   </div>
                 </div>
                 <div className="feature-content">
-                  <h3 className="feature-title">Vendor Profiles</h3>
-                  <p className="feature-text">Explore detailed profiles of local vendors and see what products they offer.</p>
+                  <h3 className="feature-title">Performance Analytics</h3>
+                  <p className="feature-text">Monitor your investment journey with comprehensive performance tracking that provides complete transparency, allowing you to see real results and make data-driven decisions with confidence.</p>
                 </div>
               </div>
             </Col>
@@ -1170,12 +1201,12 @@ const LandingPage = () => {
               <div className="feature-box blue" data-aos="zoom-in" data-aos-delay="300">
                 <div className="feature-icon-wrapper">
                   <div className="feature-icon-bg">
-                    <i className="feature-icon fas fa-calendar-check fa-2x"></i>
+                    <i className="feature-icon fas fa-globe fa-2x"></i>
                   </div>
                 </div>
                 <div className="feature-content">
-                  <h3 className="feature-title">Event Updates</h3>
-                  <p className="feature-text">Stay informed about upcoming market events and special vendor promotions.</p>
+                  <h3 className="feature-title">Market Intelligence</h3>
+                  <p className="feature-text">Stay ahead with our comprehensive calendar covering critical Indian and global market events, helping you anticipate market movements and make timely investment decisions based on upcoming catalysts.</p>
                 </div>
               </div>
             </Col>
@@ -1183,12 +1214,12 @@ const LandingPage = () => {
               <div className="feature-box beige" data-aos="zoom-in" data-aos-delay="400">
                 <div className="feature-icon-wrapper">
                   <div className="feature-icon-bg">
-                    <i className="feature-icon fas fa-mobile-alt fa-2x"></i>
+                    <i className="feature-icon fas fa-graduation-cap fa-2x"></i>
                   </div>
                 </div>
                 <div className="feature-content">
-                  <h3 className="feature-title">Mobile Access</h3>
-                  <p className="feature-text">Access everything on the go with our responsive design that works on any device.</p>
+                  <h3 className="feature-title">Knowledge Hub</h3>
+                  <p className="feature-text">Access a wealth of educational resources, institutional investment data (FII & DII), and significant market transactions (Block & Bulk Deals) directly on your mobile device, empowering you to make informed investment decisions anywhere, anytime.</p>
                 </div>
               </div>
             </Col>
@@ -1196,48 +1227,62 @@ const LandingPage = () => {
         </Container>
       </section>
 
-      {/* Features Section */}
-      <section className="py-5" id="features">
+      {/* Recommendations Slider Section */}
+      <section className="recommendations-section" id="recommendations">
         <Container>
-          <h2 data-aos="fade-up">Key Features</h2>
-          <p className="lead" data-aos="fade-up" data-aos-delay="100">
-            Everything you need to connect with local markets and vendors
-          </p>
-          <Row className="mt-5 justify-content-center">
-            <Col sm={12} md={4} className="mb-4">
-              <Card className="feature-card" data-aos="fade-up" data-aos-delay="150">
-                <Card.Body>
-                  <div className="feature-icon">
-                    <i className="fas fa-search fa-lg"></i>
-                  </div>
-                  <Card.Title>Advanced Search</Card.Title>
-                  <Card.Text>Find markets and vendors by location, product type, or special features.</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col sm={12} md={4} className="mb-4">
-              <Card className="feature-card" data-aos="fade-up" data-aos-delay="200">
-                <Card.Body>
-                  <div className="feature-icon">
-                    <i className="fas fa-star fa-lg"></i>
-                  </div>
-                  <Card.Title>Reviews & Ratings</Card.Title>
-                  <Card.Text>See what others think and share your own experiences with markets and vendors.</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col sm={12} md={4} className="mb-4">
-              <Card className="feature-card" data-aos="fade-up" data-aos-delay="250">
-                <Card.Body>
-                  <div className="feature-icon">
-                    <i className="fas fa-bell fa-lg"></i>
-                  </div>
-                  <Card.Title>Notifications</Card.Title>
-                  <Card.Text>Get timely alerts about favorite vendors, new products, and market events.</Card.Text>
-                </Card.Body>
-              </Card>
+          <Row className="justify-content-center">
+            <Col xs={12} className="text-center mb-5">
+              <h2 className="section-title" data-aos="fade-up">
+                You Will Get <span className="text-gradient">Recommendations For</span>
+              </h2>
             </Col>
           </Row>
+          <Row className="justify-content-center">
+            <Col xs={12}>
+              <div className="trading-cards-container" data-aos="fade-up">
+                <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="100">
+                  <div className="trading-card">
+                    <div className="card-icon">
+                      <i className="fas fa-chart-line fa-3x"></i>
+                    </div>
+                  </div>
+                  <div className="card-label">Nifty</div>
+                </div>
+                <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="200">
+                  <div className="trading-card">
+                    <div className="card-icon">
+                      <i className="fas fa-university fa-3x"></i>
+                    </div>
+                  </div>
+                  <div className="card-label">Bank Nifty</div>
+                </div>
+                <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="300">
+                  <div className="trading-card">
+                    <div className="card-icon">
+                      <i className="fas fa-poll fa-3x"></i>
+                    </div>
+                  </div>
+                  <div className="card-label">Sensex</div>
+                </div>
+                <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="400">
+                  <div className="trading-card">
+                    <div className="card-icon">
+                      <i className="fas fa-coins fa-3x"></i>
+                    </div>
+                  </div>
+                  <div className="card-label">Stocks</div>
+                </div>
+                <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="500">
+                  <div className="trading-card">
+                    <div className="card-icon">
+                      <i className="fas fa-gem fa-3x"></i>
+                    </div>
+                  </div>
+                  <div className="card-label">Commodity</div>
+                </div>
+              </div>
+            </Col>
+          </Row>          
         </Container>
       </section>
 
@@ -1251,39 +1296,31 @@ const LandingPage = () => {
             <Col sm={12} md={6} lg={3} className="mb-4 benefit-card-container">
               <div className="benefit-card" data-aos="fade-up" data-aos-delay="100">
                 <div className="benefit-icon">
-                  <i className="fas fa-leaf fa-2x"></i>
+                  <i className="fas fa-bell fa-2x"></i>
                 </div>
-                <h3>Support Local Business</h3>
-                <p>Help your community thrive by supporting local vendors and farmers. Your purchases make a direct impact on your local economy.</p>
+                <h3>Real-Time Alerts</h3>
+                <p>Get timely Buy/Sell/Hold recommendations directly to your phone, so you never miss a market opportunity.</p>
               </div>
             </Col>
             <Col sm={12} md={6} lg={3} className="mb-4 benefit-card-container">
               <div className="benefit-card" data-aos="fade-up" data-aos-delay="200">
                 <div className="benefit-icon">
-                  <i className="fas fa-apple-alt fa-2x"></i>
+                  <i className="fas fa-mobile-alt fa-2x"></i>
                 </div>
-                <h3>Fresh Products</h3>
-                <p>Access the freshest produce and handcrafted goods directly from the people who make them.</p>
+                <h3>Easy-to-Use Mobile App</h3>
+                <p>
+                Access all recommendations, market events conveniently on the go with our user-friendly app.</p>
               </div>
             </Col>
             <Col sm={12} md={6} lg={3} className="mb-4 benefit-card-container">
               <div className="benefit-card" data-aos="fade-up" data-aos-delay="300">
                 <div className="benefit-icon">
-                  <i className="fas fa-users fa-2x"></i>
+                  <i className="fas fa-headset fa-2x"></i>
                 </div>
-                <h3>Community Connection</h3>
-                <p>Build relationships with the people who grow and make the products you love and connect with like-minded shoppers.</p>
+                <h3>Dedicated Client Support</h3>
+                <p>Need help? Our Customer support team is available via email and to answer all your queries quickly.</p>
               </div>
-            </Col>
-            <Col sm={12} md={6} lg={3} className="mb-4 benefit-card-container">
-              <div className="benefit-card" data-aos="fade-up" data-aos-delay="400">
-                <div className="benefit-icon">
-                  <i className="fas fa-map-marked-alt fa-2x"></i>
-                </div>
-                <h3>Discover Hidden Gems</h3>
-                <p>Find unique products and markets you might never have known about without our platform's curated recommendations.</p>
-              </div>
-            </Col>
+            </Col>            
           </Row>
         </Container>
       </section>
@@ -1303,8 +1340,8 @@ const LandingPage = () => {
                       <i className="fas fa-user"></i>
                     </div>
                     <div className="ms-3">
-                      <h5 className="mb-0">Sarah Johnson</h5>
-                      <small className="text-muted">Market Shopper</small>
+                      <h5 className="mb-0">Priya Sharma</h5>
+                      <small className="text-muted">Retail Trader</small>
                     </div>
                   </div>
                   <div className="text-warning mb-2">
@@ -1314,7 +1351,7 @@ const LandingPage = () => {
                     <i className="fas fa-star"></i>
                     <i className="fas fa-star"></i>
                   </div>
-                  <Card.Text>"This app has completely changed how I shop for produce. I've discovered amazing local vendors I never knew existed in my area!"</Card.Text>
+                  <Card.Text>"The accuracy of these trade recommendations is incredible. I've been able to significantly improve my success rate in Nifty options trading thanks to their precise entries and exits."</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -1326,8 +1363,8 @@ const LandingPage = () => {
                       <i className="fas fa-user"></i>
                     </div>
                     <div className="ms-3">
-                      <h5 className="mb-0">Michael Rodriguez</h5>
-                      <small className="text-muted">Vendor</small>
+                      <h5 className="mb-0">Rajesh Patel</h5>
+                      <small className="text-muted">Commodity Trader</small>
                     </div>
                   </div>
                   <div className="text-warning mb-2">
@@ -1337,7 +1374,7 @@ const LandingPage = () => {
                     <i className="fas fa-star"></i>
                     <i className="fas fa-star"></i>
                   </div>
-                  <Card.Text>"As a small vendor, this platform has helped me reach so many new customers. My business has grown significantly since I joined."</Card.Text>
+                  <Card.Text>"Their commodity market recommendations have consistently delivered results. The clear targets and stop-loss levels take the guesswork out of trading. Worth every rupee!"</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -1349,8 +1386,8 @@ const LandingPage = () => {
                       <i className="fas fa-user"></i>
                     </div>
                     <div className="ms-3">
-                      <h5 className="mb-0">Emily Chen</h5>
-                      <small className="text-muted">Market Organizer</small>
+                      <h5 className="mb-0">Amit Desai</h5>
+                      <small className="text-muted">Part-time Investor</small>
                     </div>
                   </div>
                   <div className="text-warning mb-2">
@@ -1360,7 +1397,7 @@ const LandingPage = () => {
                     <i className="fas fa-star"></i>
                     <i className="fas fa-star-half-alt"></i>
                   </div>
-                  <Card.Text>"The tools provided for market organizers are incredible. It's so much easier to coordinate vendors and promote our events now."</Card.Text>
+                  <Card.Text>"As someone who can't monitor markets all day, the mobile alerts are a game-changer. The notifications are timely, and the analysis behind each recommendation is thorough and educational."</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -1372,7 +1409,7 @@ const LandingPage = () => {
       <section className="pricing-section" id="pricing">
         <Container>
           <h2 className="pricing-title" data-aos="fade-up">
-            Simple <span className="text-success">Pricing</span> Plans
+            Future & Options <span className="text-success">Subscriptions</span>            
           </h2>
           <p className="pricing-subtitle" data-aos="fade-up" data-aos-delay="100">
             Choose the perfect plan for your needs. All plans include access to our core features.
@@ -1381,148 +1418,74 @@ const LandingPage = () => {
             <Col sm={12} md={6} lg={4} className="mb-4">
               <div className="pricing-card" data-aos="fade-up" data-aos-delay="150">
                 <div className="pricing-header">
-                  <h3 className="plan-name">Basic</h3>
+                  <h3 className="plan-name">10 Days Trial</h3>
                   <div className="plan-price">
-                    <span className="price-amount">$0</span>
-                    <span className="price-period">/month</span>
+                    <span className="price-amount">₹ 1500</span>                    
                   </div>
-                </div>
-                <div className="pricing-divider"></div>
-                <div className="pricing-features">
-                  <ul className="feature-list">
-                    <li>
-                      <div className="check-circle">
-                        <i className="feature-icon fas fa-check"></i>
-                      </div>
-                      <span>Market search</span>
-                    </li>
-                    <li>
-                      <div className="check-circle">
-                        <i className="feature-icon fas fa-check"></i>
-                      </div>
-                      <span>Vendor profiles</span>
-                    </li>
-                    <li>
-                      <div className="check-circle">
-                        <i className="feature-icon fas fa-check"></i>
-                      </div>
-                      <span>Basic filtering</span>
-                    </li>
-                    <li>
-                      <div className="check-circle">
-                        <i className="feature-icon fas fa-check"></i>
-                      </div>
-                      <span>Event calendar</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="pricing-footer">
-                  <Button variant="outline-light" className="choose-plan-btn">
-                    Get Started
-                  </Button>
-                </div>
+                </div>                
               </div>
             </Col>
             <Col sm={12} md={6} lg={4} className="mb-4">
-              <div className="pricing-card highlighted" data-aos="fade-up" data-aos-delay="250">
+              <div className="pricing-card" data-aos="fade-up" data-aos-delay="150">
                 <div className="pricing-header">
-                  <h3 className="plan-name">Pro</h3>
+                  <h3 className="plan-name">Monthly</h3>
                   <div className="plan-price">
-                    <span className="price-amount">$9</span>
-                    <span className="price-period">/month</span>
+                    <span className="price-amount">₹ 4500</span>                    
                   </div>
-                </div>
-                <div className="pricing-divider"></div>
-                <div className="pricing-features">
-                  <ul className="feature-list">
-                    <li>
-                      <div className="check-circle">
-                        <i className="feature-icon fas fa-check"></i>
-                      </div>
-                      <span>All Basic features</span>
-                    </li>
-                    <li>
-                      <div className="check-circle">
-                        <i className="feature-icon fas fa-check"></i>
-                      </div>
-                      <span>Vendor favorites</span>
-                    </li>
-                    <li>
-                      <div className="check-circle">
-                        <i className="feature-icon fas fa-check"></i>
-                      </div>
-                      <span>Advanced filtering</span>
-                    </li>
-                    <li>
-                      <div className="check-circle">
-                        <i className="feature-icon fas fa-check"></i>
-                      </div>
-                      <span>Product notifications</span>
-                    </li>
-                    <li>
-                      <div className="check-circle">
-                        <i className="feature-icon fas fa-check"></i>
-                      </div>
-                      <span>No advertisements</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="pricing-footer">
-                  <Button variant="success" className="choose-plan-btn highlighted">
-                    Choose Pro
-                  </Button>
-                </div>
+                </div>                
               </div>
             </Col>
             <Col sm={12} md={6} lg={4} className="mb-4">
-              <div className="pricing-card" data-aos="fade-up" data-aos-delay="350">
+              <div className="pricing-card" data-aos="fade-up" data-aos-delay="150">
                 <div className="pricing-header">
-                  <h3 className="plan-name">Vendor</h3>
+                  <h3 className="plan-name">Quarterly</h3>
                   <div className="plan-price">
-                    <span className="price-amount">$19</span>
-                    <span className="price-period">/month</span>
+                    <span className="price-amount">₹ 10000</span>                    
                   </div>
-                </div>
-                <div className="pricing-divider"></div>
-                <div className="pricing-features">
-                  <ul className="feature-list">
-                    <li>
-                      <div className="check-circle">
-                        <i className="feature-icon fas fa-check"></i>
-                      </div>
-                      <span>All Pro features</span>
-                    </li>
-                    <li>
-                      <div className="check-circle">
-                        <i className="feature-icon fas fa-check"></i>
-                      </div>
-                      <span>Vendor dashboard</span>
-                    </li>
-                    <li>
-                      <div className="check-circle">
-                        <i className="feature-icon fas fa-check"></i>
-                      </div>
-                      <span>Product listings</span>
-                    </li>
-                    <li>
-                      <div className="check-circle">
-                        <i className="feature-icon fas fa-check"></i>
-                      </div>
-                      <span>Analytics</span>
-                    </li>
-                    <li>
-                      <div className="check-circle">
-                        <i className="feature-icon fas fa-check"></i>
-                      </div>
-                      <span>Priority support</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="pricing-footer">
-                  <Button variant="outline-light" className="choose-plan-btn">
-                    Choose Vendor
-                  </Button>
-                </div>
+                </div>                
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+
+      <section className="pricing-section" id="pricing">
+        <Container>
+          <h2 className="pricing-title" data-aos="fade-up">
+            Commodity <span className="text-success">Subscriptions</span>            
+          </h2>
+          <p className="pricing-subtitle" data-aos="fade-up" data-aos-delay="100">
+            Choose the perfect plan for your needs. All plans include access to our core features.
+          </p>
+          <Row className="justify-content-center">
+            <Col sm={12} md={6} lg={4} className="mb-4">
+              <div className="pricing-card" data-aos="fade-up" data-aos-delay="150">
+                <div className="pricing-header">
+                  <h3 className="plan-name">10 Days Trial</h3>
+                  <div className="plan-price">
+                    <span className="price-amount">₹ 3500</span>                    
+                  </div>
+                </div>                
+              </div>
+            </Col>
+            <Col sm={12} md={6} lg={4} className="mb-4">
+              <div className="pricing-card" data-aos="fade-up" data-aos-delay="150">
+                <div className="pricing-header">
+                  <h3 className="plan-name">Monthly</h3>
+                  <div className="plan-price">
+                    <span className="price-amount">₹ 11000</span>                    
+                  </div>
+                </div>                
+              </div>
+            </Col>
+            <Col sm={12} md={6} lg={4} className="mb-4">
+              <div className="pricing-card" data-aos="fade-up" data-aos-delay="150">
+                <div className="pricing-header">
+                  <h3 className="plan-name">Quarterly</h3>
+                  <div className="plan-price">
+                    <span className="price-amount">₹ 25000</span>                    
+                  </div>
+                </div>                
               </div>
             </Col>
           </Row>
@@ -1539,8 +1502,8 @@ const LandingPage = () => {
         <Container>
           <Row className="gy-4">
             <Col xs={12} md={5} className="mb-4 mb-md-0">
-              <h5>About MarketApp</h5>
-              <p>Discover local markets and vendors in your community. Shop fresh products and connect with local businesses.</p>
+              <h5>About Mewa</h5>
+              <p>Your trusted partner for financial market insights. We provide expert trading recommendations with precise target and stop-loss levels for Nifty, Bank Nifty, Sensex, Stocks, and Commodities.</p>
               <div className="social-icons">
                 <a href="#" aria-label="Facebook">
                   <i className="fab fa-facebook-f"></i>
@@ -1565,8 +1528,18 @@ const LandingPage = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#features" className="footer-link">
-                    Features
+                  <a href="#how-we-do" className="footer-link">
+                    How We Do
+                  </a>
+                </li>
+                <li>
+                  <a href="#what-you-get" className="footer-link">
+                    What You Get
+                  </a>
+                </li>
+                <li>
+                  <a href="#recommendations" className="footer-link">
+                    Recommendations
                   </a>
                 </li>
                 <li>
@@ -1584,16 +1557,6 @@ const LandingPage = () => {
             <Col xs={6} md={4} className="mb-4 mb-md-0">
               <h5>Resources</h5>
               <ul className="list-unstyled">
-                <li>
-                  <a href="#" className="footer-link">
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="footer-link">
-                    Help Center
-                  </a>
-                </li>
                 {!loading
                   ? data?.length &&
                     data?.map((staticLink) => (
@@ -1609,7 +1572,7 @@ const LandingPage = () => {
           </Row>
           <hr className="my-4" />
           <div className="text-center">
-            <p className="mb-0">&copy; {new Date().getFullYear()} MarketApp. All rights reserved.</p>
+            <p className="mb-0">&copy; {new Date().getFullYear()} Mewa. All rights reserved.</p>
           </div>
         </Container>
       </footer>
