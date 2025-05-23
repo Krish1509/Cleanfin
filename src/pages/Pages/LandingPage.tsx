@@ -796,10 +796,10 @@ const LandingPage = () => {
       // Update active section based on scroll position
       const howWeDoSection = document.getElementById("how-we-do");
       const whatYouGetSection = document.getElementById("what-you-get");
-      const recommendationsSection = document.getElementById("recommendations");
+      const servicesSection = document.getElementById("services");
       const benefitsSection = document.getElementById("benefits");
       const testimonialsSection = document.getElementById("testimonials");
-      const pricingSection = document.getElementById("pricing");
+      const paymentSection = document.getElementById("payment");
 
       // Default to 'hero' section
       if (window.scrollY < 100) {
@@ -810,14 +810,14 @@ const LandingPage = () => {
         setActiveSection("how-we-do");
       } else if (whatYouGetSection && whatYouGetSection.getBoundingClientRect().top <= 200 && whatYouGetSection.getBoundingClientRect().bottom >= 200) {
         setActiveSection("what-you-get");
-      } else if (recommendationsSection && recommendationsSection.getBoundingClientRect().top <= 200 && recommendationsSection.getBoundingClientRect().bottom >= 200) {
-        setActiveSection("recommendations");
+      } else if (servicesSection && servicesSection.getBoundingClientRect().top <= 200 && servicesSection.getBoundingClientRect().bottom >= 200) {
+        setActiveSection("services");
       } else if (benefitsSection && benefitsSection.getBoundingClientRect().top <= 200 && benefitsSection.getBoundingClientRect().bottom >= 200) {
         setActiveSection("benefits");
       } else if (testimonialsSection && testimonialsSection.getBoundingClientRect().top <= 200 && testimonialsSection.getBoundingClientRect().bottom >= 200) {
         setActiveSection("testimonials");
-      } else if (pricingSection && pricingSection.getBoundingClientRect().top <= 200 && pricingSection.getBoundingClientRect().bottom >= 200) {
-        setActiveSection("pricing");
+      } else if (paymentSection && paymentSection.getBoundingClientRect().top <= 200 && paymentSection.getBoundingClientRect().bottom >= 200) {
+        setActiveSection("payment");
       }
     };
 
@@ -972,16 +972,16 @@ const LandingPage = () => {
               </Nav.Link>
 
               <Nav.Link
-                href="#recommendations"
+                href="#services"
                 className="px-0"
-                active={activeSection === "recommendations"}
+                active={activeSection === "services"}
                 onClick={(e: MouseEvent<HTMLAnchorElement>) => {
                   e.preventDefault();
-                  scrollToSection("recommendations");
+                  scrollToSection("services");
                   setExpanded(false);
                 }}
               >
-                Recommendations
+                Services
               </Nav.Link>
 
               <Nav.Link
@@ -1011,29 +1011,16 @@ const LandingPage = () => {
               </Nav.Link>
 
               <Nav.Link
-                href="#pricing"
+                href="#payment"
                 className="px-0"
-                active={activeSection === "pricing"}
+                active={activeSection === "payment"}
                 onClick={(e: MouseEvent<HTMLAnchorElement>) => {
                   e.preventDefault();
-                  scrollToSection("pricing");
+                  scrollToSection("payment");
                   setExpanded(false);
                 }}
               >
-                Pricing
-              </Nav.Link>
-
-              <Nav.Link
-                href="#contact"
-                className="px-0"
-                active={activeSection === "contact"}
-                onClick={(e: MouseEvent<HTMLAnchorElement>) => {
-                  e.preventDefault();
-                  scrollToSection("contact");
-                  setExpanded(false);
-                }}
-              >
-                Contact
+                Payment
               </Nav.Link>
 
               {/* Divider */}
@@ -1227,13 +1214,13 @@ const LandingPage = () => {
         </Container>
       </section>
 
-      {/* Recommendations Slider Section */}
-      <section className="recommendations-section" id="recommendations">
+      {/* Services Slider Section */}
+      <section className="services-section" id="services">
         <Container>
           <Row className="justify-content-center">
             <Col xs={12} className="text-center mb-5">
               <h2 className="section-title" data-aos="fade-up">
-                You Will Get <span className="text-gradient">Recommendations For</span>
+                You Will Get <span className="text-gradient">Services For</span>
               </h2>
             </Col>
           </Row>
@@ -1405,11 +1392,11 @@ const LandingPage = () => {
         </Container>
       </section>
 
-      {/* Pricing Section */}
-      <section className="pricing-section" id="pricing">
+      {/* Payment Section */}
+      <section className="pricing-section" id="payment">
         <Container>
           <h2 className="pricing-title" data-aos="fade-up">
-            Future & Options <span className="text-success">Subscriptions</span>            
+            Future & Options <span className="text-success">Payment</span>            
           </h2>
           <p className="pricing-subtitle" data-aos="fade-up" data-aos-delay="100">
             Choose the perfect plan for your needs. All plans include access to our core features.
@@ -1449,10 +1436,10 @@ const LandingPage = () => {
         </Container>
       </section>
 
-      <section className="pricing-section" id="pricing">
+      <section className="pricing-section" id="payment">
         <Container>
           <h2 className="pricing-title" data-aos="fade-up">
-            Commodity <span className="text-success">Subscriptions</span>            
+            Commodity <span className="text-success">Payment</span>            
           </h2>
           <p className="pricing-subtitle" data-aos="fade-up" data-aos-delay="100">
             Choose the perfect plan for your needs. All plans include access to our core features.
@@ -1538,8 +1525,8 @@ const LandingPage = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#recommendations" className="footer-link">
-                    Recommendations
+                  <a href="#services" className="footer-link">
+                    Services
                   </a>
                 </li>
                 <li>
@@ -1548,8 +1535,8 @@ const LandingPage = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#pricing" className="footer-link">
-                    Pricing
+                  <a href="#payment" className="footer-link">
+                    Payment
                   </a>
                 </li>
               </ul>
