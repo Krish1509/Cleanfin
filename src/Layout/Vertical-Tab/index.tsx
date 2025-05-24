@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import React from "react";
 import { useState } from "react";
 import { changeThemeLayout } from "../../toolkit/thunk";
 import {
@@ -12,6 +13,7 @@ import SubMenuList from "../SubMenuList";
 import { Link } from "react-router-dom";
 import navCardBg from "../../assets/images/layout/nav-card-bg.svg";
 import mewaLogo from "../../assets/images/mewa-logo.png";
+import mewaLogoWhite from "../../assets/images/mewa-logo-white.png";
 import avatar1 from "../../assets/images/user/avatar-1.jpg";
 import SimpleBar from "simplebar-react";
 import NestedMenu from "../NestedMenu";
@@ -46,9 +48,9 @@ const VerticalTab = ({
           <div className="navbar-wrapper">
             <div className="m-header">
               <Link to="/" className="b-brand text-primary">
-                {themeMode || sidebarTheme === "dark" ? (
+                {themeMode === "dark" ? (
                   <img
-                    src={mewaLogo}
+                    src={mewaLogoWhite}
                     alt="logo"
                     className="logo-lg landing-logo"
                   />

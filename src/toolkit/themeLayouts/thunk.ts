@@ -16,6 +16,8 @@ import {
 export const changeThemeMode = (themeMode: any) => async (dispatch: any) => {
   try {
     changeHTMLAttribute("data-pc-theme", themeMode);
+    // Save theme mode to localStorage for persistence
+    localStorage.setItem("themeMode", themeMode);
     dispatch(changeThemeModeAction(themeMode));
   } catch (error) {
     console.error(error);

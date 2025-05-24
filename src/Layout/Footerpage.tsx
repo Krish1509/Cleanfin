@@ -1,12 +1,23 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import mewaLogo from "../assets/images/mewa-logo.png";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import mewaLogo from "../assets/images/mewa-logo.png";
+import mewaLogoWhite from "../assets/images/mewa-logo-white.png";
 
 // css
 import "../assets/scss/landing.scss";
 
 const Footerpage = () => {
+  const selectThemeMode = createSelector(
+    (state: any) => state.Theme,
+    (theme) => theme.themeMode
+  );
+  
+  const themeMode = useSelector(selectThemeMode);
+
   return (
     <React.Fragment>
       <footer className="pc-footer footer border-top ">
@@ -18,7 +29,7 @@ const Footerpage = () => {
                 data-wow-delay="0.2s"
               >
                 <img
-                  src={mewaLogo}
+                  src={themeMode === "dark" ? mewaLogoWhite : mewaLogo}
                   alt="image"
                   className="img-fluid mb-3"
                   style={{ width: "100px" }}

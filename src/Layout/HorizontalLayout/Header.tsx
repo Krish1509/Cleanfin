@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import mewaLogo from "../../assets/images/mewa-logo.png";
+import mewaLogoWhite from "../../assets/images/mewa-logo-white.png";
 import Navbar from "./Navbar";
 import TopBar from "../Topbar";
 
 import { ReactNode } from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { changeThemeLayout, changeThemePreset } from "../../toolkit/thunk";
 import {
@@ -147,7 +148,7 @@ const Header = ({
             >
               {themeMode === "dark" ? (
                 <img
-                  src={mewaLogo}
+                  src={mewaLogoWhite}
                   alt="logo"
                   className="logo-lg landing-logo"
                 />
@@ -161,7 +162,7 @@ const Header = ({
             </Link>
             <div
               style={{
-                color: "#000",
+                color: themeMode === "dark" ? "#fff" : "#000",
                 marginLeft: "10px",
                 marginTop: "5px",
                 fontSize: "1.8rem",
