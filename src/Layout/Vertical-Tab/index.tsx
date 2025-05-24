@@ -1,22 +1,33 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
+// React Router
+import { Link } from "react-router-dom";
+
+// Redux Toolkit
 import { changeThemeLayout } from "../../toolkit/thunk";
 import {
   changeSidebarTheme,
   changeSidebarThemeCaptions,
 } from "../../toolkit/themeLayouts/thunk";
+
+// Components
 import RightCustomizer from "../RightCustomizer";
 import TopBar from "../Topbar";
 import Footer from "../Footer";
 import SubMenuList from "../SubMenuList";
-import { Link } from "react-router-dom";
+import NestedMenu from "../NestedMenu";
+
+// UI Components
+import { Card, CardBody, Dropdown } from "react-bootstrap";
+import SimpleBar from "simplebar-react";
+
+// Assets
 import navCardBg from "../../assets/images/layout/nav-card-bg.svg";
 import mewaLogo from "../../assets/images/mewa-logo.png";
 import mewaLogoWhite from "../../assets/images/mewa-logo-white.png";
 import avatar1 from "../../assets/images/user/avatar-1.jpg";
-import SimpleBar from "simplebar-react";
-import NestedMenu from "../NestedMenu";
-import { Card, CardBody, Dropdown } from "react-bootstrap";
+
+// Data
 import { menuItems } from "../MenuData";
 
 const VerticalTab = ({
