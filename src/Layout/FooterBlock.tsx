@@ -1,16 +1,26 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
-
-import mewaLogo from "../assets/images/mewa-logo.png";
 import { Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import mewaLogo from "../assets/images/mewa-logo.png";
+import mewaLogoWhite from "../assets/images/mewa-logo-white.png";
 import { getAllowedDashboard } from "../helper/auth";
 
 const FooterBlock = () => {
+  const selectThemeMode = createSelector(
+    (state: any) => state.Theme,
+    (theme) => theme.themeMode
+  );
+  
+  const themeMode = useSelector(selectThemeMode);
+
   return (
     <React.Fragment>
       <div className="auth-sidefooter">
         <img
-          src={mewaLogo}
+          src={themeMode === "dark" ? mewaLogoWhite : mewaLogo}
           className="img-brand img-fluid"
           alt="images"
           style={{ width: "70px", height: "35px" }}

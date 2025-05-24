@@ -119,7 +119,8 @@ const PastPerformance = () => {
                           {moment(item?.createdAt).format("YYYY-MM-DD")} {item?.time}
                         </td>
                         <td>
-                          {item?.price} <span className={`badge ms-2 ${item.action === "buy" ? "bg-light-success" : "bg-light-danger"}`}>{item?.action.toUpperCase()}</span>
+                          <span className={`badge me-2 ${item.action === "buy" ? "bg-light-success" : "bg-light-danger"}`}>{item?.action.toUpperCase()}</span>
+                          {item?.price}
                         </td>
                         <td>
                           <div className="d-flex align-items-center">

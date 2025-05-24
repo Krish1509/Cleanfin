@@ -9,10 +9,30 @@ function App() {
     (state: any) => state.Theme,
     (state) => state.layoutTheme
   );
+  
+  const SelectThemeState = createSelector(
+    (state: any) => state.Theme,
+    (state) => state
+  );
+  
   const themeLayout = useSelector(SelecthemeLayout);
+  const themeState = useSelector(SelectThemeState);
+  
   const className = "layout-3";
   const className2 = "layout-extended";
   const className3 = "layout-moduler";
+
+  // Initialize HTML attributes from theme state on app load
+  useEffect(() => {
+    if (document.body) {
+      document.body.setAttribute("data-pc-theme", themeState.themeMode);
+      document.body.setAttribute("data-pc-layout", themeState.layoutTheme);
+      document.body.setAttribute("data-pc-sidebar-theme", themeState.sidebarTheme);
+      document.body.setAttribute("data-pc-sidebar-caption", themeState.sidebarThemeCaptions);
+      document.body.setAttribute("data-pc-preset", themeState.themePreset);
+      document.body.setAttribute("data-pc-direction", themeState.themeLayout);
+    }
+  }, [themeState]);
 
   useEffect(() => {
     if (themeLayout === "vertical-tab") {

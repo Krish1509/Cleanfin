@@ -5,7 +5,7 @@ import { ChevronUp } from "react-feather";
 import { useNavigate } from "react-router-dom";
 import "../../assets/css/landing-page.css";
 // Import images
-import mewaLogo from "../../assets/images/mewa-logo.png";
+import mewaLogo from "../../assets/images/mewa-logo-white.png";
 import marketImage from "../../assets/images/landing-page/market-image.png";
 // Import AOS library and its styles
 import AOS from "aos";
