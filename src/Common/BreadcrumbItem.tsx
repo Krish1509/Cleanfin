@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { getAllowedDashboard } from "../helper/auth";
 
@@ -9,10 +9,19 @@ interface BreadcrumbItemProps {
   subTitle: string;
 }
 
-const BreadcrumbItem: React.FC<BreadcrumbItemProps> = ({
-  mainTitle,
-  subTitle,
-}) => {
+const BreadcrumbItem: React.FC<BreadcrumbItemProps> = ({ mainTitle, subTitle }) => {
+  useEffect(() => {
+    setTimeout(() => {
+      const header = document.querySelector(".pc-navbar") as HTMLElement;
+      const pageHeader = document.querySelector(".page-header") as HTMLElement;
+
+      if (header && pageHeader) {
+        const height = header.offsetHeight - 40;
+        pageHeader.style.marginTop = `${height}px`;
+      }
+    }, 100); // Wait for layout to stabilize
+  }, []);
+
   return (
     <React.Fragment>
       <Helmet>
