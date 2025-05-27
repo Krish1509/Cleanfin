@@ -135,7 +135,7 @@ const PastPerformance = () => {
                           </div>
                         </td>
                         <td>{item?.sellPrice}</td>
-                        <td>{moment(item?.closeDate).format("YYYY-MM-DD")}</td>
+                        <td>{moment(item?.closeDate).format("YYYY-MM-DD HH:mm")}</td>
                         <td>{moment(item?.closeDate).diff(moment(item?.createdAt), "days")} days</td>
                       </tr>
                     ))}
