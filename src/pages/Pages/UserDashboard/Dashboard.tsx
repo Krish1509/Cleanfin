@@ -122,7 +122,13 @@ const UserDashboard = () => {
           return data;
         });
 
-        setdata(fetchedData); // Set the fetched data to state
+        const sortedData = fetchedData?.sort((a, b) => {
+          const dateTimeA = new Date(`${a.date.toDate().toISOString().split("T")[0]}T${a.time}`);
+          const dateTimeB = new Date(`${b.date.toDate().toISOString().split("T")[0]}T${b.time}`);
+          return dateTimeB.getTime() - dateTimeA.getTime(); // Newest first
+        });
+
+        setdata(sortedData); // Set the fetched data to state
         setLoading(false);
       });
 

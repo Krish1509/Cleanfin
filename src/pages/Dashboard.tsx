@@ -88,13 +88,9 @@ const Dashboard = () => {
         });
 
         const sortedData = fetchedData.sort((a, b) => {
-          // Convert to Date objects if the date is stored as a string
-          // If it's a Firestore timestamp, use .toDate() method before comparison
-          const dateA = new Date(a.date.seconds * 1000 + Math.floor(a.date.nanoseconds / 1e6));
-          const dateB = new Date(b.date.seconds * 1000 + Math.floor(b.date.nanoseconds / 1e6));
-
-          // Sort in descending order (newest first)
-          return dateB.getTime() - dateA.getTime();
+          const dateTimeA = new Date(`${a.date.toDate().toISOString().split("T")[0]}T${a.time}`);
+          const dateTimeB = new Date(`${b.date.toDate().toISOString().split("T")[0]}T${b.time}`);
+          return dateTimeB.getTime() - dateTimeA.getTime(); // Newest first
         });
 
         setdata(sortedData); // Set the sorted data to state

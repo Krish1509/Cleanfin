@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import BcakImg from "../../../assets/images/authentication/img-auth-bg.jpg";
-import mewaLogo from "../../../assets/images/login-logo.png";
+import mewaLogo from "../../../assets/images/MEWA_F_Black.png";
 
 import { Card, CardBody, Col, Row } from "react-bootstrap";
 import PhoneStep from "./PhoneStep";
@@ -14,10 +14,7 @@ const Login = () => {
   const [isAboutTabEnabled, setIsAboutTabEnabled] = useState(false);
 
   const handleTabSelect = (tab: string) => {
-    if (
-      (tab === "otp-tab" && !isOtpTabEnabled) ||
-      (tab === "about-tab" && !isAboutTabEnabled)
-    ) {
+    if ((tab === "otp-tab" && !isOtpTabEnabled) || (tab === "about-tab" && !isAboutTabEnabled)) {
       return; // Prevent switching to disabled tabs
     }
     if (tab === "phone-tab") {
@@ -43,65 +40,38 @@ const Login = () => {
 
   return (
     <React.Fragment>
-      <div
-        className="auth-main v2"
-        style={{ backgroundImage: `url(${BcakImg})` }}
-      >
+      <div className="auth-main v2" style={{ backgroundImage: `url(${BcakImg})` }}>
         <div className="bg-overlay bg-dark-custom"></div>
 
         <div className="auth-wrapper">
           <div className="auth-form">
             <Card className="my-5 mx-3">
               <CardBody className="d-flex justify-content-between">
-                <div className="d-flex justify-content-center">
-                  <img
-                    className="img-fluid"
-                    src={mewaLogo}
-                    alt="mewa"
-                    style={{ width: "250px" }}
-                  />
+                <div className="d-flex justify-content-center" style={{ marginTop: "30px", marginBottom: "30px" }}>
+                  <img className="img-fluid" src={mewaLogo} alt="mewa" style={{ width: "240px" }} />
                 </div>
                 <div className="py-4 mb-3">
                   <Row className="nav-pills justify-content-between">
                     <Col className="nav-item auth-step">
-                      <div
-                        className={`nav-link ${
-                          activeTab === "phone-tab" ? "active-auth" : ""
-                        }`}
-                        onClick={() => handleTabSelect("phone-tab")}
-                      >
+                      <div className={`nav-link ${activeTab === "phone-tab" ? "active-auth" : ""}`} onClick={() => handleTabSelect("phone-tab")}>
                         <span className="avtar rounded-circle auth-avatar">
                           <i className="ph-duotone ph-phone"></i>
                         </span>
-                        <span className="d-none d-sm-inline">
-                          Mobile Number
-                        </span>
+                        <span className="d-none d-sm-inline">Mobile Number</span>
                       </div>
                     </Col>
 
                     <Col className="nav-item auth-step">
-                      <div
-                        className={`nav-link ${
-                          activeTab === "otp-tab" ? "active-auth" : ""
-                        }`}
-                        onClick={() => handleTabSelect("otp-tab")}
-                      >
+                      <div className={`nav-link ${activeTab === "otp-tab" ? "active-auth" : ""}`} onClick={() => handleTabSelect("otp-tab")}>
                         <span className="avtar rounded-circle auth-avatar">
                           <i className="ph-duotone ph-lock-key"></i>
                         </span>
-                        <span className="d-none d-sm-inline">
-                          OTP Verification
-                        </span>
+                        <span className="d-none d-sm-inline">OTP Verification</span>
                       </div>
                     </Col>
 
                     <Col className="nav-item auth-step">
-                      <div
-                        className={`nav-link ${
-                          activeTab === "about-tab" ? "active-auth" : ""
-                        }`}
-                        onClick={() => handleTabSelect("about-tab")}
-                      >
+                      <div className={`nav-link ${activeTab === "about-tab" ? "active-auth" : ""}`} onClick={() => handleTabSelect("about-tab")}>
                         <span className="avtar rounded-circle auth-avatar">
                           <i className="ph-duotone ph-user"></i>
                         </span>
