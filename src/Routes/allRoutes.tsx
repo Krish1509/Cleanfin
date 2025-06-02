@@ -30,6 +30,7 @@ import UserQuery from "../pages/Pages/UserQuery";
 import Education from "../pages/Pages/UserDashboard/Education";
 import ViewEducation from "../pages/Pages/UserDashboard/Education/view";
 import FIIDIITrades from "../pages/Pages/FIIDIITrades";
+import WatchList from "../pages/Pages/UserDashboard/WatchList";
 
 const routes = [
   // Dashboard Routes
@@ -178,6 +179,8 @@ const routes = [
     component: <FIIDIITrades />,
     allowedRoles: ["admin"],
   },
+  // Watch List
+  { path: "/watchlist", component: <WatchList />, allowedRoles: ["customer"] },
 ];
 
 const nonAuthRoutes = [
