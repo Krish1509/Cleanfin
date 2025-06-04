@@ -1,9 +1,63 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
+import React, { useState } from "react";
 import { Button, Card, CardBody, CardHeader } from "react-bootstrap";
+import { postRequest } from "../../../../service/fetch-services";
+import { IWatchList } from "../Helper/interfaces";
+import AddWatchList from "./AddWatchList";
+import AddWatchListScript from "./AddWatchlistScript";
 // import Loader from "../../../../Common/Loader/Loader";
 
 const WatchList = () => {
+  const [watchlistData, setWatchlistData] = useState<IWatchList[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [selectedWatchlist, setSelectedWatchlist] = useState<string>("");
+  const [showAddModal, setShowAddModal] = useState<boolean>(false);
+  const [showAddScriptModal, setShowAddScriptModal] = useState<boolean>(false);
+
+  const createWatchList = async () => {
+    try {
+      setLoading(true);
+      const body = {
+        name: "Default WatchList",
+        isDefault: true,
+      };
+      await postRequest("watchlist/create", body, true);
+      setLoading(false);
+      getWatchlists(); // Refresh watchlists after creation
+    } catch (err) {
+      setLoading(false);
+    }
+  };
+
+  const getWatchlists = async () => {
+    try {
+      setLoading(true);
+      const body = {
+        findAll: true,
+        fields: { name: 1 },
+      };
+      const result = await postRequest("watchlist/list", body, true);
+      const { watchlists } = result.data;
+      setWatchlistData(watchlists);
+      setSelectedWatchlist(watchlists.length > 0 ? watchlists[0]?._id : null); // Set the first watchlist as selected if available
+      setLoading(false);
+      if (watchlists.length === 0) {
+        createWatchList(); // Create a default watchlist if none exist
+      }
+    } catch (err) {
+      setLoading(false);
+    }
+  };
+
+  React.useEffect(() => {
+    // Simulate an API call to fetch watchlists
+    getWatchlists();
+  }, []);
+
+  const onAfterCreateNew = (data: IWatchList) => {
+    setWatchlistData((prev) => [...prev, data]);
+  };
+
   return (
     <React.Fragment>
       <div className="col-12 mt-4 pb-4">
@@ -11,15 +65,26 @@ const WatchList = () => {
           <CardHeader>
             <div className="d-sm-flex align-items-center justify-content-between">
               <h5 className="mb-3 mb-sm-0">All Watchlists</h5>
+              <Button type="button" variant="outline-primary" onClick={() => setShowAddScriptModal(true)}>
+                Add Script
+              </Button>
             </div>
-            <div className="mt-4">
-              <Button type="button" variant="outline-primary" className="me-2 active">
-                Watchlist 1
-              </Button>
-              <Button type="button" variant="outline-primary" className="me-2">
-                Watchlist 2
-              </Button>
-              <Button type="button" variant="outline-primary">
+
+            <div className="mt-4 d-flex flex-wrap gap-1">
+              {!loading &&
+                watchlistData.map((watchlist, index) => (
+                  <Button
+                    type="button"
+                    variant="outline-primary"
+                    className={`me-2 ${selectedWatchlist === watchlist?._id ? "active" : ""}`}
+                    key={index}
+                    onClick={() => setSelectedWatchlist(watchlist?._id)}
+                  >
+                    {watchlist.name}
+                  </Button>
+                ))}
+
+              <Button type="button" variant="outline-primary" onClick={() => setShowAddModal(true)}>
                 <i className="feather icon-plus"></i>
               </Button>
             </div>
@@ -65,6 +130,21 @@ const WatchList = () => {
           </React.Fragment>
         </Card>
       </div>
+
+      {/* AddWatchList Modal */}
+      {showAddModal && <AddWatchList show={showAddModal} handleClose={() => setShowAddModal(false)} handleAfterCreate={onAfterCreateNew} />}
+
+      {/* Add Script Modal */}
+      {showAddScriptModal && (
+        <AddWatchListScript
+          show={showAddScriptModal}
+          handleClose={() => setShowAddScriptModal(false)}
+          selectedWatchlist={selectedWatchlist}
+          handleAfterCreateScript={() => console.log("callback after script creation")}
+        />
+      )}
+
+      {/* Loader Component */}
 
       {/* <Loader updateLoading={loading}></Loader> */}
     </React.Fragment>
