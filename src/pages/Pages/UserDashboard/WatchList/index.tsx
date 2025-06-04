@@ -6,8 +6,52 @@ import { IWatchList } from "../Helper/interfaces";
 import AddWatchList from "./AddWatchList";
 import AddWatchListScript from "./AddWatchlistScript";
 import Select from "react-select";
+import MobileWatchlistRow from "./MobileWatchlistRow";
 
 // import Loader from "../../../../Common/Loader/Loader";
+
+const watchlistScripts = [
+  {
+    company: "AAPL",
+    qty: 10,
+    price: 200,
+    invested: 2000,
+    current: 2500,
+    returns: 500,
+  },
+  {
+    company: "AMD",
+    qty: 20,
+    price: 250,
+    invested: 5000,
+    current: 4800,
+    returns: -200,
+  },
+  {
+    company: "TSLA",
+    qty: 5,
+    price: 700,
+    invested: 3500,
+    current: -1900,
+    returns: 400,
+  },
+  {
+    company: "GOOGL",
+    qty: 3,
+    price: 2800,
+    invested: 8400,
+    current: 9000,
+    returns: 600,
+  },
+  {
+    company: "MSFT",
+    qty: 12,
+    price: 300,
+    invested: 3600,
+    current: 3840,
+    returns: 240,
+  },
+];
 
 const WatchList = () => {
   const [watchlistData, setWatchlistData] = useState<IWatchList[]>([]);
@@ -118,7 +162,8 @@ const WatchList = () => {
 
           <React.Fragment>
             <CardBody className="pt-3">
-              <div className="table-responsive">
+              {/* Desktop Table */}
+              <div className="table-responsive d-none d-sm-block">
                 <table className="table table-hover" id="pc-dt-simple">
                   <thead>
                     <tr>
@@ -131,26 +176,35 @@ const WatchList = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Appl</td>
-                      <td>10</td>
-                      <td>200</td>
-                      <td>400</td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <i className="ti ti-arrow-up text-success f-18 align-text-bottom" />
-                          <span className="text-success">1000</span>
-                        </div>
-                      </td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <i className="ti ti-arrow-down text-danger f-18 align-text-bottom" />
-                          <span className="text-danger">1000</span>
-                        </div>
-                      </td>
-                    </tr>
+                    {watchlistScripts.map((row, idx) => (
+                      <tr key={idx}>
+                        <td>{row.company}</td>
+                        <td>{row.qty}</td>
+                        <td>{row.price}</td>
+                        <td>{row.invested}</td>
+                        <td>
+                          <div className="d-flex align-items-center">
+                            <i className={`ti ${row.current >= 0 ? "ti-arrow-up text-success" : "ti-arrow-down text-danger"} f-18 align-text-bottom`} />
+                            <span className={row.current >= 0 ? "text-success" : "text-danger"}>{row.current}</span>
+                          </div>
+                        </td>
+                        <td>
+                          <div className="d-flex align-items-center">
+                            <i className={`ti ${row.returns >= 0 ? "ti-arrow-up text-success" : "ti-arrow-down text-danger"} f-18 align-text-bottom`} />
+                            <span className={row.returns >= 0 ? "text-success" : "text-danger"}>{row.returns}</span>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
+              </div>
+
+              {/* Mobile Accordion Table */}
+              <div className="d-block d-sm-none">
+                {watchlistScripts.map((row, idx) => (
+                  <MobileWatchlistRow key={idx} company={row.company} qty={row.qty} price={row.price} invested={row.invested} current={row.current} returns={row.returns} />
+                ))}
               </div>
             </CardBody>
           </React.Fragment>
