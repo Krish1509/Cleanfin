@@ -5,6 +5,8 @@ import { postRequest } from "../../../../service/fetch-services";
 import { IWatchList } from "../Helper/interfaces";
 import AddWatchList from "./AddWatchList";
 import AddWatchListScript from "./AddWatchlistScript";
+import Select from "react-select";
+
 // import Loader from "../../../../Common/Loader/Loader";
 
 const WatchList = () => {
@@ -13,6 +15,7 @@ const WatchList = () => {
   const [selectedWatchlist, setSelectedWatchlist] = useState<string>("");
   const [showAddModal, setShowAddModal] = useState<boolean>(false);
   const [showAddScriptModal, setShowAddScriptModal] = useState<boolean>(false);
+  const [watchlistOptions, setWatchlistOptions] = useState<{ value: string; label: string }[]>([]);
 
   const createWatchList = async () => {
     try {
@@ -40,6 +43,12 @@ const WatchList = () => {
       const { watchlists } = result.data;
       setWatchlistData(watchlists);
       setSelectedWatchlist(watchlists.length > 0 ? watchlists[0]?._id : null); // Set the first watchlist as selected if available
+      setWatchlistOptions(
+        watchlists.map((wtl: any) => ({
+          value: wtl._id,
+          label: wtl.name,
+        }))
+      );
       setLoading(false);
       if (watchlists.length === 0) {
         createWatchList(); // Create a default watchlist if none exist
@@ -70,7 +79,8 @@ const WatchList = () => {
               </Button>
             </div>
 
-            <div className="mt-4 d-flex flex-wrap gap-1">
+            {/* Desktop: Button group */}
+            <div className="mt-4 d-none d-sm-flex flex-wrap gap-1">
               {!loading &&
                 watchlistData.map((watchlist, index) => (
                   <Button
@@ -83,9 +93,25 @@ const WatchList = () => {
                     {watchlist.name}
                   </Button>
                 ))}
-
               <Button type="button" variant="outline-primary" onClick={() => setShowAddModal(true)}>
                 <i className="feather icon-plus"></i>
+              </Button>
+            </div>
+
+            {/* Mobile: Dropdown */}
+            <div className="mt-4 d-block d-sm-none">
+              <Select
+                isClearable={false}
+                isSearchable={true}
+                options={watchlistOptions}
+                placeholder="Select Watchlist"
+                className="react-select"
+                classNamePrefix="react-select"
+                value={watchlistOptions.find((opt) => opt.value === selectedWatchlist) || null}
+                onChange={(selectedOption) => setSelectedWatchlist(selectedOption ? selectedOption.value : "")}
+              />
+              <Button type="button" variant="outline-primary" className="mt-2" onClick={() => setShowAddModal(true)} style={{ width: "100%" }}>
+                <i className="feather icon-plus"></i> Add Watchlist
               </Button>
             </div>
           </CardHeader>
