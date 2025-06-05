@@ -117,3 +117,12 @@ export interface INotification {
   userId: string;
   createdAt: string;
 }
+
+export interface IWatchList {
+  _id: string;
+  name: string;
+  isDefault: boolean;
+  items: any[];
+  userId: string;
+  createdAt: string;
+}
