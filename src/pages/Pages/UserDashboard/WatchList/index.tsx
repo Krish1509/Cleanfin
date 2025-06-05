@@ -4,9 +4,9 @@ import { Button, Card, CardBody, CardHeader } from "react-bootstrap";
 import { postRequest } from "../../../../service/fetch-services";
 import { IWatchList } from "../Helper/interfaces";
 import AddWatchList from "./AddWatchList";
-import AddWatchListScript from "./AddWatchlistScript";
 import Select from "react-select";
 import MobileWatchlistRow from "./MobileWatchlistRow";
+import AddWatchListScript from "./AddWatchListScript";
 
 // import Loader from "../../../../Common/Loader/Loader";
 
