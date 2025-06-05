@@ -109,6 +109,7 @@ const WatchList = () => {
 
   const onAfterCreateNew = (data: IWatchList) => {
     setWatchlistData((prev) => [...prev, data]);
+    setWatchlistOptions((prev) => [...prev, { value: data._id, label: data.name }]);
   };
 
   return (
