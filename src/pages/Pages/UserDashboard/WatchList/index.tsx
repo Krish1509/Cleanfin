@@ -86,7 +86,9 @@ const WatchList = () => {
       const result = await postRequest("watchlist/list", body, true);
       const { watchlists } = result.data;
       setWatchlistData(watchlists);
-      setSelectedWatchlist(watchlists.length > 0 ? watchlists[0]?._id : null); // Set the first watchlist as selected if available
+      if (selectedWatchlist === "") {
+        setSelectedWatchlist(watchlists.length > 0 ? watchlists[0]?._id : null); // Set the first watchlist as selected if available
+      }
       setWatchlistOptions(
         watchlists.map((wtl: any) => ({
           value: wtl._id,
@@ -177,26 +179,28 @@ const WatchList = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {watchlistScripts.map((row, idx) => (
-                      <tr key={idx}>
-                        <td>{row.company}</td>
-                        <td>{row.qty}</td>
-                        <td>{row.price}</td>
-                        <td>{row.invested}</td>
-                        <td>
-                          <div className="d-flex align-items-center">
-                            <i className={`ti ${row.current >= 0 ? "ti-arrow-up text-success" : "ti-arrow-down text-danger"} f-18 align-text-bottom`} />
-                            <span className={row.current >= 0 ? "text-success" : "text-danger"}>{row.current}</span>
-                          </div>
-                        </td>
-                        <td>
-                          <div className="d-flex align-items-center">
-                            <i className={`ti ${row.returns >= 0 ? "ti-arrow-up text-success" : "ti-arrow-down text-danger"} f-18 align-text-bottom`} />
-                            <span className={row.returns >= 0 ? "text-success" : "text-danger"}>{row.returns}</span>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
+                    {watchlistData
+                      .find(item => item._id === selectedWatchlist)
+                      ?.items?.map((row, idx) => (
+                        <tr key={idx}>
+                          <td>{row?.scriptId?.name}</td>
+                          <td>{row.qty}</td>
+                          <td>{row.price}</td>
+                          <td>{row.invested}</td>
+                          <td>
+                            <div className="d-flex align-items-center">
+                              {/* <i className={`ti ${row.current >= 0 ? "ti-arrow-up text-success" : "ti-arrow-down text-danger"} f-18 align-text-bottom`} /> */}
+                              <span className={row.current >= 0 ? "text-success" : "text-danger"}>{row.current}</span>
+                            </div>
+                          </td>
+                          <td>
+                            <div className="d-flex align-items-center">
+                              {/* <i className={`ti ${row.returns >= 0 ? "ti-arrow-up text-success" : "ti-arrow-down text-danger"} f-18 align-text-bottom`} /> */}
+                              <span className={row.returns >= 0 ? "text-success" : "text-danger"}>{row.returns}</span>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                 </table>
               </div>
@@ -221,7 +225,18 @@ const WatchList = () => {
           show={showAddScriptModal}
           handleClose={() => setShowAddScriptModal(false)}
           selectedWatchlist={selectedWatchlist}
-          handleAfterCreateScript={() => console.log("callback after script creation")}
+          handleAfterCreateScript={(data: IWatchList) => {
+            setWatchlistData(prev => {
+              const index: number = watchlistData.findIndex(item => item._id === data._id);
+              if (index !== -1) {
+                prev.splice(index, 1, data)
+                return prev;
+              } else {
+                return [...prev, data]
+              }
+            })
+
+          }}
         />
       )}
 

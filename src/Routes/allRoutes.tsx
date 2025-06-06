@@ -180,7 +180,7 @@ const routes = [
     allowedRoles: ["admin"],
   },
   // Watch List
-  { path: "/watchlist", component: <WatchList />, allowedRoles: ["customer"] },
+  { path: "/watchlist", component: <WatchList />, allowedRoles: ["customer", "admin"] },
 ];
 
 const nonAuthRoutes = [
