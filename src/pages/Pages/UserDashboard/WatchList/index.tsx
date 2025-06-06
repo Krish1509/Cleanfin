@@ -189,13 +189,13 @@ const WatchList = () => {
                           <td>{row.invested}</td>
                           <td>
                             <div className="d-flex align-items-center">
-                              <i className={`ti ${row.current >= 0 ? "ti-arrow-up text-success" : "ti-arrow-down text-danger"} f-18 align-text-bottom`} />
+                              {/* <i className={`ti ${row.current >= 0 ? "ti-arrow-up text-success" : "ti-arrow-down text-danger"} f-18 align-text-bottom`} /> */}
                               <span className={row.current >= 0 ? "text-success" : "text-danger"}>{row.current}</span>
                             </div>
                           </td>
                           <td>
                             <div className="d-flex align-items-center">
-                              <i className={`ti ${row.returns >= 0 ? "ti-arrow-up text-success" : "ti-arrow-down text-danger"} f-18 align-text-bottom`} />
+                              {/* <i className={`ti ${row.returns >= 0 ? "ti-arrow-up text-success" : "ti-arrow-down text-danger"} f-18 align-text-bottom`} /> */}
                               <span className={row.returns >= 0 ? "text-success" : "text-danger"}>{row.returns}</span>
                             </div>
                           </td>
@@ -225,8 +225,17 @@ const WatchList = () => {
           show={showAddScriptModal}
           handleClose={() => setShowAddScriptModal(false)}
           selectedWatchlist={selectedWatchlist}
-          handleAfterCreateScript={() => {
-            getWatchlists();
+          handleAfterCreateScript={(data: IWatchList) => {
+            setWatchlistData(prev => {
+              const index: number = watchlistData.findIndex(item => item._id === data._id);
+              if (index !== -1) {
+                prev.splice(index, 1, data)
+                return prev;
+              } else {
+                return [...prev, data]
+              }
+            })
+
           }}
         />
       )}
