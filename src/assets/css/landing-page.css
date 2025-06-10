@@ -101,9 +101,10 @@
   left: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  background-image: url("../images/landing/img-dot-bg.png") !important;
+  background-color: #000000 !important;
+  /* background-image: url("../images/landing/img-dot-bg.png") !important; 
   opacity: 0.2 !important;
-  z-index: 0 !important;
+  z-index: 0 !important; */
 }
 
 .landing-page .hero-section .container {
@@ -755,6 +756,7 @@ body {
   right: 0 !important;
   bottom: 0 !important;
   background-image: url("../images/landing/img-dot-bg.png") !important;
+  background-color: #000000 !important;
   opacity: 0.02 !important;
   z-index: 0 !important;
 }
@@ -978,7 +980,7 @@ body {
 }
 
 .landing-page .process-title {
-  font-size: 1.25rem !important;
+  font-size: 1.1rem !important;
   font-weight: 600 !important;
   color: white !important;
   margin: 0 !important;

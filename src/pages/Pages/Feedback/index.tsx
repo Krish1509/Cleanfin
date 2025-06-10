@@ -6,6 +6,7 @@ import { Card, CardBody, CardHeader, Form } from "react-bootstrap";
 import { postRequest } from "../../../service/fetch-services";
 import Pagination from "../../../Common/Pagination"; // Import Pagination component
 import Loader from "../../../Common/Loader/Loader";
+import moment from "moment";
 
 type FeedbackListData = {
   _id: string;
@@ -96,7 +97,9 @@ const Feedback = () => {
                     <thead>
                       <tr>
                         <th>User Name</th>
+                        <th>Phone</th>
                         <th>Description</th>
+                        <th>Date</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -105,6 +108,7 @@ const Feedback = () => {
                           <td>
                             {item?.firstName} {item?.lastName}
                           </td>
+                          <td>{item?.mobileNumber ? item?.mobileNumber : "-"}</td>
                           <td className="html-content">
                             <span
                               style={{
@@ -121,6 +125,7 @@ const Feedback = () => {
                               }}
                             />
                           </td>
+                          <td>{moment(item?.createdAt).format("DD-MM-YYYY HH:mm:ss")}</td>
                         </tr>
                       ))}
                     </tbody>

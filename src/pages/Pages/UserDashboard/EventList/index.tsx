@@ -32,7 +32,7 @@ const EventList = () => {
                 <Card className="table-card">
                     <CardHeader>
                         <div className="d-sm-flex align-items-center justify-content-between">
-                            <h5 className="mb-3 mb-sm-0">Event List</h5>
+                            <h5 className="mb-3 mb-sm-0">Global Event List</h5>
                         </div>
                     </CardHeader>
                     {!loading && (
@@ -42,12 +42,12 @@ const EventList = () => {
                                     <table className="table table-hover" id="pc-dt-simple">
                                         <thead>
                                             <tr>
-                                                <th>Title</th>
-                                                <th>Country</th>
-                                                <th>Date</th>
-                                                <th>Impact</th>
-                                                <th>Forecast</th>
-                                                <th>Previous</th>
+                                                <th>EVENT</th>
+                                                <th>CURRENCY</th>
+                                                <th>DATE</th>
+                                                <th>IMPACT EXPECTED</th>
+                                                <th>FORECAST</th>
+                                                <th>PREVIOUS</th>
                                             </tr>
                                         </thead>
                                         <tbody>

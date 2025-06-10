@@ -77,12 +77,12 @@ const OptionScripts = () => {
 
   return (
     <React.Fragment>
-      <BreadcrumbItem mainTitle="Option Scripts" subTitle="Option Scripts List" />
+      <BreadcrumbItem mainTitle="Scripts" subTitle="Scripts List" />
       <div className="col-12 mt-4 pb-4">
         <Card className="table-card">
           <CardHeader>
             <div className="d-sm-flex align-items-center justify-content-between">
-              <h5 className="mb-3 mb-sm-0">Option Scripts List</h5>
+              <h5 className="mb-3 mb-sm-0">Scripts List</h5>
             </div>
           </CardHeader>
           <div className="d-sm-flex align-items-center w-100 mt-4">

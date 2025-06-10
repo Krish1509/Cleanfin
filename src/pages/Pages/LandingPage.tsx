@@ -5,7 +5,7 @@ import { ChevronUp } from "react-feather";
 import { useNavigate } from "react-router-dom";
 import "../../assets/css/landing-page.css";
 // Import images
-import mewaLogo from "../../assets/images/mewa-logo-white.png";
+import mewaLogo from "../../assets/images/MEWA_F_White.png";
 import marketImage from "../../assets/images/landing-page/market-image.png";
 // Import AOS library and its styles
 import AOS from "aos";
@@ -632,14 +632,7 @@ const LandingPage = () => {
 
             box.appendChild(borderEffect);
 
-            // Add hover event to show border
-            box.addEventListener("mouseenter", () => {
-              borderEffect.style.opacity = "1";
-            });
-
-            box.addEventListener("mouseleave", () => {
-              borderEffect.style.opacity = "0";
-            });
+            
           };
 
           createBorderEffect();
@@ -677,14 +670,7 @@ const LandingPage = () => {
             iconBg.style.transition = "all 0.3s ease";
             iconBg.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.05)";
 
-            // Add pulse animation on hover
-            box.addEventListener("mouseenter", () => {
-              iconBg.style.animation = "pulse 1s ease-in-out";
-            });
 
-            box.addEventListener("mouseleave", () => {
-              iconBg.style.animation = "";
-            });
           }
 
           // Style icons based on parent box class
@@ -700,14 +686,7 @@ const LandingPage = () => {
               icon.style.color = "#d97706";
             }
 
-            // Add spin animation on hover
-            box.addEventListener("mouseenter", () => {
-              icon.style.animation = "spin 2s linear 1";
-            });
 
-            box.addEventListener("mouseleave", () => {
-              icon.style.animation = "";
-            });
           }
 
           // Style feature content
@@ -734,14 +713,7 @@ const LandingPage = () => {
             featureTitle.style.width = "100%";
             featureTitle.style.display = "block";
 
-            // Darken text on hover
-            box.addEventListener("mouseenter", () => {
-              featureTitle.style.color = "#111";
-            });
 
-            box.addEventListener("mouseleave", () => {
-              featureTitle.style.color = "#333";
-            });
           }
 
           // Style feature text with fade-in animation
@@ -759,14 +731,7 @@ const LandingPage = () => {
             featureText.style.display = "block";
             featureText.style.padding = "0 0.5rem";
 
-            // Darken text on hover
-            box.addEventListener("mouseenter", () => {
-              featureText.style.color = "#444";
-            });
 
-            box.addEventListener("mouseleave", () => {
-              featureText.style.color = "#666";
-            });
           }
         });
       }
@@ -836,9 +801,7 @@ const LandingPage = () => {
     navigate("/login");
   };
 
-  const handleGetStarted = () => {
-    navigate("/register");
-  };
+
 
   // Handle scroll to top with smooth scrolling
   const scrollToTop = () => {
@@ -905,8 +868,7 @@ const LandingPage = () => {
       <Navbar variant="dark" expand="lg" expanded={expanded} className="py-2 px-0">
         <Container fluid className="px-3">
           <Navbar.Brand href="#hero" className="d-flex align-items-center">
-            <img src={mewaLogo} alt="Mewa Logo" className="me-2" height="40" />
-            <span className="fw-bold text-white">Mewa</span>
+            <img src={mewaLogo} alt="Mewa Logo" className="me-2" height="80" />            
           </Navbar.Brand>
 
           <Navbar.Toggle aria-controls="navbar-nav" onClick={toggleMenu}>
@@ -1038,17 +1000,6 @@ const LandingPage = () => {
               >
                 Login
               </Nav.Link>
-
-              <Nav.Link
-                className="nav-button-link"
-                onClick={(e: MouseEvent<HTMLAnchorElement>) => {
-                  e.preventDefault();
-                  handleGetStarted();
-                  setExpanded(false);
-                }}
-              >
-                Get Started
-              </Nav.Link>
             </Nav>
 
             {/* Mobile only buttons that will be hidden on desktop */}
@@ -1061,17 +1012,7 @@ const LandingPage = () => {
                 }}
               >
                 Login
-              </button>
-
-              <button
-                className="mobile-button btn btn-success"
-                onClick={() => {
-                  handleGetStarted();
-                  setExpanded(false);
-                }}
-              >
-                Get Started
-              </button>
+              </button>              
             </div>
           </Navbar.Collapse>
         </Container>
@@ -1085,7 +1026,7 @@ const LandingPage = () => {
               <div data-aos="fade-right" data-aos-delay="100">
                 <h4>We'll Provide You</h4>
                 <h2 className="hero-title">Buy & Sell Alerts<br />With Target & Stop Loss</h2>
-                <p>Trade. Chill. Repeat.</p>
+                <p><i>Trade. Chill. Repeat.</i></p>
                 <div className="d-flex mt-4">
                   <Button variant="outline-light" size="lg" onClick={handleLogin}>
                     JOIN NOW
@@ -1111,7 +1052,7 @@ const LandingPage = () => {
               <div className="process-flow-container">
                 <div className="process-card" data-aos="fade-up" data-aos-delay="100">
                   <div className="process-card-inner">
-                    <h4 className="process-title">Our research-backed technical system generates accurate trade signals</h4>
+                    <h4 className="process-title">After years of research, We have developed our own technical system which generates trades with accuracy</h4>
                   </div>
                 </div>
                 <div className="process-connector" data-aos="fade-up" data-aos-delay="150">
@@ -1167,7 +1108,7 @@ const LandingPage = () => {
                 </div>
                 <div className="feature-content">
                   <h3 className="feature-title">Strategic Recommendations</h3>
-                  <p className="feature-text">Receive meticulously researched buy & sell recommendations with precise target prices and protective stop-loss levels, all backed by expert analysis to maximize your trading potential.</p>
+                  <p className="feature-text">Expert-backed Buy and Sell Recommendations with Target and Stop Loss</p>
                 </div>
               </div>
             </Col>
@@ -1180,7 +1121,7 @@ const LandingPage = () => {
                 </div>
                 <div className="feature-content">
                   <h3 className="feature-title">Performance Analytics</h3>
-                  <p className="feature-text">Monitor your investment journey with comprehensive performance tracking that provides complete transparency, allowing you to see real results and make data-driven decisions with confidence.</p>
+                  <p className="feature-text">Track performance that provides complete transparency, allowing you to see real results and make data-driven decisions with confidence.</p>
                 </div>
               </div>
             </Col>
@@ -1193,7 +1134,7 @@ const LandingPage = () => {
                 </div>
                 <div className="feature-content">
                   <h3 className="feature-title">Market Intelligence</h3>
-                  <p className="feature-text">Stay ahead with our comprehensive calendar covering critical Indian and global market events, helping you anticipate market movements and make timely investment decisions based on upcoming catalysts.</p>
+                  <p className="feature-text">Stay ahead with our comprehensive calendar covering global market events</p>
                 </div>
               </div>
             </Col>
@@ -1206,7 +1147,7 @@ const LandingPage = () => {
                 </div>
                 <div className="feature-content">
                   <h3 className="feature-title">Knowledge Hub</h3>
-                  <p className="feature-text">Access a wealth of educational resources, institutional investment data (FII & DII), and significant market transactions (Block & Bulk Deals) directly on your mobile device, empowering you to make informed investment decisions anywhere, anytime.</p>
+                  <p className="feature-text">Access a wealth of educational resources, institutional investment data (FII & DII), and significant market transactions (Block & Bulk Deals) directly on your device</p>
                 </div>
               </div>
             </Col>

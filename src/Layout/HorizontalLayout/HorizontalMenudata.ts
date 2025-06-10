@@ -29,7 +29,7 @@ const adminMenuData = [
   },
   {
     id: "optionscripts",
-    label: "Option Scripts",
+    label: "Scripts",
     dataPage: null,
     link: "/optionscripts",
     icon: "",
@@ -71,14 +71,14 @@ const adminMenuData = [
   },
   {
     id: "userBrokerRegistration",
-    label: "User Broker Registration",
+    label: "Open Demat Account",
     dataPage: null,
     link: "/userBroker",
     icon: "",
   },
   {
     id: "userQuery",
-    label: "Help",
+    label: "Query",
     dataPage: null,
     link: "/userQueries",
     icon: "",
@@ -130,14 +130,14 @@ const userMenuData = [
   },
   {
     id: "userBrokerRegistration",
-    label: "User Broker Registration",
+    label: "Open Demat Account",
     dataPage: null,
     link: "/userBrokerRegistration",
     icon: "",
   },
   {
     id: "helpForm",
-    label: "Help",
+    label: "Query",
     dataPage: null,
     link: "/addHelp",
     icon: "",

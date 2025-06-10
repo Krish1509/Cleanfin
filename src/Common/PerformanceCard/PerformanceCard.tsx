@@ -28,74 +28,57 @@ const PerformanceCard = () => {
     <React.Fragment>
       {!countLoading ? (
         <Row>
-          <Col xs={6} sm={4} md={4} lg={4} xxl={3}>
-            <Card className="performancecard">
+          <Col xs={12} sm={4} md={4} lg={4} xl={4}>
+            <Card className="performancecard mb-3">
               <CardBody>
                 <div>
                   <i className="fas fa-layer-group f-20 p-2 bg-light rounded "></i>
                 </div>
                 <div className="d-flex align-items-center justify-content-between mt-4">
-                  <div>Total Calls</div>
+                  <div style={{ fontSize: '1.1rem' }} className="text-dark">Total Calls</div>
                   <div>
-                    <h4 className="font-weight-bold">
+                    <h3 className="font-weight-bold mb-0 text-dark">
                       {pastPerformanceCount?.totalCalls || 0}
-                    </h4>
+                    </h3>
                   </div>
                 </div>
               </CardBody>
             </Card>
           </Col>
-          <Col xs={6} sm={4} md={4} lg={4} xxl={3}>
-            <Card className="performancecard">
+          <Col xs={12} sm={4} md={4} lg={4} xl={4}>
+            <Card className="performancecard mb-3">
               <CardBody>
                 <div>
                   <i className="fas fa-reply f-20 p-2 bg-light rounded "></i>
                 </div>
                 <div className="d-flex align-items-center justify-content-between mt-4">
-                  <div>Exited Calls</div>
+                  <div style={{ fontSize: '1.1rem' }} className="text-dark">Exited Calls</div>
                   <div>
-                    <h4 className="font-weight-bold">
+                    <h3 className="font-weight-bold mb-0 text-dark">
                       {pastPerformanceCount?.exitedCalls || 0}
-                    </h4>
+                    </h3>
                   </div>
                 </div>
               </CardBody>
             </Card>
           </Col>
-          <Col xs={6} sm={4} md={4} lg={4} xxl={3}>
-            <Card className="performancecard">
+          <Col xs={12} sm={4} md={4} lg={4} xl={4}>
+            <Card className="performancecard mb-3">
               <CardBody>
                 <div>
                   <i className="fas fa-chart-bar f-20 p-2 bg-light rounded "></i>
                 </div>
                 <div className="d-flex align-items-center justify-content-between mt-4">
-                  <div>Success Rate</div>
+                  <div style={{ fontSize: '1.1rem' }} className="text-dark">Success Rate</div>
                   <div>
-                    <h4 className="font-weight-bold">
+                    <h3 className="font-weight-bold mb-0 text-dark">
                       {pastPerformanceCount?.successRate || 0}%
-                    </h4>
+                    </h3>
                   </div>
                 </div>
               </CardBody>
             </Card>
-          </Col>
-          <Col xs={6} sm={4} md={4} lg={4} xxl={3}>
-            <Card className="performancecard">
-              <CardBody>
-                <div>
-                  <i className="fas fa-chart-line f-20 p-2 bg-light rounded "></i>
-                </div>
-                <div className="d-flex align-items-center justify-content-between mt-4">
-                  <div>Annual Retunrs</div>
-                  <div>
-                    <h4 className="font-weight-bold">
-                      {pastPerformanceCount?.annualReturns || 0}%
-                    </h4>
-                  </div>
-                </div>
-              </CardBody>
-            </Card>
-          </Col>
+          </Col>          
         </Row>
       ) : (
         ""

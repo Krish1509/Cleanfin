@@ -151,7 +151,7 @@ const routes = [
     allowedRoles: ["customer", "admin"],
   },
 
-  // User Broker Registration
+  // Open Demat Account
   {
     path: "/userBrokerRegistration",
     component: <UserBrokerRegistration />,

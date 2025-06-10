@@ -254,7 +254,7 @@ const UserDashboard = () => {
               Past Performance
             </div>
             <div onClick={() => scrollToSection("fii-dii-trades")} className={`menu-item ${activeSection === "fii-dii-trades" ? "active" : ""}`}>
-              FII DII Trades
+              FII / DII Data
             </div>
           </div>
         </div>
@@ -267,7 +267,15 @@ const UserDashboard = () => {
                   <h3>
                     Hey {user?.firstName} {user?.lastName}
                   </h3>
-                  <p className="mt-3 mb-5 font-weight-normal fs-5">Here is your command center</p>
+                  <p className="mt-3 mb-5 font-weight-normal fs-5">
+                    {(() => {
+                      const hour = new Date().getHours();
+                      if (hour >= 5 && hour < 12) return "Good Morning";
+                      if (hour >= 12 && hour < 17) return "Good Afternoon";
+                      if (hour >= 17 && hour < 21) return "Good Evening";
+                      return "Good Night";
+                    })()}, 
+                  </p>
                 </div>
               </div>
               <Col lg={12}>
@@ -337,7 +345,7 @@ const UserDashboard = () => {
             <div className="user-dashboard-container container-min" id="fii-dii-trades">
               <Col lg={12}>
                 <div className="d-flex align-items-center justify-content-between mb-3">
-                  <h5 className="mb-0">FII DII Trades</h5>
+                  <h5 className="mb-0">FII / DII Data</h5>
                   <div>
                     <ButtonGroup>
                       <Button style={{ flex: 1 }} variant={tradesTimes === TradeTime.Day ? "secondary" : "outline-secondary"} onClick={() => setTradesTimes(TradeTime.Day)}>
