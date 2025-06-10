@@ -47,7 +47,7 @@ const UserBrokerRegistration = () => {
       const result = await postRequest("userBrokerRegistration/create", values);
 
       if (result) {
-        ToastAlert.success(`User Broker Registration created successfully`);
+        ToastAlert.success(`Open Demat Account created successfully`);
         navigate("/dashboard/user");
       } else {
         setLoading(false);
@@ -60,7 +60,8 @@ const UserBrokerRegistration = () => {
 
   return (
     <React.Fragment>
-      <BreadcrumbItem mainTitle="User Broker Registration" subTitle={`User Broker Registration Add`} />
+      <BreadcrumbItem mainTitle="Open Demat Account" subTitle={`Open Demat Account Add`} />
+      <p>Once you submit the form, our team will get in touch with you.</p>
       <Row>
         <Col sm={12}>
           <Card>
@@ -144,7 +145,7 @@ const UserBrokerRegistration = () => {
                       </Row>
                       <Row>
                         <div className="text-end">
-                          <button type="button" className="btn btn-outline-secondary me-1" onClick={() => navigate("/recommendation")}>
+                          <button type="button" className="btn btn-outline-secondary me-1" onClick={() => navigate("/dashboard/user")}>
                             Cancel
                           </button>
                           <button type="submit" className="btn btn-primary" disabled={loading}>

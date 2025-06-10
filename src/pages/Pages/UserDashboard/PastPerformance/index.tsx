@@ -59,56 +59,16 @@ const PastPerformance = () => {
           {!loading && (
             <React.Fragment>
               <CardBody className="pt-3">
-                {/* <Row className="g-3 mb-3">
-                  {exitedCalls?.map((data, index) => (
-                    <Col md={6} xxl={3} key={index}>
-                      <Card className="border mb-0">
-                        <CardBody className="p-3">
-                          <div className="d-flex align-items-center justify-content-between gap-1">
-                            <h6 className="mb-0">
-                              {data?.scriptData?.[0]?.name}
-                            </h6>
-                            <p className="mb-0 text-muted d-flex align-items-center gap-1">
-                              <span
-                                className={`badge ms-2 ${
-                                  data.action === "buy"
-                                    ? "bg-light-success"
-                                    : "bg-light-danger"
-                                }`}
-                              >
-                                {data?.action.toUpperCase()}
-                              </span>
-                            </p>
-                          </div>
-                          <h5 className="mb-2 mt-3">
-                            <i className="fas fa-rupee-sign" />
-                            {data?.price}
-                          </h5>
-                          <p className="mb-0 text-muted d-flex align-items-center gap-2">
-                            Recommended Price
-                          </p>
-                          <div className="d-flex align-items-center gap-1">
-                            <p className="mb-0 text-muted d-flex align-items-center gap-2 mt-2">
-                              <span>
-                                {moment(data?.date).format("YYYY-MM-DD")}
-                              </span>
-                            </p>
-                          </div>
-                        </CardBody>
-                      </Card>
-                    </Col>
-                   ))}
-                 </Row> */}
                 <table className="table table-hover" id="pc-dt-simple">
                   <thead>
                     <tr>
-                      <th>Script Name</th>
-                      <th>Date</th>
-                      <th>Price</th>
-                      <th>Return</th>
-                      <th>Exit Price</th>
-                      <th>Sell Date</th>
-                      <th>Duration</th>
+                      <th>SCRIPT NAME</th>
+                      <th>ENTRY DATE</th>
+                      <th>RECOMMENDED PRICE</th>
+                      <th>RETURNS</th>
+                      <th>EXIT PRICE</th>
+                      <th>EXIT DATE</th>
+                      <th>DURATION</th>
                     </tr>
                   </thead>
                   <tbody>

@@ -252,7 +252,6 @@ const Recommendation = () => {
                         <th>Action</th>
                         <th>Target 1</th>
                         <th>Exit Price</th>
-                        {/* <th>Target 3</th> */}
                         <th>Stop Loss</th>
                         <th>Action</th>
                       </tr>
@@ -273,7 +272,7 @@ const Recommendation = () => {
                             ) : (
                               ""
                             )}
-                            {item?.scriptData[0].name}
+                            {item?.scriptData?.name}
                           </td>
                           <td>
                             {moment(item?.date).format("YYYY-MM-DD")} {item?.time}

@@ -49,7 +49,7 @@ const AddHelp = () => {
 
   return (
     <React.Fragment>
-      <BreadcrumbItem mainTitle="Help Form" subTitle={`Add Help`} />
+      <BreadcrumbItem mainTitle="Query Form" subTitle={`Add Query`} />
       <Row>
         <Col sm={12}>
           <Card>

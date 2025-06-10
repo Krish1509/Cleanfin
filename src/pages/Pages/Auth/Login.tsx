@@ -80,6 +80,7 @@ const Login = () => {
                     </Col>
                   </Row>
                 </div>
+
                 {activeTab === "phone-tab" ? (
                   <PhoneStep setActiveTab={enableOtpTab} />
                 ) : activeTab === "otp-tab" ? (
