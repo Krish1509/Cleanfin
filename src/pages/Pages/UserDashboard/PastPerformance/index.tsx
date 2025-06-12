@@ -60,48 +60,50 @@ const PastPerformance = () => {
           {!loading && (
             <React.Fragment>
               <CardBody className="pt-3">
-                <table className="table table-hover" id="pc-dt-simple">
-                  <thead>
-                    <tr>
-                      <th>SCRIPT NAME</th>
-                      <th>ENTRY DATE</th>
-                      <th>RECOMMENDED PRICE</th>
-                      <th>RETURNS</th>
-                      <th>EXIT PRICE</th>
-                      <th>EXIT DATE</th>
-                      <th>DURATION</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {exitedCalls.map((item, key) => (
-                      <tr key={key}>
-                        <td>{item?.scriptData[0].name}</td>
-                        <td>
-                          {moment(item?.createdAt).format("YYYY-MM-DD")} {item?.time}
-                        </td>
-                        <td>
-                          <span className={`badge me-2 ${item.action === "buy" ? "bg-light-success" : "bg-light-danger"}`}>{item?.action.toUpperCase()}</span>
-                          {item?.price}
-                        </td>
-                        <td>
-                          <div className="d-flex align-items-center">
-                            <>
-                              {item?.profitLoss > 0 ? (
-                                <i className="material-icons-two-tone text-success me-1">arrow_circle_up</i>
-                              ) : (
-                                <i className="material-icons-two-tone text-danger me-1">arrow_circle_down</i>
-                              )}
-                              {item?.profitLoss?.toFixed(2)}%
-                            </>
-                          </div>
-                        </td>
-                        <td>{item?.sellPrice}</td>
-                        <td>{moment(item?.closeDate).format("YYYY-MM-DD HH:mm")}</td>
-                        <td>{moment(item?.closeDate).diff(moment(item?.createdAt), "days")} days</td>
+                <div className=" ">
+                  <table className="table table-hover sticky-table-header" id="pc-dt-simple">
+                    <thead>
+                      <tr>
+                        <th>SCRIPT NAME</th>
+                        <th>ENTRY DATE</th>
+                        <th>RECOMMENDED PRICE</th>
+                        <th>RETURNS</th>
+                        <th>EXIT PRICE</th>
+                        <th>EXIT DATE</th>
+                        <th>DURATION</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {exitedCalls.map((item, key) => (
+                        <tr key={key}>
+                          <td>{item?.scriptData[0].name}</td>
+                          <td>
+                            {moment(item?.createdAt).format("YYYY-MM-DD")} {item?.time}
+                          </td>
+                          <td>
+                            <span className={`badge me-2 ${item.action === "buy" ? "bg-light-success" : "bg-light-danger"}`}>{item?.action.toUpperCase()}</span>
+                            {item?.price}
+                          </td>
+                          <td>
+                            <div className="d-flex align-items-center">
+                              <>
+                                {item?.profitLoss > 0 ? (
+                                  <i className="material-icons-two-tone text-success me-1">arrow_circle_up</i>
+                                ) : (
+                                  <i className="material-icons-two-tone text-danger me-1">arrow_circle_down</i>
+                                )}
+                                {item?.profitLoss?.toFixed(2)}%
+                              </>
+                            </div>
+                          </td>
+                          <td>{item?.sellPrice}</td>
+                          <td>{moment(item?.closeDate).format("YYYY-MM-DD HH:mm")}</td>
+                          <td>{moment(item?.closeDate).diff(moment(item?.createdAt), "days")} days</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </CardBody>
               <Pagination
                 totalPages={totalPages}
