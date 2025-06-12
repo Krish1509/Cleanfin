@@ -13,6 +13,7 @@ const AboutSchema = Yup.object().shape({
   firstName: Yup.string().required("First name is required"),
   lastName: Yup.string().required("Last name is required"),
   age: Yup.number().required("Age is required").min(1, "Invalid age"),
+  email: Yup.string().email("Invalid email").optional(),
 });
 
 const AboutStep: React.FC = () => {
@@ -32,6 +33,7 @@ const AboutStep: React.FC = () => {
         formData.append("firstName", values.firstName);
         formData.append("lastName", values.lastName);
         formData.append("age", values.age);
+        formData.append("email", values.email);
 
         const result = await handleFormData("user/edit", formData);
 
@@ -60,7 +62,7 @@ const AboutStep: React.FC = () => {
     <div className="text-center mb-4">
       <h4 className="f-w-500 mb-4">About You</h4>
       <div className="auth-inputs">
-        <Formik initialValues={{ firstName: "", lastName: "", age: "" }} validationSchema={AboutSchema} onSubmit={handleSubmit}>
+        <Formik initialValues={{ firstName: "", lastName: "", age: "", email: "" }} validationSchema={AboutSchema} onSubmit={handleSubmit}>
           {({ errors, touched }) => (
             <Form>
               <InputGroup className="mb-2">
@@ -71,9 +73,13 @@ const AboutStep: React.FC = () => {
                 <Field type="text" className="form-control" id="floatingInput" placeholder="Last name" name="lastName" />
                 {errors.lastName && touched.lastName ? <div className="invalid-feedback d-flex align-items-start">{errors.lastName}</div> : null}
               </InputGroup>
-              <InputGroup>
+              <InputGroup className="mb-2">
                 <Field type="number" className="form-control" id="floatingInput" placeholder="Age" name="age" />
                 {errors.age && touched.age ? <div className="invalid-feedback d-flex align-items-start">{errors.age}</div> : null}
+              </InputGroup>
+              <InputGroup>
+                <Field type="text" className="form-control" id="floatingInput" placeholder="Email" name="email" />
+                {errors.email && touched.email ? <div className="invalid-feedback d-flex align-items-start">{errors.email}</div> : null}
               </InputGroup>
               <div className="d-grid mt-4">
                 <button type="submit" className="btn btn-primary" disabled={loading}>

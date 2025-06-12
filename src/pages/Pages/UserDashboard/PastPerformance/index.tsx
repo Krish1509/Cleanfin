@@ -60,8 +60,8 @@ const PastPerformance = () => {
           {!loading && (
             <React.Fragment>
               <CardBody className="pt-3">
-                <div className=" ">
-                  <table className="table table-hover sticky-table-header" id="pc-dt-simple">
+                <div className="table-responsive">
+                  <table className="table table-hover" id="pc-dt-simple">
                     <thead>
                       <tr>
                         <th>SCRIPT NAME</th>
