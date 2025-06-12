@@ -11,6 +11,7 @@ import ToastAlert from "../../../helper/toast-alert";
 import BreadcrumbItem from "../../../Common/BreadcrumbItem";
 import RichTextEditor from "../../../Common/Editor/RichTextEditor";
 import Loader from "../../../Common/Loader/Loader";
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
   description: Yup.string().required("Description is required!"),
@@ -22,6 +23,7 @@ interface FormValues {
 
 const AddFeedback = () => {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (values: any) => {
     try {
@@ -45,10 +47,6 @@ const AddFeedback = () => {
     }
   };
 
-  const handleCancel = (resetForm: () => void) => {
-    resetForm();
-  };
-
   return (
     <React.Fragment>
       <BreadcrumbItem mainTitle="Content Bytes" subTitle="Add Feedback" />
@@ -67,47 +65,25 @@ const AddFeedback = () => {
                     resetForm(); // This resets the form after submission
                   }}
                 >
-                  {({ errors, touched, values, setFieldValue, resetForm }) => (
+                  {({ errors, touched, values, setFieldValue }) => (
                     <Form>
                       <Row>
                         <Col sm={12}>
                           <div className="mb-3">
                             <label className="form-label">Description</label>
-                            <RichTextEditor
-                              value={values?.description}
-                              onChange={(value: any) =>
-                                setFieldValue("description", value)
-                              }
-                            />
-                            {errors.description && touched.description ? (
-                              <div className="invalid-feedback d-flex align-items-start">
-                                {errors.description}
-                              </div>
-                            ) : null}
+                            <RichTextEditor value={values?.description} onChange={(value: any) => setFieldValue("description", value)} />
+                            {errors.description && touched.description ? <div className="invalid-feedback d-flex align-items-start">{errors.description}</div> : null}
                           </div>
                         </Col>
                       </Row>
 
                       <Row>
                         <div className="text-end">
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary me-1"
-                            onClick={() => handleCancel(resetForm)}
-                          >
+                          <button type="button" className="btn btn-outline-secondary me-1" onClick={() => navigate("/dashboard/user")}>
                             Cancel
                           </button>
-                          <button
-                            type="submit"
-                            className="btn btn-primary"
-                            disabled={loading}
-                          >
-                            Submit{" "}
-                            {loading ? (
-                              <Spinner className="ml-2" size="sm" />
-                            ) : (
-                              ""
-                            )}
+                          <button type="submit" className="btn btn-primary" disabled={loading}>
+                            Submit {loading ? <Spinner className="ml-2" size="sm" /> : ""}
                           </button>
                         </div>
                       </Row>

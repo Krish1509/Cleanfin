@@ -44,7 +44,8 @@ const PastPerformance = () => {
 
   useEffect(() => {
     fetchExitedCalls();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage, entriesPerPage]);
 
   return (
     <React.Fragment>
