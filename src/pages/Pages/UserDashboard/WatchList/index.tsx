@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Socket } from "socket.io-client";
 import { Button, Card, CardBody, CardHeader } from "react-bootstrap";
 import { postRequest } from "../../../../service/fetch-services";
 import { IWatchList } from "../Helper/interfaces";
@@ -7,59 +8,45 @@ import AddWatchList from "./AddWatchList";
 import Select from "react-select";
 import MobileWatchlistRow from "./MobileWatchlistRow";
 import AddWatchListScript from "./AddWatchListScript";
+import { initializeSocket } from "../../../../service/socketService";
 
 // import Loader from "../../../../Common/Loader/Loader";
 
-const watchlistScripts = [
-  {
-    company: "AAPL",
-    qty: 10,
-    price: 200,
-    invested: 2000,
-    current: 2500,
-    returns: 500,
-  },
-  {
-    company: "AMD",
-    qty: 20,
-    price: 250,
-    invested: 5000,
-    current: 4800,
-    returns: -200,
-  },
-  {
-    company: "TSLA",
-    qty: 5,
-    price: 700,
-    invested: 3500,
-    current: -1900,
-    returns: 400,
-  },
-  {
-    company: "GOOGL",
-    qty: 3,
-    price: 2800,
-    invested: 8400,
-    current: 9000,
-    returns: 600,
-  },
-  {
-    company: "MSFT",
-    qty: 12,
-    price: 300,
-    invested: 3600,
-    current: 3840,
-    returns: 240,
-  },
-];
+const user = localStorage.getItem('user') && JSON.parse(localStorage.getItem("user") || "")
+const USER_ID = user?._id;
 
 const WatchList = () => {
+  const [socket, setSocket] = useState<Socket | null>(null);
   const [watchlistData, setWatchlistData] = useState<IWatchList[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedWatchlist, setSelectedWatchlist] = useState<string>("");
   const [showAddModal, setShowAddModal] = useState<boolean>(false);
   const [showAddScriptModal, setShowAddScriptModal] = useState<boolean>(false);
   const [watchlistOptions, setWatchlistOptions] = useState<{ value: string; label: string }[]>([]);
+
+  
+  
+  React.useEffect(() => {
+    // Initialize socket connection
+    const newSocket = initializeSocket();
+    setSocket(newSocket);
+
+    // Log connection established
+    newSocket.on("connect", () => {
+      console.log("Socket connection established");
+
+    });
+
+    // Log disconnection
+    newSocket.on("disconnect", (reason) => {
+      console.log("Socket disconnected:", reason);
+    });
+
+    // Clean up socket connection on component unmount
+    return () => {
+      newSocket.disconnect();
+    };
+  }, []);
 
   const createWatchList = async () => {
     try {
@@ -107,11 +94,90 @@ const WatchList = () => {
   React.useEffect(() => {
     // Simulate an API call to fetch watchlists
     getWatchlists();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onAfterCreateNew = (data: IWatchList) => {
     setWatchlistData((prev) => [...prev, data]);
     setWatchlistOptions((prev) => [...prev, { value: data._id, label: data.name }]);
+  };
+
+  useEffect(() => {
+    if (socket && selectedWatchlist) {
+      // Find the selected watchlist
+      const selectedWatchlistData = watchlistData.find(watchlist => watchlist._id === selectedWatchlist);
+      if (selectedWatchlistData) {
+        // Extract the scriptId code from the items
+        selectedWatchlistData?.items.forEach(item => {
+          const scriptIdCode = item.scriptId?.code;
+          if (scriptIdCode) {
+            socket.emit("watchlist:join", { userId: USER_ID, scriptId: scriptIdCode });
+          }
+        });
+      }
+
+      // Listen for updates from the server
+      socket.on("share:update", ({ scriptId, data }) => {
+        if (selectedWatchlistData) {
+          setWatchlistData((prev) =>
+            prev.map((watchlist) => {
+              // Match the watchlist
+              if (watchlist._id === selectedWatchlistData._id) {
+                return {
+                  ...watchlist,
+                  items: watchlist.items.map((item) => {
+                    // Match the script/item to update its price                    
+                    if (item.scriptId.code == scriptId) {
+                      return {
+                        ...item,
+                        price: data.last_traded_price,
+                        volume: data.volume,
+                        totalBuyQuantity: data.total_buy_quantity,
+                        totalSellQuantity: data.total_sell_quantity,
+                      };
+                    }
+                    return item;
+                  }),
+                };
+              }
+              return watchlist;
+            })
+          );
+        }
+      });
+
+      // Listen for user joined events
+      socket.on("room:userJoined", ({ userId }) => {
+        console.log(`User ${userId} joined the room`);
+      });
+
+      // Listen for user left events
+      socket.on("room:userLeft", ({ userId }) => {
+        console.log(`User ${userId} left the room`);
+      });
+    }
+  }, [socket, selectedWatchlist, watchlistData]);
+
+  const handleAfterCreateScript = (data: IWatchList) => {
+    setWatchlistData(prev => {
+      const index = prev.findIndex(item => item._id === data._id);
+      if (index !== -1) {
+        const updatedPrev = [...prev];
+        updatedPrev[index] = data;
+        return updatedPrev;
+      }
+      return [...prev, data];
+    });
+
+    // Emit an event to update the watchlist data
+    if (socket && data.items) {
+      data.items.forEach(item => {
+        const scriptIdCode = item.scriptId?.code;
+        if (scriptIdCode) {
+          socket.emit("watchlist:update", { scriptId: scriptIdCode, data });
+        }
+      });
+    }
   };
 
   return (
@@ -170,47 +236,58 @@ const WatchList = () => {
                 <table className="table table-hover" id="pc-dt-simple">
                   <thead>
                     <tr>
-                      <th>Company</th>
-                      <th>Qty</th>
+                      <th>Name</th>
                       <th>Mkt.Price</th>
-                      <th>Invested</th>
-                      <th>Current</th>
-                      <th>Returns</th>
+                      <th>Volume</th>
+                      <th>Total Buy Quantity</th>
+                      <th>Total Sell Quantity</th>
                     </tr>
                   </thead>
                   <tbody>
                     {watchlistData
                       .find(item => item._id === selectedWatchlist)
-                      ?.items?.map((row, idx) => (
-                        <tr key={idx}>
-                          <td>{row?.scriptId?.name}</td>
-                          <td>{row.qty}</td>
-                          <td>{row.price}</td>
-                          <td>{row.invested}</td>
-                          <td>
-                            <div className="d-flex align-items-center">
-                              {/* <i className={`ti ${row.current >= 0 ? "ti-arrow-up text-success" : "ti-arrow-down text-danger"} f-18 align-text-bottom`} /> */}
-                              <span className={row.current >= 0 ? "text-success" : "text-danger"}>{row.current}</span>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="d-flex align-items-center">
-                              {/* <i className={`ti ${row.returns >= 0 ? "ti-arrow-up text-success" : "ti-arrow-down text-danger"} f-18 align-text-bottom`} /> */}
-                              <span className={row.returns >= 0 ? "text-success" : "text-danger"}>{row.returns}</span>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
+                      ?.items?.map((row, idx) => {
+                        return (
+                          <tr key={idx}>
+                            <td>{row?.scriptId?.name}</td>
+                            <td>{row.price || "-"}</td>
+                            <td>{row.volume || "-"}</td>
+                            <td>{row.totalBuyQuantity || "-"}</td>
+                            <td>{row.totalSellQuantity || "-"}</td>
+                            <td>
+                              <div className="d-flex align-items-center">
+                                {/* <i className={`ti ${row.current >= 0 ? "ti-arrow-up text-success" : "ti-arrow-down text-danger"} f-18 align-text-bottom`} /> */}
+                                <span className={row.current >= 0 ? "text-success" : "text-danger"}>{row.current}</span>
+                              </div>
+                            </td>
+                            <td>
+                              <div className="d-flex align-items-center">
+                                {/* <i className={`ti ${row.returns >= 0 ? "ti-arrow-up text-success" : "ti-arrow-down text-danger"} f-18 align-text-bottom`} /> */}
+                                <span className={row.returns >= 0 ? "text-success" : "text-danger"}>{row.returns}</span>
+                              </div>
+                            </td>
+                          </tr>
+                        )
+                      })}
                   </tbody>
                 </table>
               </div>
 
               {/* Mobile Accordion Table */}
               <div className="d-block d-sm-none">
-                {watchlistScripts.map((row, idx) => (
-                  <MobileWatchlistRow key={idx} company={row.company} qty={row.qty} price={row.price} invested={row.invested} current={row.current} returns={row.returns} />
-                ))}
-              </div>
+                {watchlistData
+                  .find(item => item._id === selectedWatchlist)
+                  ?.items?.map((row, idx) => (
+                    <MobileWatchlistRow
+                      key={idx}
+                      name={row?.scriptId?.name || "-"}
+                      price={row?.price || "-"}
+                      volume={row?.volume || "-"}
+                      totalBuyQuantity={row?.totalBuyQuantity || "-"}
+                      totalSellQuantity={row?.totalSellQuantity || "-"}
+                    />
+                  ))}
+              </div>              
             </CardBody>
           </React.Fragment>
         </Card>
@@ -225,18 +302,7 @@ const WatchList = () => {
           show={showAddScriptModal}
           handleClose={() => setShowAddScriptModal(false)}
           selectedWatchlist={selectedWatchlist}
-          handleAfterCreateScript={(data: IWatchList) => {
-            setWatchlistData(prev => {
-              const index: number = watchlistData.findIndex(item => item._id === data._id);
-              if (index !== -1) {
-                prev.splice(index, 1, data)
-                return prev;
-              } else {
-                return [...prev, data]
-              }
-            })
-
-          }}
+          handleAfterCreateScript={handleAfterCreateScript}
         />
       )}
 
