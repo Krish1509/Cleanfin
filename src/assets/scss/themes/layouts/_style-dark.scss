@@ -8,9 +8,9 @@
   --pc-heading-color: rgba(255, 255, 255, 0.8);
 
   // Navbar
-  --pc-sidebar-background: #1D2630;
-  --pc-sidebar-color: #FFFFFF;
-  --pc-sidebar-color-rgb: #{to-rgb(#FFFFFF)};
+  --pc-sidebar-background: #1d2630;
+  --pc-sidebar-color: #ffffff;
+  --pc-sidebar-color-rgb: #{to-rgb(#ffffff)};
   --pc-sidebar-submenu-border-color: var(--bs-gray-600);
   --pc-sidebar-caption-color: #748892;
 
@@ -113,10 +113,8 @@
   --bs-accordion-btn-color: var(--bs-body-color);
   --bs-accordion-active-bg: rgba(var(--bs-primary-rgb), 0.2);
   --bs-accordion-btn-icon: #{escape-svg(
- url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$gray-300}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>"))
-}
-
-;
+      url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$gray-300}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>")
+    )};
 }
 
 .navbar.navbar-light .navbar-nav {
@@ -160,7 +158,7 @@
   }
 
   li.vtree-leaf a.vtree-leaf-label:hover,
-  li.vtree-leaf.vtree-selected>a.vtree-leaf-label {
+  li.vtree-leaf.vtree-selected > a.vtree-leaf-label {
     background-color: lighten($dark-layout-color, 8%);
     outline-color: lighten($dark-layout-color, 8%);
   }
@@ -176,10 +174,10 @@
   &:not(:focus) {
     border-color: #{lighten($dark-layout-color, 15%)};
   }
-  &.is-valid{
+  &.is-valid {
     border-color: var(--bs-success);
   }
-  &.is-invalid{
+  &.is-invalid {
     border-color: var(--bs-danger);
   }
 }
@@ -213,7 +211,9 @@ select.datatable-selector,
 select.datatable-input,
 .form-select:not([multiple]) {
   background-color: #{lighten($dark-layout-color, 10%)};
-  background-image: escape-svg(url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#6f747f' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/></svg>"));
+  background-image: escape-svg(
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#6f747f' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/></svg>")
+  );
   background-repeat: no-repeat;
   background-size: $form-select-bg-size;
 }
@@ -252,7 +252,7 @@ select.datatable-input,
     .alert-link {
       color: $value;
     }
-    @if ($color == 'dark') {
+    @if ($color == "dark") {
       color: var(--bs-body-color);
       background-color: #{lighten($dark-layout-color, 10%)};
       border-color: #{lighten($dark-layout-color, 15%)};
@@ -266,6 +266,11 @@ select.datatable-input,
     background: transparentize($value, 0.8);
     color: $value;
     border-color: transparentize($value, 0.8);
+  }
+  .badge.bg-light-secondary {
+    background: rgba($secondary, 0.9) !important;
+    color: #fff !important;
+    border-color: rgba($secondary, 0.9) !important;
   }
 
   .icon-svg-#{$color} {
@@ -281,13 +286,12 @@ select.datatable-input,
     background: transparentize($value, 0.8) !important;
     border-color: transparentize($value, 0.8);
 
-    @if ($color =='dark') {
+    @if ($color == "dark") {
       color: var(--bs-body-color);
     }
   }
 
   .btn-link-#{$color} {
-
     &:not(:disabled):not(.disabled).active,
     &:not(:disabled):not(.disabled):active,
     &:active,
@@ -305,14 +309,16 @@ select.datatable-input,
           border-color: transparentize($value, 0.8);
           background-color: transparentize($value, 0.8);
 
-          @if ($color =='dark') {
+          @if ($color == "dark") {
             border-color: transparentize($white, 0.8);
 
-            &[type='checkbox'] {
-              background-image: escape-svg(url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='#{$white}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/></svg>"));
+            &[type="checkbox"] {
+              background-image: escape-svg(
+                url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='#{$white}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/></svg>")
+              );
             }
 
-            &[type='radio'] {
+            &[type="radio"] {
               background-image: escape-svg(url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='2' fill='#{$white}'/></svg>"));
             }
           }
@@ -322,11 +328,11 @@ select.datatable-input,
   }
 }
 
-.custom-switch-v1.form-check .form-check-input.input-light-dark:checked[type=checkbox]{
+.custom-switch-v1.form-check .form-check-input.input-light-dark:checked[type="checkbox"] {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='4.1' fill='%2334495E'/%3e%3c/svg%3e");
 }
-.form-check .form-check-input.input-light-dark:checked[type=checkbox],
-.form-check .form-check-input.input-light-dark:checked{
+.form-check .form-check-input.input-light-dark:checked[type="checkbox"],
+.form-check .form-check-input.input-light-dark:checked {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23ffffff'/%3e%3c/svg%3e");
 }
 
@@ -334,114 +340,112 @@ select.datatable-input,
 .form-floating > .custom-select:focus ~ label::after,
 .form-floating > .form-control:not(:placeholder-shown) ~ label::after,
 .form-floating > .custom-select:not(:placeholder-shown) ~ label::after,
-.form-floating > .form-control-plaintext ~ label::after, .form-floating >
-.form-select ~ label::after{
+.form-floating > .form-control-plaintext ~ label::after,
+.form-floating > .form-select ~ label::after {
   background: #{lighten($dark-layout-color, 10%)};
 }
 
-@each $name,
-$value in $preset-colors {
-  &[data-pc-preset='#{$name}'] {
+@each $name, $value in $preset-colors {
+  &[data-pc-preset="#{$name}"] {
     .form-check {
       .form-check-input {
         &.input-light-primary {
           &:checked {
-            border-color: transparentize(map-get($value, 'primary'), 0.8);
-            background-color: transparentize(map-get($value, 'primary'), 0.8);
+            border-color: transparentize(map-get($value, "primary"), 0.8);
+            background-color: transparentize(map-get($value, "primary"), 0.8);
           }
         }
       }
     }
 
     .btn-light-primary {
-      background: transparentize(map-get($value, 'primary'), 0.8);
-      color: map-get($value, 'primary');
-      border-color: transparentize(map-get($value, 'primary'), 0.8);
+      background: transparentize(map-get($value, "primary"), 0.8);
+      color: map-get($value, "primary");
+      border-color: transparentize(map-get($value, "primary"), 0.8);
 
       .material-icons-two-tone {
-        background-color: map-get($value, 'primary');
+        background-color: map-get($value, "primary");
       }
 
       &:hover {
-        background: map-get($value, 'primary');
+        background: map-get($value, "primary");
         color: #fff;
-        border-color: map-get($value, 'primary');
+        border-color: map-get($value, "primary");
       }
 
       &.focus,
       &:focus {
-        background: map-get($value, 'primary');
+        background: map-get($value, "primary");
         color: #fff;
-        border-color: map-get($value, 'primary');
+        border-color: map-get($value, "primary");
       }
 
       &:not(:disabled):not(.disabled).active,
       &:not(:disabled):not(.disabled):active,
-      .show>&.dropdown-toggle {
-        background: map-get($value, 'primary');
+      .show > &.dropdown-toggle {
+        background: map-get($value, "primary");
         color: #fff;
-        border-color: map-get($value, 'primary');
+        border-color: map-get($value, "primary");
       }
     }
 
     .btn-check:active,
     .btn-check:checked {
-      +.btn-light-primary {
-        background: map-get($value, 'primary') !important;
+      + .btn-light-primary {
+        background: map-get($value, "primary") !important;
         color: #fff;
-        border-color: map-get($value, 'primary');
+        border-color: map-get($value, "primary");
       }
     }
 
     .btn-link-primary {
       background: transparent;
-      color: map-get($value, 'primary');
+      color: map-get($value, "primary");
       border-color: transparent;
 
       .material-icons-two-tone {
-        background-color: map-get($value, 'primary');
+        background-color: map-get($value, "primary");
       }
 
       &:hover {
-        background: transparentize(map-get($value, 'primary'), 0.8);
-        color: map-get($value, 'primary');
-        border-color: transparentize(map-get($value, 'primary'), 0.8);
+        background: transparentize(map-get($value, "primary"), 0.8);
+        color: map-get($value, "primary");
+        border-color: transparentize(map-get($value, "primary"), 0.8);
       }
 
       &.focus,
       &:focus {
-        background: transparentize(map-get($value, 'primary'), 0.8);
-        color: map-get($value, 'primary');
-        border-color: transparentize(map-get($value, 'primary'), 0.8);
+        background: transparentize(map-get($value, "primary"), 0.8);
+        color: map-get($value, "primary");
+        border-color: transparentize(map-get($value, "primary"), 0.8);
       }
 
       &:not(:disabled):not(.disabled).active,
       &:not(:disabled):not(.disabled):active,
-      .show>&.dropdown-toggle {
-        background: transparentize(map-get($value, 'primary'), 0.8);
-        color: map-get($value, 'primary');
-        border-color: transparentize(map-get($value, 'primary'), 0.8);
+      .show > &.dropdown-toggle {
+        background: transparentize(map-get($value, "primary"), 0.8);
+        color: map-get($value, "primary");
+        border-color: transparentize(map-get($value, "primary"), 0.8);
       }
     }
 
     .btn-check:active,
     .btn-check:checked {
-      +.btn-link-primary {
-        background: transparentize(map-get($value, 'primary'), 0.8);
-        color: map-get($value, 'primary');
-        border-color: transparentize(map-get($value, 'primary'), 0.8);
+      + .btn-link-primary {
+        background: transparentize(map-get($value, "primary"), 0.8);
+        color: map-get($value, "primary");
+        border-color: transparentize(map-get($value, "primary"), 0.8);
       }
     }
   }
 }
 
 .card {
-
   .bg-light,
   .card-footer.bg-light {
     background-color: rgba(0, 0, 0, 0.15) !important;
   }
-  .border{
+  .border {
     border: var(--bs-border-width) var(--bs-border-style) #343a3e !important;
   }
 }
@@ -454,7 +458,6 @@ $value in $preset-colors {
 }
 
 .datepicker-cell {
-
   &.focused:not(.selected),
   &:not(.disabled):hover {
     background: var(--bs-primary);
@@ -472,7 +475,7 @@ $value in $preset-colors {
 .datepicker-controls {
   .btn {
     background: transparent;
-    border:transparent;
+    border: transparent;
     color: var(--bs-body-color);
   }
 }
@@ -481,7 +484,7 @@ $value in $preset-colors {
   border-color: rgba(0, 0, 0, 0.3);
 }
 
-.material-icons-two-tone:not([class*='text']) {
+.material-icons-two-tone:not([class*="text"]) {
   background-color: var(--bs-body-color);
 }
 
@@ -528,8 +531,7 @@ $value in $preset-colors {
     &.nextMonthDay:focus {
       background: #{lighten($dark-layout-color, 15%)};
       border-color: #{lighten($dark-layout-color, 15%)};
-      box-shadow: -5px 0 0 #{lighten($dark-layout-color, 15%)},
-      5px 0 0 #{lighten($dark-layout-color, 15%)};
+      box-shadow: -5px 0 0 #{lighten($dark-layout-color, 15%)}, 5px 0 0 #{lighten($dark-layout-color, 15%)};
     }
   }
 
@@ -549,7 +551,6 @@ $value in $preset-colors {
 }
 
 .flatpickr-time {
-
   input,
   .flatpickr-am-pm {
     color: var(--bs-body-color);
@@ -587,7 +588,7 @@ $value in $preset-colors {
   }
 }
 
-.choices[data-type*='select-one'] {
+.choices[data-type*="select-one"] {
   &:after {
     border-color: var(--bs-body-color) transparent transparent transparent;
   }
@@ -599,7 +600,6 @@ $value in $preset-colors {
 }
 
 .choices.is-disabled {
-
   .choices__inner,
   .choices__input {
     background: transparent;
@@ -632,7 +632,7 @@ $value in $preset-colors {
   color: var(--bs-body-color);
 }
 
-.typeahead>ul {
+.typeahead > ul {
   background: var(--bs-body-bg);
 }
 
@@ -724,7 +724,7 @@ $value in $preset-colors {
   color: var(--bs-body-color);
 }
 
-[data-uppy-drag-drop-supported='true'] .uppy-Dashboard-AddFiles {
+[data-uppy-drag-drop-supported="true"] .uppy-Dashboard-AddFiles {
   border-color: #{lighten($dark-layout-color, 15%)};
 }
 
@@ -749,27 +749,27 @@ $value in $preset-colors {
     border-color: #{lighten($dark-layout-color, 15%)};
   }
 
-  > :not(:last-child)> :last-child>*,
+  > :not(:last-child) > :last-child > *,
   td,
   th {
     border-color: #{lighten($dark-layout-color, 15%)};
   }
 
   &[class*="bg-"] {
-    > :not(caption)>*>* {
+    > :not(caption) > * > * {
       color: #fff;
     }
   }
 
   &::not([class*="bg-"]) {
-    > :not(caption)>*>* {
+    > :not(caption) > * > * {
       background-color: transparent;
       color: var(--bs-body-color);
     }
   }
 }
 
-.table-striped>tbody>tr:nth-of-type(odd)>* {
+.table-striped > tbody > tr:nth-of-type(odd) > * {
   --bs-table-accent-bg: transparent;
 }
 
@@ -805,10 +805,12 @@ $value in $preset-colors {
   }
 }
 
-table.dataTable tbody tr>.dtfc-fixed-left, table.dataTable tbody tr>.dtfc-fixed-right,
-div.dataTables_scrollBody>table>tbody tr:first-child th, div.dataTables_scrollBody>table>tbody tr:first-child td,
-.datatable-table.dataTable[class*=table-] thead th,
-.table.dataTable[class*=table-] thead th,
+table.dataTable tbody tr > .dtfc-fixed-left,
+table.dataTable tbody tr > .dtfc-fixed-right,
+div.dataTables_scrollBody > table > tbody tr:first-child th,
+div.dataTables_scrollBody > table > tbody tr:first-child td,
+.datatable-table.dataTable[class*="table-"] thead th,
+.table.dataTable[class*="table-"] thead th,
 table.datatable.fixedHeader-floating,
 table.datatable.fixedHeader-locked,
 div.DTFC_LeftHeadWrapper table,
@@ -817,19 +819,19 @@ table.DTFC_Cloned tr {
   background: var(--bs-body-bg);
 }
 
-table.dataTable thead tr>.dtfc-fixed-left,
-table.dataTable thead tr>.dtfc-fixed-right,
-table.dataTable tfoot tr>.dtfc-fixed-left,
-table.dataTable tfoot tr>.dtfc-fixed-right,
-.table.datatable[class*='table-'] thead th {
+table.dataTable thead tr > .dtfc-fixed-left,
+table.dataTable thead tr > .dtfc-fixed-right,
+table.dataTable tfoot tr > .dtfc-fixed-left,
+table.dataTable tfoot tr > .dtfc-fixed-right,
+.table.datatable[class*="table-"] thead th {
   background: #{lighten($dark-layout-color, 15%)};
 }
 
-.table-bordered> :not(caption)>* {
+.table-bordered > :not(caption) > * {
   border-width: 0px;
 }
 
-table.datatable>tbody>tr.child ul.dtr-details>li {
+table.datatable > tbody > tr.child ul.dtr-details > li {
   border-bottom-color: #{lighten($dark-layout-color, 15%)};
 }
 
@@ -852,8 +854,8 @@ text {
   stroke: transparent !important;
 }
 
-.fc .fc-list-sticky .fc-list-day>*,
-.fc .fc-scrollgrid-section-sticky>*,
+.fc .fc-list-sticky .fc-list-day > *,
+.fc .fc-scrollgrid-section-sticky > *,
 .auth-main .auth-wrapper.v3,
 .auth-main .auth-wrapper.v2 {
   background: lighten($dark-layout-color, 4%);
@@ -870,9 +872,7 @@ text {
 }
 
 .fc-event {
-
-  @each $color,
-  $value in $theme-colors {
+  @each $color, $value in $theme-colors {
     &.event-#{$color} {
       background: transparentize($value, 0.8) !important;
       color: $value !important;
@@ -893,7 +893,10 @@ text {
 }
 .btns-gallery {
   .btn-light-primary {
-    &:not(:hover), &:not(:focus), &:not(:active), &:not(.active) {
+    &:not(:hover),
+    &:not(:focus),
+    &:not(:active),
+    &:not(.active) {
       background: transparent !important;
       border-color: transparent;
       color: #{lighten($dark-layout-color, 30%)};
@@ -952,7 +955,7 @@ text {
 }
 
 .navbar-toggler-icon {
-  --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e")
+  --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
 .uppy-DragDrop-label,
@@ -961,27 +964,45 @@ text {
   color: var(--bs-body-color);
 }
 .playbutton-wrapper [data-action],
-.tns-outer [data-action]{
+.tns-outer [data-action] {
   color: var(--bs-body-color);
 }
 
 .slider.slider-disabled .slider-track,
-.slider-track{
+.slider-track {
   background: var(--bs-body-bg);
 }
 
-div:where(.swal2-container) .swal2-range{
+div:where(.swal2-container) .swal2-range {
   background: var(--bs-body-bg) !important;
 }
-.modal-body{
-  .bd-example-row{
+.modal-body {
+  .bd-example-row {
     background: var(--bs-body-bg);
   }
 }
-.auth-main .auth-wrapper .saprator:after{
-  background: rgb(255, 255, 255,.2);
+.auth-main .auth-wrapper .saprator:after {
+  background: rgb(255, 255, 255, 0.2);
 }
-&.component-page .footer .footer-link a:not(:hover){
+&.component-page .footer .footer-link a:not(:hover) {
+  color: var(--bs-body-color);
+}
+.menucontainer {
+  background-color: var(--pc-sidebar-background);
+}
+.performancecard {
+  background-color: var(--bs-card-bg);
+  border-color: var(--bs-card-border-color);
+}
+.ql-editor.ql-blank::before {
+  color: var(--bs-body-color);
+}
+.pc-head-link {
+  > i {
+    color: var(--bs-body-color);
+  }
+}
+.footer .footer-link a:not(:hover) {
   color: var(--bs-body-color);
 }
 // ================================

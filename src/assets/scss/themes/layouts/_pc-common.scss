@@ -59,7 +59,6 @@
   }
 }
 
-
 .page-header {
   display: flex;
   align-items: center;
@@ -558,6 +557,32 @@
     @media (min-width: 1400px) {
       max-width: 1140px;
     }
+  }
+}
+.sticky-table-header thead th {
+  position: sticky;
+  top: 195px;
+  z-index: 10;
+  background: inherit;
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.04);
+
+  @media (min-width: 768px) {
+    top: 100px;
+  }
+
+  @media (min-width: 992px) {
+    top: 100px;
+  }
+
+  @media (min-width: 1200px) {
+    top: 195px;
+  }
+
+  @media (min-width: 1400px) {
+    top: 195px;
+  }
+  @media (min-width: 2000px) {
+    top: 160px;
   }
 }
 

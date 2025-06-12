@@ -21,19 +21,18 @@ export interface FIIDIIData {
 
 type FIIDIITradesCardProps = {
   tradesTimes: TradeTime;
-}
+};
 
 const FIIDIITradesCard = ({ tradesTimes }: FIIDIITradesCardProps) => {
   const [countLoading, SetCountLoading] = useState<boolean>(false);
-  const [pastPerformanceCount, SetPastPerformanceCount] =
-    useState<FIIDIIData>(Object);
+  const [pastPerformanceCount, SetPastPerformanceCount] = useState<FIIDIIData>(Object);
 
   const fetchFIIDIITrades = React.useCallback(async () => {
     try {
       SetCountLoading(true);
       const result = await postRequest("fiiDiiTrades/list", {
         groupBy: tradesTimes,
-        period: 7
+        period: 7,
       });
       SetPastPerformanceCount(result?.data);
       SetCountLoading(false);

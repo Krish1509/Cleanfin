@@ -20,6 +20,7 @@ interface FormValues {
   subscription_start: string;
   subscription_end: string;
   isActive: boolean;
+  email: string;
 }
 
 const EditProfile = () => {
@@ -49,6 +50,7 @@ const EditProfile = () => {
     subscription_start: userData?.subscription_start || "",
     subscription_end: userData?.subscription_end || "",
     isActive: userData?.isActive || false,
+    email: userData?.email || "",
   };
 
   // Validation schema using Yup
@@ -62,6 +64,7 @@ const EditProfile = () => {
     subscription_start: Yup.date().required("Subscription start is required"),
     subscription_end: Yup.date().required("Subscription end is required"),
     isActive: Yup.boolean(),
+    email: Yup.string().email("Invalid email format").optional(),
   });
 
   // Handle image file change for the circle avatar
@@ -78,7 +81,7 @@ const EditProfile = () => {
       const formData = new FormData();
       formData.append("userId", values?._id);
 
-      const fieldsToCheck: (keyof FormValues)[] = ["firstName", "lastName", "age"];
+      const fieldsToCheck: (keyof FormValues)[] = ["firstName", "lastName", "age", "email"];
 
       fieldsToCheck.forEach((field) => {
         if (values[field] !== initialValues[field]) {
@@ -209,9 +212,9 @@ const EditProfile = () => {
 
                     <Row>
                       <Col lg={6} sm={12} className="mb-3">
-                        <label className="col-form-label text-sm-end">Age</label>
-                        <Field type="number" name="age" className="form-control" placeholder="Enter age" />
-                        <ErrorMessage name="age" component="div" className="text-danger" />
+                        <label className="col-form-label text-sm-end">Email</label>
+                        <Field type="text" name="email" className="form-control" placeholder="Enter email" />
+                        <ErrorMessage name="email" component="div" className="text-danger" />
                       </Col>
                       <Col lg={6} sm={12} className="mb-3">
                         <label className="col-form-label text-sm-end">Mobile Number</label>
@@ -221,7 +224,12 @@ const EditProfile = () => {
                     </Row>
 
                     <Row>
-                      <Col lg={12} className="mb-3">
+                      <Col lg={6} sm={12} className="mb-3">
+                        <label className="col-form-label text-sm-end">Age</label>
+                        <Field type="number" name="age" className="form-control" placeholder="Enter age" />
+                        <ErrorMessage name="age" component="div" className="text-danger" />
+                      </Col>
+                      <Col lg={6} className="mb-3">
                         <label className="col-form-label text-sm-end">Role</label>
                         <Field type="text" name="role" className="form-control" placeholder="Role" disabled />
                       </Col>
