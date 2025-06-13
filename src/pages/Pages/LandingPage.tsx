@@ -1249,6 +1249,15 @@ const LandingPage = () => {
             <Col sm={12} md={6} lg={3} className="mb-4 benefit-card-container">
               <div className="benefit-card" data-aos="fade-up" data-aos-delay="300">
                 <div className="benefit-icon">
+                  <i className="fas fa-wallet fa-2x"></i>
+                </div>
+                <h3>Cost Effective</h3>
+                <p>Maximize your profits with our affordable plans that deliver high-quality trading insights without breaking the bank.</p>
+              </div>
+            </Col>
+            <Col sm={12} md={6} lg={3} className="mb-4 benefit-card-container">
+              <div className="benefit-card" data-aos="fade-up" data-aos-delay="300">
+                <div className="benefit-icon">
                   <i className="fas fa-headset fa-2x"></i>
                 </div>
                 <h3>Dedicated Client Support</h3>
