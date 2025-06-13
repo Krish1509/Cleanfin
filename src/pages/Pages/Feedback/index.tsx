@@ -14,12 +14,13 @@ type FeedbackListData = {
   firstName: string;
   lastName: string;
   description: string;
+  email: string;
+  mobileNumber: string;
+  createdAt: string;
 };
 
 const Feedback = () => {
-  const [feedbackListData, setFeedbackListData] = useState<FeedbackListData[]>(
-    []
-  );
+  const [feedbackListData, setFeedbackListData] = useState<FeedbackListData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [entriesPerPage, setEntriesPerPage] = useState<number>(10);
@@ -31,9 +32,7 @@ const Feedback = () => {
     setCurrentPage(1); // Reset page to 1 when search query changes
   };
 
-  const handleEntriesPerPageChange = (
-    e: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleEntriesPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setEntriesPerPage(parseInt(e.target.value));
     setCurrentPage(1); // Reset page to 1 when entries per page changes
   };
@@ -79,12 +78,7 @@ const Feedback = () => {
             <ul className="list-inline ms-auto my-1 me-4">
               <li className="list-inline-item">
                 <form className="form-search">
-                  <Form.Control
-                    type="search"
-                    placeholder="Search...."
-                    className="ps-2 pe-3 pt-2"
-                    onChange={handleSearchChange}
-                  />
+                  <Form.Control type="search" placeholder="Search...." className="ps-2 pe-3 pt-2" onChange={handleSearchChange} />
                 </form>
               </li>
             </ul>
@@ -97,6 +91,7 @@ const Feedback = () => {
                     <thead>
                       <tr>
                         <th>User Name</th>
+                        <th>Email</th>
                         <th>Phone</th>
                         <th>Description</th>
                         <th>Date</th>
@@ -108,6 +103,7 @@ const Feedback = () => {
                           <td>
                             {item?.firstName} {item?.lastName}
                           </td>
+                          <td>{item?.email || ""}</td>
                           <td>{item?.mobileNumber ? item?.mobileNumber : "-"}</td>
                           <td className="html-content">
                             <span

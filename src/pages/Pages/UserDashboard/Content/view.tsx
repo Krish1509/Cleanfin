@@ -61,7 +61,7 @@ const ViewContentBytes = () => {
           <Col sm={8}>
             <Card>
               <CardHeader>
-                <FilePreview url={data?.filePath} />
+                <FilePreview url={data?.filePath} data={data} />
               </CardHeader>
               <CardBody className="border-bottom">
                 <Row>
@@ -92,27 +92,13 @@ const ViewContentBytes = () => {
           {/* Sidebar view */}
           <Col sm={4}>
             {listData?.map((contentbyte: any) => (
-              <Card
-                className="overflow-hidden"
-                key={contentbyte._id}
-                onClick={() => handleViewContentBytes(contentbyte?._id)}
-              >
+              <Card className="overflow-hidden" key={contentbyte._id} onClick={() => handleViewContentBytes(contentbyte?._id)}>
                 <CardBody className="p-0">
                   <Row className="d-flex">
-                    <Col
-                      sm={4}
-                      className="d-flex align-items-center p-0"
-                      style={{ width: "33.33%" }}
-                    >
+                    <Col sm={4} className="d-flex align-items-center p-0" style={{ width: "33.33%" }}>
                       {/* <FilePreview url={contentbyte?.filePath} /> */}
                       <img
-                        src={
-                          contentbyte?.type === "audio"
-                            ? audio
-                            : contentbyte?.type === "video"
-                            ? video
-                            : file
-                        }
+                        src={contentbyte?.type === "audio" ? audio : contentbyte?.type === "video" ? video : file}
                         className="img-fluid rounded-md-start object-fit-cover w-100 h-100"
                         alt="card-image"
                       />
@@ -126,22 +112,13 @@ const ViewContentBytes = () => {
                           justifyContent: "space-between",
                         }}
                       >
-                        <h5 className="mb-0 w-100 overflow-hidden text-nowrap text-truncate">
-                          {contentbyte?.title}
-                        </h5>
-                        <p
-                          className="mb-0 justify-content-between"
-                          style={{ display: "flex" }}
-                        >
+                        <h5 className="mb-0 w-100 overflow-hidden text-nowrap text-truncate">{contentbyte?.title}</h5>
+                        <p className="mb-0 justify-content-between" style={{ display: "flex" }}>
                           <span className="text-muted">
                             <i className="feather icon-clock me-1"></i>
-                            <label className="mb-0">
-                              {contentbyte?.uploaded}
-                            </label>
+                            <label className="mb-0">{contentbyte?.uploaded}</label>
                           </span>
-                          <span className="badge bg-light-secondary">
-                            {contentbyte?.type}
-                          </span>
+                          <span className="badge bg-light-secondary">{contentbyte?.type}</span>
                         </p>
                       </div>
                     </Col>
