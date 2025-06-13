@@ -9,6 +9,7 @@ import Pagination from "../../../Common/Pagination"; // Import Pagination compon
 import Loader from "../../../Common/Loader/Loader";
 import Reply from "./Reply";
 import ToastAlert from "../../../helper/toast-alert";
+import moment from "moment";
 
 type UserQueryListData = {
   email: string;
@@ -16,6 +17,7 @@ type UserQueryListData = {
   query: string;
   _id: string;
   userId: any;
+  createdAt: string;
 };
 
 const UserQuery = () => {
@@ -107,6 +109,7 @@ const UserQuery = () => {
                   <table className="table table-hover" id="pc-dt-simple">
                     <thead>
                       <tr>
+                        <th style={{ width: "15%" }}>Date</th>
                         <th style={{ width: "15%" }}>Name</th>
                         <th style={{ width: "15%" }}>Email</th>
                         <th style={{ width: "10%" }}>Phone</th>
@@ -117,6 +120,7 @@ const UserQuery = () => {
                     <tbody>
                       {userQueryListData.map((item, key) => (
                         <tr key={key}>
+                          <td style={{ width: "15%" }}>{item?.createdAt ? moment(item?.createdAt).format("DD/MM/YYYY HH:mm") : ""}</td>
                           <td style={{ width: "15%" }}>
                             {item?.userId?.firstName} {item?.userId?.lastName || ""}
                           </td>
