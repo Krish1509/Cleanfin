@@ -1,25 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect, CSSProperties } from "react";
 
-const validFileExtensions = [
-  "pdf",
-  "jpg",
-  "jpeg",
-  "png",
-  "gif",
-  "bmp",
-  "webp",
-  "mp4",
-  "avi",
-  "mkv",
-  "mov",
-  "mp3",
-  "wav",
-  "ogg",
-  "flac",
-  "webm",
-  "mpg",
-  "mpeg",
-];
+const validFileExtensions = ["pdf", "jpg", "jpeg", "png", "gif", "bmp", "webp", "mp4", "avi", "mkv", "mov", "mp3", "wav", "ogg", "flac", "webm", "mpg", "mpeg"];
 
 const defaultStyles = {
   container: {
@@ -49,6 +31,7 @@ type FilePreviewProps = {
   invalidExtensions?: string[];
   styles?: typeof defaultStyles;
   onError?: (message: string | Error) => void;
+  data?: any; // Optional prop for additional data, if needed
 };
 
 type FileState = {
@@ -58,12 +41,7 @@ type FileState = {
   url: string;
 };
 
-function getFileUrl({
-  type,
-  url,
-  file,
-  onError,
-}: Pick<FilePreviewProps, "type" | "url" | "file" | "onError">): {
+function getFileUrl({ type, url, file, onError }: Pick<FilePreviewProps, "type" | "url" | "file" | "onError">): {
   url: string;
   preview: "imgPreview" | "noURL";
 } {
@@ -96,15 +74,7 @@ function getFileUrl({
   };
 }
 
-const FilePreview: React.FC<FilePreviewProps> = ({
-  type = "url",
-  file = null,
-  url = "",
-  width = "100%",
-  height = "auto",
-  styles = defaultStyles,
-  onError,
-}) => {
+const FilePreview: React.FC<FilePreviewProps> = ({ type = "url", file = null, url = "", width = "100%", height = "auto", styles = defaultStyles, onError, data }) => {
   const [state, setState] = useState<FileState>(() => {
     const { url: initialUrl, preview } = getFileUrl({ type, url, file, onError });
     return {
@@ -118,7 +88,7 @@ const FilePreview: React.FC<FilePreviewProps> = ({
   const objPreviewStyle: CSSProperties = {
     width: "100%",
     height,
-    objectFit: "contain"
+    objectFit: "contain",
   };
 
   useEffect(() => {
@@ -141,12 +111,7 @@ const FilePreview: React.FC<FilePreviewProps> = ({
       }}
     >
       {preview === "imgPreview" ? (
-        <img
-          src={resolvedUrl}
-          onError={() => setState((prev) => ({ ...prev, preview: "docPreview" }))}
-          style={objPreviewStyle}
-          alt="Preview"
-        />
+        <img src={resolvedUrl} onError={() => setState((prev) => ({ ...prev, preview: "docPreview" }))} style={objPreviewStyle} alt="Preview" />
       ) : preview === "docPreview" ? (
         <object
           style={{
@@ -157,6 +122,12 @@ const FilePreview: React.FC<FilePreviewProps> = ({
           }}
           data={resolvedUrl}
         ></object>
+      ) : state?.type === "url" ? (
+        <div style={{ ...styles.container, padding: "5em", paddingLeft: "1em", paddingTop: "0" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 7, alignItems: "flex-start" }}>
+            <span style={styles.noPreviewText}>{data?.url}</span>
+          </div>
+        </div>
       ) : (
         <div style={{ ...styles.container, padding: "5em" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>

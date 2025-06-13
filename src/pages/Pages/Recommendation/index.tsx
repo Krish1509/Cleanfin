@@ -248,7 +248,7 @@ const Recommendation = () => {
                     <thead>
                       <tr>
                         <th>Script Name</th>
-                        <th>Date</th>
+                        <th>Entry Date</th>
                         <th>Action</th>
                         <th>Target 1</th>
                         <th>Exit Price</th>
