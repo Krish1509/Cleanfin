@@ -1173,7 +1173,9 @@ const LandingPage = () => {
                       <i className="fas fa-chart-line fa-3x"></i>
                     </div>
                   </div>
-                  <div className="card-label">Nifty Future</div>
+                  <div className="card-label">
+                    Nifty <br /> Future
+                  </div>
                 </div>
                 <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="200" onClick={handleLogin}>
                   <div className="trading-card">
@@ -1181,7 +1183,10 @@ const LandingPage = () => {
                       <i className="fas fa-university fa-3x"></i>
                     </div>
                   </div>
-                  <div className="card-label">Bank Nifty Future</div>
+                  <div className="card-label">
+                    Bank Nifty <br />
+                    Future
+                  </div>
                 </div>
                 <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="300" onClick={handleLogin}>
                   <div className="trading-card">
@@ -1189,7 +1194,9 @@ const LandingPage = () => {
                       <i className="fas fa-poll fa-3x"></i>
                     </div>
                   </div>
-                  <div className="card-label">Sensex Future</div>
+                  <div className="card-label">
+                    Sensex <br /> Future
+                  </div>
                 </div>
                 <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="400" onClick={handleLogin}>
                   <div className="trading-card">
@@ -1197,7 +1204,9 @@ const LandingPage = () => {
                       <i className="fas fa-coins fa-3x"></i>
                     </div>
                   </div>
-                  <div className="card-label">Future Stocks</div>
+                  <div className="card-label">
+                    Future <br /> Stocks
+                  </div>
                 </div>
                 <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="500" onClick={handleLogin}>
                   <div className="trading-card">
@@ -1205,7 +1214,9 @@ const LandingPage = () => {
                       <i className="fas fa-chart-area fa-3x"></i>
                     </div>
                   </div>
-                  <div className="card-label">Equity Future</div>
+                  <div className="card-label">
+                    Equity <br /> Future
+                  </div>
                 </div>
                 <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="600" onClick={handleLogin}>
                   <div className="trading-card">
@@ -1213,7 +1224,9 @@ const LandingPage = () => {
                       <i className="fas fa-gem fa-3x"></i>
                     </div>
                   </div>
-                  <div className="card-label">Commodity Future</div>
+                  <div className="card-label">
+                    Commodity <br /> Future
+                  </div>
                 </div>
               </div>
             </Col>
