@@ -4,7 +4,7 @@ import moment from "moment";
 
 //import Components
 import BreadcrumbItem from "../../../Common/BreadcrumbItem";
-import { Card, CardBody, CardHeader, Form } from "react-bootstrap";
+import { Button, Card, CardBody, CardHeader, Form } from "react-bootstrap";
 import { postRequest } from "../../../service/fetch-services";
 import Pagination from "../../../Common/Pagination"; // Import Pagination component
 import DatePicker from "../../../Common/DatePicker";
@@ -12,6 +12,7 @@ import ToggleSwitch from "../../../Common/ToggleSwitch"; // Import the new Toggl
 import ToastAlert from "../../../helper/toast-alert";
 import ConfirmationModal from "../../../Common/ConfirmationModal";
 import Loader from "../../../Common/Loader/Loader";
+import exportToExcel from "../../../helper/exportToExcel";
 
 type UserListData = {
   id: string;
@@ -43,9 +44,7 @@ const User = () => {
     setCurrentPage(1); // Reset page to 1 when search query changes
   };
 
-  const handleEntriesPerPageChange = (
-    e: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleEntriesPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setEntriesPerPage(parseInt(e.target.value));
     setCurrentPage(1); // Reset page to 1 when entries per page changes
   };
@@ -79,31 +78,56 @@ const User = () => {
     fetchUserListData();
   }, [entriesPerPage, currentPage, searchQuery, fetchUserListData]);
 
-  const updateUserDetails = React.useCallback(
-    async (id: string, key: string, value: any) => {
-      setUpdateLoading(true);
-      try {
-        const body = {
-          userId: id,
-          [key]: value,
-        };
-        const result = await postRequest("user/edit", body, true);
-        ToastAlert.success(result.message);
-        // Update user in the local state
-        setUserListData((prevList) =>
-          prevList.map((user) =>
-            user.id === id ? { ...user, [key]: value } : user
-          )
-        );
-        setUpdateLoading(false);
-        setShowConfirm(false);
-        setSelectedId("");
-      } catch (err) {
-        setUpdateLoading(false);
-      }
-    },
-    []
-  );
+  const updateUserDetails = React.useCallback(async (id: string, key: string, value: any) => {
+    setUpdateLoading(true);
+    try {
+      const body = {
+        userId: id,
+        [key]: value,
+      };
+      const result = await postRequest("user/edit", body, true);
+      ToastAlert.success(result.message);
+      // Update user in the local state
+      setUserListData((prevList) => prevList.map((user) => (user.id === id ? { ...user, [key]: value } : user)));
+      setUpdateLoading(false);
+      setShowConfirm(false);
+      setSelectedId("");
+    } catch (err) {
+      setUpdateLoading(false);
+    }
+  }, []);
+
+  const [exportLoading, setExportLoading] = useState<boolean>(false);
+  const exportExcel = async () => {
+    try {
+      setExportLoading(true);
+      const body = {
+        search: searchQuery,
+      };
+      const result = await postRequest("user/export", body, true);
+      const users = result?.data || [];
+      const excelData = [
+        {
+          workBookColumns: ["Name", "Mobile", "Role", "Subscription Start", "Subscription End", "Active"],
+          data: users?.map((item: any) => [
+            `${item?.firstName || ""} ${item?.lastName || ""}`,
+            item?.mobileNumber || "",
+            item?.role,
+            moment(item?.subscription_start).format("YYYY-MM-DD"),
+            moment(item?.subscription_end).format("YYYY-MM-DD"),
+            item?.isActive ? "Yes" : "No",
+          ]),
+          workSheetName: "Users",
+        },
+      ];
+      await exportToExcel(excelData, `Users-${moment().format("YYYY-MM-DD-HH-mm")}`);
+      ToastAlert.success("Successfully file exported");
+      setExportLoading(false);
+    } catch (err) {
+      setExportLoading(false);
+      ToastAlert.error("Failed to export data.");
+    }
+  };
 
   return (
     <React.Fragment>
@@ -113,18 +137,16 @@ const User = () => {
           <CardHeader>
             <div className="d-sm-flex align-items-center justify-content-between">
               <h5 className="mb-3 mb-sm-0">User List</h5>
+              <Button onClick={exportExcel} className="btn btn-primary" disabled={exportLoading}>
+                {exportLoading ? "Exporting..." : "Export"}
+              </Button>
             </div>
           </CardHeader>
           <div className="d-sm-flex align-items-center mt-4">
             <ul className="list-inline ms-auto my-1 me-4">
               <li className="list-inline-item">
                 <form className="form-search">
-                  <Form.Control
-                    type="search"
-                    placeholder="Search...."
-                    className="ps-2 pe-3 pt-2"
-                    onChange={handleSearchChange}
-                  />
+                  <Form.Control type="search" placeholder="Search...." className="ps-2 pe-3 pt-2" onChange={handleSearchChange} />
                 </form>
               </li>
             </ul>
@@ -157,22 +179,12 @@ const User = () => {
                           </td>
                           <td>{item?.mobileNumber}</td>
                           <td>{item?.role}</td>
-                          <td>
-                            {moment(item?.subscription_start).format(
-                              "YYYY-MM-DD"
-                            )}
-                          </td>
+                          <td>{moment(item?.subscription_start).format("YYYY-MM-DD")}</td>
                           <td>
                             <DatePicker
                               minDate={new Date(item?.subscription_start)}
                               value={item?.subscription_end}
-                              onChange={(date: any) =>
-                                updateUserDetails(
-                                  item.id,
-                                  "subscription_end",
-                                  date
-                                )
-                              }
+                              onChange={(date: any) => updateUserDetails(item.id, "subscription_end", date)}
                             />
                           </td>
                           <td>
@@ -193,16 +205,10 @@ const User = () => {
                             />
                           </td>
                           <td>
-                            <a
-                              href="#"
-                              className="avtar avtar-xs btn btn-primary"
-                            >
+                            <a href="#" className="avtar avtar-xs btn btn-primary">
                               <i className="ti ti-pencil f-20"></i>
                             </a>
-                            <a
-                              href="#"
-                              className="avtar avtar-xs btn btn-danger ms-1"
-                            >
+                            <a href="#" className="avtar avtar-xs btn btn-danger ms-1">
                               <i className="ti ti-trash f-20"></i>
                             </a>
                           </td>
@@ -224,13 +230,9 @@ const User = () => {
           {showConfirm ? (
             <ConfirmationModal
               show={showConfirm}
-              handleConfirm={() =>
-                updateUserDetails(selectedId, "isActive", selectedStatus)
-              }
+              handleConfirm={() => updateUserDetails(selectedId, "isActive", selectedStatus)}
               handleClose={() => setShowConfirm(false)}
-              message={`Are you sure you want to ${
-                selectedStatus ? "activate" : "deactivate"
-              } this record?`}
+              message={`Are you sure you want to ${selectedStatus ? "activate" : "deactivate"} this record?`}
               loading={updateLoading}
             />
           ) : (
