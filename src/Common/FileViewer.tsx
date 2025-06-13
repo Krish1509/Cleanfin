@@ -103,8 +103,6 @@ const FilePreview: React.FC<FilePreviewProps> = ({ type = "url", file = null, ur
 
   const { preview, url: resolvedUrl } = state;
 
-  console.log("FilePreview", data);
-
   return (
     <div
       style={{
