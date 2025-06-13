@@ -1133,22 +1133,22 @@ body {
 }
 
 .landing-page .feature-box.purple {
-  background-color: #f8f0ff !important;
+  background-color: #fff8e6 !important;
   animation-delay: 0.1s !important;
 }
 
 .landing-page .feature-box.teal {
-  background-color: #e6faf8 !important;
+  background-color: #e6f3ff !important;
   animation-delay: 0.3s !important;
 }
 
 .landing-page .feature-box.blue {
-  background-color: #e6f3ff !important;
+  background-color: #e6faf8 !important;
   animation-delay: 0.5s !important;
 }
 
 .landing-page .feature-box.beige {
-  background-color: #fff8e6 !important;
+  background-color: #f8f0ff !important;
   animation-delay: 0.7s !important;
 }
 
@@ -1165,7 +1165,7 @@ body {
   }
 }
 
-.landing-page .feature-box::before {
+/* .landing-page .feature-box::before {
   content: "" !important;
   position: absolute !important;
   top: 0 !important;
@@ -1180,7 +1180,7 @@ body {
   animation: borderAnimation 6s ease infinite !important;
   opacity: 0 !important;
   transition: opacity 0.3s ease !important;
-}
+} */
 
 .landing-page .feature-box:hover::before {
   opacity: 1 !important;
@@ -1338,24 +1338,24 @@ body {
   animation: pulse 1s ease-in-out !important;
 }
 
-.landing-page .feature-box:hover .feature-icon {
+/* .landing-page .feature-box:hover .feature-icon {
   animation: spin 2s linear 1 !important;
-}
+} */
 
 .landing-page .feature-box.purple .feature-icon {
-  color: #9333ea !important;
+  color: #d97706 !important;
 }
 
 .landing-page .feature-box.teal .feature-icon {
-  color: #0d9488 !important;
-}
-
-.landing-page .feature-box.blue .feature-icon {
   color: #3b82f6 !important;
 }
 
+.landing-page .feature-box.blue .feature-icon {
+  color: #0d9488 !important;
+}
+
 .landing-page .feature-box.beige .feature-icon {
-  color: #d97706 !important;
+  color: #9333ea !important;
 }
 
 /* Back to Top Button */
