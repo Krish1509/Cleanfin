@@ -631,8 +631,6 @@ const LandingPage = () => {
             borderEffect.style.transition = "opacity 0.3s ease";
 
             box.appendChild(borderEffect);
-
-            
           };
 
           createBorderEffect();
@@ -669,8 +667,6 @@ const LandingPage = () => {
             iconBg.style.margin = "0 auto";
             iconBg.style.transition = "all 0.3s ease";
             iconBg.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.05)";
-
-
           }
 
           // Style icons based on parent box class
@@ -685,8 +681,6 @@ const LandingPage = () => {
             } else if (box.classList.contains("beige")) {
               icon.style.color = "#d97706";
             }
-
-
           }
 
           // Style feature content
@@ -712,8 +706,6 @@ const LandingPage = () => {
             featureTitle.style.textAlign = "center";
             featureTitle.style.width = "100%";
             featureTitle.style.display = "block";
-
-
           }
 
           // Style feature text with fade-in animation
@@ -730,8 +722,6 @@ const LandingPage = () => {
             featureText.style.width = "100%";
             featureText.style.display = "block";
             featureText.style.padding = "0 0.5rem";
-
-
           }
         });
       }
@@ -801,8 +791,6 @@ const LandingPage = () => {
     navigate("/login");
   };
 
-
-
   // Handle scroll to top with smooth scrolling
   const scrollToTop = () => {
     window.scrollTo({
@@ -868,7 +856,7 @@ const LandingPage = () => {
       <Navbar variant="dark" expand="lg" expanded={expanded} className="py-2 px-0">
         <Container fluid className="px-3">
           <Navbar.Brand href="#hero" className="d-flex align-items-center">
-            <img src={mewaLogo} alt="Mewa Logo" className="me-2" height="80" />            
+            <img src={mewaLogo} alt="Mewa Logo" className="me-2" height="80" />
           </Navbar.Brand>
 
           <Navbar.Toggle aria-controls="navbar-nav" onClick={toggleMenu}>
@@ -1012,7 +1000,7 @@ const LandingPage = () => {
                 }}
               >
                 Login
-              </button>              
+              </button>
             </div>
           </Navbar.Collapse>
         </Container>
@@ -1025,8 +1013,14 @@ const LandingPage = () => {
             <Col xs={12} lg={6} className="mb-5 mb-lg-0">
               <div data-aos="fade-right" data-aos-delay="100">
                 <h4>We'll Provide You</h4>
-                <h2 className="hero-title">Buy & Sell Alerts<br />With Target & Stop Loss</h2>
-                <p><i>Trade. Chill. Repeat.</i></p>
+                <h2 className="hero-title">
+                  Buy & Sell Alerts
+                  <br />
+                  With Target & Stop Loss
+                </h2>
+                <p>
+                  <i>Trade. Chill. Repeat.</i>
+                </p>
                 <div className="d-flex mt-4">
                   <Button variant="outline-light" size="lg" onClick={handleLogin}>
                     JOIN NOW
@@ -1121,7 +1115,9 @@ const LandingPage = () => {
                 </div>
                 <div className="feature-content">
                   <h3 className="feature-title">Performance Analytics</h3>
-                  <p className="feature-text">Track performance that provides complete transparency, allowing you to see real results and make data-driven decisions with confidence.</p>
+                  <p className="feature-text">
+                    Track performance that provides complete transparency, allowing you to see real results and make data-driven decisions with confidence.
+                  </p>
                 </div>
               </div>
             </Col>
@@ -1147,7 +1143,10 @@ const LandingPage = () => {
                 </div>
                 <div className="feature-content">
                   <h3 className="feature-title">Knowledge Hub</h3>
-                  <p className="feature-text">Access a wealth of educational resources, institutional investment data (FII & DII), and significant market transactions (Block & Bulk Deals) directly on your device</p>
+                  <p className="feature-text">
+                    Access a wealth of educational resources, institutional investment data (FII & DII), and significant market transactions (Block & Bulk Deals) directly on your
+                    device
+                  </p>
                 </div>
               </div>
             </Col>
@@ -1174,7 +1173,7 @@ const LandingPage = () => {
                       <i className="fas fa-chart-line fa-3x"></i>
                     </div>
                   </div>
-                  <div className="card-label">Nifty</div>
+                  <div className="card-label">Nifty Future</div>
                 </div>
                 <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="200">
                   <div className="trading-card">
@@ -1182,7 +1181,7 @@ const LandingPage = () => {
                       <i className="fas fa-university fa-3x"></i>
                     </div>
                   </div>
-                  <div className="card-label">Bank Nifty</div>
+                  <div className="card-label">Bank Nifty Future</div>
                 </div>
                 <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="300">
                   <div className="trading-card">
@@ -1190,7 +1189,7 @@ const LandingPage = () => {
                       <i className="fas fa-poll fa-3x"></i>
                     </div>
                   </div>
-                  <div className="card-label">Sensex</div>
+                  <div className="card-label">Sensex Future</div>
                 </div>
                 <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="400">
                   <div className="trading-card">
@@ -1198,7 +1197,15 @@ const LandingPage = () => {
                       <i className="fas fa-coins fa-3x"></i>
                     </div>
                   </div>
-                  <div className="card-label">Stocks</div>
+                  <div className="card-label">Future Stocks</div>
+                </div>
+                <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="500">
+                  <div className="trading-card">
+                    <div className="card-icon">
+                      <i className="fas fa-chart-area fa-3x"></i>
+                    </div>
+                  </div>
+                  <div className="card-label">Equity Future</div>
                 </div>
                 <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="500">
                   <div className="trading-card">
@@ -1206,11 +1213,11 @@ const LandingPage = () => {
                       <i className="fas fa-gem fa-3x"></i>
                     </div>
                   </div>
-                  <div className="card-label">Commodity</div>
+                  <div className="card-label">Commodity Future</div>
                 </div>
               </div>
             </Col>
-          </Row>          
+          </Row>
         </Container>
       </section>
 
@@ -1236,8 +1243,7 @@ const LandingPage = () => {
                   <i className="fas fa-mobile-alt fa-2x"></i>
                 </div>
                 <h3>Easy-to-Use Mobile App</h3>
-                <p>
-                Access all recommendations, market events conveniently on the go with our user-friendly app.</p>
+                <p>Access all recommendations, market events conveniently on the go with our user-friendly app.</p>
               </div>
             </Col>
             <Col sm={12} md={6} lg={3} className="mb-4 benefit-card-container">
@@ -1248,7 +1254,7 @@ const LandingPage = () => {
                 <h3>Dedicated Client Support</h3>
                 <p>Need help? Our Customer support team is available via email and to answer all your queries quickly.</p>
               </div>
-            </Col>            
+            </Col>
           </Row>
         </Container>
       </section>
@@ -1279,7 +1285,10 @@ const LandingPage = () => {
                     <i className="fas fa-star"></i>
                     <i className="fas fa-star"></i>
                   </div>
-                  <Card.Text>"The accuracy of these trade recommendations is incredible. I've been able to significantly improve my success rate in Nifty options trading thanks to their precise entries and exits."</Card.Text>
+                  <Card.Text>
+                    "The accuracy of these trade recommendations is incredible. I've been able to significantly improve my success rate in Nifty options trading thanks to their
+                    precise entries and exits."
+                  </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -1302,7 +1311,10 @@ const LandingPage = () => {
                     <i className="fas fa-star"></i>
                     <i className="fas fa-star"></i>
                   </div>
-                  <Card.Text>"Their commodity market recommendations have consistently delivered results. The clear targets and stop-loss levels take the guesswork out of trading. Worth every rupee!"</Card.Text>
+                  <Card.Text>
+                    "Their commodity market recommendations have consistently delivered results. The clear targets and stop-loss levels take the guesswork out of trading. Worth
+                    every rupee!"
+                  </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -1325,7 +1337,10 @@ const LandingPage = () => {
                     <i className="fas fa-star"></i>
                     <i className="fas fa-star-half-alt"></i>
                   </div>
-                  <Card.Text>"As someone who can't monitor markets all day, the mobile alerts are a game-changer. The notifications are timely, and the analysis behind each recommendation is thorough and educational."</Card.Text>
+                  <Card.Text>
+                    "As someone who can't monitor markets all day, the mobile alerts are a game-changer. The notifications are timely, and the analysis behind each recommendation
+                    is thorough and educational."
+                  </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -1337,7 +1352,7 @@ const LandingPage = () => {
       <section className="pricing-section" id="payment">
         <Container>
           <h2 className="pricing-title" data-aos="fade-up">
-            Future & Options <span className="text-success">Payment</span>            
+            Future & Options <span className="text-success">Payment</span>
           </h2>
           <p className="pricing-subtitle" data-aos="fade-up" data-aos-delay="100">
             Choose the perfect plan for your needs. All plans include access to our core features.
@@ -1348,9 +1363,9 @@ const LandingPage = () => {
                 <div className="pricing-header">
                   <h3 className="plan-name">10 Days Trial</h3>
                   <div className="plan-price">
-                    <span className="price-amount">₹ 1500</span>                    
+                    <span className="price-amount">₹ 1500</span>
                   </div>
-                </div>                
+                </div>
               </div>
             </Col>
             <Col sm={12} md={6} lg={4} className="mb-4">
@@ -1358,9 +1373,9 @@ const LandingPage = () => {
                 <div className="pricing-header">
                   <h3 className="plan-name">Monthly</h3>
                   <div className="plan-price">
-                    <span className="price-amount">₹ 4500</span>                    
+                    <span className="price-amount">₹ 4500</span>
                   </div>
-                </div>                
+                </div>
               </div>
             </Col>
             <Col sm={12} md={6} lg={4} className="mb-4">
@@ -1368,9 +1383,9 @@ const LandingPage = () => {
                 <div className="pricing-header">
                   <h3 className="plan-name">Quarterly</h3>
                   <div className="plan-price">
-                    <span className="price-amount">₹ 10000</span>                    
+                    <span className="price-amount">₹ 10000</span>
                   </div>
-                </div>                
+                </div>
               </div>
             </Col>
           </Row>
@@ -1380,7 +1395,7 @@ const LandingPage = () => {
       <section className="pricing-section" id="payment">
         <Container>
           <h2 className="pricing-title" data-aos="fade-up">
-            Commodity <span className="text-success">Payment</span>            
+            Commodity <span className="text-success">Payment</span>
           </h2>
           <p className="pricing-subtitle" data-aos="fade-up" data-aos-delay="100">
             Choose the perfect plan for your needs. All plans include access to our core features.
@@ -1391,9 +1406,9 @@ const LandingPage = () => {
                 <div className="pricing-header">
                   <h3 className="plan-name">10 Days Trial</h3>
                   <div className="plan-price">
-                    <span className="price-amount">₹ 3500</span>                    
+                    <span className="price-amount">₹ 3500</span>
                   </div>
-                </div>                
+                </div>
               </div>
             </Col>
             <Col sm={12} md={6} lg={4} className="mb-4">
@@ -1401,9 +1416,9 @@ const LandingPage = () => {
                 <div className="pricing-header">
                   <h3 className="plan-name">Monthly</h3>
                   <div className="plan-price">
-                    <span className="price-amount">₹ 11000</span>                    
+                    <span className="price-amount">₹ 11000</span>
                   </div>
-                </div>                
+                </div>
               </div>
             </Col>
             <Col sm={12} md={6} lg={4} className="mb-4">
@@ -1411,9 +1426,9 @@ const LandingPage = () => {
                 <div className="pricing-header">
                   <h3 className="plan-name">Quarterly</h3>
                   <div className="plan-price">
-                    <span className="price-amount">₹ 25000</span>                    
+                    <span className="price-amount">₹ 25000</span>
                   </div>
-                </div>                
+                </div>
               </div>
             </Col>
           </Row>
@@ -1431,7 +1446,10 @@ const LandingPage = () => {
           <Row className="gy-4">
             <Col xs={12} md={5} className="mb-4 mb-md-0">
               <h5>About Mewa</h5>
-              <p>Your trusted partner for financial market insights. We provide expert trading recommendations with precise target and stop-loss levels for Nifty, Bank Nifty, Sensex, Stocks, and Commodities.</p>
+              <p>
+                Your trusted partner for financial market insights. We provide expert trading recommendations with precise target and stop-loss levels for Nifty, Bank Nifty,
+                Sensex, Stocks, and Commodities.
+              </p>
               <div className="social-icons">
                 <a href="#" aria-label="Facebook">
                   <i className="fab fa-facebook-f"></i>
