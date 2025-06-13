@@ -7,6 +7,8 @@ import * as Yup from "yup";
 import BreadcrumbItem from "../../../Common/BreadcrumbItem";
 import { handleFormData } from "../../../service/fetch-services";
 import ToastAlert from "../../../helper/toast-alert";
+import { useNavigate } from "react-router-dom";
+import { getAllowedDashboard } from "../../../helper/auth";
 
 // Type for the form values
 interface FormValues {
@@ -27,6 +29,8 @@ const EditProfile = () => {
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState<FormValues | null>(null);
   const [selectedImage, setSelectedImage] = useState<File | string | null>(null);
+
+  const navigate = useNavigate();
 
   // Fetch user data from localStorage when the component mounts
   useEffect(() => {
@@ -110,6 +114,7 @@ const EditProfile = () => {
   const handleCancel = (resetForm: () => void) => {
     setSelectedImage(null);
     resetForm();
+    navigate(`/${getAllowedDashboard()}`);
   };
 
   return (
