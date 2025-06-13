@@ -1167,7 +1167,7 @@ const LandingPage = () => {
           <Row className="justify-content-center">
             <Col xs={12}>
               <div className="trading-cards-container" data-aos="fade-up">
-                <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="100">
+                <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="100" onClick={handleLogin}>
                   <div className="trading-card">
                     <div className="card-icon">
                       <i className="fas fa-chart-line fa-3x"></i>
@@ -1175,7 +1175,7 @@ const LandingPage = () => {
                   </div>
                   <div className="card-label">Nifty Future</div>
                 </div>
-                <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="200">
+                <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="200" onClick={handleLogin}>
                   <div className="trading-card">
                     <div className="card-icon">
                       <i className="fas fa-university fa-3x"></i>
@@ -1183,7 +1183,7 @@ const LandingPage = () => {
                   </div>
                   <div className="card-label">Bank Nifty Future</div>
                 </div>
-                <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="300">
+                <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="300" onClick={handleLogin}>
                   <div className="trading-card">
                     <div className="card-icon">
                       <i className="fas fa-poll fa-3x"></i>
@@ -1191,7 +1191,7 @@ const LandingPage = () => {
                   </div>
                   <div className="card-label">Sensex Future</div>
                 </div>
-                <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="400">
+                <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="400" onClick={handleLogin}>
                   <div className="trading-card">
                     <div className="card-icon">
                       <i className="fas fa-coins fa-3x"></i>
@@ -1199,7 +1199,7 @@ const LandingPage = () => {
                   </div>
                   <div className="card-label">Future Stocks</div>
                 </div>
-                <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="500">
+                <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="500" onClick={handleLogin}>
                   <div className="trading-card">
                     <div className="card-icon">
                       <i className="fas fa-chart-area fa-3x"></i>
@@ -1207,7 +1207,7 @@ const LandingPage = () => {
                   </div>
                   <div className="card-label">Equity Future</div>
                 </div>
-                <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="500">
+                <div className="trading-card-item" data-aos="zoom-in" data-aos-delay="600" onClick={handleLogin}>
                   <div className="trading-card">
                     <div className="card-icon">
                       <i className="fas fa-gem fa-3x"></i>

@@ -1017,11 +1017,11 @@ body {
     justify-content: center !important;
     gap: 20px !important;
   }
-  
+
   .landing-page .process-connector {
     display: none !important;
   }
-  
+
   .landing-page .process-card {
     margin: 10px !important;
   }
@@ -1039,7 +1039,7 @@ body {
     margin: 10px 0 !important;
     height: 50px !important;
   }
-  
+
   .landing-page .connector-line {
     width: 2px !important;
     height: 30px !important;
@@ -1272,7 +1272,7 @@ body {
   .landing-page .feature-box {
     min-height: 420px !important;
   }
-  
+
   .landing-page .feature-box-container {
     margin-bottom: 20px !important;
   }
@@ -1592,6 +1592,7 @@ body {
   transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   scroll-snap-align: center !important;
   padding: 10px !important;
+  cursor: pointer;
 }
 
 .landing-page .trading-card-item:hover {
@@ -1605,8 +1606,7 @@ body {
   aspect-ratio: 4/5 !important;
   background: linear-gradient(145deg, #121212, #1a1a1a) !important;
   border-radius: 16px !important;
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5), 
-              0 0 0 1px rgba(16, 185, 129, 0.3) !important;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(16, 185, 129, 0.3) !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
@@ -1646,14 +1646,7 @@ body {
   left: -50% !important;
   width: 200% !important;
   height: 200% !important;
-  background: linear-gradient(
-    45deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.02) 45%,
-    rgba(255, 255, 255, 0.08) 50%,
-    rgba(255, 255, 255, 0.02) 55%,
-    transparent 100%
-  ) !important;
+  background: linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.02) 45%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.02) 55%, transparent 100%) !important;
   transform: rotate(45deg) !important;
   transition: all 0.6s ease !important;
   z-index: 0 !important;
@@ -1669,11 +1662,7 @@ body {
   content: "" !important;
   position: absolute !important;
   inset: 0 !important;
-  background: radial-gradient(
-    circle at center,
-    rgba(16, 185, 129, 0.2) 0%,
-    rgba(16, 185, 129, 0) 70%
-  ) !important;
+  background: radial-gradient(circle at center, rgba(16, 185, 129, 0.2) 0%, rgba(16, 185, 129, 0) 70%) !important;
   opacity: 0 !important;
   transition: opacity 0.3s ease !important;
   z-index: 1 !important;
@@ -1776,11 +1765,11 @@ body {
     gap: 20px !important;
     scroll-padding-left: 25px !important;
   }
-  
+
   .landing-page .trading-card-item {
     width: 170px !important;
   }
-  
+
   .landing-page .market-types {
     max-width: 90% !important;
     gap: 12px !important;
@@ -1791,25 +1780,25 @@ body {
   .landing-page .trading-card-item {
     width: 150px !important;
   }
-  
+
   .landing-page .card-label {
     font-size: 0.9rem !important;
   }
-  
+
   .landing-page .services-section {
     padding: 5rem 0 !important;
   }
-  
+
   .landing-page .services-section .section-title {
     font-size: 2.25rem !important;
   }
-  
+
   .landing-page .market-types {
     max-width: 100% !important;
     gap: 10px !important;
     padding: 12px 15px !important;
   }
-  
+
   .landing-page .market-types span {
     font-size: 0.9rem !important;
     padding: 4px 12px !important;
@@ -1820,20 +1809,20 @@ body {
   .landing-page .trading-card-item {
     width: 130px !important;
   }
-  
+
   .landing-page .trading-cards-container {
     gap: 15px !important;
     padding-left: 20px !important;
   }
-  
+
   .landing-page .services-section .section-title {
     font-size: 1.9rem !important;
   }
-  
+
   .landing-page .market-types {
     padding: 10px !important;
   }
-  
+
   .landing-page .market-types span {
     font-size: 0.8rem !important;
     padding: 3px 10px !important;
