@@ -77,12 +77,7 @@ const Event = () => {
             <ul className="list-inline ms-auto my-1 me-4">
               <li className="list-inline-item">
                 <form className="form-search">
-                  <Form.Control
-                    type="search"
-                    placeholder="Search...."
-                    className="ps-2 pe-3 pt-2"
-                    onChange={handleSearchChange}
-                  />
+                  <Form.Control type="search" placeholder="Search...." className="ps-2 pe-3 pt-2" onChange={handleSearchChange} />
                 </form>
               </li>
             </ul>
@@ -94,12 +89,12 @@ const Event = () => {
                   <table className="table table-hover" id="pc-dt-simple">
                     <thead>
                       <tr>
-                        <th>Title</th>
-                        <th>Country</th>
-                        <th>Date</th>
-                        <th>Impact</th>
-                        <th>Forecast</th>
-                        <th>Previous</th>
+                        <th>EVENT</th>
+                        <th>CURRENCY</th>
+                        <th>DATE</th>
+                        <th>IMPACT EXPECTED</th>
+                        <th>FORECAST</th>
+                        <th>PREVIOUS</th>
                       </tr>
                     </thead>
                     <tbody>
