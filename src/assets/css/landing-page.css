@@ -1833,7 +1833,7 @@ body {
 .landing-page .testimonial-cards-container {
   display: flex;
   flex-direction: row;
-  gap: 2rem;
+  gap: 1rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   padding-bottom: 1rem;
@@ -1863,15 +1863,15 @@ body {
 
 @media (max-width: 991.98px) {
   .landing-page .testimonial-card-item {
-    flex: 0 0 80vw;
-    max-width: 80vw;
+    flex: 0 0 47vw;
+    max-width: 47vw;
   }
 }
 
 @media (max-width: 575.98px) {
   .landing-page .testimonial-card-item {
-    flex: 0 0 95vw;
-    max-width: 95vw;
+    flex: 0 0 92vw;
+    max-width: 92vw;
   }
 }
 
@@ -1882,6 +1882,7 @@ body {
   display: flex;
   align-items: center;
   box-sizing: border-box;
+  justify-content: center;
 }
 
 /* Arrow base styles */
@@ -1932,19 +1933,55 @@ body {
 /* Medium to large desktops */
 @media (min-width: 1200px) {
   .landing-page .testimonial-arrow-left {
-    left: calc(50% - 615px); /* adjust if your card container is wider/narrower */
+    left: -50px; /* adjust if your card container is wider/narrower */
   }
   .landing-page .testimonial-arrow-right {
-    right: calc(50% - 585px);
+    right: -52px;
   }
 }
 
 /* Extra large screens (e.g., 1920px and above) */
 @media (min-width: 1920px) {
   .landing-page .testimonial-arrow-left {
-    left: calc(50% - 615px); /* adjust as needed */
+    left: -33px; /* adjust as needed */
   }
   .landing-page .testimonial-arrow-right {
-    right: calc(50% - 585px);
+    right: -35px;
   }
+}
+.testimonials-container {
+  max-width: 1140px !important;
+  margin: 0 auto !important;
+  padding: 0 15px !important;
+}
+@media (min-width: 992px) {
+  .testimonials-container {
+    max-width: 1140px !important;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+  .testimonials-container {
+    max-width: 1140px !important;
+  }
+}
+
+/* Extra large screens */
+@media (min-width: 1400px) {
+  .testimonials-container {
+    max-width: 1320px !important;
+  }
+}
+
+/* Ultra wide screens */
+@media (min-width: 1600px) {
+  .testimonials-container {
+    max-width: 1825px !important;
+  }
+}
+.testimonial-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
 }

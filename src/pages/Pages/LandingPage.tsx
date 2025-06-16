@@ -11,6 +11,7 @@ import marketImage from "../../assets/images/landing-page/market-image.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { getRequest } from "../../service/fetch-services";
+import { testimonials } from "./testimonialsData";
 
 type StaticPageListData = {
   _id: string;
@@ -1291,7 +1292,7 @@ const LandingPage = () => {
 
       {/* Testimonials Section */}
       <section id="testimonials" className="py-5 bg-light">
-        <Container>
+        <div className="testimonials-container">
           <h2 className="text-center mb-5" data-aos="fade-up">
             What Our Users Say
           </h2>
@@ -1302,84 +1303,39 @@ const LandingPage = () => {
               </span>
             </button>
             <div className="testimonial-cards-container" data-aos="fade-up">
-              <div className="testimonial-card-item">
-                <Card className="testimonial-card" data-aos="fade-up" data-aos-delay="100">
-                  <Card.Body>
-                    <div className="d-flex mb-3">
-                      <div className="testimonial-avatar">
-                        <i className="fas fa-user"></i>
+              {testimonials.map((testimonial, index) => (
+                <div className="testimonial-card-item" key={index}>
+                  <Card className="testimonial-card" data-aos="fade-up" data-aos-delay={`${index * 100}`}>
+                    <Card.Body>
+                      <div className="testimonial-header">
+                        <div className="d-flex">
+                          <div className="testimonial-avatar">
+                            <i className="fas fa-user"></i>
+                          </div>
+                          <div className="ms-3 text-left">
+                            <h5 className="mb-0">{testimonial?.name}</h5>
+                            <small className="text-muted">{testimonial?.role}</small>
+                          </div>
+                        </div>
+                        <div className="text-warning mb-3">
+                          {[...Array(5)].map((_, i) => {
+                            const full = i < Math.floor(testimonial?.rating);
+                            const half = i === Math.floor(testimonial?.rating) && testimonial?.rating % 1 !== 0;
+                            return full ? (
+                              <i key={i} className="fas fa-star text-warning" />
+                            ) : half ? (
+                              <i key={i} className="fas fa-star-half-alt text-warning" />
+                            ) : (
+                              <i key={i} className="far fa-star text-warning" />
+                            );
+                          })}
+                        </div>
                       </div>
-                      <div className="ms-3">
-                        <h5 className="mb-0">Priya Sharma</h5>
-                        <small className="text-muted">Retail Trader</small>
-                      </div>
-                    </div>
-                    <div className="text-warning mb-2">
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                    </div>
-                    <Card.Text>
-                      "The accuracy of these trade recommendations is incredible. I've been able to significantly improve my success rate in Nifty options trading thanks to their
-                      precise entries and exits."
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </div>
-              <div className="testimonial-card-item">
-                <Card className="testimonial-card" data-aos="fade-up" data-aos-delay="200">
-                  <Card.Body>
-                    <div className="d-flex mb-3">
-                      <div className="testimonial-avatar">
-                        <i className="fas fa-user"></i>
-                      </div>
-                      <div className="ms-3">
-                        <h5 className="mb-0">Rajesh Patel</h5>
-                        <small className="text-muted">Commodity Trader</small>
-                      </div>
-                    </div>
-                    <div className="text-warning mb-2">
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                    </div>
-                    <Card.Text>
-                      "Their commodity market recommendations have consistently delivered results. The clear targets and stop-loss levels take the guesswork out of trading. Worth
-                      every rupee!"
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </div>
-              <div className="testimonial-card-item">
-                <Card className="testimonial-card" data-aos="fade-up" data-aos-delay="300">
-                  <Card.Body>
-                    <div className="d-flex mb-3">
-                      <div className="testimonial-avatar">
-                        <i className="fas fa-user"></i>
-                      </div>
-                      <div className="ms-3">
-                        <h5 className="mb-0">Amit Desai</h5>
-                        <small className="text-muted">Part-time Investor</small>
-                      </div>
-                    </div>
-                    <div className="text-warning mb-2">
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star-half-alt"></i>
-                    </div>
-                    <Card.Text>
-                      "As someone who can't monitor markets all day, the mobile alerts are a game-changer. The notifications are timely, and the analysis behind each recommendation
-                      is thorough and educational."
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </div>
+                      <Card.Text className="mt-4">{`"${testimonial?.testimonial}"`}</Card.Text>
+                    </Card.Body>
+                  </Card>
+                </div>
+              ))}
             </div>
             <button className="testimonial-arrow testimonial-arrow-right d-none d-md-flex" aria-label="Scroll testimonials right" onClick={() => scrollTestimonials("right")}>
               <span aria-hidden="true">
@@ -1387,7 +1343,7 @@ const LandingPage = () => {
               </span>
             </button>
           </div>
-        </Container>
+        </div>
       </section>
 
       {/* Payment Section */}
