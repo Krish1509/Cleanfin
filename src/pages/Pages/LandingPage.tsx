@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, MouseEvent } from "react";
 import { Container, Row, Col, Button, Card, Navbar, Nav } from "react-bootstrap";
-import { ChevronUp } from "react-feather";
+import { ArrowLeft, ArrowRight, ChevronUp } from "react-feather";
 import { useNavigate } from "react-router-dom";
 import "../../assets/css/landing-page.css";
 // Import images
@@ -850,6 +850,14 @@ const LandingPage = () => {
       .join(" ");
   };
 
+  const scrollTestimonials = (direction: "left" | "right", distance = 350) => {
+    const container = document.querySelector(".testimonial-cards-container") as HTMLElement;
+    if (container) {
+      const scrollAmount = direction === "left" ? -distance : distance;
+      container.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="landing-page position-relative">
       {/* Navbar - Update with expanded state and toggle handler */}
@@ -1287,86 +1295,98 @@ const LandingPage = () => {
           <h2 className="text-center mb-5" data-aos="fade-up">
             What Our Users Say
           </h2>
-          <Row className="justify-content-center">
-            <Col sm={12} md={4} className="mb-4">
-              <Card className="testimonial-card" data-aos="fade-up" data-aos-delay="100">
-                <Card.Body>
-                  <div className="d-flex mb-3">
-                    <div className="testimonial-avatar">
-                      <i className="fas fa-user"></i>
+          <div className="testimonial-slider-wrapper position-relative">
+            <button className="testimonial-arrow testimonial-arrow-left d-none d-md-flex" aria-label="Scroll testimonials left" onClick={() => scrollTestimonials("left")}>
+              <span aria-hidden="true" className="d-flex align-items-center justify-content-center">
+                <ArrowLeft />
+              </span>
+            </button>
+            <div className="testimonial-cards-container" data-aos="fade-up">
+              <div className="testimonial-card-item">
+                <Card className="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                  <Card.Body>
+                    <div className="d-flex mb-3">
+                      <div className="testimonial-avatar">
+                        <i className="fas fa-user"></i>
+                      </div>
+                      <div className="ms-3">
+                        <h5 className="mb-0">Priya Sharma</h5>
+                        <small className="text-muted">Retail Trader</small>
+                      </div>
                     </div>
-                    <div className="ms-3">
-                      <h5 className="mb-0">Priya Sharma</h5>
-                      <small className="text-muted">Retail Trader</small>
+                    <div className="text-warning mb-2">
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
                     </div>
-                  </div>
-                  <div className="text-warning mb-2">
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                  </div>
-                  <Card.Text>
-                    "The accuracy of these trade recommendations is incredible. I've been able to significantly improve my success rate in Nifty options trading thanks to their
-                    precise entries and exits."
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col sm={12} md={4} className="mb-4">
-              <Card className="testimonial-card" data-aos="fade-up" data-aos-delay="200">
-                <Card.Body>
-                  <div className="d-flex mb-3">
-                    <div className="testimonial-avatar">
-                      <i className="fas fa-user"></i>
+                    <Card.Text>
+                      "The accuracy of these trade recommendations is incredible. I've been able to significantly improve my success rate in Nifty options trading thanks to their
+                      precise entries and exits."
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </div>
+              <div className="testimonial-card-item">
+                <Card className="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                  <Card.Body>
+                    <div className="d-flex mb-3">
+                      <div className="testimonial-avatar">
+                        <i className="fas fa-user"></i>
+                      </div>
+                      <div className="ms-3">
+                        <h5 className="mb-0">Rajesh Patel</h5>
+                        <small className="text-muted">Commodity Trader</small>
+                      </div>
                     </div>
-                    <div className="ms-3">
-                      <h5 className="mb-0">Rajesh Patel</h5>
-                      <small className="text-muted">Commodity Trader</small>
+                    <div className="text-warning mb-2">
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
                     </div>
-                  </div>
-                  <div className="text-warning mb-2">
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                  </div>
-                  <Card.Text>
-                    "Their commodity market recommendations have consistently delivered results. The clear targets and stop-loss levels take the guesswork out of trading. Worth
-                    every rupee!"
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col sm={12} md={4} className="mb-4">
-              <Card className="testimonial-card" data-aos="fade-up" data-aos-delay="300">
-                <Card.Body>
-                  <div className="d-flex mb-3">
-                    <div className="testimonial-avatar">
-                      <i className="fas fa-user"></i>
+                    <Card.Text>
+                      "Their commodity market recommendations have consistently delivered results. The clear targets and stop-loss levels take the guesswork out of trading. Worth
+                      every rupee!"
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </div>
+              <div className="testimonial-card-item">
+                <Card className="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                  <Card.Body>
+                    <div className="d-flex mb-3">
+                      <div className="testimonial-avatar">
+                        <i className="fas fa-user"></i>
+                      </div>
+                      <div className="ms-3">
+                        <h5 className="mb-0">Amit Desai</h5>
+                        <small className="text-muted">Part-time Investor</small>
+                      </div>
                     </div>
-                    <div className="ms-3">
-                      <h5 className="mb-0">Amit Desai</h5>
-                      <small className="text-muted">Part-time Investor</small>
+                    <div className="text-warning mb-2">
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star-half-alt"></i>
                     </div>
-                  </div>
-                  <div className="text-warning mb-2">
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star-half-alt"></i>
-                  </div>
-                  <Card.Text>
-                    "As someone who can't monitor markets all day, the mobile alerts are a game-changer. The notifications are timely, and the analysis behind each recommendation
-                    is thorough and educational."
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
+                    <Card.Text>
+                      "As someone who can't monitor markets all day, the mobile alerts are a game-changer. The notifications are timely, and the analysis behind each recommendation
+                      is thorough and educational."
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </div>
+            </div>
+            <button className="testimonial-arrow testimonial-arrow-right d-none d-md-flex" aria-label="Scroll testimonials right" onClick={() => scrollTestimonials("right")}>
+              <span aria-hidden="true">
+                <ArrowRight className="d-flex align-items-center justify-content-center" />
+              </span>
+            </button>
+          </div>
         </Container>
       </section>
 

@@ -1828,3 +1828,123 @@ body {
     padding: 3px 10px !important;
   }
 }
+
+/* Testimonials Slider-like Container */
+.landing-page .testimonial-cards-container {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none !important; /* Firefox */
+  scroll-behavior: smooth !important;
+}
+
+.landing-page .testimonial-cards-container::-webkit-scrollbar {
+  height: 8px;
+  background: #f1f1f1;
+}
+
+.landing-page .testimonial-cards-container::-webkit-scrollbar-thumb {
+  background: #e5e7eb;
+  border-radius: 4px;
+}
+
+.landing-page .testimonial-card-item {
+  flex: 0 0 340px;
+  max-width: 340px;
+  scroll-snap-align: start;
+  margin-bottom: 0;
+  /* Responsive for smaller screens */
+}
+
+@media (max-width: 991.98px) {
+  .landing-page .testimonial-card-item {
+    flex: 0 0 80vw;
+    max-width: 80vw;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .landing-page .testimonial-card-item {
+    flex: 0 0 95vw;
+    max-width: 95vw;
+  }
+}
+
+/* Testimonial slider arrows */
+.landing-page .testimonial-slider-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Arrow base styles */
+.landing-page .testimonial-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  background: #fff;
+  border: none;
+  color: #10b981;
+  font-size: 2rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+/* Hover effect */
+.landing-page .testimonial-arrow:hover {
+  background: #10b981;
+  color: #fff;
+}
+
+/* Mobile (default) */
+.landing-page .testimonial-arrow-left {
+  left: 16px;
+}
+.landing-page .testimonial-arrow-right {
+  right: 16px;
+}
+
+/* Tablet and small laptops */
+@media (min-width: 768px) {
+  .landing-page .testimonial-arrow-left {
+    left: 10px;
+  }
+  .landing-page .testimonial-arrow-right {
+    right: 10px;
+  }
+}
+
+/* Medium to large desktops */
+@media (min-width: 1200px) {
+  .landing-page .testimonial-arrow-left {
+    left: calc(50% - 615px); /* adjust if your card container is wider/narrower */
+  }
+  .landing-page .testimonial-arrow-right {
+    right: calc(50% - 585px);
+  }
+}
+
+/* Extra large screens (e.g., 1920px and above) */
+@media (min-width: 1920px) {
+  .landing-page .testimonial-arrow-left {
+    left: calc(50% - 615px); /* adjust as needed */
+  }
+  .landing-page .testimonial-arrow-right {
+    right: calc(50% - 585px);
+  }
+}
