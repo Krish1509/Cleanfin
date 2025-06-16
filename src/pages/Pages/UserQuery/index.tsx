@@ -18,6 +18,7 @@ type UserQueryListData = {
   _id: string;
   userId: any;
   createdAt: string;
+  repliedDate: string;
 };
 
 const UserQuery = () => {
@@ -113,7 +114,8 @@ const UserQuery = () => {
                         <th style={{ width: "15%" }}>Name</th>
                         <th style={{ width: "15%" }}>Email</th>
                         <th style={{ width: "10%" }}>Phone</th>
-                        <th style={{ width: "45%" }}>Query</th>
+                        <th style={{ width: "35%" }}>Query</th>
+                        <th style={{ width: "10%" }}>Replied Date</th>
                         <th style={{ width: "10%" }}>Action</th>
                       </tr>
                     </thead>
@@ -139,6 +141,7 @@ const UserQuery = () => {
                           >
                             {item?.query}
                           </td>
+                          <td style={{ width: "15%" }}>{item?.repliedDate ? moment(item?.repliedDate).format("DD/MM/YYYY HH:mm") : ""}</td>
                           <td style={{ width: "10%" }}>
                             <Button
                               type="button"
