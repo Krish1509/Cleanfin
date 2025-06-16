@@ -1303,7 +1303,7 @@ const LandingPage = () => {
               </span>
             </button>
             <div className="testimonial-cards-container" data-aos="fade-up">
-              {testimonials.map((testimonial, index) => (
+              {testimonials?.map((testimonial, index) => (
                 <div className="testimonial-card-item" key={index}>
                   <Card className="testimonial-card" data-aos="fade-up" data-aos-delay={`${index * 100}`}>
                     <Card.Body>
