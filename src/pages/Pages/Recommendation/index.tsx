@@ -40,7 +40,7 @@ type RecommendationListData = {
   scriptCode: number;
   price: number;
   reason: string;
-  scriptData: IOptionScriptsList[];
+  scriptData: IOptionScriptsList;
 };
 
 const SegmentOptions = [
@@ -131,7 +131,7 @@ const Recommendation = () => {
 
   const handleEditDate = (item: any) => {
     navigate("/recommendation/edit", {
-      state: { id: item?._id, segmentID: item?.scriptData[0]?.segmentID },
+      state: { id: item?._id, segmentID: item?.scriptData?.segmentID },
     });
   };
 
@@ -183,7 +183,7 @@ const Recommendation = () => {
         ],
         data: recommendationListData?.map((item: RecommendationListData) => [
           segmentLabel(item.segmentId),
-          item.scriptData[0].name,
+          item.scriptData.name,
           moment(item.date).format("YYYY-MM-DD"),
           item.time,
           item.isActive ? "Yes" : "No",
