@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+/* Default arrow state */
+.arrow-stroke path {
+  stroke: white;
+  stroke-dasharray: 50%;
+  stroke-dashoffset:0;
+  transition: stroke 0.2s ease;
+}
+
+/* Animate 3 times on hover */
+.group:hover .arrow-stroke path {
+  animation: arrowFlash 1.3s ease forwards;
+}
+
+@keyframes arrowFlash {
+  0% {
+    stroke: white;
+    stroke-dashoffset: 0;
+  }
+  20% {
+    stroke: black;
+    stroke-dashoffset: -3;
+  }
+  40% {
+    stroke: white;
+    stroke-dashoffset: 0;
+  }
+  60% {
+    stroke: black;
+    stroke-dashoffset: -3;
+  }
+  80% {
+    stroke: white;
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke: black;
+    stroke-dashoffset: -4;
+  }
+}
+
+@keyframes slide-overlay {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes slide-menu {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+.animate-slide-overlay {
+  animation: slide-overlay 0.3s ease-out forwards;
+}
+.animate-slide-menu {
+  animation: slide-menu 0.3s ease-out forwards;
+}
+/* Nav.css */
+.group:hover .group-hover\:scale-x-100 {
+  transform: scaleX(1);
+}
