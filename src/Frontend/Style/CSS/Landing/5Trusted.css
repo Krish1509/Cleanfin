@@ -1,0 +1,286 @@
+.trust-container {
+  width: 100vw;
+  background: #f7f9f7;
+  padding: 60px 0;
+  margin: 0;
+  overflow-x: hidden;
+  min-height: 200px;
+}
+
+.trust-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  gap: 0;
+  padding: 0;
+  min-height: 150px;
+}
+
+.trust-logos {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+  flex: 1;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  min-height: 150px;
+}
+
+.trust-logo {
+  position: relative;
+  width: 150px;
+  height: 70px;
+  margin-top: 40px;
+  cursor: pointer;
+  transition: width 0.2s, height 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.trust-logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.trust-base {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  transition: opacity 0.22s cubic-bezier(.76,0,.33,1);
+  opacity: 1;
+}
+
+.trust-color {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition:
+    opacity 0.32s cubic-bezier(.76,0,.33,1),
+    transform 0.38s cubic-bezier(.76,0,.33,1);
+}
+
+.trust-logo:hover .trust-base,
+.trust-logo:focus .trust-base {
+  opacity: 0;
+}
+
+.trust-logo:hover .trust-color,
+.trust-logo:focus .trust-color {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.trust-badge {
+  background: #1C3F3A;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 30px 40px;
+  white-space: normal;
+  text-align: right;
+  width: 15%;  
+  display: flex;
+  align-items: center;
+  height: 120px;
+  min-width: 250px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.trust-text {
+  line-height: 1.3;
+}
+
+.trust-text div {
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 1000px) and (max-width: 1399px) {
+  .trust-logo {
+    width: 120px;
+    height: 60px;
+  }
+  
+  .trust-badge {
+    font-size: 1rem;
+    padding: 25px 35px;
+    min-width: 220px;
+    width: 18%;
+    height: 110px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .trust-row {
+    gap: 0;
+  }
+  
+  .trust-logos {
+    gap: 0;
+  }
+  
+  .trust-logo {
+    width: 160px;
+    height: 110px;
+  }
+  
+  .trust-badge {
+    font-size: 1rem;
+    padding: 25px 35px;
+    min-width: 220px;
+    width: 18%;
+    height: 110px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .trust-row {
+    gap: 0;
+  }
+  
+  .trust-logos {
+    gap: 0;
+  }
+  
+  .trust-logo {
+    width: 90px;
+    height: 65px;
+  }
+  
+  .trust-badge {
+    font-size: 1rem;
+    padding: 25px 35px;
+    min-width: 220px;
+    width: 18%;
+    height: 110px;
+  }
+}
+
+@media (max-width: 900px) {
+  .trust-row {
+    flex-direction: row;
+    gap: 0;
+  }
+  
+  .trust-logos {
+    gap: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .trust-logos::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .trust-logo {
+    flex-shrink: 0;
+    width: 100px;
+    height: 70px;
+    margin-right: 20px;
+  }
+  
+  .trust-badge {
+    margin: 0;
+    padding: 20px 30px;
+    font-size: 0.95rem;
+    height: 100px;
+    min-width: 200px;
+    width: auto;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 800px) {
+  .trust-row {
+    flex-direction: row;
+    gap: 0;
+  }
+  
+  .trust-logos {
+    gap: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  
+  .trust-logos::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .trust-logo {
+    flex-shrink: 0;
+    width: 100px;
+    height: 70px;
+    margin-right: 20px;
+  }
+  
+  .trust-badge {
+    margin: 0;
+    padding: 20px 30px;
+    font-size: 0.95rem;
+    height: 100px;
+    min-width: 200px;
+    width: auto;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 600px) {
+  .trust-logo {
+    width: 80px;
+    height: 60px;
+    margin-right: 15px;
+  }
+  
+  .trust-badge {
+    font-size: 0.85rem;
+    padding: 15px 25px;
+    height: 80px;
+    min-width: 180px;
+  }
+}
+
+@media (max-width: 400px) {
+  .trust-logo {
+    width: 70px;
+    height: 50px;
+    margin-right: 10px;
+  }
+  
+  .trust-badge {
+    font-size: 0.8rem;
+    padding: 12px 20px;
+    height: 70px;
+    min-width: 160px;
+  }
+}
+  
+  

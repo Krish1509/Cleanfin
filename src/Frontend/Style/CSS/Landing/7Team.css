@@ -1,0 +1,567 @@
+/* Team.css */
+.team-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* Background Image Section */
+.team-background {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.background-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+/* Features Grid - Positioned at Bottom */
+.features-grid {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  z-index: 10;
+}
+
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 50px 25px;
+  background: #1C3F3A;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.feature-card:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 10%;
+  right: 0;
+  bottom: 10%;
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.feature-card:hover {
+  transform: scale(1.02);
+  background: #2a5a52;
+}
+
+.feature-icon {
+  margin-bottom: 30px;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  width: 70px;
+  height: 70px;
+  align-self: flex-start;
+}
+
+.feature-card:hover .feature-icon {
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+.feature-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 18px 0;
+  line-height: 1.3;
+  text-align: left;
+}
+
+.feature-description {
+  font-size: 18px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  text-align: left;
+}
+
+/* 4th title bigger */
+.feature-card:nth-child(4) .feature-title {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+/* 4th card less gap */
+.feature-card:nth-child(4) {
+  /* padding: 40px 25px; */
+}
+
+.feature-card:nth-child(4) .feature-icon {
+  margin-top: 15px;
+  /* width: 60px; */
+  height: 55px;
+}
+
+/* Responsive Design */
+@media (min-width: 2000px) {
+  .feature-title {
+    font-size: 38px;
+  }
+  
+  .feature-card:nth-child(4) .feature-title {
+    font-size: 42px;
+  }
+  
+  .feature-description {
+    font-size: 28px;
+  }
+  
+  .feature-card {
+    padding: 120px 60px;
+    min-height: 500px;
+  }
+  .pbmit-cleanfin-icon-setting:before {
+    content: "\f124";
+}
+.pbmit-cleanfin-icon-setting-1:before {
+  content: "\f128";
+}
+  .feature-icon {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 40px;
+  }
+}
+
+@media (min-width: 1800px) {
+  .feature-title {
+    font-size: 36px;
+  }
+  
+  .feature-card:nth-child(4) .feature-title {
+    font-size: 40px;
+  }
+  
+  .feature-description {
+    font-size: 26px;
+  }
+  
+  .feature-card {
+    padding: 110px 55px;
+    min-height: 450px;
+  }
+  
+  .feature-icon {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 38px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .feature-title {
+    font-size: 34px;
+  }
+  
+  .feature-card:nth-child(4) .feature-title {
+    font-size: 38px;
+  }
+  
+  .feature-description {
+    font-size: 24px;
+  }
+  
+  .feature-card {
+    padding: 100px 50px;
+    min-height: 400px;
+  }
+  
+  .feature-icon {
+    width: 85px;
+    height: 85px;
+    margin-bottom: 35px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .feature-title {
+    font-size: 32px;
+  }
+  
+  .feature-card:nth-child(4) .feature-title {
+    font-size: 36px;
+  }
+  
+  .feature-description {
+    font-size: 22px;
+  }
+  
+  .feature-card {
+    padding: 90px 45px;
+    min-height: 380px;
+  }
+  
+  .feature-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 32px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .features-grid {
+   margin-left: 5%;
+  }
+  
+  .feature-title {
+    font-size: 28px;
+  }
+  
+  .feature-card:nth-child(4) .feature-title {
+    font-size: 32px;
+  }
+  
+  .feature-description {
+    font-size: 18px;
+  }
+  
+  .feature-card {
+    padding: 55px 40px;
+    min-height: 240px;
+  }
+  
+  .feature-icon {
+    width: 85px;
+    height: 85px;
+    margin-bottom: 28px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+  }
+  
+  .feature-card {
+    padding: 60px 25px;
+  }
+  
+  .feature-card:nth-child(2)::after {
+    display: none;
+  }
+  
+  .feature-card:nth-child(odd)::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    right: 0;
+    bottom: 10%;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .feature-title {
+    font-size: 22px;
+  }
+  
+  .feature-card:nth-child(4) .feature-title {
+    font-size: 24px;
+  }
+  
+  .feature-description {
+    font-size: 16px;
+  }
+  
+  .feature-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .team-background {
+    height: 85vh;
+  }
+  
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+  
+  .feature-card {
+    padding: 65px 30px;
+  }
+  
+  .feature-title {
+    font-size: 24px;
+  }
+  
+  .feature-card:nth-child(4) .feature-title {
+    font-size: 26px;
+  }
+  
+  .feature-description {
+    font-size: 18px;
+  }
+  
+  .feature-icon {
+    width: 85px;
+    height: 85px;
+    margin-bottom: 28px;
+  }
+}
+
+@media (max-width: 800px) {
+  .team-background {
+    height: 85vh;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+  
+  .feature-card {
+    padding: 50px 30px;
+    margin: 0;
+  }
+  
+  .feature-card::after {
+    display: none;
+  }
+  
+  .feature-title {
+    font-size: 20px;
+    margin-bottom: 12px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  
+  .feature-card:nth-child(4) .feature-title {
+    font-size: 22px;
+    font-weight: 700;
+  }
+  
+  .feature-description {
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0;
+  }
+  
+  .feature-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .team-background {
+    height: 80vh;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+  
+  .feature-card {
+    padding: 45px 25px;
+    margin: 0;
+  }
+  
+  .feature-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  
+  .feature-card:nth-child(4) .feature-title {
+    font-size: 20px;
+    font-weight: 700;
+  }
+  
+  .feature-description {
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+  }
+  
+  .feature-icon {
+    width: 55px;
+    height: 55px;
+    margin-bottom: 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .team-background {
+    height: 75vh;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+  
+  .feature-card {
+    padding: 40px 20px;
+    margin: 0;
+  }
+  
+  .feature-title {
+    font-size: 16px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  
+  .feature-card:nth-child(4) .feature-title {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  
+  .feature-description {
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0;
+  }
+  
+  .feature-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-background {
+    height: 70vh;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+  
+  .feature-card {
+    padding: 35px 18px;
+    margin: 0;
+  }
+  
+  .feature-title {
+    font-size: 15px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  
+  .feature-card:nth-child(4) .feature-title {
+    font-size: 17px;
+    font-weight: 700;
+  }
+  
+  .feature-description {
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 0;
+  }
+  
+  .feature-icon {
+    width: 45px;
+    height: 45px;
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .team-background {
+    height: 65vh;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+  
+  .feature-card {
+    padding: 30px 15px;
+    margin: 0;
+  }
+  
+  .feature-title {
+    font-size: 14px;
+    margin-bottom: 6px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  
+  .feature-card:nth-child(4) .feature-title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  
+  .feature-description {
+    font-size: 11px;
+    line-height: 1.5;
+    margin: 0;
+  }
+  
+  .feature-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+  }
+}
