@@ -16,7 +16,6 @@ import '../../Style/CSS/Navigation/Nav.css';
 
 const Nav = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [hovering, setHovering] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [openSubDropdown, setOpenSubDropdown] = useState<string | null>(null);
   const [mobileOpenDropdown, setMobileOpenDropdown] = useState<string | null>(null);
@@ -444,8 +443,7 @@ const Nav = () => {
           <div className="">
             <button
               className="navbar-contact-btn"
-              onMouseEnter={() => setHovering(true)}
-              onMouseLeave={() => setHovering(false)}
+             
             >
               GET IN TOUCH
               <svg className="pbmit-svg-arrow" xmlns="http://www.w3.org/2000/svg"

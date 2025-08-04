@@ -1,5 +1,4 @@
 
-import { useState } from 'react';
 import Girl from "../../assets/image/girl.png"
 import bglogo from "../../assets/image/bglogo.png"
 // import Mgirl  
@@ -7,8 +6,6 @@ import bglogo from "../../assets/image/bglogo.png"
 import "../../Style/CSS/Landing/1PlanForSecureFuture.css"
 
 const First = () => {
-
-  const [hovering, setHovering] = useState(false);
 
 
 
@@ -61,8 +58,6 @@ const First = () => {
                     className="first-cta-button  "
                     data-aos="fade-up"
                     data-aos-delay="500"
-                    onMouseEnter={() => setHovering(true)}
-                    onMouseLeave={() => setHovering(false)}
                   >
                     SCHEDULE A FREE CONSULTATION
                     <svg className="pbmit-svg-arrow" xmlns="http://www.w3.org/2000/svg"

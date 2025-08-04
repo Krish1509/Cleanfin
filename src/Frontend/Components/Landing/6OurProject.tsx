@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import '../../Style/CSS/Landing/6OurProject.css';
 import project1 from '../../assets/image/imgi_20_project-img-01-950x740.png';
 import project2 from '../../assets/image/imgi_21_project-img-02-950x740.png';

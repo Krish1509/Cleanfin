@@ -1,4 +1,3 @@
-import React from 'react';
 import '../../Style/CSS/Landing/7Team.css';
 import who from '../../assets/image/who.jpg';
 import WhiteLogo from '../../assets/image/WhiteLogo.png';
