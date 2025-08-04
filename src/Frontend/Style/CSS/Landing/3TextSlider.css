@@ -1,0 +1,174 @@
+/* Text Slider Container */
+.text-slider-container {
+  width: 100%;
+  background: white;
+  overflow: hidden;
+  padding: 20px 0;
+  position: relative;
+  animation: fadeInUp 1s ease-out;
+}
+
+.text-slider {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Sliding Text */
+.sliding-text {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: slideText 500s linear infinite;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  will-change: transform;
+  width: max-content;
+}
+
+/* Text Outline Effect */
+.sliding-text span {
+  color: white;
+  -webkit-text-stroke: 2px #999999;
+  text-stroke: 2px #999999;
+  margin: 0 30px;
+  font-size: 90px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* Separator (Asterisk) */
+.sliding-text .separator {
+  color: #999999;
+  -webkit-text-stroke: 2px #999999;
+  text-stroke: 2px #999999;
+  font-size: 90px;
+  margin: 0 20px;
+  font-weight: normal;
+  flex-shrink: 0;
+}
+
+/* Smooth Seamless Loop Animation */
+@keyframes slideText {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Fade In Up Animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Large screens - 1600px and above */
+@media (min-width: 1600px) {
+  .text-slider-container {
+    padding: 30px 4rem;
+  }
+  
+  .sliding-text span {
+    font-size: 100px;
+    margin: 0 40px;
+  }
+  
+  .sliding-text .separator {
+    font-size: 100px;
+    margin: 0 25px;
+  }
+}
+
+/* Extra large screens - 1800px and above */
+@media (min-width: 1800px) {
+  .text-slider-container {
+    padding: 40px 5rem;
+  }
+  
+  .sliding-text span {
+    font-size: 110px;
+    margin: 0 50px;
+  }
+  
+  .sliding-text .separator {
+    font-size: 110px;
+    margin: 0 30px;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .sliding-text span {
+    font-size: 80px;
+    margin: 0 25px;
+  }
+  
+  .sliding-text .separator {
+    font-size: 80px;
+    margin: 0 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sliding-text {
+    letter-spacing: 1px;
+  }
+  
+  .sliding-text span {
+    font-size: 70px;
+    margin: 0 20px;
+  }
+  
+  .sliding-text .separator {
+    font-size: 70px;
+    margin: 0 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sliding-text {
+    letter-spacing: 0.5px;
+  }
+  
+  .sliding-text span {
+    font-size: 60px;
+    margin: 0 15px;
+  }
+  
+  .sliding-text .separator {
+    font-size: 60px;
+    margin: 0 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .sliding-text span {
+    font-size: 50px;
+    margin: 0 12px;
+  }
+  
+  .sliding-text .separator {
+    font-size: 50px;
+    margin: 0 8px;
+  }
+} 

@@ -1,0 +1,102 @@
+/* Scroll to Top Button */
+.scroll-to-top-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 50px;
+  height: 50px;
+  border: none;
+  background: rgba(128, 128, 128, 0.1);
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-to-top-btn:hover {
+  transform: scale(1.05);
+  background: rgba(128, 128, 128, 0.15);
+}
+
+.progress-circle {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.progress-bg {
+  transition: stroke-dashoffset 0.3s ease;
+}
+
+.progress-fill {
+  transition: stroke-dashoffset 0.3s ease;
+}
+
+.arrow-svg {
+  position: absolute;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.scroll-to-top-btn:hover .arrow-svg path {
+  stroke: #000;
+  transform: translateY(-2px);
+}
+
+/* Animation for button appearance */
+.scroll-to-top-btn {
+  animation: slideInUp 0.3s ease;
+}
+
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .scroll-to-top-btn {
+    bottom: 18px;
+    right: 18px;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .arrow-svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll-to-top-btn {
+    bottom: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+  }
+  
+  .arrow-svg {
+    width: 12px;
+    height: 12px;
+  }
+} 
