@@ -6,24 +6,44 @@ import {
   Search,
   ShoppingBag,
   Facebook,
-  Twitter,
   Instagram,
 } from 'lucide-react';
+import { FaXTwitter } from "react-icons/fa6";
+
+// Import assets
 import Logo from '../../assets/image/Logo.png';
 import LogoBlack from '../../assets/image/LogoBlack.png';
 
+// Import styles
 import '../../Style/CSS/Navigation/Nav.css';
 
 const Nav = () => {
+  // ========================================
+  // STATE MANAGEMENT
+  // ========================================
+  
+  // Mobile menu state
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+  // Desktop dropdown states
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [openSubDropdown, setOpenSubDropdown] = useState<string | null>(null);
+  
+  // Mobile dropdown state
   const [mobileOpenDropdown, setMobileOpenDropdown] = useState<string | null>(null);
+  
+  // Hover timeout states for smooth transitions
   const [hoverTimeout, setHoverTimeout] = useState<any>(null);
   const [closeTimeout, setCloseTimeout] = useState<any>(null);
+  
+  // Ref for detecting clicks outside
   const navRef = useRef(null);
 
-  // Ensure mobile menu is closed on component mount and window resize
+  // ========================================
+  // EFFECTS & LIFECYCLE
+  // ========================================
+
+  // Handle window resize and initial setup
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 1024) {
@@ -39,22 +59,7 @@ const Nav = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(prev => !prev);
-    // Close any open dropdowns when toggling menu
-    setMobileOpenDropdown(null);
-    setOpenDropdown(null);
-  };
-
-  const toggleMobileDropdown = (itemName: string) => {
-    if (mobileOpenDropdown === itemName) {
-      setMobileOpenDropdown(null);
-    } else {
-      setMobileOpenDropdown(itemName);
-    }
-  };
-
-  // Close mobile menu when clicking outside
+  // Handle clicks outside and escape key
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (navRef.current && !(navRef.current as any).contains(event.target)) {
@@ -94,6 +99,98 @@ const Nav = () => {
       }
     };
   }, [hoverTimeout]);
+
+  // ========================================
+  // EVENT HANDLERS
+  // ========================================
+
+  // Mobile menu toggle
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(prev => !prev);
+    // Close any open dropdowns when toggling menu
+    setMobileOpenDropdown(null);
+    setOpenDropdown(null);
+  };
+
+  // Mobile dropdown toggle
+  const toggleMobileDropdown = (itemName: string) => {
+    if (mobileOpenDropdown === itemName) {
+      setMobileOpenDropdown(null);
+    } else {
+      setMobileOpenDropdown(itemName);
+    }
+  };
+
+  // Desktop hover handlers
+  const handleMouseEnter = (itemName: string, event: React.MouseEvent) => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+      setHoverTimeout(null);
+    }
+
+    if (closeTimeout) {
+      clearTimeout(closeTimeout);
+      setCloseTimeout(null);
+    }
+
+    if (menuItems.find(item => item.name === itemName)?.hasDropdown) {
+      setOpenDropdown(itemName);
+      
+      // Position the dropdown correctly
+      const target = event.currentTarget as HTMLElement;
+      const rect = target.getBoundingClientRect();
+      const dropdown = target.querySelector('.navbar-dropdown') as HTMLElement;
+      
+      if (dropdown) {
+        dropdown.style.left = rect.left + 'px';
+        dropdown.style.top = (rect.bottom + 8) + 'px';
+      }
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+      setHoverTimeout(null);
+    }
+
+    const timeout = setTimeout(() => {
+      setOpenDropdown(null);
+    }, 150);
+    setCloseTimeout(timeout);
+  };
+
+  const handleDropdownMouseEnter = () => {
+    if (closeTimeout) {
+      clearTimeout(closeTimeout);
+      setCloseTimeout(null);
+    }
+  };
+
+  const handleDropdownMouseLeave = () => {
+    const timeout = setTimeout(() => {
+      setOpenDropdown(null);
+      setOpenSubDropdown(null);
+    }, 150);
+    setCloseTimeout(timeout);
+  };
+
+  const handleSubDropdownMouseEnter = (itemName: string) => {
+    console.log('Opening sub-dropdown for:', itemName);
+    setOpenSubDropdown(itemName);
+  };
+
+  const handleSubDropdownMouseLeave = () => {
+    console.log('Closing sub-dropdown');
+    const timeout = setTimeout(() => {
+      setOpenSubDropdown(null);
+    }, 150);
+    setCloseTimeout(timeout);
+  };
+
+  // ========================================
+  // MENU DATA
+  // ========================================
 
   const menuItems = [
     {
@@ -253,83 +350,26 @@ const Nav = () => {
     { name: 'CONTACT US', hasDropdown: false },
   ];
 
-  const handleMouseEnter = (itemName: string, event: React.MouseEvent) => {
-    if (hoverTimeout) {
-      clearTimeout(hoverTimeout);
-      setHoverTimeout(null);
-    }
-
-    if (closeTimeout) {
-      clearTimeout(closeTimeout);
-      setCloseTimeout(null);
-    }
-
-    if (menuItems.find(item => item.name === itemName)?.hasDropdown) {
-      setOpenDropdown(itemName);
-      
-      // Position the dropdown correctly
-      const target = event.currentTarget as HTMLElement;
-      const rect = target.getBoundingClientRect();
-      const dropdown = target.querySelector('.navbar-dropdown') as HTMLElement;
-      
-      if (dropdown) {
-        dropdown.style.left = rect.left + 'px';
-        dropdown.style.top = (rect.bottom + 8) + 'px';
-      }
-    }
-  };
-
-  const handleMouseLeave = () => {
-    if (hoverTimeout) {
-      clearTimeout(hoverTimeout);
-      setHoverTimeout(null);
-    }
-
-    const timeout = setTimeout(() => {
-      setOpenDropdown(null);
-    }, 150);
-    setCloseTimeout(timeout);
-  };
-
-  const handleDropdownMouseEnter = () => {
-    if (closeTimeout) {
-      clearTimeout(closeTimeout);
-      setCloseTimeout(null);
-    }
-  };
-
-  const handleDropdownMouseLeave = () => {
-    const timeout = setTimeout(() => {
-      setOpenDropdown(null);
-      setOpenSubDropdown(null);
-    }, 150);
-    setCloseTimeout(timeout);
-  };
-
-  const handleSubDropdownMouseEnter = (itemName: string) => {
-    console.log('Opening sub-dropdown for:', itemName);
-    setOpenSubDropdown(itemName);
-  };
-
-  const handleSubDropdownMouseLeave = () => {
-    console.log('Closing sub-dropdown');
-    const timeout = setTimeout(() => {
-      setOpenSubDropdown(null);
-    }, 150);
-    setCloseTimeout(timeout);
-  };
+  // ========================================
+  // RENDER
+  // ========================================
 
   return (
     <nav ref={navRef} className="navbar">
       <div className="navbar-container">
-        {/* Logo */}
-          <div className="navbar-logo">
-            <a href="/">
-              <img src={Logo} alt="Logo" className="navbar-logo-img" />
-            </a>
-          </div>
+        
+        {/* ========================================
+            LOGO SECTION
+        ======================================== */}
+        <div className="navbar-logo">
+          <a href="/">
+            <img src={Logo} alt="Logo" className="navbar-logo-img" />
+          </a>
+        </div>
 
-        {/* Desktop Navigation */}
+        {/* ========================================
+            DESKTOP NAVIGATION MENU
+        ======================================== */}
         <div className="navbar-menu-desktop">
           <ul className="navbar-menu-list">
             {menuItems.map((item, index) => (
@@ -339,6 +379,7 @@ const Nav = () => {
                 onMouseEnter={(e) => handleMouseEnter(item.name, e)}
                 onMouseLeave={handleMouseLeave}
               >
+                {/* Main Menu Item Button */}
                 <button className="navbar-menu-item">
                   <span>{item.name}</span>
                   {item.hasDropdown && <ChevronDown className="navbar-menu-chevron" />}
@@ -366,6 +407,7 @@ const Nav = () => {
                           }
                         }}
                       >
+                        {/* Dropdown Item Link */}
                         <a
                           href={dropdownItem.href}
                           className="navbar-dropdown-item"
@@ -412,26 +454,31 @@ const Nav = () => {
           </ul>
         </div>
 
-        {/* Right Side Actions */}
+        {/* ========================================
+            RIGHT SIDE ACTIONS
+        ======================================== */}
         <div className="navbar-actions">
+          
           {/* Social Media Icons - Show on 1400px+ */}
           <button className="navbar-icon-btn navbar-social-btn">
             <Facebook className="navbar-icon" />
           </button>
           <button className="navbar-icon-btn navbar-social-btn">
-            <Twitter className="navbar-icon" />
+            <FaXTwitter className="navbar-icon" />
           </button>
           <button className="navbar-icon-btn navbar-social-btn">
             <Instagram className="navbar-icon" />
           </button>
 
-          {/* Search and Cart */}
-          <button className="navbar-icon-btn">
-            <Search className="navbar-icon" />
+          {/* Search Button */}
+          <button className="navbar-icon-btn ">
+            <Search className="navbar-icon max-[300px]:hidden" />
           </button>
 
+          {/* Vertical Separator */}
           <div className="navbar-vertical-line"></div>
 
+          {/* Shopping Cart */}
           <div className="navbar-cart-wrapper">
             <button className="navbar-icon-btn">
               <ShoppingBag className="navbar-icon-lg" />
@@ -443,7 +490,6 @@ const Nav = () => {
           <div className="">
             <button
               className="navbar-contact-btn"
-             
             >
               GET IN TOUCH
               <svg className="pbmit-svg-arrow" xmlns="http://www.w3.org/2000/svg"
@@ -456,7 +502,7 @@ const Nav = () => {
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Toggle Button */}
           <button
             className="navbar-mobile-btn"
             onClick={toggleMobileMenu}
@@ -467,8 +513,12 @@ const Nav = () => {
         </div>
       </div>
 
-      {/* Mobile Side Menu */}
+      {/* ========================================
+          MOBILE SIDE MENU
+      ======================================== */}
       <div className={`navbar-mobile-menu ${isMobileMenuOpen ? 'navbar-mobile-menu-open' : ''}`}>
+        
+        {/* Mobile Header */}
         <div className="navbar-mobile-header">
           <div className="navbar-mobile-logo">
             <img src={LogoBlack} alt="Logo" className="navbar-mobile-logo-img" />
@@ -482,6 +532,7 @@ const Nav = () => {
           </button>
         </div>
 
+        {/* Mobile Menu Content */}
         <div className="navbar-mobile-content">
           <ul className="navbar-mobile-list">
             {menuItems.map((item, index) => (
@@ -512,41 +563,51 @@ const Nav = () => {
             ))}
           </ul>
 
+          {/* Mobile Actions */}
           <div className="navbar-mobile-actions">
+            
+            {/* Mobile Social Icons */}
             <div className="navbar-mobile-socials">
               <button className="navbar-mobile-social-btn">
                 <Facebook className="navbar-mobile-social-icon" />
               </button>
               <button className="navbar-mobile-social-btn">
-                <Twitter className="navbar-mobile-social-icon" />
+                <FaXTwitter className="navbar-mobile-social-icon" />
               </button>
               <button className="navbar-mobile-social-btn">
                 <Instagram className="navbar-mobile-social-icon" />
               </button>
             </div>
 
+            {/* Mobile Cart */}
             <div className="navbar-mobile-cart">
+            <button className=" ">
+            <Search className="text-black min-[300px]:hidden" />
+          </button>
               <button className="navbar-mobile-cart-btn">
                 <ShoppingBag className="navbar-mobile-cart-icon" />
                 <span className="navbar-mobile-cart-badge">0</span>
               </button>
             </div>
 
-            <button className="cta-button justify-center">
-                    GET IN TOUCH
-                    <svg className="pbmit-svg-arrow" xmlns="http://www.w3.org/2000/svg"
-                      xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                      width="10" height="19" viewBox="0 0 19 19">
-                      <line x1="1" y1="18" x2="17.8" y2="1.2"></line>
-                      <line x1="1.2" y1="1" x2="18" y2="1"></line>
-                      <line x1="18" y1="17.8" x2="18" y2="1"></line>
-                    </svg>
-                  </button>
+            {/* Mobile Contact Button */}
+            <button className="cta-button justify-center ">
+              GET IN TOUCH
+              <svg className="pbmit-svg-arrow" xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                width="10" height="19" viewBox="0 0 19 19">
+                <line x1="1" y1="18" x2="17.8" y2="1.2"></line>
+                <line x1="1.2" y1="1" x2="18" y2="1"></line>
+                <line x1="18" y1="17.8" x2="18" y2="1"></line>
+              </svg>
+            </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* ========================================
+          MOBILE MENU OVERLAY
+      ======================================== */}
       {isMobileMenuOpen && (
         <div
           className="navbar-mobile-overlay"

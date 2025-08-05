@@ -80,11 +80,11 @@ const Second: React.FC = () => {
         <div className="counter-section">
           <div className="counter-circle">
             <div className="counter-display ">
-              <span>{count}</span>
-              <div className="counter-plus min-[1000px]:ml-[2.3rem] min-[1000px]:mt-[1px] min-[800px]:ml-[2.16rem] min-[800px]:mt-[0.5px] max-[700px]:ml-[2rem] max-[800px]:mt-[1px]
-               max-[600px]:ml-[1.2rem] max-[600px]:mt-[1px]
-
-              ">+</div>
+              <span className='z-10'>{count}</span>
+              <div className="pluse absolute  text-3xl z-0 bg-white rounded-full px-2 
+          
+              
+                            ">+</div>
             </div>
             <div className="experience-text">
               EXPERIENCE

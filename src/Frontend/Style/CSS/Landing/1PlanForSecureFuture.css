@@ -458,11 +458,11 @@ body::-webkit-scrollbar {
     }
 /* Main Headline */
 .first-headline {
-  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-size: clamp(4rem, 10vw, 8rem);
   font-weight: 700;
   color: #000000;
   margin-bottom: 1.5rem;
-  line-height: 1.2;
+  line-height: 1.1;
   animation: fadeInUp 1s ease-out, textSlideIn 1.5s ease-out;
 }
 
@@ -856,7 +856,7 @@ body::-webkit-scrollbar {
 /* Mobile and Small Displays */
 @media (max-width: 600px) {
   .first-headline{
-    font-size: 1.8rem;
+    font-size: 3.5rem;
     
   }
   .first-description-line-container {
@@ -869,7 +869,7 @@ body::-webkit-scrollbar {
 }
 @media  (max-width: 300px) {
   .first-headline{
-    font-size: 1.2rem;
+    font-size: 2.8rem;
   }
   .first-plan-tag {
    margin-top: 200px;
@@ -883,7 +883,7 @@ body::-webkit-scrollbar {
 }
 @media (min-width: 300px) and (max-width: 350px) {
   .first-headline{
-    font-size: 1.6rem;
+    font-size: 3.2rem;
   }
     .first-headline {
       width: 130%;
@@ -894,7 +894,7 @@ body::-webkit-scrollbar {
 }
 @media (min-width: 350px) and (max-width: 400px) {
   .first-headline{
-    font-size: 1.9rem;
+    font-size: 3.8rem;
   }
     .first-headline {
       width: 130%;
@@ -906,7 +906,7 @@ body::-webkit-scrollbar {
 
 @media (min-width: 400px) and (max-width: 450px) {
   .first-headline{
-  font-size: 2.3rem;
+  font-size: 4.2rem;
  }
  .first-description-line-container {
    width: 100%;
@@ -914,7 +914,7 @@ body::-webkit-scrollbar {
 }
 @media (min-width: 450px) and (max-width: 499px) {
   .first-headline{
-  font-size: 2.58rem;
+  font-size: 4.8rem;
  }
  .first-description-line-container {
    width: 100%;
@@ -922,7 +922,7 @@ body::-webkit-scrollbar {
 }
 @media (min-width: 500px) and (max-width: 550px) {
   .first-headline{
-  font-size: 2.91rem;
+  font-size: 5.2rem;
  }
  .first-description-line-container {
    width: 100%;
@@ -930,7 +930,7 @@ body::-webkit-scrollbar {
 }
 @media (min-width: 550px) and (max-width: 600px) {
   .first-headline{
-   font-size: 3.25rem;
+   font-size: 5.8rem;
   }
   .first-description-line-container {
    width: 100%;
@@ -1697,3 +1697,39 @@ Mobile Menu */
 
 }
 
+/* Character Split Animation */
+@keyframes charAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.8);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateY(20px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Ensure character spans inherit the text color */
+.first-headline-line1-char,
+.first-headline-line2-char {
+  color: #ffffff !important;
+  display: inline-block;
+  white-space: pre;
+}
+
+/* Add a slight delay between lines */
+.first-headline-line2 {
+  animation-delay: 0.5s;
+}
+
+/* Ensure the dot animates with the last character */
+.first-headline-line2 .rounded-full {
+  animation: charAnimation 0.6s ease-out forwards;
+  animation-delay: 0.8s;
+  opacity: 0;
+  transform: translateY(40px) scale(0.8);
+}

@@ -2,12 +2,14 @@
 import Girl from "../../assets/image/girl.png"
 import bglogo from "../../assets/image/bglogo.png"
 // import Mgirl  
-
+import SplitText from "./Utils/SplitText"
 import "../../Style/CSS/Landing/1PlanForSecureFuture.css"
 
 const First = () => {
 
-
+  const handleAnimationComplete = () => {
+    console.log('All letters have animated!');
+  };
 
   return (
     <div className="first-container">
@@ -33,18 +35,43 @@ const First = () => {
               </div>
 
               {/* Main Headline - Responsive text sizing */}
-              <h1 className="first-headline first-headline-animated">
-                <span className="first-headline-line1 w-[200%]">Your Financial Goals,</span><br />
-                <span className="first-headline-line2">Our Expertise 
-                <span className="rounded-full">.</span>
-                  </span>
+              <h1 className="mb-2">
+              <SplitText
+  text="Your Financial Goals,"
+  className="first-headline-line1 font-bold text-[4.5vw] max-[1000px]:text-[5.5vw] max-[900px]:text-[6.5vw] max-[800px]:text-[7.5vw] max-[700px]:text-[7.5vw] max-[500px]:text-[8.5vw] max-[330px]:text-[7.5vw]"
+  delay={100}
+  duration={0.6}
+  ease="power3.out"
+  splitType="chars"
+  from={{ opacity: 0, x: 40 }}
+  to={{ opacity: 1, x: 0 }}
+  threshold={0.1}
+  rootMargin="-100px"
+  textAlign="center"
+  onLetterAnimationComplete={handleAnimationComplete}
+/>
+<br/>
+<SplitText
+  text="Our Expertise."
+  className="first-headline-line2 font-bold text-[4.5vw] max-[1000px]:text-[5.5vw]  max-[900px]:text-[7vw] max-[800px]:text-[7.5vw] max-[700px]:text-[7.5vw] max-[500px]:text-[8.5vw] max-[330px]:text-[7.5vw]"
+  delay={100}
+  duration={0.6}
+  ease="power3.out"
+  splitType="chars"
+    from={{ opacity: 0, x: 40 }}
+  to={{ opacity: 1, x: 0 }}
+  threshold={0.1}
+  rootMargin="-100px"
+  textAlign="center"
+  onLetterAnimationComplete={handleAnimationComplete}
+/>
               </h1>
 
 
               <div className="fle">
                 <div className="flex">
                   <div className="first-line mt-[12px] mx-1 mr-4" data-aos="fade-right" data-aos-delay="300"></div>
-                  <div className="first-description-line-container " data-aos="fade-up" data-aos-delay="400">
+                  <div className="first-description-line-container  " data-aos="fade-up" data-aos-delay="400">
                     {/* Description */}
                     <p className="first-description ">
 
@@ -55,7 +82,7 @@ const First = () => {
                   </div>
                   </div>
                   <div
-                    className="first-cta-button  "
+                    className="first-cta-button min-[1000px]:mt-[-5px]  max-[320px]:text-[3.5vw] "
                     data-aos="fade-up"
                     data-aos-delay="500"
                   >

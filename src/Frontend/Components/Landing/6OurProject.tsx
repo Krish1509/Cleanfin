@@ -26,7 +26,7 @@ const OurProjects = () => {
       category: "FUNDING",
       title: "Startup Funding"
     },
-    {
+    { 
       id: 2,
       image: project2,
       category: "CONSULTING",
@@ -78,7 +78,7 @@ const OurProjects = () => {
           <p className="projects-description">
             We welcome and celebrate different perspectives to help our firm, our clients and our people.
           </p>
-          <button className="cta-button">
+          <button className="touch-button">
             View Projects
             <svg className="pbmit-svg-arrow" xmlns="http://www.w3.org/2000/svg" width="10" height="19" viewBox="0 0 19 19">
               <line x1="1" y1="18" x2="17.8" y2="1.2" />

@@ -49,7 +49,7 @@ const WhoWeAre = () => {
                   <h2 className="main-heading">
                     We See Solutions Growing for your Business
                   </h2>
-                  <button className="cta-button">
+                  <button className="touch-button1">
                     GET IN TOUCH
                     <svg className="pbmit-svg-arrow" xmlns="http://www.w3.org/2000/svg"
                       xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -84,26 +84,26 @@ const WhoWeAre = () => {
                       </div>
                     </div>
 
-                    <div className="stats-divider"></div>
+                    <div className="stats-divider "></div>
 
-                    <div className="features-list">
-                      <div className="feature-item">
-                        <span className="checkmark">✓</span>
-                        <span>Cancel anytime you want</span>
-                      </div>
-                      <div className="feature-item">
-                        <span className="checkmark">✓</span>
-                        <span>Save costs for development</span>
-                      </div>
-                      <div className="feature-item">
-                        <span className="checkmark">✓</span>
-                        <span>Say No to Laziness</span>
-                      </div>
-                      <div className="feature-item">
-                        <span className="checkmark">✓</span>
-                        <span>Comprehensive package</span>
-                      </div>
-                    </div>
+                                         <div className="features-list1">
+                       <div className="feature-item1">
+                         <span className="checkmark">✓</span>
+                         <span>Cancel anytime you want</span>
+                       </div>
+                       <div className="feature-item1">
+                         <span className="checkmark">✓</span>
+                         <span>Save costs for development</span>
+                       </div>
+                       <div className="feature-item1">
+                         <span className="checkmark">✓</span>
+                         <span>Say No to Laziness</span>
+                       </div>
+                       <div className="feature-item1">
+                         <span className="checkmark">✓</span>
+                         <span>Comprehensive package</span>
+                       </div>
+                     </div>
                   </div>
                 </div>
               </div>

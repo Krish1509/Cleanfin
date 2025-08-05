@@ -24,7 +24,7 @@ const OurProcess: React.FC = () => {
               and our people. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi 
               molestiae leo nec velit interdum.
             </p>
-            <button className="cta-button">
+            <button className="touch-button">
               Get In Touch 
               <svg className="pbmit-svg-arrow" xmlns="http://www.w3.org/2000/svg"
                       xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
