@@ -11,7 +11,7 @@ import {
 import { FaXTwitter } from "react-icons/fa6";
 
 // Import assets
-import Logo from '../../assets/image/Logo.png';
+import Logo from '../../assets/image/logo.png';
 import LogoBlack from '../../assets/image/LogoBlack.png';
 
 // Import styles
