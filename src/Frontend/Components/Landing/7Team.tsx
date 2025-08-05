@@ -1,5 +1,5 @@
 import '../../Style/CSS/Landing/7Team.css';
-import who from '../../assets/image/who.jpg';
+import who from '../../assets/image/Who.jpg';
 import WhiteLogo from '../../assets/image/WhiteLogo.png';
 import setting from '../../assets/image/setting.png';
 import hand from '../../assets/image/hand.png';

@@ -50,8 +50,8 @@ const LatestBlog: React.FC = () => {
     <section className="latest-blog-section">
       <div className="section-header ">
         <div className="header-left py-5">
-          <span className="bad">Latest Blog</span>
-          <h2 className="section-title min-[1000px]:mb-3">Latest news coming</h2>
+          <span className="text-[3vw] border-2 border-black rounded-full px-4 py-2">Latest Blog</span>
+          <h2 className="section-title min-[1000px]:mb-3 mt-3">Latest news coming</h2>
         </div>
         <div className="header-right">
           <p className="section-description">
