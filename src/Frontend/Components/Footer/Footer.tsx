@@ -1,7 +1,7 @@
 import { Mail, Facebook, Instagram } from 'lucide-react';
 import Logo from '../../assets/image/logo.png';
 import bglogo from '../../assets/image/bglogo.png';
-import '../../Style/CSS/Footer/Footer.css';
+import '../../Style/CSS/Footer/footer.css';
 import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
